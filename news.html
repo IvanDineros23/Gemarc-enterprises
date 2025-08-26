@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News - Gemarc Enterprises Incorporated</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <img src="images\gemarclogo.png" alt="Gemarc Enterprises" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="news.html" class="active">News</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Services Navigation -->
+    <nav class="services-nav">
+        <div class="container">
+            <div class="services-nav-header">
+                <span class="services-nav-title">Products</span>
+                <div class="services-hamburger" onclick="toggleServicesMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <ul class="services-list">
+                <li><a href="aggregates.html">Aggregates</a></li>
+                <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                <li><a href="soil.html">Soil</a></li>
+                <li><a href="steel.html">Steel</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero news-hero">
+        <div class="hero-content">
+            <h1>Company News</h1>
+            <p>Stay updated with our latest developments and achievements</p>
+        </div>
+    </section>
+
+    <!-- News Content -->
+    <section class="news-section">
+        <div class="container">
+            <!-- Featured News -->
+            <article class="featured-news">
+                <div class="news-header">
+                    <span class="news-badge">Featured</span>
+                    <h2>Gemarc Enterprises Pursues ISO 9001 Quality Management System Certification</h2>
+                    <div class="news-meta">
+                        <span class="news-date"><i class="fas fa-calendar-alt"></i> August 2025</span>
+                        <span class="news-category"><i class="fas fa-tag"></i> Quality Management</span>
+                    </div>
+                </div>
+
+                <div class="news-content">
+                    <p class="lead">We are proud to announce that Gemarc Enterprises Incorporated is currently in the process of implementing and pursuing ISO 9001 Quality Management System certification, demonstrating our unwavering commitment to delivering exceptional quality and service to our valued clients.</p>
+                    
+                    <div class="slideshow-container">
+                        <div class="slide active">
+                            <img src="images/news/GEItrainingiso9001-1024x768.jpg" alt="ISO 9001 Training Session - Overview">
+                            <div class="slide-caption">
+                                <h3>ISO 9001 Training Overview</h3>
+                                <p>Our team participating in comprehensive ISO 9001 quality management system training</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/news/2GEItrainingiso9001.jpg" alt="ISO 9001 Training Session - Team Engagement">
+                            <div class="slide-caption">
+                                <h3>Team Engagement</h3>
+                                <p>Active participation and learning during the ISO 9001 implementation training</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/news/3GEItrainingiso9001.jpg" alt="ISO 9001 Training Session - Interactive Learning">
+                            <div class="slide-caption">
+                                <h3>Interactive Learning</h3>
+                                <p>Hands-on training sessions to ensure proper understanding of quality management principles</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/news/4GEItrainingiso9001.jpg" alt="ISO 9001 Training Session - Knowledge Building">
+                            <div class="slide-caption">
+                                <h3>Knowledge Building</h3>
+                                <p>Building expertise in quality management systems and best practices</p>
+                            </div>
+                        </div>
+
+                        <!-- Navigation arrows -->
+                        <button class="slide-btn prev-btn" onclick="changeSlide(-1)">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="slide-btn next-btn" onclick="changeSlide(1)">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+
+                        <!-- Slide indicators -->
+                        <div class="slide-indicators">
+                            <span class="indicator active" onclick="currentSlide(1)"></span>
+                            <span class="indicator" onclick="currentSlide(2)"></span>
+                            <span class="indicator" onclick="currentSlide(3)"></span>
+                            <span class="indicator" onclick="currentSlide(4)"></span>
+                        </div>
+                    </div>
+
+                    <div class="news-body">
+                        <h3>Our Commitment to Quality Excellence</h3>
+                        <p>ISO 9001 is the international standard for Quality Management Systems (QMS) that helps organizations ensure they meet customer and regulatory requirements while continuously improving their processes. By pursuing this certification, Gemarc Enterprises demonstrates our dedication to:</p>
+                        
+                        <ul class="quality-benefits">
+                            <li><i class="fas fa-check-circle"></i> <strong>Customer Satisfaction:</strong> Ensuring our products and services consistently meet customer expectations</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Continuous Improvement:</strong> Implementing processes that drive ongoing enhancement of our operations</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Risk Management:</strong> Identifying and mitigating potential risks in our processes</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Operational Excellence:</strong> Streamlining processes for maximum efficiency and effectiveness</li>
+                            <li><i class="fas fa-check-circle"></i> <strong>Regulatory Compliance:</strong> Meeting all applicable statutory and regulatory requirements</li>
+                        </ul>
+
+                        <h3>Training and Implementation Process</h3>
+                        <p>Our team has been actively participating in comprehensive ISO 9001 training sessions to ensure proper implementation of the quality management system. These training sessions cover essential aspects including:</p>
+                        
+                        <div class="training-topics">
+                            <div class="topic-card">
+                                <i class="fas fa-cogs"></i>
+                                <h4>Process Management</h4>
+                                <p>Understanding and documenting key business processes</p>
+                            </div>
+                            <div class="topic-card">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Performance Monitoring</h4>
+                                <p>Establishing metrics and KPIs for continuous improvement</p>
+                            </div>
+                            <div class="topic-card">
+                                <i class="fas fa-users"></i>
+                                <h4>Leadership Engagement</h4>
+                                <p>Ensuring management commitment and employee involvement</p>
+                            </div>
+                            <div class="topic-card">
+                                <i class="fas fa-file-alt"></i>
+                                <h4>Documentation Control</h4>
+                                <p>Managing documents and records effectively</p>
+                            </div>
+                        </div>
+
+                        <h3>What This Means for Our Clients</h3>
+                        <p>The ISO 9001 certification process reinforces our commitment to providing our clients with:</p>
+                        <ul class="client-benefits">
+                            <li>Enhanced product quality and reliability</li>
+                            <li>Improved service delivery and customer support</li>
+                            <li>Greater transparency in our processes</li>
+                            <li>Consistent performance across all services</li>
+                            <li>Increased confidence in our capabilities</li>
+                        </ul>
+
+                        <p class="closing-statement">We look forward to completing this certification process and continuing to serve our clients with the highest standards of quality and excellence. Stay tuned for updates on our ISO 9001 certification journey!</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="aggregates.html">Aggregates</a></li>
+                        <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                        <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                        <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                        <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                        <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                        <li><a href="soil.html">Soil</a></li>
+                        <li><a href="steel.html">Steel</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gemarc Enterprises Incorporated. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Social Media Buttons -->
+    <div class="floating-social">
+        <a href="#" class="floating-btn facebook-btn" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="floating-btn viber-btn" target="_blank">
+            <i class="fab fa-viber"></i>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Slideshow functionality
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+
+        function showSlide(index) {
+            // Hide all slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            // Show current slide
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            slideIndex += direction;
+            
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            } else if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+            
+            showSlide(slideIndex);
+        }
+
+        function currentSlide(index) {
+            slideIndex = index - 1;
+            showSlide(slideIndex);
+        }
+
+        // Auto-play slideshow
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    </script>
+</body>
+</html>
