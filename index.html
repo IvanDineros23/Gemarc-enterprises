@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemarc Enterprises Incorporated</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images\gemarclogo.png" alt="Gemarc Enterprises" class="logo-img">
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Services Navigation -->
+    <nav class="services-nav">
+        <div class="container">
+            <div class="services-nav-header">
+                <span class="services-nav-title">Categories</span>
+                <div class="services-hamburger" onclick="toggleServicesMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <ul class="services-list">
+                <li><a href="#aggregates">Aggregates</a></li>
+                <li><a href="#asphalt">Asphalt & Bitumen</a></li>
+                <li><a href="#cement">Cement & Mortar</a></li>
+                <li><a href="#concrete">Concrete & Mortar</a></li>
+                <li><a href="#drilling">Drilling Machine</a></li>
+                <li><a href="#industrial">Industrial Equipment</a></li>
+                <li><a href="#soil">Soil</a></li>
+                <li><a href="#steel">Steel</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Our Services</h1>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <div class="services-grid">
+                <!-- Supply Service -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Supply</h3>
+                        <p>We provide high-quality construction materials and equipment supply services to meet all your project needs.</p>
+                        <a href="#supply" class="service-link">Learn More</a>
+                    </div>
+                </div>
+
+                <!-- Calibration Service -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Calibration & Verification</h3>
+                        <p>Professional calibration and verification services to ensure your equipment meets industry standards and regulations.</p>
+                        <a href="#calibration" class="service-link">Learn More</a>
+                    </div>
+                </div>
+
+                <!-- Repair Service -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Repair & Maintenance</h3>
+                        <p>Expert repair and maintenance services for construction equipment and industrial machinery.</p>
+                        <a href="#repair" class="service-link">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Partnership Section -->
+    <section class="partnership-section">
+        <div class="container">
+            <div class="partnership-content">
+                <h2>Our Trusted Partners</h2>
+                <p>We collaborate with leading brands in the industry to deliver exceptional quality and service</p>
+                <div class="partners-carousel-container">
+                    <button class="carousel-btn carousel-btn-left" onclick="moveCarousel(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="partners-carousel">
+                        <div class="partners-track" id="partnersTrack">
+                            <div class="partner-item">
+                                <img src="images/partnership/gilson_logo.png" alt="Gilson" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/logo-matest.png" alt="Matest" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/ehwa.png" alt="Ehwa" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/labtech_logo.jpg" alt="Labtech" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/dualmfg-logo.jpg" alt="Dual MFG" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/NL-Scientific_logo.png" alt="NL Scientific" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/QLab-Corporation.jpg" alt="QLab Corporation" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/Tae-Sung-Co_logo.png" alt="Tae Sung Co" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/toho-logo-200.jpg" alt="Toho" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/WandJ.jpg" alt="W&J" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/tbt-Nanjing_logo.jpg" alt="TBT Nanjing" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/capping-gypsum-logo.png" alt="Capping Gypsum" class="partner-logo">
+                            </div>
+                            <!-- Duplicate items for seamless loop -->
+                            <div class="partner-item">
+                                <img src="images/partnership/gilson_logo.png" alt="Gilson" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/logo-matest.png" alt="Matest" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/ehwa.png" alt="Ehwa" class="partner-logo">
+                            </div>
+                            <div class="partner-item">
+                                <img src="images/partnership/labtech_logo.jpg" alt="Labtech" class="partner-logo">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn carousel-btn-right" onclick="moveCarousel(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact CTA Section -->
+    <section class="contact-cta-section" id="about">
+        <div class="container">
+            <div class="contact-cta-content">
+                <h2>Finding something interesting ?</h2>
+                <h3>Contact Us Now</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Section -->
+    <section class="bottom-section">
+        <div class="container">
+            <div class="bottom-content">
+                <div class="bottom-left">
+                    <div class="logo-bottom">
+                        <img src="images/gemarclogo.png" alt="Gemarc Enterprises" class="logo-bottom-img">
+                    </div>
+                    <h3>GEMARC Enterprises</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="bottom-center">
+                    <h4>Get in touch with us for the best quality</h4>
+                    <h5>Material testing equipment.</h5>
+                    <p>We supply, repair & calibrate Material Testing Equipment under the line of Soil and Aggregates, Concrete, Asphalt, and other Testing Equipment.</p>
+                </div>
+                <div class="bottom-right">
+                    <h4>Quick Links</h4>
+                    <ul class="quick-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#services">Services</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contact Information</h4>
+                    <p><i class="fas fa-phone"></i> Phone: +63 XXX XXX XXXX</p>
+                    <p><i class="fas fa-envelope"></i> Email: info@gemarc.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Address: Philippines</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li>Aggregates Supply</li>
+                        <li>Asphalt & Bitumen</li>
+                        <li>Construction Equipment</li>
+                        <li>Calibration Services</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gemarc Enterprises Incorporated. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
