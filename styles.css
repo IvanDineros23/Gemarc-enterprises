@@ -896,6 +896,11 @@ body {
     .bottom-center,
     .bottom-right {
         text-align: center;
+        align-items: center;
+    }
+    
+    .bottom-left {
+        align-items: center;
     }
     
     .social-icons {
