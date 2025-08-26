@@ -621,6 +621,278 @@ body {
     color: #ccc;
 }
 
+/* Page Content Styles */
+.page-content {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.content-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.content-wrapper h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.content-wrapper > p {
+    font-size: 1.1rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 50px;
+    line-height: 1.6;
+}
+
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.equipment-card {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.equipment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.equipment-card h3 {
+    font-size: 1.4rem;
+    color: #2e7d32;
+    margin-bottom: 15px;
+}
+
+.equipment-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.services-offered {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.services-offered h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.services-offered ul {
+    list-style: none;
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.services-offered li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    color: #666;
+    position: relative;
+    padding-left: 30px;
+}
+
+.services-offered li:before {
+    content: "✓";
+    color: #2e7d32;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.services-offered li:last-child {
+    border-bottom: none;
+}
+
+/* Authentication Pages Styles */
+.auth-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: calc(100vh - 140px);
+}
+
+.auth-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.auth-form {
+    background: white;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form h2 {
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.auth-form > p {
+    color: #666;
+    text-align: center;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px 45px 15px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2e7d32;
+}
+
+.form-group i {
+    position: absolute;
+    right: 15px;
+    top: 43px;
+    color: #999;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.checkbox-container input {
+    margin-right: 10px;
+}
+
+.forgot-password {
+    color: #2e7d32;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 15px;
+    background: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.auth-btn:hover {
+    background: #1b5e20;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+}
+
+.auth-footer a {
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.auth-info {
+    padding: 40px;
+}
+
+.auth-info h3 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.info-item i {
+    font-size: 2rem;
+    color: #2e7d32;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+
+.info-item h4 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.info-item p {
+    color: #666;
+    line-height: 1.5;
+}
+
 /* Responsive Design */
 @media (min-width: 1025px) {
     /* Desktop-specific styles for better visibility */
@@ -949,7 +1221,75 @@ body {
     .footer-bottom {
         text-align: center;
     }
+    
+    /* Page Content Responsive */
+    .page-content {
+        padding: 60px 0;
+    }
+    
+    .content-wrapper h2 {
+        font-size: 2rem;
+    }
+    
+    .equipment-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .equipment-card {
+        padding: 25px;
+    }
+    
+    .services-offered {
+        padding: 30px;
+    }
+    
+    .services-offered h3 {
+        font-size: 1.5rem;
+    }
+    
+    /* Authentication Pages Responsive */
+    .auth-section {
+        padding: 60px 0;
+    }
+    
+    .auth-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .auth-form {
+        padding: 40px 30px;
+    }
+    
+    .auth-form h2 {
+        font-size: 1.8rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .auth-info {
+        padding: 30px;
+    }
+    
+    .auth-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .info-item i {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
 }
+
 
 @media (max-width: 480px) {
     .container {
@@ -1066,7 +1406,38 @@ body {
     .footer {
         padding: 30px 0 15px;
     }
+    
+    /* Page Content 480px */
+    .content-wrapper h2 {
+        font-size: 1.8rem;
+    }
+    
+    .equipment-card {
+        padding: 20px;
+    }
+    
+    .services-offered {
+        padding: 25px;
+    }
+    
+    /* Authentication 480px */
+    .auth-form {
+        padding: 30px 20px;
+    }
+    
+    .auth-form h2 {
+        font-size: 1.6rem;
+    }
+    
+    .form-group input {
+        padding: 12px 40px 12px 12px;
+    }
+    
+    .auth-info {
+        padding: 25px;
+    }
 }
+
 
 @media (max-width: 320px) {
     /* Extra small devices */
