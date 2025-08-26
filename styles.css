@@ -187,8 +187,9 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/construction-bg.jpg');
-    background-size: cover;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/360_F_1589025175_1DxdWO4V6n1gbYRWoVjD0eef0QEi9yq4.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
     height: 300px;
     display: flex;
@@ -232,16 +233,19 @@ body {
     transform: translateY(-10px);
 }
 
-.service-card:nth-child(1) {
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMmMzZTUwIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSI0OCI+8J+aimY8L3RleHQ+Cjwvc3ZnPgo=');
+.service-card:nth-child(1),
+.supply-card {
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/istockphoto-153734113-612x612.jpg');
 }
 
-.service-card:nth-child(2) {
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjOGU5Nzc1Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSI0OCI+8J+QpTwvdGV4dD4KPC9zdmc+Cg==');
+.service-card:nth-child(2),
+.calibration-card {
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/technicianinstrument-technician-on-job-calibrate-600nw-1020417871.webp');
 }
 
-.service-card:nth-child(3) {
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjOTVhNWE2Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSI0OCI+8J+UQTY8L3RleHQ+Cjwvc3ZnPgo=');
+.service-card:nth-child(3),
+.repair-card {
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/focused-industrial-engineer-using-calibration-600nw-2462349429.webp');
 }
 
 .service-icon {
@@ -2034,5 +2038,550 @@ body {
     .news-meta {
         flex-direction: column;
         gap: 10px;
+    }
+}
+
+/* Services Page Styles */
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.service-features {
+    list-style: none;
+    margin: 20px 0;
+}
+
+.service-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.service-features li i {
+    color: #4caf50;
+    font-size: 0.9rem;
+}
+
+.additional-services {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.additional-services h2 {
+    font-size: 2.2rem;
+    color: #2e7d32;
+    margin-bottom: 40px;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.benefit-item {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-item i {
+    font-size: 2.5rem;
+    color: #4caf50;
+    margin-bottom: 20px;
+}
+
+.benefit-item h4 {
+    color: #2e7d32;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.benefit-item p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Contact Page Styles */
+.contact-hero {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/360_F_1589025175_1DxdWO4V6n1gbYRWoVjD0eef0QEi9yq4.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.contact-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+.contact-info h2 {
+    color: #2e7d32;
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+}
+
+.contact-info > p {
+    color: #666;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.contact-method {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.contact-icon {
+    background: #4caf50;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.contact-details h4 {
+    color: #2e7d32;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+}
+
+.contact-details p {
+    color: #666;
+    line-height: 1.5;
+}
+
+.contact-form {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.contact-form h2 {
+    color: #2e7d32;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4caf50;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #2e7d32, #4caf50);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.3s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+}
+
+.map-section {
+    padding: 60px 0;
+}
+
+.map-section h2 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 40px;
+    font-size: 2.2rem;
+}
+
+.map-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.map-placeholder {
+    background: #f0f0f0;
+    height: 400px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    text-align: center;
+}
+
+.map-placeholder i {
+    font-size: 3rem;
+    color: #4caf50;
+    margin-bottom: 20px;
+}
+
+/* About Page Styles */
+.about-hero {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/360_F_1589025175_1DxdWO4V6n1gbYRWoVjD0eef0QEi9yq4.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.about-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.about-text h2 {
+    color: #2e7d32;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.about-text .lead {
+    font-size: 1.3rem;
+    color: #4caf50;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+.about-text p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.about-image {
+    display: flex;
+    justify-content: center;
+}
+
+.image-placeholder {
+    background: #e0e0e0;
+    width: 300px;
+    height: 200px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.image-placeholder i {
+    font-size: 3rem;
+    color: #4caf50;
+    margin-bottom: 15px;
+}
+
+.mvv-section {
+    margin-bottom: 80px;
+}
+
+.mvv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.mvv-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.mvv-icon {
+    background: linear-gradient(135deg, #2e7d32, #4caf50);
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 25px;
+}
+
+.mvv-card h3 {
+    color: #2e7d32;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.mvv-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.mvv-card ul {
+    list-style: none;
+    text-align: left;
+}
+
+.mvv-card ul li {
+    color: #666;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.mvv-card ul li::before {
+    content: "✓";
+    color: #4caf50;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.what-we-do {
+    margin-bottom: 80px;
+}
+
+.what-we-do h2 {
+    text-align: center;
+    color: #2e7d32;
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+}
+
+.services-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-overview-card {
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.service-overview-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-overview-card i {
+    font-size: 3rem;
+    color: #4caf50;
+    margin-bottom: 20px;
+}
+
+.service-overview-card h4 {
+    color: #2e7d32;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.service-overview-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.stats-section {
+    margin-bottom: 80px;
+    text-align: center;
+}
+
+.stats-section h2 {
+    color: #2e7d32;
+    font-size: 2.2rem;
+    margin-bottom: 50px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #2e7d32, #4caf50);
+    color: white;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.quality-section {
+    text-align: center;
+}
+
+.quality-section h2 {
+    color: #2e7d32;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
+.quality-section > p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 800px;
+    margin: 0 auto 50px;
+}
+
+.quality-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.quality-feature {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.quality-feature i {
+    font-size: 2.5rem;
+    color: #4caf50;
+    margin-bottom: 20px;
+}
+
+.quality-feature h4 {
+    color: #2e7d32;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.quality-feature p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Responsive Design for New Pages */
+@media (max-width: 768px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .contact-form {
+        padding: 30px 20px;
+    }
+    
+    .mvv-grid,
+    .services-overview,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .about-text h2 {
+        font-size: 2rem;
     }
 }

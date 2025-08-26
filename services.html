@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemarc Enterprises Incorporated</title>
+    <title>Services - Gemarc Enterprises Incorporated</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -19,8 +19,8 @@
             <nav class="nav">
                 <ul class="nav-list">
                     <li><a href="news.html">News</a></li>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html" class="active">Services</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="about.html">About</a></li>
                 </ul>
@@ -67,6 +67,11 @@
     <!-- Services Section -->
     <section class="services-section">
         <div class="container">
+            <div class="section-header">
+                <h2>Comprehensive Solutions for Your Construction Needs</h2>
+                <p>At Gemarc Enterprises Incorporated, we provide a full range of services to support your construction and industrial projects. Our expert team is committed to delivering quality solutions that meet your specific requirements.</p>
+            </div>
+            
             <div class="services-grid">
                 <!-- Supply Service -->
                 <div class="service-card supply-card">
@@ -76,6 +81,12 @@
                     <div class="service-content">
                         <h3>Supply</h3>
                         <p>We provide high-quality construction materials and equipment supply services to meet all your project needs.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Wide range of construction materials</li>
+                            <li><i class="fas fa-check"></i> Quality assured products</li>
+                            <li><i class="fas fa-check"></i> Timely delivery services</li>
+                            <li><i class="fas fa-check"></i> Competitive pricing</li>
+                        </ul>
                         <a href="#supply" class="service-link">Learn More</a>
                     </div>
                 </div>
@@ -88,6 +99,12 @@
                     <div class="service-content">
                         <h3>Calibration & Verification</h3>
                         <p>Professional calibration and verification services to ensure your equipment meets industry standards and regulations.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Certified calibration procedures</li>
+                            <li><i class="fas fa-check"></i> ISO compliant processes</li>
+                            <li><i class="fas fa-check"></i> Detailed documentation</li>
+                            <li><i class="fas fa-check"></i> Regular maintenance schedules</li>
+                        </ul>
                         <a href="#calibration" class="service-link">Learn More</a>
                     </div>
                 </div>
@@ -100,92 +117,42 @@
                     <div class="service-content">
                         <h3>Repair & Maintenance</h3>
                         <p>Expert repair and maintenance services for construction equipment and industrial machinery.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Skilled technicians</li>
+                            <li><i class="fas fa-check"></i> Quick turnaround times</li>
+                            <li><i class="fas fa-check"></i> Genuine replacement parts</li>
+                            <li><i class="fas fa-check"></i> Preventive maintenance programs</li>
+                        </ul>
                         <a href="#repair" class="service-link">Learn More</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-
-    <!-- Partnership Section -->
-    <section class="partnership-section">
-        <div class="container">
-            <div class="partnership-content">
-                <h2>Our Trusted Partners</h2>
-                <p>We collaborate with leading brands in the industry to deliver exceptional quality and service</p>
-                <div class="partners-carousel-container">
-                    <button class="carousel-btn carousel-btn-left" onclick="moveCarousel(-1)">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <div class="partners-carousel">
-                        <div class="partners-track" id="partnersTrack">
-                            <div class="partner-item">
-                                <img src="images/partnership/gilson_logo.png" alt="Gilson" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/logo-matest.png" alt="Matest" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/ehwa.png" alt="Ehwa" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/labtech_logo.jpg" alt="Labtech" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/dualmfg-logo.jpg" alt="Dual MFG" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/NL-Scientific_logo.png" alt="NL Scientific" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/QLab-Corporation.jpg" alt="QLab Corporation" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/Tae-Sung-Co_logo.png" alt="Tae Sung Co" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/toho-logo-200.jpg" alt="Toho" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/WandJ.jpg" alt="W&J" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/tbt-Nanjing_logo.jpg" alt="TBT Nanjing" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/capping-gypsum-logo.png" alt="Capping Gypsum" class="partner-logo">
-                            </div>
-                            <!-- Duplicate items for seamless loop -->
-                            <div class="partner-item">
-                                <img src="images/partnership/gilson_logo.png" alt="Gilson" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/logo-matest.png" alt="Matest" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/ehwa.png" alt="Ehwa" class="partner-logo">
-                            </div>
-                            <div class="partner-item">
-                                <img src="images/partnership/labtech_logo.jpg" alt="Labtech" class="partner-logo">
-                            </div>
-                        </div>
+            <!-- Additional Services Section -->
+            <div class="additional-services">
+                <h2>Why Choose Gemarc Enterprises?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-award"></i>
+                        <h4>Quality Assurance</h4>
+                        <p>We maintain the highest standards in all our services and products.</p>
                     </div>
-                    <button class="carousel-btn carousel-btn-right" onclick="moveCarousel(1)">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+                    <div class="benefit-item">
+                        <i class="fas fa-clock"></i>
+                        <h4>Timely Delivery</h4>
+                        <p>We understand the importance of deadlines and ensure prompt service delivery.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-users"></i>
+                        <h4>Expert Team</h4>
+                        <p>Our experienced professionals bring years of industry expertise to every project.</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-handshake"></i>
+                        <h4>Customer Support</h4>
+                        <p>We provide ongoing support and consultation for all our clients.</p>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Contact CTA Section -->
-    <section class="contact-cta-section" id="about">
-        <div class="container">
-            <div class="contact-cta-content">
-                <h2>Finding something interesting ?</h2>
-                <h3>Contact Us Now</h3>
             </div>
         </div>
     </section>
