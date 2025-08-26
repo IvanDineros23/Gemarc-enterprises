@@ -38,6 +38,16 @@ body {
     width: auto;
 }
 
+.logo-link {
+    display: inline-block;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.logo-link:hover {
+    transform: scale(1.05);
+}
+
 .nav {
     position: relative;
 }
