@@ -351,21 +351,11 @@ body {
 .partners-track {
     display: flex;
     gap: 30px;
-    transition: transform 0.5s ease;
-    animation: autoScroll 20s linear infinite;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .partners-track:hover {
-    animation-play-state: paused;
-}
-
-@keyframes autoScroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
+    transition-duration: 1.2s;
 }
 
 .partner-item {

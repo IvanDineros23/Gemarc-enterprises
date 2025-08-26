@@ -59,45 +59,75 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Partnership Carousel Functionality
-let currentPosition = 0;
+let currentIndex = 0;
+let autoSlideInterval;
 const partnersTrack = document.getElementById('partnersTrack');
 const partnerItems = document.querySelectorAll('.partner-item');
-const itemWidth = 230; // 200px width + 30px gap
-const totalItems = 12; // Original items count
+const totalItems = 12; // Original items count (without duplicates)
+const itemsToShow = 3; // Show 3 items at a time
+const itemWidth = 260; // 200px width + 30px gap + padding
 
 function moveCarousel(direction) {
-    currentPosition += direction * itemWidth;
+    // Clear auto-slide when manually navigating
+    clearInterval(autoSlideInterval);
     
-    // Reset position for infinite loop
-    if (currentPosition <= -(totalItems * itemWidth)) {
-        currentPosition = 0;
-    } else if (currentPosition > 0) {
-        currentPosition = -(totalItems * itemWidth - itemWidth);
+    if (direction === 1) {
+        currentIndex += itemsToShow;
+    } else {
+        currentIndex -= itemsToShow;
     }
     
+    // Reset to beginning if at end
+    if (currentIndex >= totalItems) {
+        currentIndex = 0;
+    } else if (currentIndex < 0) {
+        currentIndex = totalItems - itemsToShow;
+    }
+    
+    updateCarouselPosition();
+    
+    // Restart auto-slide after 5 seconds
+    setTimeout(() => {
+        startAutoSlide();
+    }, 5000);
+}
+
+function updateCarouselPosition() {
     if (partnersTrack) {
-        partnersTrack.style.transform = `translateX(${currentPosition}px)`;
-        partnersTrack.style.animation = 'none';
-        
-        // Restart animation after manual control
-        setTimeout(() => {
-            partnersTrack.style.animation = 'autoScroll 20s linear infinite';
-        }, 1000);
+        const translateX = -(currentIndex * itemWidth);
+        partnersTrack.style.transform = `translateX(${translateX}px)`;
     }
 }
 
-// Reset carousel position when animation completes
-function resetCarouselPosition() {
-    if (partnersTrack) {
-        partnersTrack.addEventListener('animationiteration', () => {
-            partnersTrack.style.transform = 'translateX(0)';
-        });
-    }
+function startAutoSlide() {
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(() => {
+        currentIndex += itemsToShow;
+        
+        if (currentIndex >= totalItems) {
+            currentIndex = 0;
+        }
+        
+        updateCarouselPosition();
+    }, 3500); // 3.5 seconds delay between transitions
 }
 
 // Initialize carousel
 document.addEventListener('DOMContentLoaded', () => {
-    resetCarouselPosition();
+    updateCarouselPosition();
+    startAutoSlide();
+    
+    // Pause auto-slide on hover
+    const carouselContainer = document.querySelector('.partners-carousel-container');
+    if (carouselContainer) {
+        carouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoSlideInterval);
+        });
+        
+        carouselContainer.addEventListener('mouseleave', () => {
+            startAutoSlide();
+        });
+    }
 });
 
 // Smooth scrolling for navigation links
