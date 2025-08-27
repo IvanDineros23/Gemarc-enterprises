@@ -3363,6 +3363,36 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* NL Scientific Products Section Styling */
+.nl-section {
+    margin: 40px 0;
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* LabTech BioMedic Products Section Styling */
+.labtech-section {
+    margin: 40px 0;
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Single Product Container for LabTech */
+.single-product-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.featured-product {
+    max-width: 400px;
+    width: 100%;
+}
+
 .brand-header {
     display: flex;
     justify-content: space-between;
@@ -3384,6 +3414,20 @@ body {
     height: 50px;
     width: auto;
     filter: brightness(0) invert(1);
+}
+
+/* NL Scientific logo - no filter needed since it's already proper color */
+.nl-section .brand-logo-img {
+    height: 80px;
+    width: auto;
+    filter: none;
+}
+
+/* LabTech BioMedic logo - no filter needed */
+.labtech-section .brand-logo-img {
+    height: 45px;
+    width: auto;
+    filter: none;
 }
 
 .brand-tagline {
@@ -3508,7 +3552,7 @@ body {
 
 /* Mobile Responsive for Matest Products - Force Horizontal */
 @media (max-width: 768px) {
-    .matest-section {
+    .matest-section, .nl-section, .labtech-section {
         padding: 20px 15px;
         margin: 20px 0;
     }
@@ -3534,6 +3578,15 @@ body {
         gap: 15px;
         overflow-x: auto;
         padding-bottom: 10px;
+    }
+    
+    .single-product-container {
+        margin-top: 20px;
+    }
+    
+    .featured-product {
+        max-width: 100%;
+        margin: 0 10px;
     }
     
     .product-card {
@@ -3568,6 +3621,14 @@ body {
         height: 40px;
     }
     
+    .nl-section .brand-logo-img {
+        height: 60px;
+    }
+    
+    .labtech-section .brand-logo-img {
+        height: 35px;
+    }
+    
     .brand-tagline {
         font-size: 0.8rem;
     }
@@ -3584,6 +3645,10 @@ body {
     
     .product-card {
         min-width: 220px;
+    }
+    
+    .featured-product {
+        min-width: 280px;
     }
     
     .product-image {
