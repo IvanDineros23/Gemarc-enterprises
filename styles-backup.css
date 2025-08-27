@@ -1,24 +1,21 @@
-/* 
-   Legacy styles.css file for backwards compatibility
-   This file imports all the new modular CSS files
-   
-   DEPRECATED: Use specific CSS files instead:
-   - css/common.css for shared styles
-   - css/index.css for homepage
-   - css/about.css for about page
-   - css/services.css for services page
-   - css/contact.css for contact page
-   - css/news.css for news page
-   - css/products.css for all product pages
-*/
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-@import url('css/common.css');
-@import url('css/index.css');
-@import url('css/about.css');
-@import url('css/services.css');
-@import url('css/contact.css');
-@import url('css/news.css');
-@import url('css/products.css');
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
 /* Header Styles */
 .header {
