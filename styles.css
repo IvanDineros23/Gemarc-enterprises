@@ -3456,6 +3456,25 @@ body {
     filter: none;
 }
 
+/* TOHO logo - no filter needed, larger size */
+.toho-section .brand-logo-img {
+    height: 80px;
+    width: auto;
+    filter: none;
+}
+
+/* Tae Sung Co. logo - no filter needed */
+.taesung-section .brand-logo-img {
+    height: 70px;
+    width: auto;
+    filter: none;
+}
+
+/* Add spacing for Tae Sung section */
+.taesung-section {
+    margin-top: 60px;
+}
+
 /* Add spacing between Capstone and EHWA sections */
 .ehwa-section {
     margin-top: 60px;
