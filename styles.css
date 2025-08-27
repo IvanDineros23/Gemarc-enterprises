@@ -803,6 +803,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
+    margin-top: 60px;
 }
 
 .services-offered h3 {
@@ -3432,6 +3433,37 @@ body {
     height: 45px;
     width: auto;
     filter: none;
+}
+
+/* Capstone logo - no filter needed */
+.capstone-section .brand-logo-img {
+    height: 50px;
+    width: auto;
+    filter: none;
+}
+
+/* EHWA logo - no filter needed */
+.ehwa-section .brand-logo-img {
+    height: 50px;
+    width: auto;
+    filter: none;
+}
+
+/* TBT Nanjing logo - no filter needed */
+.tbt-section .brand-logo-img {
+    height: 50px;
+    width: auto;
+    filter: none;
+}
+
+/* Add spacing between Capstone and EHWA sections */
+.ehwa-section {
+    margin-top: 60px;
+}
+
+/* Add spacing for TBT section */
+.tbt-section {
+    margin-top: 60px;
 }
 
 .brand-tagline {
