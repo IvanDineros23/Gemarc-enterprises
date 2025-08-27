@@ -766,7 +766,7 @@ body {
     line-height: 1.6;
 }
 
-.equipment-grid {
+.general-equipment-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
@@ -2292,45 +2292,49 @@ body {
 
 .equipment-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 0;
     padding: 0;
+    margin: 0;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .equipment-item {
     display: flex;
     align-items: center;
-    padding: 20px 40px;
+    padding: 20px 25px;
     border-bottom: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
     transition: all 0.3s ease;
+    background: white;
 }
 
 .equipment-item:hover {
-    background: #f8f9fa;
-    transform: translateX(5px);
+    background: #f8fff8;
+    transform: translateX(2px);
 }
 
-.equipment-item:nth-child(even) {
-    background: #fafafa;
+.equipment-item:nth-child(3n) {
+    border-right: none;
 }
 
-.equipment-item:nth-child(even):hover {
-    background: #f0f8f0;
+.equipment-item:nth-child(n+10) {
+    border-bottom: none;
 }
 
 .equipment-number {
     background: #4caf50;
     color: white;
-    width: 35px;
-    height: 35px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
     margin-right: 20px;
     flex-shrink: 0;
-    font-size: 0.9rem;
 }
 
 .equipment-name {
@@ -3171,7 +3175,7 @@ body {
     margin: 40px 0;
 }
 
-.equipment-item {
+.matest-equipment-item {
     display: flex;
     align-items: flex-start;
     gap: 30px;
@@ -3183,11 +3187,11 @@ body {
     transition: transform 0.3s ease;
 }
 
-.equipment-item:hover {
+.matest-equipment-item:hover {
     transform: translateY(-5px);
 }
 
-.equipment-item:nth-child(even) {
+.matest-equipment-item:nth-child(even) {
     flex-direction: row-reverse;
 }
 
@@ -3323,12 +3327,12 @@ body {
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-    .equipment-item {
+    .matest-equipment-item {
         flex-direction: column !important;
         text-align: center;
     }
     
-    .equipment-item:nth-child(even) {
+    .matest-equipment-item:nth-child(even) {
         flex-direction: column !important;
     }
     
