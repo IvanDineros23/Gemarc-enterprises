@@ -3421,49 +3421,63 @@ body {
     filter: brightness(0) invert(1);
 }
 
-/* NL Scientific logo - no filter needed since it's already proper color */
+/* NL Scientific logo*/
 .nl-section .brand-logo-img {
     height: 80px;
     width: auto;
     filter: none;
 }
 
-/* LabTech BioMedic logo - no filter needed */
+/* LabTech BioMedic logo */
 .labtech-section .brand-logo-img {
     height: 45px;
     width: auto;
     filter: none;
 }
 
-/* Capstone logo - no filter needed */
+/* Capstone logo  */
 .capstone-section .brand-logo-img {
     height: 50px;
     width: auto;
     filter: none;
 }
 
-/* EHWA logo - no filter needed */
+/* EHWA logo */
 .ehwa-section .brand-logo-img {
     height: 50px;
     width: auto;
     filter: none;
 }
 
-/* TBT Nanjing logo - no filter needed */
+/* TBT Nanjing logo */
 .tbt-section .brand-logo-img {
     height: 50px;
     width: auto;
     filter: none;
 }
 
-/* TOHO logo - no filter needed, larger size */
+/* GOTECH logo */
+.gotech-section .brand-logo-img {
+    height: 80px;
+    width: auto;
+    filter: none;
+}
+
+/* Dual Manufacturing logo */
+.dual-section .brand-logo-img {
+    height: 50px;
+    width: auto;
+    filter: none;
+}
+
+/* TOHO logo */
 .toho-section .brand-logo-img {
     height: 80px;
     width: auto;
     filter: none;
 }
 
-/* Tae Sung Co. logo - no filter needed */
+/* Tae Sung Co. logo */
 .taesung-section .brand-logo-img {
     height: 70px;
     width: auto;
