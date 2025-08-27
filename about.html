@@ -68,51 +68,133 @@
     <!-- About Section -->
     <section class="about-section">
         <div class="container">
-            <!-- Company Overview -->
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>Gemarc Enterprises Incorporated</h2>
-                    <p class="lead">Your Trusted Partner in Construction Materials and Equipment</p>
-                    <p>Established with a vision to provide exceptional quality construction materials and equipment, Gemarc Enterprises Incorporated has been serving the construction industry with dedication and expertise. We are committed to delivering innovative solutions that meet the evolving needs of our clients while maintaining the highest standards of quality and service.</p>
-                    <p>Our comprehensive range of products and services encompasses everything from basic construction materials to specialized industrial equipment, making us a one-stop solution for all your construction and industrial needs.</p>
+            <!-- Tabs Navigation -->
+            <div class="about-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="showTab('company-history')">Company History</button>
+                    <button class="tab-btn" onclick="showTab('mission-vision')">Mission Vision</button>
                 </div>
-                <div class="about-image">
-                    <div class="image-placeholder">
-                        <i class="fas fa-building"></i>
-                        <p>Company Building</p>
+                
+                <!-- Company History Tab Content -->
+                <div id="company-history" class="tab-content active">
+                    <div class="tab-header">
+                        <p>GEMARC ENTERPRISES INCORPORATED is a 100% Filipino-owned corporation, distributing high quality material testing equipment and laboratory apparatus from Italy, Taiwan, South Korea, USA, Malaysia and China.</p>
+                        
+                        <p>Duly registered and accredited with the following government agencies.</p>
+                        
+                        <div class="government-logos">
+                            <img src="images/DTIWEB_Masthead.jpg" alt="Department of Trade and Industry" class="gov-logo">
+                            <img src="images/sec-150x150.png" alt="Securities and Exchange Commission" class="gov-logo">
+                            <img src="images/dpwh.png" alt="Department of Public Works and Highways" class="gov-logo">
+                        </div>
+                    </div>
+                    
+                    <div class="company-history-content">
+                        <p>GEMARC was organized initially as an Enterprise in May 1974 Engaged in manufacturing footwear. It was re-organized as Corporation on March 16, 1997 so to take advantage of emerging, as well as the growing opportunities brought about by the economic recovery particularly in the field of construction. The company diverted its product line from shoe manufacturing to material testing equipments and laboratory apparatus under the line of Soil and Rock, Concrete and Aggregates Cement, Asphalt and Steel. It started developing the market for batching plants, laboratory testing centers, cement companies, universities and contractors (Both private and government agencies).</p>
+                        
+                        <p>In January 3, 2001, the company acquired calibrating equipment from Italy, that verifies and calibrates Compression Machines, UTM, batch plant, stressing jack and other material testing equipments.</p>
+                        
+                        <p>The company represent various brands from trusted manufacturers from Italy, Taiwan, Korea, USA, Malaysia and China. Year 2005, additional testing equipments were included, for rubber, plastic, footwear, leather, paper, carton, wires and cables and helmet. It also includes Hospital and Medical equipments & supplies.</p>
+                        
+                        <p>Due to high cost of imported steel products, Year 2004, the company decided to put up it's own machine shop and complete machining equipments for fabrication of basic items conforming to ASTM and AASHTO standards. And on the same year, Service Department was put up to back up the after sales service, installation, repairs and maintenance of testing equipments.</p>
+                    </div>
+                </div>
+                
+                <!-- Mission Vision Tab Content -->
+                <div id="mission-vision" class="tab-content">
+                    <div class="mission-vision-content">
+                        <div class="mission-section">
+                            <h3>MISSION</h3>
+                            <p>GEMARC ENTERPRISES INCORPORATED is committed to provide high quality branded material testing equipment and its accessories that aims to achieve customer satisfaction and exceed their expectation through continuous product and service innovations.</p>
+                        </div>
+                        
+                        <div class="vision-section">
+                            <h3>VISION</h3>
+                            <p>To be the leading provider with quality material testing equipment locally and globally.</p>
+                        </div>
+                        
+                        <div class="core-values-section">
+                            <h3>CORE VALUES</h3>
+                            <div class="values-grid">
+                                <div class="value-item">God Fearing</div>
+                                <div class="value-item">Initiative</div>
+                                <div class="value-item">Excellence</div>
+                                <div class="value-item">Integrity and Honesty</div>
+                                <div class="value-item">Responsibility and Results</div>
+                                <div class="value-item">Respect and Fairness</div>
+                                <div class="value-item">Team and Hard-work</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Mission, Vision, Values -->
-            <div class="mvv-section">
-                <div class="mvv-grid">
-                    <div class="mvv-card">
-                        <div class="mvv-icon">
-                            <i class="fas fa-bullseye"></i>
+            <!-- Milestones Section -->
+            <div class="milestones-section">
+                <h2>Milestones</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">1974</div>
+                            <div class="timeline-text">Started as an enterprise engaged in manufacturing of safety and combat shoes.</div>
                         </div>
-                        <h3>Our Mission</h3>
-                        <p>To provide high-quality construction materials and equipment while delivering exceptional customer service that exceeds expectations and builds lasting partnerships with our clients.</p>
                     </div>
-                    <div class="mvv-card">
-                        <div class="mvv-icon">
-                            <i class="fas fa-eye"></i>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">1997</div>
+                            <div class="timeline-text">Re-organized and registered as Corporation with the Bureau of Domestic Trade (BDT) and Securities and Exchange Commission (SEC). Diverted its product line into Material Testing Equipment and Laboratory Apparatus.</div>
                         </div>
-                        <h3>Our Vision</h3>
-                        <p>To be the leading provider of construction materials and equipment in the Philippines, recognized for our innovation, quality, and commitment to sustainable business practices.</p>
                     </div>
-                    <div class="mvv-card">
-                        <div class="mvv-icon">
-                            <i class="fas fa-heart"></i>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2001</div>
+                            <div class="timeline-text">Acquired a calibrating tester from Italy on January 3, 2001. Used to verify and calibrate compression machine, UTM, batching plant and stressing jack.</div>
                         </div>
-                        <h3>Our Values</h3>
-                        <ul>
-                            <li>Integrity in all business dealings</li>
-                            <li>Quality without compromise</li>
-                            <li>Customer-focused service</li>
-                            <li>Innovation and continuous improvement</li>
-                            <li>Environmental responsibility</li>
-                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2004</div>
+                            <div class="timeline-text">Put up a complete machining equipment for fabrication of basic items conforming to ASTM and AASHTO standards. Service Department was established to back up after sales service, installation, repairs and maintenance.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2005</div>
+                            <div class="timeline-text">Authorized by GOTECH TESTING MACHINE, Taichung, Taiwan as exclusive agent of testing equipment for Rubber, Plastic, Footwear, Leather, Paper, Carton, Wires and Cables.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2017</div>
+                            <div class="timeline-text">Recognized and awarded by the Golden Globe Awards for Business Excellence for Best Material Testing Equipment and Laboratory Apparatus Provider.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2018</div>
+                            <div class="timeline-text">Authorized by MATEST TESTING EQUIPMENT, Bergamo, Italy as exclusive distributor of material testing equipment for soil & aggregates, rock, concrete, asphalt, cement and rebars.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-year">2019</div>
+                            <div class="timeline-text">Authorized by NL SCIENTIFIC, Malaysia as exclusive distributor.<br><br>Authorized by TOHO, Japan exclusive distributor of Drilling Machines.</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -152,35 +234,12 @@
                         <div class="stat-label">Satisfied Clients</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">10+</div>
+                        <div class="stat-number">50+</div>
                         <div class="stat-label">Years of Experience</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">24/7</div>
                         <div class="stat-label">Customer Support</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quality Commitment -->
-            <div class="quality-section">
-                <h2>Our Commitment to Quality</h2>
-                <p>At Gemarc Enterprises, quality is not just a goal—it's our foundation. We are currently pursuing ISO 9001 Quality Management System certification, demonstrating our unwavering commitment to excellence in every aspect of our operations.</p>
-                <div class="quality-features">
-                    <div class="quality-feature">
-                        <i class="fas fa-certificate"></i>
-                        <h4>ISO 9001 Certification Process</h4>
-                        <p>Currently implementing quality management systems to meet international standards</p>
-                    </div>
-                    <div class="quality-feature">
-                        <i class="fas fa-shield-alt"></i>
-                        <h4>Quality Assurance</h4>
-                        <p>Rigorous testing and quality control processes for all products and services</p>
-                    </div>
-                    <div class="quality-feature">
-                        <i class="fas fa-users-cog"></i>
-                        <h4>Trained Professionals</h4>
-                        <p>Ongoing training and development programs for our team members</p>
                     </div>
                 </div>
             </div>

@@ -222,30 +222,46 @@ body {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
     height: 400px;
     position: relative;
     background-size: cover;
     background-position: center;
 }
 
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
 .service-card:hover {
     transform: translateY(-10px);
 }
 
+.service-card:hover::before {
+    background: rgba(0,0,0,0.85);
+}
+
 .service-card:nth-child(1),
 .supply-card {
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/istockphoto-153734113-612x612.jpg');
+    background-image: url('images/istockphoto-153734113-612x612.jpg');
 }
 
 .service-card:nth-child(2),
 .calibration-card {
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/technicianinstrument-technician-on-job-calibrate-600nw-1020417871.webp');
+    background-image: url('images/technicianinstrument-technician-on-job-calibrate-600nw-1020417871.webp');
 }
 
 .service-card:nth-child(3),
 .repair-card {
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/focused-industrial-engineer-using-calibration-600nw-2462349429.webp');
+    background-image: url('images/focused-industrial-engineer-using-calibration-600nw-2462349429.webp');
 }
 
 .service-icon {
@@ -270,32 +286,108 @@ body {
 
 .service-content {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    padding: 60px 30px 30px;
+    bottom: 0;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     color: white;
+    z-index: 2;
 }
 
 .service-content h3 {
-    font-size: 2rem;
-    margin-bottom: 15px;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
     color: white;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-weight: 300;
+    text-shadow: 3px 3px 8px rgba(0,0,0,0.9);
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
 }
 
 .service-content p {
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 20px;
+    color: white;
+    margin-bottom: 25px;
     line-height: 1.6;
-    display: none; /* Hide description to match the image */
+    font-size: 1.1rem;
+    font-weight: 300;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition: all 0.4s ease 0.1s;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+    max-width: 300px;
+    letter-spacing: 0.5px;
+}
+
+.service-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition: all 0.4s ease 0.2s;
+    max-width: 300px;
+}
+
+.service-features li {
+    color: white;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 300;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+    letter-spacing: 0.5px;
+}
+
+.service-features li i {
+    color: #66bb6a;
+    margin-right: 12px;
+    font-size: 1rem;
+    text-shadow: none;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.8));
 }
 
 .service-link {
-    display: none; /* Hide the learn more button to match the image */
+    display: inline-block;
+    background: #4caf50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 1.1rem;
+    transition: all 0.4s ease 0.3s;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    letter-spacing: 0.5px;
+    text-shadow: none;
+}
+
+.service-link:hover {
+    background: #2e7d32;
+    transform: translateY(27px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+}
+
+/* Show content on hover */
+.service-card:hover .service-content p,
+.service-card:hover .service-features,
+.service-card:hover .service-link {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 /* Contact CTA Section */
@@ -2127,6 +2219,126 @@ body {
     line-height: 1.5;
 }
 
+/* Detailed Services Section */
+.detailed-services {
+    margin-top: 80px;
+    margin-bottom: 60px;
+}
+
+.detailed-service-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+    border: 1px solid #e8f5e8;
+}
+
+.service-header {
+    display: flex;
+    align-items: center;
+    padding: 40px;
+    background: linear-gradient(135deg, #2e7d32, #4caf50);
+    color: white;
+}
+
+.service-icon-large {
+    background: rgba(255,255,255,0.2);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+    flex-shrink: 0;
+}
+
+.service-icon-large i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.service-title h2 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.service-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.service-description {
+    padding: 40px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.service-description p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+.service-description h3 {
+    color: #2e7d32;
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 0;
+    padding: 0;
+}
+
+.equipment-item {
+    display: flex;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.equipment-item:hover {
+    background: #f8f9fa;
+    transform: translateX(5px);
+}
+
+.equipment-item:nth-child(even) {
+    background: #fafafa;
+}
+
+.equipment-item:nth-child(even):hover {
+    background: #f0f8f0;
+}
+
+.equipment-number {
+    background: #4caf50;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 20px;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+
+.equipment-name {
+    color: #333;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
 /* Contact Page Styles */
 .contact-hero {
     background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/360_F_1589025175_1DxdWO4V6n1gbYRWoVjD0eef0QEi9yq4.jpg');
@@ -2426,6 +2638,269 @@ body {
     left: 0;
 }
 
+/* About Tabs Styles */
+.about-tabs {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 80px;
+    overflow: hidden;
+}
+
+.tab-buttons {
+    display: flex;
+    background: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 20px 30px;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+.tab-btn.active {
+    background: white;
+    color: #2e7d32;
+    border-bottom-color: #4caf50;
+}
+
+.tab-btn:hover {
+    background: #f0f0f0;
+    color: #2e7d32;
+}
+
+.tab-content {
+    display: none;
+    padding: 40px;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tab-header {
+    margin-bottom: 30px;
+}
+
+.tab-header p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.government-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.gov-logo {
+    height: 120px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    filter: grayscale(20%);
+    transition: all 0.3s ease;
+}
+
+.gov-logo:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.company-history-content {
+    color: #666;
+    line-height: 1.7;
+}
+
+.company-history-content p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+/* Mission Vision Tab Styles */
+.mission-vision-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.mission-section, .vision-section, .core-values-section {
+    margin-bottom: 40px;
+}
+
+.mission-section h3, .vision-section h3, .core-values-section h3 {
+    color: #2e7d32;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.mission-section p, .vision-section p {
+    color: #666;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.value-item {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: #2e7d32;
+    font-weight: 500;
+    border-left: 4px solid #4caf50;
+    transition: all 0.3s ease;
+}
+
+.value-item:hover {
+    background: #e8f5e8;
+    transform: translateY(-2px);
+}
+
+/* Milestones Timeline Styles */
+.milestones-section {
+    margin-bottom: 80px;
+    padding: 60px 0;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.milestones-section h2 {
+    text-align: center;
+    color: #2e7d32;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    width: 3px;
+    background: #4caf50;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1.5px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    width: 100%;
+    min-height: 100px;
+}
+
+.timeline-item::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.timeline-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #4caf50;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    left: 50%;
+    margin-left: -10px;
+    z-index: 2;
+    box-shadow: 0 0 0 3px #4caf50;
+    top: 25px;
+}
+
+.timeline-content {
+    position: relative;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    width: 45%;
+    border: 2px solid #e8f5e8;
+}
+
+/* Odd items (1st, 3rd, 5th...) go to the LEFT */
+.timeline-item:nth-child(odd) .timeline-content {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+/* Even items (2nd, 4th, 6th...) go to the RIGHT */
+.timeline-item:nth-child(even) .timeline-content {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.timeline-content::after {
+    content: '';
+    position: absolute;
+    top: 25px;
+    width: 0;
+    height: 0;
+    border: 15px solid;
+}
+
+/* Arrow for LEFT items pointing RIGHT */
+.timeline-item:nth-child(odd) .timeline-content::after {
+    right: -30px;
+    border-color: transparent transparent transparent #fff;
+}
+
+/* Arrow for RIGHT items pointing LEFT */
+.timeline-item:nth-child(even) .timeline-content::after {
+    left: -30px;
+    border-color: transparent #fff transparent transparent;
+}
+
+.timeline-year {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+.timeline-text {
+    color: #666;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
 .what-we-do {
     margin-bottom: 80px;
 }
@@ -2581,6 +3056,33 @@ body {
         grid-template-columns: 1fr;
     }
     
+    .equipment-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+    }
+    
+    .service-icon-large {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .service-description {
+        padding: 30px 20px;
+    }
+    
+    .equipment-item {
+        padding: 15px 20px;
+    }
+    
+    .service-title h2 {
+        font-size: 1.8rem;
+    }
+    
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -2590,6 +3092,76 @@ body {
     }
     
     .about-text h2 {
+        font-size: 2rem;
+    }
+    
+    /* Tab responsive styles */
+    .tab-buttons {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        border-bottom: 1px solid #e0e0e0;
+        border-right: none;
+    }
+    
+    .tab-btn.active {
+        border-bottom-color: #e0e0e0;
+        border-left: 3px solid #4caf50;
+    }
+    
+    .tab-content {
+        padding: 20px;
+    }
+    
+    .government-logos {
+        gap: 20px;
+    }
+    
+    .gov-logo {
+        height: 80px;
+        max-width: 150px;
+    }
+    
+    /* Mission Vision responsive styles */
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .mission-section h3, .vision-section h3, .core-values-section h3 {
+        font-size: 1.2rem;
+    }
+    
+    /* Timeline responsive styles */
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-dot {
+        left: 30px;
+        margin-left: -10px;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        width: calc(100% - 80px);
+        margin-left: 80px;
+        margin-right: 0;
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content::after,
+    .timeline-item:nth-child(even) .timeline-content::after {
+        left: -30px;
+        right: auto;
+        border-color: transparent #fff transparent transparent;
+    }
+    
+    .timeline-year {
+        font-size: 1.5rem;
+    }
+    
+    .milestones-section h2 {
         font-size: 2rem;
     }
 }
