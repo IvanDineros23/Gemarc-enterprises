@@ -244,3 +244,22 @@ function showTab(tabName) {
     // Add active class to clicked button
     event.target.classList.add('active');
 }
+
+// E-brochures dropdown toggle functionality
+function toggleEbrochures() {
+    const content = document.getElementById('ebrochuresContent');
+    const button = document.querySelector('.ebrochures-toggle-btn');
+    const buttonText = button.querySelector('span');
+    
+    if (content.classList.contains('active')) {
+        // Close dropdown
+        content.classList.remove('active');
+        button.classList.remove('active');
+        buttonText.textContent = 'View Available Downloads';
+    } else {
+        // Open dropdown
+        content.classList.add('active');
+        button.classList.add('active');
+        buttonText.textContent = 'Hide Downloads';
+    }
+}

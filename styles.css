@@ -413,6 +413,184 @@ body {
     margin: 0;
 }
 
+/* E-Brochures Section */
+.ebrochures-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.ebrochures-section .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.ebrochures-section .section-header h2 {
+    font-size: 2.5rem;
+    color: #2e7d32;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.ebrochures-section .section-header p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.ebrochures-dropdown {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ebrochures-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: linear-gradient(135deg, #2e7d32, #4caf50);
+    color: white;
+    border: none;
+    padding: 20px 40px;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 auto 30px auto;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+    min-width: 300px;
+}
+
+.ebrochures-toggle-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+    background: linear-gradient(135deg, #1b5e20, #2e7d32);
+}
+
+.ebrochures-toggle-btn .dropdown-arrow {
+    transition: transform 0.3s ease;
+    font-size: 1rem;
+}
+
+.ebrochures-toggle-btn.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.ebrochures-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.ebrochures-content.active {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: 20px;
+}
+
+.ebrochures-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ebrochure-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
+    position: relative;
+    overflow: hidden;
+}
+
+.ebrochure-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2e7d32, #4caf50);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.ebrochure-card:hover::before {
+    transform: scaleX(1);
+}
+
+.ebrochure-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.ebrochure-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #2e7d32, #4caf50);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+}
+
+.ebrochure-card:hover .ebrochure-icon {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+}
+
+.ebrochure-icon i {
+    font-size: 1.8rem;
+    color: white;
+}
+
+.ebrochure-content h3 {
+    font-size: 1.4rem;
+    color: #2e7d32;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.ebrochure-content p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #2e7d32, #4caf50);
+    color: white;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+    background: linear-gradient(135deg, #1b5e20, #2e7d32);
+}
+
+.download-btn i {
+    font-size: 1rem;
+}
+
 /* Partnership Section */
 .partnership-section {
     padding: 80px 0;
@@ -1216,6 +1394,44 @@ body {
     
     .service-card {
         height: 350px;
+    }
+    
+    /* E-Brochures Section */
+    .ebrochures-section {
+        padding: 60px 0;
+    }
+    
+    .ebrochures-section .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .ebrochures-toggle-btn {
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        min-width: 280px;
+    }
+    
+    .ebrochures-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 20px;
+    }
+    
+    .ebrochure-card {
+        padding: 25px 20px;
+    }
+    
+    .ebrochure-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .ebrochure-icon i {
+        font-size: 1.5rem;
+    }
+    
+    .ebrochure-content h3 {
+        font-size: 1.2rem;
     }
     
     /* Partnership Section */
