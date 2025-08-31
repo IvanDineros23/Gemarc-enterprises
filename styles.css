@@ -413,6 +413,18 @@ body {
     margin: 0;
 }
 
+.contact-cta-content h3 a {
+    color: #2e7d32;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-cta-content h3 a:hover {
+    color: #1b5e20;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 /* E-Brochures Section */
 .ebrochures-section {
     padding: 80px 0;
