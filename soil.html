@@ -18,11 +18,43 @@
             </div>
             <nav class="nav">
                 <ul class="nav-list">
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Company News <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">Latest News</a></li>
+                            <li><a href="blogs.html">Blogs & Articles</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Our Business <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="aggregates.html">Aggregates</a></li>
+                            <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                            <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                            <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                            <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                            <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                            <li><a href="soil.html" class="active">Soil</a></li>
+                            <li><a href="steel.html">Steel</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html">Calibration & Verification</a></li>
+                            <li><a href="services.html">Repair & Maintenance</a></li>
+                            <li><a href="services.html">Supply Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">About Us <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">Company Profile</a></li>
+                            <li><a href="about.html#history">Our History</a></li>
+                            <li><a href="about.html#team">Our Team</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <div class="hamburger" onclick="toggleMobileMenu()">
                     <span></span>
@@ -32,30 +64,6 @@
             </nav>
         </div>
     </header>
-
-    <!-- Services Navigation -->
-    <nav class="services-nav">
-        <div class="container">
-            <div class="services-nav-header">
-                <span class="services-nav-title">Categories</span>
-                <div class="services-hamburger" onclick="toggleServicesMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <ul class="services-list">
-                <li><a href="aggregates.html">Aggregates</a></li>
-                <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
-                <li><a href="cement-mortar.html">Cement & Mortar</a></li>
-                <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
-                <li><a href="drilling-machine.html">Drilling Machine</a></li>
-                <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
-                <li><a href="soil.html" class="active">Soil</a></li>
-                <li><a href="steel.html">Steel</a></li>
-            </ul>
-        </div>
-    </nav>
 
     <!-- Hero Section -->
     <section class="hero">

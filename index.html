@@ -18,11 +18,43 @@
             </div>
             <nav class="nav">
                 <ul class="nav-list">
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="about.html">About</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Company News <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">Latest News</a></li>
+                            <li><a href="blogs.html">Blogs & Articles</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Our Business <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="aggregates.html">Aggregates</a></li>
+                            <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                            <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                            <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                            <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                            <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                            <li><a href="soil.html">Soil</a></li>
+                            <li><a href="steel.html">Steel</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html">Calibration & Verification</a></li>
+                            <li><a href="services.html">Repair & Maintenance</a></li>
+                            <li><a href="services.html">Supply Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">About Us <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">Company Profile</a></li>
+                            <li><a href="about.html#history">Our History</a></li>
+                            <li><a href="about.html#team">Our Team</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <div class="hamburger" onclick="toggleMobileMenu()">
                     <span></span>
@@ -32,80 +64,6 @@
             </nav>
         </div>
     </header>
-
-    <!-- Services Navigation -->
-    <nav class="services-nav">
-        <div class="container">
-            <div class="services-nav-header">
-                <span class="services-nav-title">Products</span>
-                <div class="services-hamburger" onclick="toggleServicesMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <ul class="services-list">
-                <li><a href="aggregates.html">Aggregates</a></li>
-                <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
-                <li><a href="cement-mortar.html">Cement & Mortar</a></li>
-                <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
-                <li><a href="drilling-machine.html">Drilling Machine</a></li>
-                <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
-                <li><a href="soil.html">Soil</a></li>
-                <li><a href="steel.html">Steel</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Our Services</h1>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section class="services-section">
-        <div class="container">
-            <div class="services-grid">
-                <!-- Supply Service -->
-                <div class="service-card supply-card">
-                    <div class="service-icon">
-                        <i class="fas fa-truck"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Supply</h3>
-                        <p>We provide high-quality construction materials and equipment supply services to meet all your project needs.</p>
-                        <a href="services.html" class="service-link">Learn More</a>
-                    </div>
-                </div>
-
-                <!-- Calibration Service -->
-                <div class="service-card calibration-card">
-                    <div class="service-icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Calibration & Verification</h3>
-                        <p>Professional calibration and verification services to ensure your equipment meets industry standards and regulations.</p>
-                        <a href="services.html" class="service-link">Learn More</a>
-                    </div>
-                </div>
-
-                <!-- Repair Service -->
-                <div class="service-card repair-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <div class="service-content">
-                        <h3>Repair & Maintenance</h3>
-                        <p>Expert repair and maintenance services for construction equipment and industrial machinery.</p>
-                        <a href="services.html" class="service-link">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- E-Brochures Section -->
     <section class="ebrochures-section">
@@ -126,15 +84,15 @@
                 <!-- E-Brochures Content (Hidden by default) -->
                 <div class="ebrochures-content" id="ebrochuresContent">
                     <div class="ebrochures-grid">
-                        <!-- Product Catalog -->
+                        <!-- GEI Company Brochure 2025 -->
                         <div class="ebrochure-card">
                             <div class="ebrochure-icon">
-                                <i class="fas fa-book-open"></i>
+                                <i class="fas fa-building"></i>
                             </div>
                             <div class="ebrochure-content">
-                                <h3>Product Catalog 2025</h3>
-                                <p>Complete overview of all our construction materials and testing equipment</p>
-                                <a href="#" class="download-btn">
+                                <h3>GEI Company Brochure 2025</h3>
+                                <p>Complete overview of Gemarc Enterprises and our construction materials & testing equipment</p>
+                                <a href="downloadable content/GEI 2025 brochure.pdf" class="download-btn" download>
                                     <i class="fas fa-download"></i>
                                     Download
                                 </a>
@@ -171,15 +129,30 @@
                             </div>
                         </div>
 
-                        <!-- Partnership Brands -->
+                        <!-- Matest Catalog -->
                         <div class="ebrochure-card">
-                            <div class="ebrochure-icon">
-                                <i class="fas fa-handshake"></i>
+                            <div class="ebrochure-logo">
+                                <img src="images/partnership/logo-matest.png" alt="Matest" class="partner-logo-brochure">
                             </div>
                             <div class="ebrochure-content">
-                                <h3>Partner Brands Catalog</h3>
-                                <p>Information about all our trusted partner brands and their products</p>
-                                <a href="#" class="download-btn">
+                                <h3>Matest Equipment Catalog 2025</h3>
+                                <p>Complete catalog of Matest construction testing equipment and specifications</p>
+                                <a href="downloadable content/Matest_Cat_2025_ENG.pdf" class="download-btn" download>
+                                    <i class="fas fa-download"></i>
+                                    Download
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- TOHO Japan Catalog -->
+                        <div class="ebrochure-card">
+                            <div class="ebrochure-logo">
+                                <img src="images/partnership/toho-logo-200.jpg" alt="TOHO Japan" class="partner-logo-brochure">
+                            </div>
+                            <div class="ebrochure-content">
+                                <h3>TOHO Japan Equipment Catalog</h3>
+                                <p>Industrial testing equipment and machinery catalog from TOHO Japan</p>
+                                <a href="downloadable content/TOHO JAPAN - CATALOG.pdf" class="download-btn" download>
                                     <i class="fas fa-download"></i>
                                     Download
                                 </a>

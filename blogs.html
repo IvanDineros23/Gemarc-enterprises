@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs - Gemarc Enterprises Incorporated</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <img src="images\gemarclogo.png" alt="Gemarc Enterprises" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Company News <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">Latest News</a></li>
+                            <li><a href="blogs.html" class="active">Blogs & Articles</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Our Business <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="aggregates.html">Aggregates</a></li>
+                            <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                            <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                            <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                            <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                            <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                            <li><a href="soil.html">Soil</a></li>
+                            <li><a href="steel.html">Steel</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="services.html">Calibration & Verification</a></li>
+                            <li><a href="services.html">Repair & Maintenance</a></li>
+                            <li><a href="services.html">Supply Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">About Us <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">Company Profile</a></li>
+                            <li><a href="about.html#history">Our History</a></li>
+                            <li><a href="about.html#team">Our Team</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blogs Hero -->
+    <section class="page-hero">
+        <div class="hero-content">
+            <h1>Blogs & Articles</h1>
+            <p>Stay updated with industry insights and company updates</p>
+        </div>
+    </section>
+
+    <!-- Blogs Section -->
+    <section class="blogs-section">
+        <div class="container">
+            <div class="blogs-grid">
+                <!-- Blog Post 1 -->
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <img src="images/news/GEItrainingiso9001-1024x768.jpg" alt="ISO 9001 Training">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="fas fa-calendar"></i> March 15, 2025</span>
+                            <span class="blog-category">Training</span>
+                        </div>
+                        <h3>ISO 9001 Quality Management System Training</h3>
+                        <p>Our team recently completed comprehensive ISO 9001 training to ensure the highest quality standards in our services and operations.</p>
+                        <a href="#" class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 2 -->
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <img src="images/360_F_1589025175_1DxdWO4V6n1gbYRWoVjD0eef0QEi9yq4.jpg" alt="Construction Testing">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="fas fa-calendar"></i> March 10, 2025</span>
+                            <span class="blog-category">Industry</span>
+                        </div>
+                        <h3>The Importance of Construction Material Testing</h3>
+                        <p>Understanding why proper testing of construction materials is crucial for project safety and longevity.</p>
+                        <a href="#" class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Blog Post 3 -->
+                <article class="blog-post">
+                    <div class="blog-image">
+                        <img src="images/focused-industrial-engineer-using-calibration-600nw-2462349429.webp" alt="Calibration Services">
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-date"><i class="fas fa-calendar"></i> March 5, 2025</span>
+                            <span class="blog-category">Services</span>
+                        </div>
+                        <h3>Equipment Calibration: Ensuring Accuracy in Testing</h3>
+                        <p>Learn about our calibration services and how we maintain the highest standards of accuracy in equipment testing.</p>
+                        <a href="#" class="read-more-btn">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+
+                <!-- Coming Soon Posts -->
+                <article class="blog-post coming-soon">
+                    <div class="blog-content">
+                        <div class="coming-soon-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>More Articles Coming Soon</h3>
+                        <p>We're working on bringing you more valuable content about construction testing, equipment calibration, and industry insights.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section class="contact-cta-section">
+        <div class="container">
+            <div class="contact-cta-content">
+                <h2>Have Questions About Our Services?</h2>
+                <h3><a href="contact.html">Contact Us Now</a></h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="aggregates.html">Aggregates</a></li>
+                        <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                        <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                        <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                        <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                        <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                        <li><a href="soil.html">Soil</a></li>
+                        <li><a href="steel.html">Steel</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gemarc Enterprises Incorporated. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Social Media Buttons -->
+    <div class="floating-social">
+        <a href="https://www.facebook.com/gmrcsales/" class="floating-btn facebook-btn" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="floating-btn viber-btn" target="_blank">
+            <i class="fab fa-viber"></i>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
