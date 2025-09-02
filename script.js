@@ -708,6 +708,12 @@ const showcaseItemsPerSlide = 4;
 
 function moveShowcase(direction) {
     const track = document.getElementById('showcaseTrack');
+    
+    // Check if showcase track exists (only on index page)
+    if (!track) {
+        return;
+    }
+    
     const items = track.children;
     const totalItems = items.length;
     const maxSlides = Math.ceil(totalItems / showcaseItemsPerSlide);
@@ -744,6 +750,12 @@ function updateShowcaseDots() {
 
 // Auto-play showcase
 function autoPlayShowcase() {
+    // Check if showcase exists before starting auto-play
+    const track = document.getElementById('showcaseTrack');
+    if (!track) {
+        return;
+    }
+    
     setInterval(() => {
         moveShowcase(1);
     }, 5000); // Change slide every 5 seconds
@@ -751,8 +763,11 @@ function autoPlayShowcase() {
 
 // Initialize showcase functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Start auto-play
-    autoPlayShowcase();
+    // Only start auto-play if showcase exists
+    const track = document.getElementById('showcaseTrack');
+    if (track) {
+        autoPlayShowcase();
+    }
     
     // Handle responsive behavior
     function handleShowcaseResize() {

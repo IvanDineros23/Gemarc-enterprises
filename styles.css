@@ -409,6 +409,78 @@ body {
     color: #2e7d32;
 }
 
+/* Products Section Search Bar */
+.products-search {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+}
+
+.products-search {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 25px;
+    padding: 8px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #f0f0f0;
+    transition: all 0.3s ease;
+    max-width: 550px;
+    margin: 0 auto 30px;
+}
+
+.products-search:hover {
+    border-color: #2e7d32;
+    box-shadow: 0 6px 20px rgba(46, 125, 50, 0.15);
+}
+
+.products-search .search-input {
+    border: none;
+    background: transparent;
+    color: #333;
+    padding: 8px 12px;
+    font-size: 16px;
+    width: 450px;
+    outline: none;
+}
+
+/* Mobile responsive for products search */
+@media (max-width: 768px) {
+    .products-search {
+        max-width: 300px;
+        padding: 6px 15px;
+    }
+    
+    .products-search .search-input {
+        width: 200px;
+        font-size: 14px;
+    }
+    
+    .products-search .search-btn {
+        padding: 8px 12px;
+    }
+}
+
+.products-search .search-input::placeholder {
+    color: rgba(51, 51, 51, 0.6);
+}
+
+.products-search .search-btn {
+    background: #2e7d32;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.products-search .search-btn:hover {
+    background: #1b5e20;
+    transform: translateY(-1px);
+}
+
 /* Navigation Actions - More Compact */
 .nav-actions {
     display: flex;
