@@ -168,6 +168,78 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Products Carousel Functions
+let currentProductIndex = 0;
+let autoProductSlideInterval;
+const productsTrack = document.getElementById('productsTrack');
+const productItems = document.querySelectorAll('.product-item');
+const totalProductItems = 20; // Original items count (without duplicates)
+const productItemsToShow = 3; // Show 3 items at a time
+const productItemWidth = 260; // 200px width + 30px gap + padding
+
+function moveProductsCarousel(direction) {
+    // Clear auto-slide when manually navigating
+    clearInterval(autoProductSlideInterval);
+    
+    if (direction === 1) {
+        currentProductIndex += productItemsToShow;
+    } else {
+        currentProductIndex -= productItemsToShow;
+    }
+    
+    // Reset to beginning if at end
+    if (currentProductIndex >= totalProductItems) {
+        currentProductIndex = 0;
+    } else if (currentProductIndex < 0) {
+        currentProductIndex = totalProductItems - productItemsToShow;
+    }
+    
+    updateProductsCarouselPosition();
+    
+    // Restart auto-slide after 5 seconds
+    setTimeout(() => {
+        startProductsAutoSlide();
+    }, 5000);
+}
+
+function updateProductsCarouselPosition() {
+    if (productsTrack) {
+        const translateX = -(currentProductIndex * productItemWidth);
+        productsTrack.style.transform = `translateX(${translateX}px)`;
+    }
+}
+
+function startProductsAutoSlide() {
+    clearInterval(autoProductSlideInterval);
+    autoProductSlideInterval = setInterval(() => {
+        currentProductIndex += productItemsToShow;
+        
+        if (currentProductIndex >= totalProductItems) {
+            currentProductIndex = 0;
+        }
+        
+        updateProductsCarouselPosition();
+    }, 4000); // 4 seconds delay between transitions
+}
+
+// Initialize products carousel
+document.addEventListener('DOMContentLoaded', () => {
+    updateProductsCarouselPosition();
+    startProductsAutoSlide();
+    
+    // Pause auto-slide on hover
+    const productsCarouselContainer = document.querySelector('.products-carousel-container');
+    if (productsCarouselContainer) {
+        productsCarouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoProductSlideInterval);
+        });
+        
+        productsCarouselContainer.addEventListener('mouseleave', () => {
+            startProductsAutoSlide();
+        });
+    }
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
