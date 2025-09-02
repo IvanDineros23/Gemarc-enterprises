@@ -23,46 +23,88 @@
                     <button class="search-btn" type="button"><i class="fas fa-search"></i></button>
                 </div>
                 
-                <ul class="nav-list">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle"><i class="fas fa-newspaper"></i> News <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="news.html">News</a></li>
-                            <li><a href="blogs.html">Blogs</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle"><i class="fas fa-industry"></i> Products <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="aggregates.html">Aggregates</a></li>
-                            <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
-                            <li><a href="cement-mortar.html">Cement & Mortar</a></li>
-                            <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
-                            <li><a href="drilling-machine.html">Drilling Machine</a></li>
-                            <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
-                            <li><a href="soil.html">Soil Testing</a></li>
-                            <li><a href="steel.html">Steel Testing</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle"><i class="fas fa-wrench"></i> Services <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="services.html">Calibration</a></li>
-                            <li><a href="services.html">Maintenance</a></li>
-                            <li><a href="services.html">Supply</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle"><i class="fas fa-users"></i> About <i class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="about.html">Company</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                                <!-- Desktop nav-list (unchanged, for desktop view) -->
+                                <ul class="nav-list desktop-nav">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle"><i class="fas fa-newspaper"></i> News <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="news.html">News</a></li>
+                                            <li><a href="blogs.html">Blogs</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle"><i class="fas fa-industry"></i> Products <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="aggregates.html">Aggregates</a></li>
+                                            <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                                            <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                                            <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                                            <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                                            <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                                            <li><a href="soil.html">Soil Testing</a></li>
+                                            <li><a href="steel.html">Steel Testing</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle"><i class="fas fa-wrench"></i> Services <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="services.html">Calibration</a></li>
+                                            <li><a href="services.html">Maintenance</a></li>
+                                            <li><a href="services.html">Supply</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle"><i class="fas fa-users"></i> About <i class="fas fa-chevron-down"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="about.html">Company</a></li>
+                                            <li><a href="contact.html">Contact</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <!-- Mobile Menu Overlay -->
+                                <div class="mobile-menu-overlay" id="mobileMenu">
+                                    <button class="mobile-menu-close" id="closeMenu">&times;</button>
+                                    <ul class="mobile-menu-list">
+                                        <li>
+                                            <button class="mobile-menu-main">News</button>
+                                            <ul class="mobile-menu-sub">
+                                                <li><a href="news.html">News</a></li>
+                                                <li><a href="blogs.html">Blogs</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <button class="mobile-menu-main">Products</button>
+                                            <ul class="mobile-menu-sub">
+                                                <li><a href="aggregates.html">Aggregates</a></li>
+                                                <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                                                <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                                                <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                                                <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                                                <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                                                <li><a href="soil.html">Soil Testing</a></li>
+                                                <li><a href="steel.html">Steel Testing</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <button class="mobile-menu-main">Services</button>
+                                            <ul class="mobile-menu-sub">
+                                                <li><a href="services.html">Calibration</a></li>
+                                                <li><a href="services.html">Maintenance</a></li>
+                                                <li><a href="services.html">Supply</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <button class="mobile-menu-main">About</button>
+                                            <ul class="mobile-menu-sub">
+                                                <li><a href="about.html">Company</a></li>
+                                                <li><a href="contact.html">Contact</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                 
                 <!-- Quick Actions -->
                 <div class="nav-actions">

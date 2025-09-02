@@ -1,3 +1,38 @@
+// Mobile menu overlay logic
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+    const mainButtons = document.querySelectorAll('.mobile-menu-main');
+
+    // Open mobile menu
+    if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function() {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
+    // Close mobile menu
+    if (closeMenu && mobileMenu) {
+        closeMenu.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+    // Accordion dropdown logic
+    mainButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Close other submenus
+            mainButtons.forEach(otherBtn => {
+                if (otherBtn !== btn) {
+                    otherBtn.classList.remove('active');
+                }
+            });
+            // Toggle current submenu
+            btn.classList.toggle('active');
+        });
+    });
+});
 // Mobile menu toggle functionality
 function toggleMobileMenu() {
     const navList = document.querySelector('.nav-list');
@@ -18,6 +53,22 @@ function toggleServicesMenu() {
 
 // Close mobile menu when clicking on a link
 document.addEventListener('DOMContentLoaded', () => {
+    // Mobile: Only one dropdown open at a time
+    if (window.innerWidth <= 600) {
+        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parentDropdown = this.closest('.dropdown');
+                // Close all dropdowns
+                document.querySelectorAll('.dropdown.mobile-active').forEach(dd => {
+                    if (dd !== parentDropdown) dd.classList.remove('mobile-active');
+                });
+                // Toggle current dropdown
+                parentDropdown.classList.toggle('mobile-active');
+            });
+        });
+    }
     const navLinks = document.querySelectorAll('.nav-list a');
     const navList = document.querySelector('.nav-list');
     const hamburger = document.querySelector('.hamburger');
@@ -27,20 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const servicesHamburger = document.querySelector('.services-hamburger');
     
     // Main navigation
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navList.classList.remove('mobile-active');
-            hamburger.classList.remove('active');
-        });
-    });
-    
-    // Services navigation
-    servicesLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            servicesList.classList.remove('mobile-active');
-            servicesHamburger.classList.remove('active');
-        });
-    });
+    // Removed auto-close on link click for mobile dropdowns
     
     // Close mobile menus when clicking outside
     document.addEventListener('click', (e) => {
