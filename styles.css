@@ -913,6 +913,362 @@ body {
     cursor: pointer;
 }
 
+/* News & Blogs Section */
+.news-blogs-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.news-blogs-section .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.news-blogs-section .section-header h2 {
+    font-size: 2.5rem;
+    color: #2e7d32;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.news-blogs-section .section-header p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.news-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.news-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.news-image {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover .news-image img {
+    transform: scale(1.05);
+}
+
+.news-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(46, 125, 50, 0.9);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.news-card:hover .news-overlay {
+    opacity: 1;
+}
+
+.news-content {
+    padding: 25px;
+}
+
+.news-date {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.news-content h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.news-content p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.read-more {
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.read-more:hover {
+    color: #1b5e20;
+    gap: 12px;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 40px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #333;
+}
+
+.modal h2 {
+    color: #2e7d32;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.modal img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.modal p {
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Product Showcase Section */
+.product-showcase-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.product-showcase-section .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.product-showcase-section .section-header h2 {
+    font-size: 2.5rem;
+    color: #2e7d32;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.product-showcase-section .section-header p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.showcase-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.product-showcase {
+    overflow: hidden;
+    position: relative;
+}
+
+.showcase-track {
+    display: flex;
+    transition: transform 0.5s ease;
+    gap: 20px;
+}
+
+.product-item {
+    flex: 0 0 calc(25% - 15px);
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.product-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover img {
+    transform: scale(1.05);
+}
+
+.product-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 30px 20px 20px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover .product-overlay {
+    transform: translateY(0);
+}
+
+.product-overlay h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.product-overlay p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.showcase-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(46, 125, 50, 0.9);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.showcase-btn:hover {
+    background: rgba(46, 125, 50, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.showcase-btn-left {
+    left: 20px;
+}
+
+.showcase-btn-right {
+    right: 20px;
+}
+
+.showcase-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active,
+.dot:hover {
+    background: #2e7d32;
+    transform: scale(1.2);
+}
+
 /* E-Brochures Section */
 .ebrochures-section {
     padding: 80px 0;
@@ -939,183 +1295,96 @@ body {
     line-height: 1.6;
 }
 
-.ebrochures-dropdown {
-    max-width: 1200px;
+/* Company Brochure Card */
+.company-brochure-card {
+    max-width: 600px;
     margin: 0 auto;
-}
-
-.ebrochures-toggle-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    background: linear-gradient(135deg, #2e7d32, #4caf50);
-    color: white;
-    border: none;
-    padding: 20px 40px;
-    border-radius: 12px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 0 auto 30px auto;
-    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
-    min-width: 300px;
-}
-
-.ebrochures-toggle-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
-    background: linear-gradient(135deg, #1b5e20, #2e7d32);
-}
-
-.ebrochures-toggle-btn .dropdown-arrow {
-    transition: transform 0.3s ease;
-    font-size: 1rem;
-}
-
-.ebrochures-toggle-btn.active .dropdown-arrow {
-    transform: rotate(180deg);
-}
-
-.ebrochures-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.5s ease;
-    opacity: 0;
-}
-
-.ebrochures-content.active {
-    max-height: 2000px;
-    opacity: 1;
-    margin-top: 20px;
-}
-
-.ebrochures-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.ebrochure-card {
     background: white;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     border: 1px solid #f0f0f0;
     position: relative;
     overflow: hidden;
+    text-align: center;
 }
 
-.ebrochure-card::before {
+.company-brochure-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 5px;
     background: linear-gradient(90deg, #2e7d32, #4caf50);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
 }
 
-.ebrochure-card:hover::before {
-    transform: scaleX(1);
-}
-
-.ebrochure-card:hover {
+.company-brochure-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
 }
 
-.ebrochure-icon {
-    width: 70px;
-    height: 70px;
+.brochure-icon {
+    width: 100px;
+    height: 100px;
     background: linear-gradient(135deg, #2e7d32, #4caf50);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 25px;
+    margin: 0 auto 30px;
     transition: all 0.3s ease;
 }
 
-.ebrochure-card:hover .ebrochure-icon {
+.company-brochure-card:hover .brochure-icon {
     transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+    box-shadow: 0 15px 30px rgba(76, 175, 80, 0.4);
 }
 
-.ebrochure-icon i {
-    font-size: 1.8rem;
+.brochure-icon i {
+    font-size: 2.5rem;
     color: white;
 }
 
-.ebrochure-logo {
-    width: 70px;
-    height: 70px;
-    background: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 25px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    padding: 10px;
+.brochure-content h3 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
 }
 
-.ebrochure-card:hover .ebrochure-logo {
-    transform: scale(1.1);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-.partner-logo-brochure {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-}
-
-.ebrochure-content h3 {
-    font-size: 1.4rem;
-    color: #2e7d32;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.ebrochure-content p {
+.brochure-content p {
+    font-size: 1.1rem;
     color: #666;
     line-height: 1.6;
-    margin-bottom: 25px;
-    font-size: 1rem;
+    margin-bottom: 35px;
 }
 
-.download-btn {
+.company-download-btn {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     background: linear-gradient(135deg, #2e7d32, #4caf50);
     color: white;
     text-decoration: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-weight: 500;
+    padding: 18px 35px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
     transition: all 0.3s ease;
-    font-size: 1rem;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
 }
 
-.download-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+.company-download-btn:hover {
     background: linear-gradient(135deg, #1b5e20, #2e7d32);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(76, 175, 80, 0.4);
+    color: white;
 }
 
-.download-btn i {
-    font-size: 1rem;
+.company-download-btn i {
+    font-size: 1.2rem;
 }
 
 /* Partnership Section */
@@ -1961,6 +2230,66 @@ body {
         height: 350px;
     }
     
+    /* News & Blogs Section Mobile */
+    .news-blogs-section {
+        padding: 60px 0;
+    }
+    
+    .news-blogs-section .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .news-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 20px;
+    }
+    
+    .news-card {
+        margin-bottom: 20px;
+    }
+    
+    .news-image {
+        height: 200px;
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        padding: 30px 20px;
+        width: 95%;
+    }
+    
+    /* Product Showcase Mobile */
+    .product-showcase-section {
+        padding: 60px 0;
+    }
+    
+    .product-showcase-section .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .product-item {
+        flex: 0 0 calc(50% - 10px);
+    }
+    
+    .product-item img {
+        height: 200px;
+    }
+    
+    .showcase-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .showcase-btn-left {
+        left: 10px;
+    }
+    
+    .showcase-btn-right {
+        right: 10px;
+    }
+    
     /* E-Brochures Section */
     .ebrochures-section {
         padding: 60px 0;
@@ -1970,39 +2299,31 @@ body {
         font-size: 2rem;
     }
     
-    .ebrochures-toggle-btn {
+    .company-brochure-card {
+        margin: 0 20px;
+        padding: 30px 25px;
+    }
+    
+    .brochure-icon {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .brochure-icon i {
+        font-size: 2rem;
+    }
+    
+    .brochure-content h3 {
+        font-size: 1.6rem;
+    }
+    
+    .brochure-content p {
+        font-size: 1rem;
+    }
+    
+    .company-download-btn {
         padding: 15px 30px;
-        font-size: 1.1rem;
-        min-width: 280px;
-    }
-    
-    .ebrochures-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0 20px;
-    }
-    
-    .ebrochure-card {
-        padding: 25px 20px;
-    }
-    
-    .ebrochure-icon {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .ebrochure-logo {
-        width: 60px;
-        height: 60px;
-        padding: 8px;
-    }
-    
-    .ebrochure-icon i {
-        font-size: 1.5rem;
-    }
-    
-    .ebrochure-content h3 {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
     
     /* Partnership Section */
@@ -5214,6 +5535,66 @@ body {
     .page-hero .hero-content p {
         font-size: 1.1rem;
     }
+    
+    /* News & Blogs Mobile Styles */
+    .news-blogs-section .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .news-grid {
+        padding: 0 15px;
+    }
+    
+    .news-image {
+        height: 180px;
+    }
+    
+    .news-content {
+        padding: 20px;
+    }
+    
+    .news-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    /* Product Showcase Mobile Styles */
+    .product-showcase-section .section-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .product-item {
+        flex: 0 0 calc(100% - 10px);
+    }
+    
+    .product-item img {
+        height: 250px;
+    }
+    
+    .showcase-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .showcase-btn-left {
+        left: 5px;
+    }
+    
+    .showcase-btn-right {
+        right: 5px;
+    }
+    
+    .product-overlay {
+        padding: 20px 15px 15px;
+    }
+    
+    .product-overlay h3 {
+        font-size: 1rem;
+    }
+    
+    .product-overlay p {
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -5228,5 +5609,53 @@ body {
     
     .page-hero .hero-content p {
         font-size: 1rem;
+    }
+    
+    /* Ultra Mobile Styles */
+    .news-blogs-section {
+        padding: 40px 0;
+    }
+    
+    .news-blogs-section .section-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    .news-grid {
+        padding: 0 10px;
+    }
+    
+    .news-content {
+        padding: 15px;
+    }
+    
+    .modal-content {
+        padding: 20px 15px;
+        margin: 15% auto;
+    }
+    
+    .close {
+        top: 15px;
+        right: 20px;
+        font-size: 24px;
+    }
+    
+    .product-showcase-section {
+        padding: 40px 0;
+    }
+    
+    .product-showcase-section .section-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    .showcase-container {
+        margin: 0 10px;
+    }
+    
+    .showcase-btn {
+        display: none; /* Hide buttons on very small screens */
+    }
+    
+    .product-overlay {
+        padding: 15px 10px 10px;
     }
 }

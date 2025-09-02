@@ -598,3 +598,189 @@ function initializeSearch() {
 document.addEventListener('DOMContentLoaded', () => {
     initializeSearch();
 });
+
+// News Modal Functions
+const newsData = {
+    'iso-training': {
+        title: 'ISO 9001:2015 Quality Management Training',
+        image: 'images/news/GEItrainingiso9001-1024x768.jpg',
+        date: 'September 1, 2025',
+        content: `
+            <p>Gemarc Enterprises Incorporated successfully completed comprehensive training on ISO 9001:2015 Quality Management Systems. This training program was designed to enhance our understanding and implementation of quality management principles across all aspects of our operations.</p>
+            
+            <p>The training covered key areas including:</p>
+            <ul>
+                <li>Quality Management System documentation and implementation</li>
+                <li>Process approach and risk-based thinking</li>
+                <li>Customer satisfaction and continuous improvement</li>
+                <li>Internal audit procedures and management review processes</li>
+                <li>Corrective and preventive action methodologies</li>
+            </ul>
+            
+            <p>This certification reinforces our commitment to delivering exceptional quality in our testing equipment, calibration services, and customer support. Our team is now better equipped to ensure that all our processes meet the highest international standards.</p>
+            
+            <p>The ISO 9001:2015 certification will help us maintain consistency in our service delivery while continuously improving our operations to better serve our clients in the construction and testing industry.</p>
+        `
+    },
+    'new-equipment': {
+        title: 'Latest Calibration Equipment Arrival',
+        image: 'images/focused-industrial-engineer-using-calibration-600nw-2462349429.webp',
+        date: 'August 28, 2025',
+        content: `
+            <p>We are excited to announce the arrival of our latest state-of-the-art calibration equipment. This new addition to our laboratory significantly enhances our testing capabilities and improves the accuracy of our measurement services.</p>
+            
+            <p>The new equipment features:</p>
+            <ul>
+                <li>Advanced digital measurement systems with enhanced precision</li>
+                <li>Automated calibration processes for improved efficiency</li>
+                <li>Multi-parameter testing capabilities for comprehensive analysis</li>
+                <li>Enhanced data logging and reporting functions</li>
+                <li>Compliance with the latest international testing standards</li>
+            </ul>
+            
+            <p>This investment demonstrates our ongoing commitment to providing our clients with the most accurate and reliable testing services. The new equipment allows us to offer faster turnaround times while maintaining the highest levels of precision and quality.</p>
+            
+            <p>Our technical team has completed extensive training on the new equipment to ensure optimal operation and maximum benefit for our clients. We look forward to delivering even better service quality with these technological advancements.</p>
+        `
+    },
+    'partnership': {
+        title: 'Expanding Our Partnership Network',
+        image: 'images/technicianinstrument-technician-on-job-calibrate-600nw-1020417871.webp',
+        date: 'August 25, 2025',
+        content: `
+            <p>Gemarc Enterprises continues to strengthen its position in the testing and calibration industry by expanding our network of strategic partnerships with leading global manufacturers and technology providers.</p>
+            
+            <p>Our enhanced partnership network includes:</p>
+            <ul>
+                <li>Advanced testing equipment manufacturers from Europe and Asia</li>
+                <li>Specialized calibration service providers</li>
+                <li>Technology innovators in digital measurement systems</li>
+                <li>Quality assurance and compliance specialists</li>
+                <li>Research and development institutions</li>
+            </ul>
+            
+            <p>These partnerships enable us to offer our clients access to the latest technologies, innovative testing solutions, and comprehensive support services. By working closely with industry leaders, we ensure that our clients benefit from cutting-edge equipment and methodologies.</p>
+            
+            <p>The expanded network also allows us to provide more comprehensive training programs, technical support, and maintenance services. This collaborative approach helps us deliver superior value to our clients while staying at the forefront of industry developments.</p>
+        `
+    }
+};
+
+function openNewsModal(newsId) {
+    const modal = document.getElementById('newsModal');
+    const modalContent = document.getElementById('modalContent');
+    const news = newsData[newsId];
+    
+    if (!news) return;
+    
+    modalContent.innerHTML = `
+        <h2>${news.title}</h2>
+        <div style="color: #666; margin-bottom: 20px;">
+            <i class="fas fa-calendar"></i> ${news.date}
+        </div>
+        <img src="${news.image}" alt="${news.title}" style="width: 100%; max-width: 600px; height: auto; border-radius: 10px; margin: 20px 0;">
+        <div style="line-height: 1.6; color: #555;">
+            ${news.content}
+        </div>
+    `;
+    
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeNewsModal() {
+    const modal = document.getElementById('newsModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('newsModal');
+    if (event.target === modal) {
+        closeNewsModal();
+    }
+});
+
+// Product Showcase Functions
+let showcaseCurrentSlide = 0;
+const showcaseItemsPerSlide = 4;
+
+function moveShowcase(direction) {
+    const track = document.getElementById('showcaseTrack');
+    const items = track.children;
+    const totalItems = items.length;
+    const maxSlides = Math.ceil(totalItems / showcaseItemsPerSlide);
+    
+    showcaseCurrentSlide += direction;
+    
+    if (showcaseCurrentSlide >= maxSlides) {
+        showcaseCurrentSlide = 0;
+    } else if (showcaseCurrentSlide < 0) {
+        showcaseCurrentSlide = maxSlides - 1;
+    }
+    
+    const translateX = -(showcaseCurrentSlide * 100);
+    track.style.transform = `translateX(${translateX}%)`;
+    
+    updateShowcaseDots();
+}
+
+function currentShowcaseSlide(n) {
+    showcaseCurrentSlide = n - 1;
+    const track = document.getElementById('showcaseTrack');
+    const translateX = -(showcaseCurrentSlide * 100);
+    track.style.transform = `translateX(${translateX}%)`;
+    
+    updateShowcaseDots();
+}
+
+function updateShowcaseDots() {
+    const dots = document.querySelectorAll('.showcase-dots .dot');
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === showcaseCurrentSlide);
+    });
+}
+
+// Auto-play showcase
+function autoPlayShowcase() {
+    setInterval(() => {
+        moveShowcase(1);
+    }, 5000); // Change slide every 5 seconds
+}
+
+// Initialize showcase functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Start auto-play
+    autoPlayShowcase();
+    
+    // Handle responsive behavior
+    function handleShowcaseResize() {
+        const items = document.querySelectorAll('.product-item');
+        const windowWidth = window.innerWidth;
+        
+        let itemsPerSlide;
+        if (windowWidth <= 768) {
+            itemsPerSlide = 2;
+        } else if (windowWidth <= 1024) {
+            itemsPerSlide = 3;
+        } else {
+            itemsPerSlide = 4;
+        }
+        
+        // Update global variable
+        window.showcaseItemsPerSlide = itemsPerSlide;
+        
+        // Reset to first slide on resize
+        showcaseCurrentSlide = 0;
+        const track = document.getElementById('showcaseTrack');
+        if (track) {
+            track.style.transform = 'translateX(0%)';
+            updateShowcaseDots();
+        }
+    }
+    
+    // Call on load and resize
+    handleShowcaseResize();
+    window.addEventListener('resize', handleShowcaseResize);
+});
