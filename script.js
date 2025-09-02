@@ -152,10 +152,11 @@ function startAutoSlide() {
 
 // Initialize carousel
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize partners carousel
     updateCarouselPosition();
     startAutoSlide();
     
-    // Pause auto-slide on hover
+    // Pause auto-slide on hover for partners
     const carouselContainer = document.querySelector('.partners-carousel-container');
     if (carouselContainer) {
         carouselContainer.addEventListener('mouseenter', () => {
@@ -164,6 +165,22 @@ document.addEventListener('DOMContentLoaded', () => {
         
         carouselContainer.addEventListener('mouseleave', () => {
             startAutoSlide();
+        });
+    }
+    
+    // Initialize products carousel
+    updateProductsCarouselPosition();
+    startProductsAutoSlide();
+    
+    // Pause auto-slide on hover for products
+    const productsCarouselContainer = document.querySelector('.products-carousel-container');
+    if (productsCarouselContainer) {
+        productsCarouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(autoProductSlideInterval);
+        });
+        
+        productsCarouselContainer.addEventListener('mouseleave', () => {
+            startProductsAutoSlide();
         });
     }
 });
@@ -221,24 +238,6 @@ function startProductsAutoSlide() {
         updateProductsCarouselPosition();
     }, 4000); // 4 seconds delay between transitions
 }
-
-// Initialize products carousel
-document.addEventListener('DOMContentLoaded', () => {
-    updateProductsCarouselPosition();
-    startProductsAutoSlide();
-    
-    // Pause auto-slide on hover
-    const productsCarouselContainer = document.querySelector('.products-carousel-container');
-    if (productsCarouselContainer) {
-        productsCarouselContainer.addEventListener('mouseenter', () => {
-            clearInterval(autoProductSlideInterval);
-        });
-        
-        productsCarouselContainer.addEventListener('mouseleave', () => {
-            startProductsAutoSlide();
-        });
-    }
-});
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
