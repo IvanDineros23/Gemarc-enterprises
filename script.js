@@ -45,13 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close mobile menus when clicking outside
     document.addEventListener('click', (e) => {
         // Close main nav
-        if (!e.target.closest('.nav') && navList.classList.contains('mobile-active')) {
+        if (navList && !e.target.closest('.nav') && navList.classList.contains('mobile-active')) {
             navList.classList.remove('mobile-active');
             hamburger.classList.remove('active');
         }
         
         // Close services nav
-        if (!e.target.closest('.services-nav') && servicesList.classList.contains('mobile-active')) {
+        if (servicesList && !e.target.closest('.services-nav') && servicesList.classList.contains('mobile-active')) {
             servicesList.classList.remove('mobile-active');
             servicesHamburger.classList.remove('active');
         }
