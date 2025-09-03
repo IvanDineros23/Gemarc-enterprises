@@ -1,7 +1,14 @@
 // Mobile menu overlay logic
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenu = document.getE/* Products Carousel Functions */
+let currentProductIndex = 0;
+let autoProductSlideInterval;
+const productsTrack = document.getElementById('productsTrack');
+const productItems = document.querySelectorAll('.product-item');
+const totalProductItems = 20; // Original items count (without duplicates)
+const productItemsToShow = 3; // Show 3 items at a time
+const productItemWidth = 280; // Increased width for better spacingId('mobileMenu');
     const closeMenu = document.getElementById('closeMenu');
     const mainButtons = document.querySelectorAll('.mobile-menu-main');
 
@@ -728,13 +735,13 @@ function previousHighlight() {
 function startHighlightsAutoplay() {
     setInterval(() => {
         nextHighlight();
-    }, 8000); // Change slide every 8 seconds
+    }, 12000); // Change slide every 12 seconds for a slower pace
 }
 
 // Initialize highlights carousel
 document.addEventListener('DOMContentLoaded', function() {
     // Start autoplay after page load
-    setTimeout(startHighlightsAutoplay, 3000);
+    setTimeout(startHighlightsAutoplay, 5000);
     
     // Add keyboard navigation
     document.addEventListener('keydown', function(e) {
