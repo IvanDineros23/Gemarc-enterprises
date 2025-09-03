@@ -670,6 +670,114 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSearch();
 });
 
+// Highlights Carousel Functions
+let currentHighlight = 0;
+let totalHighlights = 4;
+
+// Initialize carousel functions when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize carousel with first slide if elements exist
+    const slides = document.querySelectorAll('.highlights-slide');
+    if (slides.length > 0) {
+        totalHighlights = slides.length;
+        showHighlight(0);
+    }
+});
+
+function showHighlight(slideIndex) {
+    // Hide all slides
+    const slides = document.querySelectorAll('.highlights-slide');
+    const dots = document.querySelectorAll('.nav-dot');
+    
+    // Safety check - if elements don't exist, exit the function
+    if (slides.length === 0 || dots.length === 0) return;
+    
+    // Update totalHighlights based on actual slides
+    totalHighlights = slides.length;
+    
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    // Show selected slide
+    if (slides[slideIndex]) {
+        slides[slideIndex].classList.add('active');
+        dots[slideIndex].classList.add('active');
+        currentHighlight = slideIndex;
+    }
+}
+
+function nextHighlight() {
+    const slides = document.querySelectorAll('.highlights-slide');
+    if (slides.length === 0) return;
+    
+    totalHighlights = slides.length;
+    currentHighlight = (currentHighlight + 1) % totalHighlights;
+    showHighlight(currentHighlight);
+}
+
+function previousHighlight() {
+    const slides = document.querySelectorAll('.highlights-slide');
+    if (slides.length === 0) return;
+    
+    totalHighlights = slides.length;
+    currentHighlight = (currentHighlight - 1 + totalHighlights) % totalHighlights;
+    showHighlight(currentHighlight);
+}
+
+// Auto-advance highlights (optional)
+function startHighlightsAutoplay() {
+    setInterval(() => {
+        nextHighlight();
+    }, 8000); // Change slide every 8 seconds
+}
+
+// Initialize highlights carousel
+document.addEventListener('DOMContentLoaded', function() {
+    // Start autoplay after page load
+    setTimeout(startHighlightsAutoplay, 3000);
+    
+    // Add keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') {
+            previousHighlight();
+        } else if (e.key === 'ArrowRight') {
+            nextHighlight();
+        }
+    });
+});
+
+// Product Categories Showcase Functions
+function showCategory(categoryId) {
+    // Check if elements exist first
+    const allContents = document.querySelectorAll('.category-content');
+    const allButtons = document.querySelectorAll('.category-nav-btn');
+    
+    // If these elements don't exist (section was removed), exit the function
+    if (allContents.length === 0 || allButtons.length === 0) return;
+    
+    // Hide all category contents
+    allContents.forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Remove active class from all buttons
+    allButtons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Show selected category
+    const selectedContent = document.getElementById(categoryId);
+    if (selectedContent) {
+        selectedContent.classList.add('active');
+    }
+    
+    // Add active class to clicked button
+    const clickedButton = event ? event.target.closest('.category-nav-btn') : document.querySelector(`.category-nav-btn[onclick*="${categoryId}"]`);
+    if (clickedButton) {
+        clickedButton.classList.add('active');
+    }
+}
+
 // News Modal Functions
 const newsData = {
     'iso-training': {

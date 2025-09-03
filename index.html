@@ -120,13 +120,303 @@
         </div>
     </header>
 
-    <!-- Product Showcase Section -->
-    <section class="product-showcase-section">
+    <!-- Material Testing Highlights Section -->
+    <section class="material-testing-highlights">
+        <div class="highlights-background"></div>
         <div class="container">
             <!-- Search Bar -->
             <div class="products-search">
                 <input type="search" placeholder="Search products, services..." class="search-input" autocomplete="off">
                 <button class="search-btn" type="button"><i class="fas fa-search"></i></button>
+            </div>
+
+            <!-- Navigation Dots -->
+            <div class="highlights-navigation">
+                <button class="nav-dot active" onclick="showHighlight(0)"></button>
+                <button class="nav-dot" onclick="showHighlight(1)"></button>
+                <button class="nav-dot" onclick="showHighlight(2)"></button>
+                <button class="nav-dot" onclick="showHighlight(3)"></button>
+            </div>
+            
+            <!-- Slide Navigation Buttons -->
+            <button class="highlights-nav-btn prev" onclick="previousHighlight()">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="highlights-nav-btn next" onclick="nextHighlight()">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <div class="highlights-carousel">
+                <div class="highlights-slide active" data-slide="0">
+                    <div class="highlights-content">
+                        <div class="highlights-text">
+                            <h1 class="highlights-title">
+                                <span class="text-white">COMPRESSION</span><br>
+                                MACHINES
+                            </h1>
+                            <p class="highlights-description">
+                                Professional compression testing equipment for construction materials including concrete, cement, mortar, and other building materials. Our machines deliver precise load measurement and accurate strength analysis for quality control and compliance testing.
+                            </p>
+                            <div class="highlights-actions">
+                                <a href="contact.html" class="highlights-btn primary">Get Quote</a>
+                                <a href="about.html" class="highlights-btn secondary">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="highlights-images">
+                            <div class="compression-machines-showcase">
+                                <div class="machine-item">
+                                    <img src="images/HCM-6100.7F.png" alt="Compression Testing Machine" class="machine-image">
+                                </div>
+                                <div class="machine-item">
+                                    <img src="images/22.1102.01-SV-i20.jpg" alt="Professional Compression Testing System" class="machine-image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlights-slide" data-slide="1">
+                    <div class="highlights-content">
+                        <div class="highlights-text">
+                            <div class="highlights-badge">PRECISION TESTING</div>
+                            <h1 class="highlights-title">
+                                <span class="text-red">COMPRESSION</span><br>
+                                TESTING SOLUTIONS
+                            </h1>
+                            <p class="highlights-description">
+                                Advanced compression testing machines for concrete, cement, and construction materials. Our equipment delivers precise load measurement with digital control systems for accurate material strength analysis.
+                            </p>
+                            <div class="highlights-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">3000kN</span>
+                                    <span class="stat-label">Max Load Capacity</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">±0.5%</span>
+                                    <span class="stat-label">Accuracy</span>
+                                </div>
+                            </div>
+                            <div class="highlights-actions">
+                                <a href="concrete-mortar.html" class="highlights-btn primary">View Products</a>
+                                <a href="contact.html" class="highlights-btn secondary">Get Consultation</a>
+                            </div>
+                        </div>
+                        <div class="highlights-images">
+                            <div class="equipment-showcase">
+                                <img src="images/A024N.jpg" alt="Compression Testing Machine" class="main-equipment-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="highlights-slide" data-slide="2">
+                    <div class="highlights-content">
+                        <div class="highlights-text">
+                            <div class="highlights-badge">GEOTECHNICAL</div>
+                            <h1 class="highlights-title">
+                                <span class="text-red">SOIL TESTING</span><br>
+                                EXCELLENCE
+                            </h1>
+                            <p class="highlights-description">
+                                Comprehensive soil testing equipment including triaxial systems, consolidation apparatus, and direct shear testing. Essential for geotechnical engineering and foundation design projects.
+                            </p>
+                            <div class="highlights-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Triaxial Testing Systems</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Consolidation Testing</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Direct Shear Testing</span>
+                                </div>
+                            </div>
+                            <div class="highlights-actions">
+                                <a href="soil.html" class="highlights-btn primary">Explore Soil Testing</a>
+                                <a href="services.html" class="highlights-btn secondary">Our Services</a>
+                            </div>
+                        </div>
+                        <div class="highlights-images">
+                            <div class="equipment-showcase">
+                                <img src="images/B011.jpg" alt="Soil Testing Equipment" class="main-equipment-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+              
+                <div class="highlights-slide" data-slide="3">
+                    <div class="highlights-content">
+                        <div class="highlights-text">
+                            <div class="highlights-badge">FULL SERVICE</div>
+                            <h1 class="highlights-title">
+                                <span class="text-red">CALIBRATION</span> &<br>
+                                MAINTENANCE
+                            </h1>
+                            <p class="highlights-description">
+                                Complete calibration and maintenance services for all testing equipment. Our certified technicians ensure your instruments maintain accuracy and compliance with international standards.
+                            </p>
+                            <div class="highlights-services">
+                                <div class="service-item">
+                                    <i class="fas fa-tools"></i>
+                                    <div>
+                                        <h4>Equipment Calibration</h4>
+                                        <p>ISO/IEC 17025 certified calibration services</p>
+                                    </div>
+                                </div>
+                                <div class="service-item">
+                                    <i class="fas fa-wrench"></i>
+                                    <div>
+                                        <h4>Preventive Maintenance</h4>
+                                        <p>Regular maintenance to ensure optimal performance</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="highlights-actions">
+                                <a href="services.html" class="highlights-btn primary">Book Service</a>
+                                <a href="tel:+639552114034" class="highlights-btn secondary">Call Support</a>
+                            </div>
+                        </div>
+                        <div class="highlights-images">
+                            <div class="equipment-showcase">
+                                <img src="images/focused-industrial-engineer-using-calibration-600nw-2462349429.webp" alt="Calibration Services" class="main-equipment-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News & Updates Section -->
+    <section class="news-blogs-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Latest News & Updates</h2>
+                <p>Stay updated with our latest news, industry insights, and company announcements</p>
+            </div>
+            
+            <div class="news-grid">
+                <!-- News Card 1 - ISO 9001 Training -->
+                <div class="news-card" onclick="openNewsModal('iso-training')">
+                    <div class="news-image">
+                        <img src="images/news/GEItrainingiso9001-1024x768.jpg" alt="ISO 9001 Training">
+                        <div class="news-overlay">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>September 1, 2025</span>
+                        </div>
+                        <h3>ISO 9001:2015 Quality Management Training</h3>
+                        <p>Our team completed comprehensive training on ISO 9001:2015 Quality Management Systems to enhance our service delivery.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- News Card 2 - New Equipment -->
+                <div class="news-card" onclick="openNewsModal('new-equipment')">
+                    <div class="news-image">
+                        <img src="images/focused-industrial-engineer-using-calibration-600nw-2462349429.webp" alt="New Equipment">
+                        <div class="news-overlay">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>August 28, 2025</span>
+                        </div>
+                        <h3>Latest Calibration Equipment Arrival</h3>
+                        <p>We've received state-of-the-art calibration equipment to improve our testing accuracy and service quality.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- News Card 3 - Partnership -->
+                <div class="news-card" onclick="openNewsModal('partnership')">
+                    <div class="news-image">
+                        <img src="images/technicianinstrument-technician-on-job-calibrate-600nw-1020417871.webp" alt="Partnership News">
+                        <div class="news-overlay">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">
+                            <i class="fas fa-calendar"></i>
+                            <span>August 25, 2025</span>
+                        </div>
+                        <h3>Expanding Our Partnership Network</h3>
+                        <p>Gemarc Enterprises strengthens partnerships with leading global manufacturers to bring you better products and services.</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+                
+                <!-- Drilling Category -->
+                <div class="category-content" id="drilling">
+                    <h3>Drilling Equipment</h3>
+                    <p>Professional drilling equipment for core sampling and soil investigation</p>
+                    <div class="category-products-grid">
+                        <div class="category-product-card">
+                            <div class="product-image-placeholder">
+                                <i class="fas fa-image"></i>
+                                <span>Product Image</span>
+                            </div>
+                            <div class="product-info">
+                                <h4>Drilling Equipment</h4>
+                                <p>Coming soon - Professional drilling equipment for geotechnical investigation.</p>
+                                <button class="product-details-btn">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- UPM Category -->
+                <div class="category-content" id="upm">
+                    <h3>UPM Systems</h3>
+                    <p>Universal testing machines for comprehensive material analysis</p>
+                    <div class="category-products-grid">
+                        <div class="category-product-card">
+                            <div class="product-image-placeholder">
+                                <i class="fas fa-image"></i>
+                                <span>Product Image</span>
+                            </div>
+                            <div class="product-info">
+                                <h4>UPM System</h4>
+                                <p>Coming soon - Universal testing machines for multi-purpose material testing.</p>
+                                <button class="product-details-btn">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Aggregate Testing Category -->
+                <div class="category-content" id="aggregate">
+                    <h3>Aggregate Testing Equipment</h3>
+                    <p>Specialized equipment for aggregate quality assessment and analysis</p>
+                    <div class="category-products-grid">
+                        <div class="category-product-card">
+                            <div class="product-image-placeholder">
+                                <i class="fas fa-image"></i>
+                                <span>Product Image</span>
+                            </div>
+                            <div class="product-info">
+                                <h4>Aggregate Testing Equipment</h4>
+                                <p>Coming soon - Professional aggregate testing equipment for quality assessment.</p>
+                                <button class="product-details-btn">Learn More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="products-content">
@@ -216,75 +506,6 @@
                     <button class="carousel-btn carousel-btn-right" onclick="moveProductsCarousel(1)">
                         <i class="fas fa-chevron-right"></i>
                     </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- News & Blogs Section -->
-    <section class="news-blogs-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Latest News & Updates</h2>
-                <p>Stay updated with our latest news, industry insights, and company announcements</p>
-            </div>
-            
-            <div class="news-grid">
-                <!-- News Card 1 - ISO 9001 Training -->
-                <div class="news-card" onclick="openNewsModal('iso-training')">
-                    <div class="news-image">
-                        <img src="images/news/GEItrainingiso9001-1024x768.jpg" alt="ISO 9001 Training">
-                        <div class="news-overlay">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-date">
-                            <i class="fas fa-calendar"></i>
-                            <span>September 1, 2025</span>
-                        </div>
-                        <h3>ISO 9001:2015 Quality Management Training</h3>
-                        <p>Our team completed comprehensive training on ISO 9001:2015 Quality Management Systems to enhance our service delivery.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <!-- News Card 2 - New Equipment -->
-                <div class="news-card" onclick="openNewsModal('new-equipment')">
-                    <div class="news-image">
-                        <img src="images/focused-industrial-engineer-using-calibration-600nw-2462349429.webp" alt="New Equipment">
-                        <div class="news-overlay">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-date">
-                            <i class="fas fa-calendar"></i>
-                            <span>August 28, 2025</span>
-                        </div>
-                        <h3>Latest Calibration Equipment Arrival</h3>
-                        <p>We've received state-of-the-art calibration equipment to improve our testing accuracy and service quality.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <!-- News Card 3 - Partnership -->
-                <div class="news-card" onclick="openNewsModal('partnership')">
-                    <div class="news-image">
-                        <img src="images/technicianinstrument-technician-on-job-calibrate-600nw-1020417871.webp" alt="Partnership News">
-                        <div class="news-overlay">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-date">
-                            <i class="fas fa-calendar"></i>
-                            <span>August 25, 2025</span>
-                        </div>
-                        <h3>Expanding Our Partnership Network</h3>
-                        <p>Gemarc Enterprises strengthens partnerships with leading global manufacturers to bring you better products and services.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
                 </div>
             </div>
         </div>
