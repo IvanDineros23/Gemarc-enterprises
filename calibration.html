@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calibration Services - Gemarc Enterprises Incorporated</title>
+    <link rel="icon" type="image/png" href="images/gemarclogo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <img src="images\gemarclogo.png" alt="Gemarc Enterprises" class="logo-img">
+                </a>
+            </div>
+            <nav class="nav">
+                <!-- Desktop nav-list (unchanged, for desktop view) -->
+                <ul class="nav-list desktop-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-newspaper"></i> News <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="news.html">News</a></li>
+                            <li><a href="blogs.html">Blogs</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-industry"></i> Products <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="aggregates.html">Aggregates</a></li>
+                            <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                            <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                            <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                            <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                            <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                            <li><a href="soil.html">Soil Testing</a></li>
+                            <li><a href="steel.html">Steel Testing</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-wrench"></i> Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="calibration.html">Calibration</a></li>
+                            <li><a href="services.html">Maintenance</a></li>
+                            <li><a href="services.html">Supply</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle"><i class="fas fa-users"></i> About <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="about.html">Company</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- Mobile Menu Overlay -->
+                <div class="mobile-menu-overlay" id="mobileMenu">
+                    <button class="mobile-menu-close" id="closeMenu">&times;</button>
+                    <ul class="mobile-menu-list">
+                        <li>
+                            <button class="mobile-menu-main">News</button>
+                            <ul class="mobile-menu-sub">
+                                <li><a href="news.html">News</a></li>
+                                <li><a href="blogs.html">Blogs</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <button class="mobile-menu-main">Products</button>
+                            <ul class="mobile-menu-sub">
+                                <li><a href="aggregates.html">Aggregates</a></li>
+                                <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                                <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                                <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                                <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                                <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                                <li><a href="soil.html">Soil Testing</a></li>
+                                <li><a href="steel.html">Steel Testing</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <button class="mobile-menu-main">Services</button>
+                            <ul class="mobile-menu-sub">
+                                <li><a href="calibration.html">Calibration</a></li>
+                                <li><a href="services.html">Maintenance</a></li>
+                                <li><a href="services.html">Supply</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <button class="mobile-menu-main">About</button>
+                            <ul class="mobile-menu-sub">
+                                <li><a href="about.html">Company</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="nav-actions">
+                    <a href="contact.html" class="action-btn quote-btn">
+                        <i class="fas fa-calculator"></i> Get Quote
+                    </a>
+                    <a href="tel:+639552114034" class="action-btn call-btn">
+                        <i class="fas fa-phone"></i> Call Now
+                    </a>
+                </div>
+                
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Professional Calibration Services Section -->
+    <section class="calibration-hero">
+        <div class="container">
+            <div class="calibration-hero-content">
+                <h1>Professional Calibration Services</h1>
+                <p>At Gemarc Enterprises, we provide comprehensive calibration services for construction and materials testing equipment. Our team of certified technicians ensures that your equipment meets the highest standards of accuracy and reliability, following ISO 9001 quality management protocols.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Calibration Showcase -->
+    <div class="branded-products-section">
+        <div class="products-content">
+            <h2>Our Calibration Showcase</h2>
+            <p>View examples of recent calibration work performed by our expert technicians</p>
+            <div class="products-carousel-container">
+                <button class="carousel-btn carousel-btn-left" onclick="moveProductsCarousel(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn carousel-btn-right" onclick="moveProductsCarousel(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="products-carousel">
+                    <div class="products-track" id="productsTrack">
+                        <div class="product-item">
+                            <img src="./images/calibration/viber_image_2025-09-04_08-39-34-126.jpg" alt="Calibration Work 1" class="product-logo">
+                        </div>
+                        <div class="product-item">
+                            <img src="./images/calibration/viber_image_2025-09-04_08-39-34-214.jpg" alt="Calibration Work 2" class="product-logo">
+                        </div>
+                        <div class="product-item">
+                            <img src="./images/calibration/viber_image_2025-09-04_08-39-34-308.jpg" alt="Calibration Work 3" class="product-logo">
+                        </div>
+                        <div class="product-item">
+                            <img src="./images/calibration/viber_image_2025-09-04_08-39-34-718.jpg" alt="Calibration Work 4" class="product-logo">
+                        </div>
+                        <div class="product-item">
+                            <img src="./images/calibration/viber_image_2025-09-04_08-39-34-788.jpg" alt="Calibration Work 5" class="product-logo">
+                        </div>
+                        <div class="product-item">
+                            <img src="./images/calibration/viber_image_2025-09-04_08-39-34-898.jpg" alt="Calibration Work 6" class="product-logo">
+                        </div>
+                        <div class="product-item">
+                            <img src="./images/calibration/viber_image_2025-09-04_08-39-35-027.jpg" alt="Calibration Work 7" class="product-logo">
+                        </div>
+                        <div class="product-item">
+                            <img src="./images/calibration/viber_image_2025-09-04_08-39-35-055.jpg" alt="Calibration Work 8" class="product-logo">
+                        </div>
+                        <!-- Duplicate items for seamless loop -->
+                        <div class="product-item">
+                            <img src="./images/calibration/viber_image_2025-09-04_08-39-34-126.jpg" alt="Calibration Work 1" class="product-logo">
+                        </div>
+                        <div class="product-item">
+                            <img src="./images/calibration/viber_image_2025-09-04_08-39-34-214.jpg" alt="Calibration Work 2" class="product-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="aggregates.html">Aggregates</a></li>
+                        <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                        <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                        <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                        <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                        <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                        <li><a href="soil.html">Soil</a></li>
+                        <li><a href="steel.html">Steel</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Gemarc Enterprises Incorporated. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Social Media Buttons -->
+    <div class="floating-social">
+        <a href="https://www.facebook.com/gmrcsales/" class="floating-btn facebook-btn" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="#" class="floating-btn viber-btn" target="_blank">
+            <i class="fab fa-viber"></i>
+        </a>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -44,7 +44,7 @@
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle"><i class="fas fa-wrench"></i> Services <i class="fas fa-chevron-down"></i></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="services.html">Calibration</a></li>
+                                            <li><a href="calibration.html">Calibration</a></li>
                                             <li><a href="services.html">Maintenance</a></li>
                                             <li><a href="services.html">Supply</a></li>
                                         </ul>
@@ -85,7 +85,7 @@
                                         <li>
                                             <button class="mobile-menu-main">Services</button>
                                             <ul class="mobile-menu-sub">
-                                                <li><a href="services.html">Calibration</a></li>
+                                                <li><a href="calibration.html">Calibration</a></li>
                                                 <li><a href="services.html">Maintenance</a></li>
                                                 <li><a href="services.html">Supply</a></li>
                                             </ul>
@@ -159,54 +159,137 @@
                         <h3>Our calibration, repair and maintenance are the following:</h3>
                     </div>
                     
-                    <div class="equipment-grid">
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">Compression Machine</div>
+                    <div class="equipment-accordion">
+                        <!-- Compression Machine -->
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('compression')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">Compression Machine</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="compression-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="compression-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/calibration/viber_image_2025-09-04_08-39-34-126.jpg" alt="Compression Machine Type 1" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Digital Compression Machine</h4>
+                                            <p>High-precision digital compression testing</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/calibration/viber_image_2025-09-04_08-39-34-214.jpg" alt="Compression Machine Type 2" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Hydraulic Compression Machine</h4>
+                                            <p>Heavy-duty hydraulic compression testing</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/calibration/viber_image_2025-09-04_08-39-34-308.jpg" alt="Compression Machine Type 3" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Automated Compression Machine</h4>
+                                            <p>Fully automated compression testing system</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">Universal Testing Machine</div>
+
+                        <!-- Universal Testing Machine -->
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('utm')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">Universal Testing Machine</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="utm-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="utm-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/calibration/viber_image_2025-09-04_08-39-34-718.jpg" alt="UTM Type 1" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Electronic UTM</h4>
+                                            <p>Precision electronic universal testing</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/calibration/viber_image_2025-09-04_08-39-34-788.jpg" alt="UTM Type 2" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Computerized UTM</h4>
+                                            <p>Computer-controlled testing system</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/calibration/viber_image_2025-09-04_08-39-34-898.jpg" alt="UTM Type 3" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>High-Capacity UTM</h4>
+                                            <p>Heavy-duty universal testing machine</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">Batching Plant</div>
+
+                        <!-- Batching Plant -->
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('batching')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">Batching Plant</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="batching-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="batching-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/calibration/viber_image_2025-09-04_08-39-35-027.jpg" alt="Batching Plant Type 1" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Mobile Batching Plant</h4>
+                                            <p>Portable concrete batching system</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/calibration/viber_image_2025-09-04_08-39-35-055.jpg" alt="Batching Plant Type 2" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Stationary Batching Plant</h4>
+                                            <p>Fixed concrete production facility</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/calibration/viber_image_2025-09-04_08-39-34-126.jpg" alt="Batching Plant Type 3" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Automated Batching Plant</h4>
+                                            <p>Fully automated concrete production</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">Scales and Balances</div>
-                        </div>
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">California Bearing Ratio (CBR)</div>
-                        </div>
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">Marshall Stability</div>
-                        </div>
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">Drying Ovens and Furnace</div>
-                        </div>
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">Water Bath / Oil Bath</div>
-                        </div>
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">Rebound Hammer</div>
-                        </div>
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">Speedy Moisture Tester</div>
-                        </div>
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">Thermometers</div>
-                        </div>
-                        <div class="equipment-item">
-                            <div class="equipment-number"></div>
-                            <div class="equipment-name">Vernier Caliper</div>
+
+                        <!-- Other Equipment Items (remaining 9 items) -->
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('other')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">Other Equipment & Instruments</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="other-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="other-content">
+                                <div class="other-equipment-grid">
+                                    <div class="other-equipment-item">Scales and Balances</div>
+                                    <div class="other-equipment-item">California Bearing Ratio (CBR)</div>
+                                    <div class="other-equipment-item">Marshall Stability</div>
+                                    <div class="other-equipment-item">Drying Ovens and Furnace</div>
+                                    <div class="other-equipment-item">Water Bath / Oil Bath</div>
+                                    <div class="other-equipment-item">Rebound Hammer</div>
+                                    <div class="other-equipment-item">Speedy Moisture Tester</div>
+                                    <div class="other-equipment-item">Thermometers</div>
+                                    <div class="other-equipment-item">Vernier Caliper</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

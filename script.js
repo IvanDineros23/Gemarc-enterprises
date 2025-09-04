@@ -663,44 +663,48 @@ function initializeSearch() {
                 return;
             }
 
-        // If no direct match, show a "no results found" message
-        // Create or get notification element
-        let notification = document.querySelector('.search-notification');
-        
-        if (!notification) {
-            notification = document.createElement('div');
-            notification.className = 'search-notification';
+            // If no direct match, show a "no results found" message
+            // Create or get notification element
+            let notification = document.querySelector('.search-notification');
             
-            // Append to the products-search container for proper positioning
-            const searchContainer = document.querySelector('.products-search');
-            if (searchContainer) {
-                searchContainer.appendChild(notification);
-            } else {
-                searchInput.parentNode.appendChild(notification);
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.className = 'search-notification';
+                
+                // Append to the products-search container for proper positioning
+                const searchContainer = document.querySelector('.products-search');
+                if (searchContainer) {
+                    searchContainer.appendChild(notification);
+                } else {
+                    searchInput.parentNode.appendChild(notification);
+                }
             }
-        }
-        
-        console.log('No search results found for: ' + query);
-        
-        // Set notification message
-        notification.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <i class="fas fa-exclamation-circle" style="font-size: 16px;"></i>
-                <div>
-                    <strong>No results found</strong>
-                    <p style="margin: 0; font-size: 13px;">Please try different keywords or check our menu for categories.</p>
+            
+            console.log('No search results found for: ' + query);
+            
+            // Set notification message
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-exclamation-circle" style="font-size: 16px;"></i>
+                    <div>
+                        <strong>No results found</strong>
+                        <p style="margin: 0; font-size: 13px;">Please try different keywords or check our menu for categories.</p>
+                    </div>
+                    <button onclick="this.parentNode.parentNode.style.display='none';" style="margin-left: auto; background: none; border: none; cursor: pointer; font-size: 16px;">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                <button onclick="this.parentNode.parentNode.style.display='none';" style="margin-left: auto; background: none; border: none; cursor: pointer; font-size: 16px;">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        `;
-        notification.style.display = 'block';
-        
-        // Hide notification after 5 seconds
-        setTimeout(() => {
-            if (notification) notification.style.display = 'none';
-        }, 5000);
+            `;
+            notification.style.display = 'block';
+            
+            // Hide notification after 5 seconds
+            setTimeout(() => {
+                if (notification) notification.style.display = 'none';
+            }, 5000);
+        } catch (error) {
+            console.error('Error performing search:', error);
+            alert('An error occurred while searching. Please try again.');
+        }
     }
 
     // Event listeners - using more robust approach
@@ -793,7 +797,7 @@ function previousHighlight() {
 function startHighlightsAutoplay() {
     setInterval(() => {
         nextHighlight();
-    }, 12000); // Change slide every 12 seconds for a slower pace
+    }, 3500); // Change slide every 3.5 seconds as requested
 }
 
 // Initialize highlights carousel
@@ -919,9 +923,6 @@ function openNewsModal(newsId) {
     
     modalContent.innerHTML = `
         <h2>${news.title}</h2>
-        <div style="color: #666; margin-bottom: 20px;">
-            <i class="fas fa-calendar"></i> ${news.date}
-        </div>
         <img src="${news.image}" alt="${news.title}" style="width: 100%; max-width: 600px; height: auto; border-radius: 10px; margin: 20px 0;">
         <div style="line-height: 1.6; color: #555;">
             ${news.content}
@@ -1043,3 +1044,119 @@ document.addEventListener('DOMContentLoaded', function() {
     handleShowcaseResize();
     window.addEventListener('resize', handleShowcaseResize);
 });
+
+// Calibration Slideshow Functions
+let currentCalibration = 0;
+const calibrationSlides = document.querySelectorAll('.calibration-slide');
+const calibrationDots = document.querySelectorAll('.cal-nav-dot');
+
+// Initialize calibration slideshow
+document.addEventListener('DOMContentLoaded', function() {
+    if (calibrationSlides.length > 0) {
+        showCalibration(0);
+        
+        // Start autoplay
+        let calibrationInterval = setInterval(function() {
+            nextCalibration();
+        }, 3500); // Change slide every 3.5 seconds
+        
+        // Pause on hover
+        const calibrationCarousel = document.querySelector('.calibration-carousel');
+        if (calibrationCarousel) {
+            calibrationCarousel.addEventListener('mouseenter', function() {
+                clearInterval(calibrationInterval);
+            });
+            
+            calibrationCarousel.addEventListener('mouseleave', function() {
+                calibrationInterval = setInterval(function() {
+                    nextCalibration();
+                }, 3500);
+            });
+        }
+        
+        // Touch events for mobile swipe
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        if (calibrationCarousel) {
+            calibrationCarousel.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+            
+            calibrationCarousel.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+        }
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX) {
+                nextCalibration(); // Swipe left
+            } else if (touchEndX > touchStartX) {
+                previousCalibration(); // Swipe right
+            }
+        }
+    }
+});
+
+function showCalibration(slideIndex) {
+    if (calibrationSlides.length === 0) return;
+    
+    // Hide all slides
+    calibrationSlides.forEach(slide => {
+        slide.classList.remove('active');
+    });
+    
+    // Remove active class from all dots
+    calibrationDots.forEach(dot => {
+        dot.classList.remove('active');
+    });
+    
+    // Show selected slide
+    currentCalibration = slideIndex;
+    
+    // Handle index boundaries
+    if (currentCalibration >= calibrationSlides.length) {
+        currentCalibration = 0;
+    } else if (currentCalibration < 0) {
+        currentCalibration = calibrationSlides.length - 1;
+    }
+    
+    // Add active class to current slide and dot
+    calibrationSlides[currentCalibration].classList.add('active');
+    calibrationDots[currentCalibration].classList.add('active');
+}
+
+function nextCalibration() {
+    showCalibration(currentCalibration + 1);
+}
+
+function previousCalibration() {
+    showCalibration(currentCalibration - 1);
+}
+
+// Equipment Accordion Toggle Function
+function toggleEquipment(equipmentId) {
+    const content = document.getElementById(equipmentId + '-content');
+    const icon = document.getElementById(equipmentId + '-icon');
+    
+    // Close all other accordion items
+    const allContents = document.querySelectorAll('.equipment-accordion-content');
+    const allIcons = document.querySelectorAll('.accordion-icon');
+    
+    allContents.forEach(otherContent => {
+        if (otherContent !== content) {
+            otherContent.classList.remove('open');
+        }
+    });
+    
+    allIcons.forEach(otherIcon => {
+        if (otherIcon !== icon) {
+            otherIcon.classList.remove('rotated');
+        }
+    });
+    
+    // Toggle current accordion item
+    content.classList.toggle('open');
+    icon.classList.toggle('rotated');
+}
