@@ -382,6 +382,7 @@ function toggleEbrochures() {
 
 // Smart Search Functionality
 function initializeSearch() {
+    console.log('Search functionality initialized');
     // Search mappings for products and pages
     const searchMappings = {
         // Products
@@ -593,89 +594,146 @@ function initializeSearch() {
 
     // Function to perform search
     function performSearch() {
-        const query = searchInput.value.trim().toLowerCase();
-        
-        if (query === '') {
-            alert('Please enter a search term');
-            return;
-        }
-
-        // Check for exact matches first
-        if (allMappings[query]) {
-            window.location.href = allMappings[query];
-            return;
-        }
-
-        // Check for partial matches with scoring
-        let bestMatch = null;
-        let bestScore = 0;
-        
-        for (const [key, value] of Object.entries(allMappings)) {
-            let score = 0;
-            
-            // Exact match gets highest score
-            if (key === query) {
-                score = 100;
-            }
-            // Query contains the key
-            else if (query.includes(key)) {
-                score = 80 + (key.length / query.length) * 20;
-            }
-            // Key contains the query
-            else if (key.includes(query)) {
-                score = 60 + (query.length / key.length) * 20;
-            }
-            // Word boundary matches
-            else if (key.split(' ').some(word => word.includes(query)) || 
-                     query.split(' ').some(word => key.includes(word))) {
-                score = 40;
+        try {
+            // Get the search input element again to ensure it's current
+            const searchInput = document.querySelector('.search-input');
+            if (!searchInput) {
+                console.error('Search input not found');
+                return;
             }
             
-            if (score > bestScore) {
-                bestScore = score;
-                bestMatch = value;
+            const query = searchInput.value.trim().toLowerCase();
+            console.log('Searching for:', query);
+            
+            if (query === '') {
+                alert('Please enter a search term');
+                return;
+            }
+
+            // Check for exact matches first
+            if (allMappings[query]) {
+                console.log('Exact match found:', allMappings[query]);
+                window.location.href = allMappings[query];
+                return;
+            }
+
+            // Check for partial matches with scoring
+            let bestMatch = null;
+            let bestScore = 0;
+            let matchDetails = [];
+            
+            for (const [key, value] of Object.entries(allMappings)) {
+                let score = 0;
+                
+                // Exact match gets highest score
+                if (key === query) {
+                    score = 100;
+                }
+                // Query contains the key
+                else if (query.includes(key)) {
+                    score = 80 + (key.length / query.length) * 20;
+                }
+                // Key contains the query
+                else if (key.includes(query)) {
+                    score = 60 + (query.length / key.length) * 20;
+                }
+                // Word boundary matches
+                else if (key.split(' ').some(word => word.includes(query)) || 
+                         query.split(' ').some(word => key.includes(word))) {
+                    score = 40;
+                }
+                
+                if (score > 0) {
+                    matchDetails.push({ key, value, score });
+                }
+                
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestMatch = value;
+                }
+            }
+            
+            console.log('Match details:', matchDetails);
+            console.log('Best match:', bestMatch, 'with score:', bestScore);
+
+            // If we found a good match (score > 30), redirect
+            if (bestMatch && bestScore > 30) {
+                console.log('Redirecting to:', bestMatch);
+                window.location.href = bestMatch;
+                return;
+            }
+
+        // If no direct match, show a "no results found" message
+        // Create or get notification element
+        let notification = document.querySelector('.search-notification');
+        
+        if (!notification) {
+            notification = document.createElement('div');
+            notification.className = 'search-notification';
+            
+            // Append to the products-search container for proper positioning
+            const searchContainer = document.querySelector('.products-search');
+            if (searchContainer) {
+                searchContainer.appendChild(notification);
+            } else {
+                searchInput.parentNode.appendChild(notification);
             }
         }
-
-        // If we found a good match (score > 30), redirect
-        if (bestMatch && bestScore > 30) {
-            window.location.href = bestMatch;
-            return;
-        }
-
-        // If no direct match, use Google site search
-        const siteUrl = window.location.hostname;
-        const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(query + ' site:' + siteUrl)}`;
-        window.open(googleSearchUrl, '_blank');
+        
+        console.log('No search results found for: ' + query);
+        
+        // Set notification message
+        notification.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-exclamation-circle" style="font-size: 16px;"></i>
+                <div>
+                    <strong>No results found</strong>
+                    <p style="margin: 0; font-size: 13px;">Please try different keywords or check our menu for categories.</p>
+                </div>
+                <button onclick="this.parentNode.parentNode.style.display='none';" style="margin-left: auto; background: none; border: none; cursor: pointer; font-size: 16px;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `;
+        notification.style.display = 'block';
+        
+        // Hide notification after 5 seconds
+        setTimeout(() => {
+            if (notification) notification.style.display = 'none';
+        }, 5000);
     }
 
-    // Event listeners
-    searchBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        performSearch();
-    });
-
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
+    // Event listeners - using more robust approach
+    if (searchBtn) {
+        searchBtn.onclick = function(e) {
             e.preventDefault();
             performSearch();
-        }
-    });
+        };
+    }
 
-    // Add search suggestions (optional enhancement)
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        if (query.length < 2) return;
-
-        // You can add autocomplete suggestions here later
-        // For now, we'll just handle the basic search
-    });
+    if (searchInput) {
+        searchInput.onkeydown = function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                performSearch();
+            }
+        };
+    }
 }
 
-// Initialize search functionality when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initializeSearch();
-});
+// Make sure search is initialized
+function setupSearch() {
+    console.log('Setting up search functionality');
+    try {
+        initializeSearch();
+    } catch (error) {
+        console.error('Error setting up search:', error);
+    }
+}
+
+// Use multiple methods to ensure search is initialized
+document.addEventListener('DOMContentLoaded', setupSearch);
+window.addEventListener('load', setupSearch);
 
 // Highlights Carousel Functions
 let currentHighlight = 0;
