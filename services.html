@@ -268,26 +268,318 @@
                             </div>
                         </div>
 
-                        <!-- Other Equipment Items (remaining 9 items) -->
+                        <!-- Other Equipment Items (individual dropdowns) -->
                         <div class="equipment-accordion-item">
-                            <div class="equipment-accordion-header" onclick="toggleEquipment('other')">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('scales')">
                                 <div class="equipment-info">
                                     <div class="equipment-number"></div>
-                                    <div class="equipment-name">Other Equipment & Instruments</div>
+                                    <div class="equipment-name">Scales and Balances</div>
                                 </div>
-                                <i class="fas fa-chevron-down accordion-icon" id="other-icon"></i>
+                                <i class="fas fa-chevron-down accordion-icon" id="scales-icon"></i>
                             </div>
-                            <div class="equipment-accordion-content" id="other-content">
-                                <div class="other-equipment-grid">
-                                    <div class="other-equipment-item">Scales and Balances</div>
-                                    <div class="other-equipment-item">California Bearing Ratio (CBR)</div>
-                                    <div class="other-equipment-item">Marshall Stability</div>
-                                    <div class="other-equipment-item">Drying Ovens and Furnace</div>
-                                    <div class="other-equipment-item">Water Bath / Oil Bath</div>
-                                    <div class="other-equipment-item">Rebound Hammer</div>
-                                    <div class="other-equipment-item">Speedy Moisture Tester</div>
-                                    <div class="other-equipment-item">Thermometers</div>
-                                    <div class="other-equipment-item">Vernier Caliper</div>
+                            <div class="equipment-accordion-content" id="scales-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/Metric-Frame-Sieves-150x150.jpeg" alt="Digital Scale" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Digital Scale</h4>
+                                            <p>High-precision digital weighing scale</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/USA-Standard-Sieves-150x150.jpeg" alt="Analytical Balance" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Analytical Balance</h4>
+                                            <p>Laboratory analytical balance</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/S276-01-150x150.jpg" alt="Platform Scale" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Platform Scale</h4>
+                                            <p>Heavy-duty platform weighing scale</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('cbr')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">California Bearing Ratio (CBR)</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="cbr-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="cbr-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/B011.jpg" alt="CBR Testing Machine" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>CBR Testing Machine</h4>
+                                            <p>California Bearing Ratio testing equipment</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/B043-KIT.jpg" alt="CBR Mold Set" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>CBR Mold Set</h4>
+                                            <p>Complete CBR mold and accessories</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/B055.jpg" alt="CBR Penetrometer" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>CBR Penetrometer</h4>
+                                            <p>CBR penetration testing device</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('marshall')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">Marshall Stability</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="marshall-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="marshall-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/0011007_brovold-superpave-gyratory-compactor_600.jpeg" alt="Marshall Stability Test" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Marshall Stability Tester</h4>
+                                            <p>Asphalt mixture stability testing</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/SuperpaveR-Gyratory-Compactor.png" alt="Marshall Compactor" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Marshall Compactor</h4>
+                                            <p>Sample preparation compactor</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/22.1102.01-SV-i20.jpg" alt="Marshall Test Set" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Marshall Test Set</h4>
+                                            <p>Complete Marshall testing apparatus</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('ovens')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">Drying Ovens and Furnace</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="ovens-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="ovens-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/C208.jpg" alt="Laboratory Oven" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Laboratory Oven</h4>
+                                            <p>Precision laboratory drying oven</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/E138.jpg" alt="Muffle Furnace" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Muffle Furnace</h4>
+                                            <p>High-temperature muffle furnace</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/HCM-6100.7F.png" alt="Convection Oven" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Convection Oven</h4>
+                                            <p>Forced air circulation oven</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('waterbath')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">Water Bath / Oil Bath</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="waterbath-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="waterbath-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/C319-02.jpg" alt="Water Bath" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Digital Water Bath</h4>
+                                            <p>Temperature-controlled water bath</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/E070.jpg" alt="Oil Bath" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Oil Bath</h4>
+                                            <p>High-temperature oil bath system</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/LBD-2045-D.jpg" alt="Shaking Water Bath" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Shaking Water Bath</h4>
+                                            <p>Orbital shaking water bath</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('rebound')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">Rebound Hammer</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="rebound-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="rebound-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/S165-02-KIT.jpg" alt="Schmidt Hammer" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Schmidt Hammer</h4>
+                                            <p>Concrete strength assessment tool</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/S172-01.jpg" alt="Digital Rebound Hammer" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Digital Rebound Hammer</h4>
+                                            <p>Digital concrete test hammer</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/A024N.jpg" alt="Rebound Test Kit" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Rebound Test Kit</h4>
+                                            <p>Complete rebound testing kit</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('moisture')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">Speedy Moisture Tester</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="moisture-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="moisture-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/A075N.jpg" alt="Speedy Moisture Tester" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Speedy Moisture Tester</h4>
+                                            <p>Rapid moisture content determination</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/A125N.jpg" alt="Digital Moisture Meter" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Digital Moisture Meter</h4>
+                                            <p>Electronic moisture measurement</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/sec-150x150.png" alt="Moisture Balance" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Moisture Balance</h4>
+                                            <p>Precision moisture analyzer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('thermometers')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">Thermometers</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="thermometers-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="thermometers-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/GT-7001-DSU.jpg" alt="Digital Thermometer" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Digital Thermometer</h4>
+                                            <p>High-precision digital temperature measurement</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/GT-7010-D2EP.jpg" alt="Infrared Thermometer" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Infrared Thermometer</h4>
+                                            <p>Non-contact temperature measurement</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/GT-7013-MP.jpg" alt="Laboratory Thermometer" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Laboratory Thermometer</h4>
+                                            <p>Precision laboratory thermometer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="equipment-accordion-item">
+                            <div class="equipment-accordion-header" onclick="toggleEquipment('vernier')">
+                                <div class="equipment-info">
+                                    <div class="equipment-number"></div>
+                                    <div class="equipment-name">Vernier Caliper</div>
+                                </div>
+                                <i class="fas fa-chevron-down accordion-icon" id="vernier-icon"></i>
+                            </div>
+                            <div class="equipment-accordion-content" id="vernier-content">
+                                <div class="equipment-cards">
+                                    <div class="equipment-card">
+                                        <img src="./images/LDO-060E.jpg" alt="Digital Vernier Caliper" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Digital Vernier Caliper</h4>
+                                            <p>High-precision digital measuring tool</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/LWB-111D.jpg" alt="Stainless Steel Caliper" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Stainless Steel Caliper</h4>
+                                            <p>Durable stainless steel construction</p>
+                                        </div>
+                                    </div>
+                                    <div class="equipment-card">
+                                        <img src="./images/Spindle-Type-D2-KS-58.png" alt="Heavy Duty Caliper" class="equipment-img">
+                                        <div class="card-overlay">
+                                            <h4>Heavy Duty Caliper</h4>
+                                            <p>Large capacity measuring caliper</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

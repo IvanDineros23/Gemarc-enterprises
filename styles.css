@@ -4642,10 +4642,16 @@ body {
 
 .equipment-accordion-item {
     border: 1px solid #f0f0f0;
-    border-radius: 8px;
+    border-radius: 12px;
     margin-bottom: 15px;
     overflow: hidden;
     background: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.equipment-accordion-item:hover {
+    border-color: #4caf50;
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.1);
 }
 
 .equipment-accordion-header {
@@ -4654,12 +4660,30 @@ body {
     justify-content: space-between;
     padding: 20px 25px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     background: white;
+    position: relative;
+}
+
+.equipment-accordion-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25px;
+    right: 25px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #4caf50, transparent);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
 }
 
 .equipment-accordion-header:hover {
-    background: #f8fff8;
+    background: linear-gradient(135deg, #f8fff8 0%, #f0fff0 100%);
+    transform: translateY(-1px);
+}
+
+.equipment-accordion-header:hover::after {
+    transform: scaleX(1);
 }
 
 .equipment-info {
@@ -4668,50 +4692,85 @@ body {
 }
 
 .equipment-number {
-    background: #4caf50;
+    background: linear-gradient(135deg, #4caf50, #45a049);
     color: white;
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 20px;
     flex-shrink: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.equipment-accordion-header:hover .equipment-number {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
 }
 
 .equipment-name {
     color: #333;
     font-weight: 500;
     font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.equipment-accordion-header:hover .equipment-name {
+    color: #2e7d32;
 }
 
 .accordion-icon {
     color: #4caf50;
-    transition: transform 0.3s ease;
-    font-size: 0.9rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.1);
 }
 
 .accordion-icon.rotated {
     transform: rotate(180deg);
+    background: rgba(76, 175, 80, 0.2);
 }
 
 .equipment-accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: #f9f9f9;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(135deg, #f9f9f9 0%, #f5f7f5 100%);
+    opacity: 0;
 }
 
 .equipment-accordion-content.open {
-    max-height: 1000px;
+    max-height: 2500px;
     padding: 30px;
+    opacity: 1;
+    animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .equipment-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
 }
 
 .equipment-card {
@@ -4719,22 +4778,30 @@ body {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     background: white;
-    height: 200px;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .equipment-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.2);
 }
 
 .equipment-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: 220px;
+    object-fit: contain;
     object-position: center;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #f8f9fa;
+    padding: 20px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    border-bottom: 1px solid #eee;
 }
 
 .equipment-card:hover .equipment-img {
@@ -4746,11 +4813,17 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    height: 80px;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 60%, transparent 100%);
     color: white;
-    padding: 20px;
+    padding: 15px;
     transform: translateY(100%);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    backdrop-filter: blur(2px);
 }
 
 .equipment-card:hover .card-overlay {
@@ -4759,8 +4832,18 @@ body {
 
 .card-overlay h4 {
     margin: 0 0 5px 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
+    line-height: 1.2;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.card-overlay p {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    opacity: 0.95;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 .card-overlay p {
@@ -4794,6 +4877,32 @@ body {
 @media (max-width: 768px) {
     .equipment-cards {
         grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 15px 0;
+    }
+    
+    .equipment-card {
+        height: 260px;
+        margin: 0 10px;
+    }
+    
+    .equipment-img {
+        height: 180px;
+        padding: 15px;
+    }
+    
+    .card-overlay {
+        height: 75px;
+        padding: 12px;
+    }
+    
+    .card-overlay h4 {
+        font-size: 0.9rem;
+        margin-bottom: 3px;
+    }
+    
+    .card-overlay p {
+        font-size: 0.8rem;
     }
     
     .equipment-accordion-header {
@@ -4802,6 +4911,7 @@ body {
     
     .equipment-accordion-content.open {
         padding: 20px;
+        max-height: 2000px;
     }
     
     .other-equipment-grid {
@@ -5782,9 +5892,10 @@ body {
 .equipment-img {
     width: 100%;
     height: 250px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    background: #f8f9fa;
 }
 
 .equipment-details {
