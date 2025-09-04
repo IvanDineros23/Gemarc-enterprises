@@ -797,7 +797,7 @@ function previousHighlight() {
 function startHighlightsAutoplay() {
     setInterval(() => {
         nextHighlight();
-    }, 3500); // Change slide every 3.5 seconds as requested
+    }, 6000); // Change slide every 6 seconds for smoother experience
 }
 
 // Initialize highlights carousel
