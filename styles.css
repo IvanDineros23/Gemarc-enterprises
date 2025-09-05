@@ -7965,3 +7965,246 @@ body {
 .news-card:hover .read-more i {
     transform: translateX(4px);
 }
+
+/* Company Profile Section Styles */
+.company-profile-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.profile-header h3 {
+    font-size: 2rem;
+    color: #1b5e20;
+    margin-bottom: 1rem;
+}
+
+.profile-header p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+.profile-download-section {
+    margin-bottom: 3rem;
+}
+
+.download-card {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(27, 94, 32, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.download-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(45deg, #1b5e20, #2e7d32);
+}
+
+.download-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.download-icon {
+    flex: 0 0 80px;
+    text-align: center;
+    margin-right: 2rem;
+    position: relative;
+}
+
+.download-icon i {
+    font-size: 3.5rem;
+    background: linear-gradient(135deg, #d32f2f 0%, #f44336 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 4px rgba(211, 47, 47, 0.3));
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.download-info {
+    flex: 1;
+}
+
+.download-info h4 {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.download-info p {
+    color: #666;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.file-type {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #999;
+    font-weight: 500;
+    background: #f1f5f9;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.download-action {
+    flex: 0 0 auto;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(27, 94, 32, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.2) 100%);
+    transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.download-btn:hover::before {
+    left: 100%;
+}
+
+.download-btn:hover {
+    background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(27, 94, 32, 0.4);
+}
+
+.download-btn:active {
+    transform: translateY(0px);
+    box-shadow: 0 4px 15px rgba(27, 94, 32, 0.3);
+}
+
+.download-btn i {
+    font-size: 0.9rem;
+}
+
+.profile-highlights {
+    background: #f8f9fa;
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.profile-highlights h4 {
+    font-size: 1.3rem;
+    color: #1b5e20;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.highlight-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.highlight-list li {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.highlight-list li:last-child {
+    border-bottom: none;
+}
+
+.highlight-list i {
+    color: #1b5e20;
+    margin-right: 1rem;
+    font-size: 1.1rem;
+    flex: 0 0 20px;
+}
+
+.highlight-list li span {
+    color: #444;
+    line-height: 1.5;
+}
+
+/* Responsive styles for company profile */
+@media (max-width: 768px) {
+    .download-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+    
+    .download-icon {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .download-action {
+        margin-top: 1rem;
+    }
+    
+    .profile-highlights {
+        padding: 1.5rem;
+    }
+    
+    .highlight-list li {
+        align-items: flex-start;
+    }
+    
+    .highlight-list i {
+        margin-top: 0.2rem;
+    }
+}
