@@ -2863,6 +2863,38 @@ body {
     margin-bottom: 30px;
 }
 
+/* Horizontal Footer Layout */
+.footer-content.horizontal-footer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 30px;
+}
+
+.horizontal-footer .footer-section {
+    text-align: left;
+}
+
+.horizontal-footer .footer-section h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #ffd700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.horizontal-footer .footer-section h4 i {
+    font-size: 1rem;
+}
+
+.horizontal-footer .footer-section p {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    line-height: 1.5;
+}
+
 .footer-section {
     text-align: center;
 }
@@ -3864,6 +3896,16 @@ body {
     /* Footer */
     .footer {
         padding: 40px 0 20px;
+    }
+    
+    .footer-content.horizontal-footer {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .horizontal-footer .footer-section {
+        text-align: center;
     }
     
     .footer-content {
