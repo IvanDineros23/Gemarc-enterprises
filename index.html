@@ -322,14 +322,14 @@
                     </div>
                 </a>
 
-                <!-- News Card 3 - Partnership -->
+                <!-- News Card 3 - Employee Recognition -->
                 <a href="news.html" class="news-card">
                     <div class="news-image">
-                        <img src="images/technicianinstrument-technician-on-job-calibrate-600nw-1020417871.webp" alt="Partnership News">
+                        <img src="images/news/viber_image_2025-09-05_10-41-22-958.jpg" alt="Employee Recognition 2025">
                     </div>
                     <div class="news-content">
-                        <h3>Expanding Our Partnership Network</h3>
-                        <p>Gemarc Enterprises strengthens partnerships with leading global manufacturers to bring you better products and services.</p>
+                        <h3>Employee Recognition for the First Half of the Year 2025</h3>
+                        <p>We celebrated and recognized the outstanding contributions of our dedicated employees during the first half of 2025.</p>
                         <span class="read-more">Read More <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
@@ -623,17 +623,40 @@
         </div>
     </footer>
 
-    <!-- Floating Social Media Buttons -->
-    <div class="floating-social">
-        <a href="https://www.facebook.com/gmrcsales/" class="floating-btn facebook-btn" target="_blank">
+    <!-- Floating Social Media Buttons (Redone for robust fixed positioning) -->
+    <div id="floating-social-redone">
+        <a href="https://www.facebook.com/gmrcsales/" class="fs-btn fs-facebook" target="_blank" aria-label="Facebook">
             <i class="fab fa-facebook-f"></i>
         </a>
-        <a href="viber://chat?number=%2B639090879416" class="floating-btn viber-btn" target="_blank">
+        <a href="viber://chat?number=%2B639090879416" class="fs-btn fs-viber" target="_blank" aria-label="Viber">
             <i class="fab fa-viber"></i>
         </a>
     </div>
 
     <script src="script.js"></script>
     <script src="search.js"></script>
+    <script>
+    // FORCE FLOATING BUTTONS TO STAY AT BOTTOM RIGHT - GUARANTEED!
+    function forceFloatingButtons() {
+        const floating = document.getElementById('floating-social-redone');
+        if (floating) {
+            floating.style.position = 'fixed';
+            floating.style.bottom = '20px';
+            floating.style.right = '20px';
+            floating.style.zIndex = '2147483647';
+            floating.style.display = 'flex';
+            floating.style.flexDirection = 'column';
+            floating.style.gap = '12px';
+        }
+    }
+    
+    // Run on load and scroll
+    window.addEventListener('load', forceFloatingButtons);
+    window.addEventListener('scroll', forceFloatingButtons);
+    window.addEventListener('resize', forceFloatingButtons);
+    
+    // Force every 100ms to be sure
+    setInterval(forceFloatingButtons, 100);
+    </script>
 </body>
 </html>

@@ -1,14 +1,23 @@
-// Mobile menu overlay logic
+// ===================================================================
+// GEMARC ENTERPRISES - MAIN JAVASCRIPT FILE
+// All JavaScript functionality consolidated here (no inline JS!)
+// ===================================================================
+
+// ===================================================================
+// MOBILE MENU FUNCTIONS
+// ===================================================================
+function toggleMobileMenu() {
+    const navList = document.querySelector('.nav-list');
+    const hamburger = document.querySelector('.hamburger');
+    
+    navList.classList.toggle('mobile-active');
+    hamburger.classList.toggle('active');
+}
+
+// Initialize mobile menu when DOM loads
 document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.getE/* Products Carousel Functions */
-let currentProductIndex = 0;
-let autoProductSlideInterval;
-const productsTrack = document.getElementById('productsTrack');
-const productItems = document.querySelectorAll('.product-item');
-const totalProductItems = 20; // Original items count (without duplicates)
-const productItemsToShow = 3; // Show 3 items at a time
-const productItemWidth = 280; // Increased width for better spacingId('mobileMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
     const closeMenu = document.getElementById('closeMenu');
     const mainButtons = document.querySelectorAll('.mobile-menu-main');
 
@@ -19,6 +28,7 @@ const productItemWidth = 280; // Increased width for better spacingId('mobileMen
             document.body.style.overflow = 'hidden';
         });
     }
+    
     // Close mobile menu
     if (closeMenu && mobileMenu) {
         closeMenu.addEventListener('click', function() {
@@ -26,6 +36,7 @@ const productItemWidth = 280; // Increased width for better spacingId('mobileMen
             document.body.style.overflow = '';
         });
     }
+    
     // Accordion dropdown logic
     mainButtons.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -40,758 +51,331 @@ const productItemWidth = 280; // Increased width for better spacingId('mobileMen
         });
     });
 });
-// Mobile menu toggle functionality
-function toggleMobileMenu() {
-    const navList = document.querySelector('.nav-list');
-    const hamburger = document.querySelector('.hamburger');
-    
-    navList.classList.toggle('mobile-active');
-    hamburger.classList.toggle('active');
-}
 
-// Services menu toggle functionality
-function toggleServicesMenu() {
-    const servicesList = document.querySelector('.services-list');
-    const servicesHamburger = document.querySelector('.services-hamburger');
-    
-    servicesList.classList.toggle('mobile-active');
-    servicesHamburger.classList.toggle('active');
-}
+// ===================================================================
+// HOMEPAGE HIGHLIGHTS CAROUSEL
+// ===================================================================
+let currentHighlightIndex = 0;
+const totalHighlights = 5; // Total number of highlights
+let highlightAutoPlay;
 
-// Close mobile menu when clicking on a link
-document.addEventListener('DOMContentLoaded', () => {
-    // Mobile: Only one dropdown open at a time
-    if (window.innerWidth <= 600) {
-        const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-        dropdownToggles.forEach(toggle => {
-            toggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                const parentDropdown = this.closest('.dropdown');
-                // Close all dropdowns
-                document.querySelectorAll('.dropdown.mobile-active').forEach(dd => {
-                    if (dd !== parentDropdown) dd.classList.remove('mobile-active');
-                });
-                // Toggle current dropdown
-                parentDropdown.classList.toggle('mobile-active');
-            });
-        });
-    }
-    const navLinks = document.querySelectorAll('.nav-list a');
-    const navList = document.querySelector('.nav-list');
-    const hamburger = document.querySelector('.hamburger');
+function showHighlight(index) {
+    const highlightsContainer = document.querySelector('.highlights-container');
+    const navDots = document.querySelectorAll('.nav-dot');
     
-    const servicesLinks = document.querySelectorAll('.services-list a');
-    const servicesList = document.querySelector('.services-list');
-    const servicesHamburger = document.querySelector('.services-hamburger');
+    if (!highlightsContainer) return;
     
-    // Main navigation
-    // Removed auto-close on link click for mobile dropdowns
+    // Update current index
+    currentHighlightIndex = index;
     
-    // Close mobile menus when clicking outside
-    document.addEventListener('click', (e) => {
-        // Close main nav
-        if (navList && !e.target.closest('.nav') && navList.classList.contains('mobile-active')) {
-            navList.classList.remove('mobile-active');
-            hamburger.classList.remove('active');
-        }
-        
-        // Close services nav
-        if (servicesList && !e.target.closest('.services-nav') && servicesList.classList.contains('mobile-active')) {
-            servicesList.classList.remove('mobile-active');
-            servicesHamburger.classList.remove('active');
-        }
+    // Move to the selected highlight
+    highlightsContainer.style.transform = `translateX(-${index * 100}%)`;
+    
+    // Update navigation dots
+    navDots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
     });
-});
-
-// Partnership Carousel Functionality
-let currentIndex = 0;
-let autoSlideInterval;
-const partnersTrack = document.getElementById('partnersTrack');
-const partnerItems = document.querySelectorAll('.partner-item');
-const totalItems = 12; // Original items count (without duplicates)
-const itemsToShow = 3; // Show 3 items at a time
-const itemWidth = 260; // 200px width + 30px gap + padding
-
-function moveCarousel(direction) {
-    // Clear auto-slide when manually navigating
-    clearInterval(autoSlideInterval);
-    
-    if (direction === 1) {
-        currentIndex += itemsToShow;
-    } else {
-        currentIndex -= itemsToShow;
-    }
-    
-    // Reset to beginning if at end
-    if (currentIndex >= totalItems) {
-        currentIndex = 0;
-    } else if (currentIndex < 0) {
-        currentIndex = totalItems - itemsToShow;
-    }
-    
-    updateCarouselPosition();
-    
-    // Restart auto-slide after 5 seconds
-    setTimeout(() => {
-        startAutoSlide();
-    }, 5000);
 }
 
-function updateCarouselPosition() {
-    if (partnersTrack) {
-        const translateX = -(currentIndex * itemWidth);
-        partnersTrack.style.transform = `translateX(${translateX}px)`;
-    }
+function nextHighlight() {
+    currentHighlightIndex = (currentHighlightIndex + 1) % totalHighlights;
+    showHighlight(currentHighlightIndex);
 }
 
-function startAutoSlide() {
-    clearInterval(autoSlideInterval);
-    autoSlideInterval = setInterval(() => {
-        currentIndex += itemsToShow;
+function previousHighlight() {
+    currentHighlightIndex = (currentHighlightIndex - 1 + totalHighlights) % totalHighlights;
+    showHighlight(currentHighlightIndex);
+}
+
+// Auto-play highlights
+function startHighlightAutoPlay() {
+    highlightAutoPlay = setInterval(() => {
+        nextHighlight();
+    }, 5000); // Change every 5 seconds
+}
+
+function stopHighlightAutoPlay() {
+    clearInterval(highlightAutoPlay);
+}
+
+// Initialize highlights on page load
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.querySelector('.highlights-container')) {
+        showHighlight(0);
+        startHighlightAutoPlay();
         
-        if (currentIndex >= totalItems) {
-            currentIndex = 0;
+        // Pause autoplay on hover
+        const highlightsSection = document.querySelector('.material-testing-highlights');
+        if (highlightsSection) {
+            highlightsSection.addEventListener('mouseenter', stopHighlightAutoPlay);
+            highlightsSection.addEventListener('mouseleave', startHighlightAutoPlay);
         }
-        
-        updateCarouselPosition();
-    }, 3500); // 3.5 seconds delay between transitions
-}
-
-// Initialize carousel
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize partners carousel
-    updateCarouselPosition();
-    startAutoSlide();
-    
-    // Pause auto-slide on hover for partners
-    const carouselContainer = document.querySelector('.partners-carousel-container');
-    if (carouselContainer) {
-        carouselContainer.addEventListener('mouseenter', () => {
-            clearInterval(autoSlideInterval);
-        });
-        
-        carouselContainer.addEventListener('mouseleave', () => {
-            startAutoSlide();
-        });
-    }
-    
-    // Initialize products carousel
-    updateProductsCarouselPosition();
-    startProductsAutoSlide();
-    
-    // Pause auto-slide on hover for products
-    const productsCarouselContainer = document.querySelector('.products-carousel-container');
-    if (productsCarouselContainer) {
-        productsCarouselContainer.addEventListener('mouseenter', () => {
-            clearInterval(autoProductSlideInterval);
-        });
-        
-        productsCarouselContainer.addEventListener('mouseleave', () => {
-            startProductsAutoSlide();
-        });
     }
 });
 
-// Products Carousel Functions
+// ===================================================================
+// PRODUCTS CAROUSEL FUNCTIONS
+// ===================================================================
 let currentProductIndex = 0;
 let autoProductSlideInterval;
-const productsTrack = document.getElementById('productsTrack');
-const productItems = document.querySelectorAll('.product-item');
-const totalProductItems = 20; // Original items count (without duplicates)
-const productItemsToShow = 3; // Show 3 items at a time
-const productItemWidth = 260; // 200px width + 30px gap + padding
 
 function moveProductsCarousel(direction) {
-    // Clear auto-slide when manually navigating
-    clearInterval(autoProductSlideInterval);
+    const productsTrack = document.getElementById('productsTrack');
+    const productItems = document.querySelectorAll('.product-item');
     
-    if (direction === 1) {
-        currentProductIndex += productItemsToShow;
-    } else {
-        currentProductIndex -= productItemsToShow;
-    }
+    if (!productsTrack || !productItems.length) return;
     
-    // Reset to beginning if at end
-    if (currentProductIndex >= totalProductItems) {
+    const totalItems = productItems.length;
+    const itemsToShow = window.innerWidth <= 768 ? 1 : (window.innerWidth <= 1024 ? 2 : 3);
+    const maxIndex = totalItems - itemsToShow;
+    
+    currentProductIndex += direction;
+    
+    // Loop around
+    if (currentProductIndex > maxIndex) {
         currentProductIndex = 0;
     } else if (currentProductIndex < 0) {
-        currentProductIndex = totalProductItems - productItemsToShow;
+        currentProductIndex = maxIndex;
     }
     
-    updateProductsCarouselPosition();
-    
-    // Restart auto-slide after 5 seconds
-    setTimeout(() => {
-        startProductsAutoSlide();
-    }, 5000);
+    const translateX = -(currentProductIndex * (100 / itemsToShow));
+    productsTrack.style.transform = `translateX(${translateX}%)`;
 }
 
-function updateProductsCarouselPosition() {
-    if (productsTrack) {
-        const translateX = -(currentProductIndex * productItemWidth);
-        productsTrack.style.transform = `translateX(${translateX}px)`;
+// ===================================================================
+// GENERAL CAROUSEL FUNCTIONS (for news/testimonials)
+// ===================================================================
+let currentCarouselIndex = 0;
+
+function moveCarousel(direction) {
+    const carouselTrack = document.getElementById('carouselTrack');
+    const carouselItems = document.querySelectorAll('.carousel-item, .testimonial-item');
+    
+    if (!carouselTrack || !carouselItems.length) return;
+    
+    const totalItems = carouselItems.length;
+    const itemsToShow = window.innerWidth <= 768 ? 1 : 2;
+    const maxIndex = totalItems - itemsToShow;
+    
+    currentCarouselIndex += direction;
+    
+    // Loop around
+    if (currentCarouselIndex > maxIndex) {
+        currentCarouselIndex = 0;
+    } else if (currentCarouselIndex < 0) {
+        currentCarouselIndex = maxIndex;
+    }
+    
+    const translateX = -(currentCarouselIndex * (100 / itemsToShow));
+    carouselTrack.style.transform = `translateX(${translateX}%)`;
+}
+
+// ===================================================================
+// NEWS MODAL FUNCTIONS (if still needed)
+// ===================================================================
+function closeNewsModal() {
+    const modal = document.querySelector('.news-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
     }
 }
 
-function startProductsAutoSlide() {
-    clearInterval(autoProductSlideInterval);
-    autoProductSlideInterval = setInterval(() => {
-        currentProductIndex += productItemsToShow;
-        
-        if (currentProductIndex >= totalProductItems) {
-            currentProductIndex = 0;
-        }
-        
-        updateProductsCarouselPosition();
-    }, 4000); // 4 seconds delay between transitions
-}
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Active navigation highlighting
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-list a');
-    
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (scrollY >= (sectionTop - 200)) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// Mobile menu toggle (if needed later)
-function toggleMobileMenu() {
-    const navList = document.querySelector('.nav-list');
-    navList.classList.toggle('mobile-active');
-}
-
-// Add loading animation
-document.addEventListener('DOMContentLoaded', () => {
-    const serviceCards = document.querySelectorAll('.service-card');
-    
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    serviceCards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(50px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(card);
-    });
-});
-
-// Header scroll effect
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.backdropFilter = 'blur(10px)';
-    } else {
-        header.style.background = 'white';
-        header.style.backdropFilter = 'none';
-    }
-});
-
-// Service card hover effects
-document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-// Tab functionality for About page
-function showTab(tabName) {
+// ===================================================================
+// ABOUT PAGE TAB FUNCTIONS
+// ===================================================================
+function showTab(tabId) {
     // Hide all tab contents
     const tabContents = document.querySelectorAll('.tab-content');
-    tabContents.forEach(content => {
-        content.classList.remove('active');
-    });
+    tabContents.forEach(content => content.classList.remove('active'));
     
     // Remove active class from all tab buttons
     const tabButtons = document.querySelectorAll('.tab-btn');
-    tabButtons.forEach(button => {
-        button.classList.remove('active');
-    });
+    tabButtons.forEach(btn => btn.classList.remove('active'));
     
     // Show selected tab content
-    const selectedTab = document.getElementById(tabName);
+    const selectedTab = document.getElementById(tabId);
     if (selectedTab) {
         selectedTab.classList.add('active');
     }
     
-    // Add active class to clicked button
-    event.target.classList.add('active');
+    // Add active class to clicked tab button
+    const clickedButton = document.querySelector(`[onclick="showTab('${tabId}')"]`);
+    if (clickedButton) {
+        clickedButton.classList.add('active');
+    }
 }
 
-// E-brochures dropdown toggle functionality
-function toggleEbrochures() {
-    const content = document.getElementById('ebrochuresContent');
-    const button = document.querySelector('.ebrochures-toggle-btn');
-    const buttonText = button.querySelector('span');
+// ===================================================================
+// SERVICES PAGE ACCORDION FUNCTIONS
+// ===================================================================
+function toggleEquipment(equipmentId) {
+    const content = document.getElementById(equipmentId);
+    const header = document.querySelector(`[onclick="toggleEquipment('${equipmentId}')"]`);
     
-    if (content.classList.contains('active')) {
-        // Close dropdown
-        content.classList.remove('active');
-        button.classList.remove('active');
-        buttonText.textContent = 'View Available Downloads';
+    if (!content || !header) return;
+    
+    const icon = header.querySelector('.equipment-accordion-icon');
+    
+    if (content.style.display === 'none' || content.style.display === '') {
+        content.style.display = 'block';
+        if (icon) icon.textContent = '−';
+        header.classList.add('active');
     } else {
-        // Open dropdown
-        content.classList.add('active');
-        button.classList.add('active');
-        buttonText.textContent = 'Hide Downloads';
+        content.style.display = 'none';
+        if (icon) icon.textContent = '+';
+        header.classList.remove('active');
     }
 }
 
-// Smart Search Functionality
-function initializeSearch() {
-    console.log('Search functionality initialized');
-    // Search mappings for products and pages
-    const searchMappings = {
-        // Products
-        'aggregates': 'aggregates.html',
-        'aggregate': 'aggregates.html',
-        'gravel': 'aggregates.html',
-        'sand': 'aggregates.html',
-        'stone': 'aggregates.html',
-        
-        'asphalt': 'asphalt-bitumen.html',
-        'bitumen': 'asphalt-bitumen.html',
-        'road': 'asphalt-bitumen.html',
-        'pavement': 'asphalt-bitumen.html',
-        
-        'cement': 'cement-mortar.html',
-        'mortar': 'cement-mortar.html',
-        'concrete': 'concrete-mortar.html',
-        
-        'drilling': 'drilling-machine.html',
-        'drill': 'drilling-machine.html',
-        'drilling machine': 'drilling-machine.html',
-        'drilling equipment': 'drilling-machine.html',
-        
-        'industrial': 'industrial-equipment.html',
-        'industrial equipment': 'industrial-equipment.html',
-        'tools': 'industrial-equipment.html',
-        
-        'soil': 'soil.html',
-        'soil testing': 'soil.html',
-        'geotechnical': 'soil.html',
-        
-        'steel': 'steel.html',
-        'steel testing': 'steel.html',
-        'metal': 'steel.html',
-        'iron': 'steel.html',
-        
-        // Services
-        'calibration': 'services.html',
-        'maintenance': 'services.html',
-        'supply': 'services.html',
-        'services': 'services.html',
-        'repair': 'services.html',
-        
-        // Company info
-        'about': 'about.html',
-        'company': 'about.html',
-        'contact': 'contact.html',
-        'phone': 'contact.html',
-        'address': 'contact.html',
-        'location': 'contact.html',
-        
-        // News & Blogs
-        'news': 'news.html',
-        'blog': 'blogs.html',
-        'blogs': 'blogs.html',
-        'articles': 'blogs.html',
-        
-        // Brand names and equipment
-        'gemarc': 'about.html',
-        'enterprises': 'about.html',
-        'testing equipment': 'index.html',
-        'quality': 'about.html',
-        'laboratory': 'index.html',
-        'lab equipment': 'index.html'
-    };
+// ===================================================================
+// NEWS PAGE SLIDESHOW FUNCTIONS
+// ===================================================================
+let slideIndex = 1;
+let employeeSlideIndex = 1;
 
-    // Enhanced content-based search mappings
-    const contentMappings = {
-        // Aggregates content
-        'sieve': 'aggregates.html',
-        'particle size': 'aggregates.html',
-        'gradation': 'aggregates.html',
-        'density': 'aggregates.html',
-        'absorption': 'aggregates.html',
-        'crushing': 'aggregates.html',
-        'abrasion': 'aggregates.html',
-        'los angeles': 'aggregates.html',
-        'soundness': 'aggregates.html',
-        'bulk density': 'aggregates.html',
-        
-        // Asphalt & Bitumen content
-        'penetration': 'asphalt-bitumen.html',
-        'viscosity': 'asphalt-bitumen.html',
-        'ductility': 'asphalt-bitumen.html',
-        'softening point': 'asphalt-bitumen.html',
-        'flash point': 'asphalt-bitumen.html',
-        'rolling thin film': 'asphalt-bitumen.html',
-        'rtfot': 'asphalt-bitumen.html',
-        'marshall': 'asphalt-bitumen.html',
-        'stability': 'asphalt-bitumen.html',
-        'flow': 'asphalt-bitumen.html',
-        
-        // Cement content
-        'compressive strength': 'cement-mortar.html',
-        'setting time': 'cement-mortar.html',
-        'soundness': 'cement-mortar.html',
-        'fineness': 'cement-mortar.html',
-        'consistency': 'cement-mortar.html',
-        'blaine': 'cement-mortar.html',
-        'vicat': 'cement-mortar.html',
-        'le chatelier': 'cement-mortar.html',
-        
-        // Concrete content
-        'slump': 'concrete-mortar.html',
-        'workability': 'concrete-mortar.html',
-        'cube': 'concrete-mortar.html',
-        'cylinder': 'concrete-mortar.html',
-        'flexural': 'concrete-mortar.html',
-        'tensile': 'concrete-mortar.html',
-        'modulus': 'concrete-mortar.html',
-        'air content': 'concrete-mortar.html',
-        
-        // Steel content
-        'tensile test': 'steel.html',
-        'yield strength': 'steel.html',
-        'ultimate strength': 'steel.html',
-        'elongation': 'steel.html',
-        'hardness': 'steel.html',
-        'brinell': 'steel.html',
-        'rockwell': 'steel.html',
-        'charpy': 'steel.html',
-        'impact': 'steel.html',
-        'fatigue': 'steel.html',
-        'rebar': 'steel.html',
-        'reinforcement': 'steel.html',
-        
-        // Soil content
-        'atterberg': 'soil.html',
-        'liquid limit': 'soil.html',
-        'plastic limit': 'soil.html',
-        'plasticity index': 'soil.html',
-        'compaction': 'soil.html',
-        'proctor': 'soil.html',
-        'cbr': 'soil.html',
-        'california bearing ratio': 'soil.html',
-        'permeability': 'soil.html',
-        'consolidation': 'soil.html',
-        'triaxial': 'soil.html',
-        'direct shear': 'soil.html',
-        'moisture content': 'soil.html',
-        'specific gravity': 'soil.html',
-        'grain size': 'soil.html',
-        'classification': 'soil.html',
-        'uscs': 'soil.html',
-        'aashto': 'soil.html',
-        
-        // Drilling equipment content
-        'core drilling': 'drilling-machine.html',
-        'sampling': 'drilling-machine.html',
-        'spt': 'drilling-machine.html',
-        'standard penetration': 'drilling-machine.html',
-        'auger': 'drilling-machine.html',
-        'diamond': 'drilling-machine.html',
-        'core barrel': 'drilling-machine.html',
-        'drilling fluid': 'drilling-machine.html',
-        'mud': 'drilling-machine.html',
-        'casing': 'drilling-machine.html',
-        'borehole': 'drilling-machine.html',
-        
-        // Industrial equipment content
-        'universal testing machine': 'industrial-equipment.html',
-        'utm': 'industrial-equipment.html',
-        'compression machine': 'industrial-equipment.html',
-        'oven': 'industrial-equipment.html',
-        'balance': 'industrial-equipment.html',
-        'scale': 'industrial-equipment.html',
-        'mixer': 'industrial-equipment.html',
-        'curing tank': 'industrial-equipment.html',
-        'mold': 'industrial-equipment.html',
-        'frame': 'industrial-equipment.html',
-        'apparatus': 'industrial-equipment.html',
-        
-        // Services content
-        'calibration certificate': 'services.html',
-        'iso': 'services.html',
-        'astm': 'services.html',
-        'aashto': 'services.html',
-        'standard': 'services.html',
-        'specification': 'services.html',
-        'verification': 'services.html',
-        'accuracy': 'services.html',
-        'precision': 'services.html',
-        'traceability': 'services.html',
-        'maintenance': 'services.html',
-        'repair': 'services.html',
-        'spare parts': 'services.html',
-        
-        // Contact content
-        'email': 'contact.html',
-        'telephone': 'contact.html',
-        'mobile': 'contact.html',
-        'address': 'contact.html',
-        'location': 'contact.html',
-        'office': 'contact.html',
-        'hours': 'contact.html',
-        'business hours': 'contact.html',
-        'map': 'contact.html',
-        'directions': 'contact.html'
-    };
-
-    // Combine all mappings
-    const allMappings = { ...searchMappings, ...contentMappings };
-
-    // Get search elements
-    const searchInput = document.querySelector('.search-input');
-    const searchBtn = document.querySelector('.search-btn');
-
-    if (!searchInput || !searchBtn) return;
-
-    // Function to perform search
-    function performSearch() {
-        try {
-            // Get the search input element again to ensure it's current
-            const searchInput = document.querySelector('.search-input');
-            if (!searchInput) {
-                console.error('Search input not found');
-                return;
-            }
-            
-            const query = searchInput.value.trim().toLowerCase();
-            console.log('Searching for:', query);
-            
-            if (query === '') {
-                alert('Please enter a search term');
-                return;
-            }
-
-            // Check for exact matches first
-            if (allMappings[query]) {
-                console.log('Exact match found:', allMappings[query]);
-                window.location.href = allMappings[query];
-                return;
-            }
-
-            // Check for partial matches with scoring
-            let bestMatch = null;
-            let bestScore = 0;
-            let matchDetails = [];
-            
-            for (const [key, value] of Object.entries(allMappings)) {
-                let score = 0;
-                
-                // Exact match gets highest score
-                if (key === query) {
-                    score = 100;
-                }
-                // Query contains the key
-                else if (query.includes(key)) {
-                    score = 80 + (key.length / query.length) * 20;
-                }
-                // Key contains the query
-                else if (key.includes(query)) {
-                    score = 60 + (query.length / key.length) * 20;
-                }
-                // Word boundary matches
-                else if (key.split(' ').some(word => word.includes(query)) || 
-                         query.split(' ').some(word => key.includes(word))) {
-                    score = 40;
-                }
-                
-                if (score > 0) {
-                    matchDetails.push({ key, value, score });
-                }
-                
-                if (score > bestScore) {
-                    bestScore = score;
-                    bestMatch = value;
-                }
-            }
-            
-            console.log('Match details:', matchDetails);
-            console.log('Best match:', bestMatch, 'with score:', bestScore);
-
-            // If we found a good match (score > 30), redirect
-            if (bestMatch && bestScore > 30) {
-                console.log('Redirecting to:', bestMatch);
-                window.location.href = bestMatch;
-                return;
-            }
-
-            // If no direct match, show a "no results found" message
-            // Create or get notification element
-            let notification = document.querySelector('.search-notification');
-            
-            if (!notification) {
-                notification = document.createElement('div');
-                notification.className = 'search-notification';
-                
-                // Append to the products-search container for proper positioning
-                const searchContainer = document.querySelector('.products-search');
-                if (searchContainer) {
-                    searchContainer.appendChild(notification);
-                } else {
-                    searchInput.parentNode.appendChild(notification);
-                }
-            }
-            
-            console.log('No search results found for: ' + query);
-            
-            // Set notification message
-            notification.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-exclamation-circle" style="font-size: 16px;"></i>
-                    <div>
-                        <strong>No results found</strong>
-                        <p style="margin: 0; font-size: 13px;">Please try different keywords or check our menu for categories.</p>
-                    </div>
-                    <button onclick="this.parentNode.parentNode.style.display='none';" style="margin-left: auto; background: none; border: none; cursor: pointer; font-size: 16px;">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            `;
-            notification.style.display = 'block';
-            
-            // Hide notification after 5 seconds
-            setTimeout(() => {
-                if (notification) notification.style.display = 'none';
-            }, 5000);
-        } catch (error) {
-            console.error('Error performing search:', error);
-            alert('An error occurred while searching. Please try again.');
-        }
-    }
-
-    // Event listeners - using more robust approach
-    if (searchBtn) {
-        searchBtn.onclick = function(e) {
-            e.preventDefault();
-            performSearch();
-        };
-    }
-
-    if (searchInput) {
-        searchInput.onkeydown = function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                performSearch();
-            }
-        };
-    }
+function changeSlide(direction) {
+    const slides = document.querySelectorAll('.news-slide');
+    const indicators = document.querySelectorAll('.slideshow-indicators .indicator');
+    
+    slideIndex += direction;
+    
+    if (slideIndex > slides.length) slideIndex = 1;
+    if (slideIndex < 1) slideIndex = slides.length;
+    
+    showSlide(slideIndex);
 }
 
-// Make sure search is initialized
-function setupSearch() {
-    console.log('Setting up search functionality');
-    try {
-        initializeSearch();
-    } catch (error) {
-        console.error('Error setting up search:', error);
-    }
+function currentSlide(index) {
+    slideIndex = index;
+    showSlide(slideIndex);
 }
 
-// Use multiple methods to ensure search is initialized
-document.addEventListener('DOMContentLoaded', setupSearch);
-window.addEventListener('load', setupSearch);
+function showSlide(index) {
+    const slides = document.querySelectorAll('.news-slide');
+    const indicators = document.querySelectorAll('.slideshow-indicators .indicator');
+    
+    slides.forEach(slide => slide.style.display = 'none');
+    indicators.forEach(indicator => indicator.classList.remove('active'));
+    
+    if (slides[index - 1]) slides[index - 1].style.display = 'block';
+    if (indicators[index - 1]) indicators[index - 1].classList.add('active');
+}
 
-// Highlights Carousel Functions
-let currentHighlight = 0;
-let totalHighlights = 4;
+// Employee Recognition Slideshow
+function changeEmployeeSlide(direction) {
+    const slides = document.querySelectorAll('.employee-slide');
+    const indicators = document.querySelectorAll('.employee-indicators .indicator');
+    
+    employeeSlideIndex += direction;
+    
+    if (employeeSlideIndex > slides.length) employeeSlideIndex = 1;
+    if (employeeSlideIndex < 1) employeeSlideIndex = slides.length;
+    
+    showEmployeeSlide(employeeSlideIndex);
+}
 
-// Initialize carousel functions when DOM is ready
+function currentEmployeeSlide(index) {
+    employeeSlideIndex = index;
+    showEmployeeSlide(employeeSlideIndex);
+}
+
+function showEmployeeSlide(index) {
+    const slides = document.querySelectorAll('.employee-slide');
+    const indicators = document.querySelectorAll('.employee-indicators .indicator');
+    
+    slides.forEach(slide => slide.style.display = 'none');
+    indicators.forEach(indicator => indicator.classList.remove('active'));
+    
+    if (slides[index - 1]) slides[index - 1].style.display = 'block';
+    if (indicators[index - 1]) indicators[index - 1].classList.add('active');
+}
+
+// Initialize slideshows
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize carousel with first slide if elements exist
-    const slides = document.querySelectorAll('.highlights-slide');
-    if (slides.length > 0) {
-        totalHighlights = slides.length;
-        showHighlight(0);
+    if (document.querySelectorAll('.news-slide').length > 0) {
+        showSlide(1);
+    }
+    if (document.querySelectorAll('.employee-slide').length > 0) {
+        showEmployeeSlide(1);
     }
 });
 
-function showHighlight(slideIndex) {
-    // Hide all slides
-    const slides = document.querySelectorAll('.highlights-slide');
-    const dots = document.querySelectorAll('.nav-dot');
+// ===================================================================
+// EXPANDABLE PRODUCT SPECIFICATIONS (for aggregates page)
+// ===================================================================
+function toggleSpecs(specsId) {
+    const specsDiv = document.getElementById(specsId);
+    const btn = specsDiv.previousElementSibling.querySelector('.expand-btn');
     
-    // Safety check - if elements don't exist, exit the function
-    if (slides.length === 0 || dots.length === 0) return;
-    
-    // Update totalHighlights based on actual slides
-    totalHighlights = slides.length;
-    
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    // Show selected slide
-    if (slides[slideIndex]) {
-        slides[slideIndex].classList.add('active');
-        dots[slideIndex].classList.add('active');
-        currentHighlight = slideIndex;
+    if (specsDiv.style.display === 'none' || specsDiv.style.display === '') {
+        specsDiv.style.display = 'block';
+        btn.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Specifications';
+        btn.classList.add('expanded');
+    } else {
+        specsDiv.style.display = 'none';
+        btn.innerHTML = '<i class="fas fa-chevron-down"></i> View Specifications';
+        btn.classList.remove('expanded');
     }
 }
 
-function nextHighlight() {
-    const slides = document.querySelectorAll('.highlights-slide');
-    if (slides.length === 0) return;
-    
-    totalHighlights = slides.length;
-    currentHighlight = (currentHighlight + 1) % totalHighlights;
-    showHighlight(currentHighlight);
-}
+// ===================================================================
+// RESPONSIVE BEHAVIOR
+// ===================================================================
+window.addEventListener('resize', function() {
+    // Update carousel displays on window resize
+    if (typeof currentProductIndex !== 'undefined') {
+        moveProductsCarousel(0); // Refresh product carousel
+    }
+    if (typeof currentCarouselIndex !== 'undefined') {
+        moveCarousel(0); // Refresh general carousel
+    }
+});
 
-function previousHighlight() {
-    const slides = document.querySelectorAll('.highlights-slide');
-    if (slides.length === 0) return;
+// ===================================================================
+// UTILITY FUNCTIONS
+// ===================================================================
+
+// Close mobile menus when clicking outside
+document.addEventListener('click', function(e) {
+    const navList = document.querySelector('.nav-list');
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
     
-    totalHighlights = slides.length;
-    currentHighlight = (currentHighlight - 1 + totalHighlights) % totalHighlights;
-    showHighlight(currentHighlight);
-}
+    // Close main nav if clicking outside
+    if (navList && !e.target.closest('.nav') && navList.classList.contains('mobile-active')) {
+        navList.classList.remove('mobile-active');
+        if (hamburger) hamburger.classList.remove('active');
+    }
+    
+    // Close mobile overlay menu if clicking outside
+    if (mobileMenu && !e.target.closest('.mobile-menu-content') && !e.target.closest('.hamburger')) {
+        if (mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    }
+});
+
+// Smooth scrolling for anchor links
+document.addEventListener('DOMContentLoaded', function() {
+    const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
+    
+    smoothScrollLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement && targetId !== '#') {
+                e.preventDefault();
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
 
 // Auto-advance highlights (optional)
 function startHighlightsAutoplay() {
@@ -1160,3 +744,70 @@ function toggleEquipment(equipmentId) {
     content.classList.toggle('open');
     icon.classList.toggle('rotated');
 }
+
+// ===================================================================
+// MODAL SYSTEM - ALWAYS CENTERED POPUPS
+// ===================================================================
+
+// Open product modal
+function openProductModal(productData) {
+    const modalOverlay = document.getElementById('productModal');
+    if (!modalOverlay) return;
+    
+    // Update modal content
+    document.getElementById('modalProductCode').textContent = productData.code;
+    document.getElementById('modalProductCodeSub').textContent = productData.code;
+    document.getElementById('modalProductName').textContent = productData.name;
+    document.getElementById('modalProductStandard').textContent = productData.standard;
+    document.getElementById('modalProductDescription').textContent = productData.description;
+    document.getElementById('modalProductImage').src = productData.image;
+    document.getElementById('modalProductImage').alt = productData.name;
+    
+    // Update specifications
+    const specsGrid = document.getElementById('modalSpecsGrid');
+    specsGrid.innerHTML = '';
+    
+    productData.specs.forEach(spec => {
+        const specItem = document.createElement('div');
+        specItem.className = 'modal-spec-item';
+        specItem.innerHTML = `
+            <span class="modal-spec-label">${spec.label}:</span>
+            <span class="modal-spec-value">${spec.value}</span>
+        `;
+        specsGrid.appendChild(specItem);
+    });
+    
+    // Show modal
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // Ensure modal is scrolled into view (for small screens)
+    setTimeout(function() {
+        const modalContent = modalOverlay.querySelector('.modal-content');
+        if (modalContent) {
+            modalContent.scrollIntoView({behavior: 'auto', block: 'center'});
+        }
+    }, 50);
+}
+
+// Close product modal
+function closeProductModal() {
+    const modalOverlay = document.getElementById('productModal');
+    if (modalOverlay) {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Close modal when clicking on overlay
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('modal-overlay')) {
+        closeProductModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeProductModal();
+    }
+});
