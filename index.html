@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -516,7 +516,6 @@
         </div>
     </section>
 
-
     <!-- Partnership Section -->
     <section class="partnership-section">
         <div class="container">
@@ -588,7 +587,6 @@
         </div>
     </section>
 
-
     <!-- Contact CTA Section -->
     <section class="contact-cta-section" id="about">
         <div class="container">
@@ -623,40 +621,7 @@
         </div>
     </footer>
 
-    <!-- Floating Social Media Buttons (Redone for robust fixed positioning) -->
-    <div id="floating-social-redone">
-        <a href="https://www.facebook.com/gmrcsales/" class="fs-btn fs-facebook" target="_blank" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="viber://chat?number=%2B639090879416" class="fs-btn fs-viber" target="_blank" aria-label="Viber">
-            <i class="fab fa-viber"></i>
-        </a>
-    </div>
-
     <script src="script.js"></script>
     <script src="search.js"></script>
-    <script>
-    // FORCE FLOATING BUTTONS TO STAY AT BOTTOM RIGHT - GUARANTEED!
-    function forceFloatingButtons() {
-        const floating = document.getElementById('floating-social-redone');
-        if (floating) {
-            floating.style.position = 'fixed';
-            floating.style.bottom = '20px';
-            floating.style.right = '20px';
-            floating.style.zIndex = '2147483647';
-            floating.style.display = 'flex';
-            floating.style.flexDirection = 'column';
-            floating.style.gap = '12px';
-        }
-    }
-    
-    // Run on load and scroll
-    window.addEventListener('load', forceFloatingButtons);
-    window.addEventListener('scroll', forceFloatingButtons);
-    window.addEventListener('resize', forceFloatingButtons);
-    
-    // Force every 100ms to be sure
-    setInterval(forceFloatingButtons, 100);
-    </script>
 </body>
 </html>

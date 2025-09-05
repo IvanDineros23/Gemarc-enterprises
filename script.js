@@ -763,6 +763,24 @@ function openProductModal(productData) {
     document.getElementById('modalProductImage').src = productData.image;
     document.getElementById('modalProductImage').alt = productData.name;
     
+    // Update manufacturer website button
+    const websiteBtn = document.getElementById('modalWebsiteBtn');
+    if (websiteBtn) {
+        if (productData.manufacturerUrl && productData.manufacturer) {
+            websiteBtn.href = productData.manufacturerUrl;
+            websiteBtn.innerHTML = `<i class="fas fa-external-link-alt"></i> Visit ${productData.manufacturer} Website`;
+            websiteBtn.style.display = 'flex';
+        } else {
+            websiteBtn.style.display = 'none';
+        }
+    }
+    
+    // Update email button subject
+    const emailBtn = document.getElementById('modalEmailBtn');
+    if (emailBtn && productData.code) {
+        emailBtn.href = `mailto:info@gemarcenterprises.com?subject=Inquiry about Product Code: ${productData.code}`;
+    }
+    
     // Update specifications
     const specsGrid = document.getElementById('modalSpecsGrid');
     specsGrid.innerHTML = '';
@@ -780,6 +798,10 @@ function openProductModal(productData) {
     // Show modal
     modalOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // Add keyboard event listener for ESC key
+    document.addEventListener('keydown', handleModalKeydown);
+    
     // Ensure modal is scrolled into view (for small screens)
     setTimeout(function() {
         const modalContent = modalOverlay.querySelector('.modal-content');
@@ -793,21 +815,46 @@ function openProductModal(productData) {
 function closeProductModal() {
     const modalOverlay = document.getElementById('productModal');
     if (modalOverlay) {
-        modalOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+        // Fade out animation
+        modalOverlay.style.opacity = '0';
+        modalOverlay.style.transition = 'opacity 0.25s ease-out';
+        
+        // Remove keyboard event listener
+        document.removeEventListener('keydown', handleModalKeydown);
+        
+        setTimeout(() => {
+            modalOverlay.classList.remove('active');
+            modalOverlay.style.opacity = '';
+            modalOverlay.style.transition = '';
+            document.body.style.overflow = '';
+        }, 250);
     }
 }
 
-// Close modal when clicking on overlay
+// Handle keyboard events for modal (only when modal is active)
+function handleModalKeydown(event) {
+    if (event.key === 'Escape') {
+        closeProductModal();
+    }
+}
+
+// Enhanced modal click handling
 document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('modal-overlay')) {
+    const modal = document.getElementById('productModal');
+    if (!modal || !modal.classList.contains('active')) return;
+    
+    // If clicking the overlay background (not the content)
+    if (e.target === modal) {
         closeProductModal();
     }
 });
 
-// Close modal with Escape key
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeProductModal();
+// Prevent modal content clicks from closing the modal
+document.addEventListener('DOMContentLoaded', function() {
+    const modalContent = document.querySelector('#productModal .modal-content');
+    if (modalContent) {
+        modalContent.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
     }
 });

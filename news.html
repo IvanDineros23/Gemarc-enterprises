@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -337,88 +337,8 @@
         </div>
     </footer>
 
-    <!-- Floating Social Media Buttons -->
-    <div class="floating-social">
-        <a href="https://www.facebook.com/gmrcsales/" class="floating-btn facebook-btn" target="_blank">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="viber://chat?number=%2B639090879416" class="floating-btn viber-btn" target="_blank">
-            <i class="fab fa-viber"></i>
-        </a>
-    </div>
-
     <script src="script.js"></script>
     <script src="search.js"></script>
-    <script>
-        // Slideshow functionality for ISO 9001
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.slideshow-container:not(.employee-recognition-slides) .slide');
-        const indicators = document.querySelectorAll('.slideshow-container:not(.employee-recognition-slides) .indicator');
-
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            indicators.forEach(indicator => indicator.classList.remove('active'));
-            
-            slides[index].classList.add('active');
-            indicators[index].classList.add('active');
-        }
-
-        function changeSlide(direction) {
-            slideIndex += direction;
-            
-            if (slideIndex >= slides.length) {
-                slideIndex = 0;
-            } else if (slideIndex < 0) {
-                slideIndex = slides.length - 1;
-            }
-            
-            showSlide(slideIndex);
-        }
-
-        function currentSlide(index) {
-            slideIndex = index - 1;
-            showSlide(slideIndex);
-        }
-
-        // Employee Recognition Slideshow functionality
-        let employeeSlideIndex = 0;
-        const employeeSlides = document.querySelectorAll('.employee-recognition-slides .slide');
-        const employeeIndicators = document.querySelectorAll('.employee-recognition-slides .indicator');
-
-        function showEmployeeSlide(index) {
-            employeeSlides.forEach(slide => slide.classList.remove('active'));
-            employeeIndicators.forEach(indicator => indicator.classList.remove('active'));
-            
-            employeeSlides[index].classList.add('active');
-            employeeIndicators[index].classList.add('active');
-        }
-
-        function changeEmployeeSlide(direction) {
-            employeeSlideIndex += direction;
-            
-            if (employeeSlideIndex >= employeeSlides.length) {
-                employeeSlideIndex = 0;
-            } else if (employeeSlideIndex < 0) {
-                employeeSlideIndex = employeeSlides.length - 1;
-            }
-            
-            showEmployeeSlide(employeeSlideIndex);
-        }
-
-        function currentEmployeeSlide(index) {
-            employeeSlideIndex = index - 1;
-            showEmployeeSlide(employeeSlideIndex);
-        }
-
-        // Auto-play slideshows
-        setInterval(() => {
-            changeSlide(1);
-        }, 5000);
-
-        setInterval(() => {
-            changeEmployeeSlide(1);
-        }, 6000);
-    </script>
-</body>
+    </body>
 </html>
 

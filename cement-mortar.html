@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -158,18 +158,73 @@
                                 <h3 class="product-name">Autoclave</h3>
                                 <p class="product-standard"><strong>Standard:</strong> ASTM C151, AASHTO T107</p>
                                 <p class="product-description">It consists of a high-pressure boiler made from special alloy steel, inside dia. 154x430 mm high, receiving a holding rack for 10 cement specimens. The heating system is achieved by electric resistances.</p>
+                                <button class="expand-btn" onclick="openProductModal({
+                                    code: 'E070',
+                                    name: 'Autoclave',
+                                    standard: 'ASTM C151, AASHTO T107',
+                                    description: 'It consists of a high pressure boiler made from special alloy steel, inside dia. 154x430 mm high, receiving a holding rack for 10 cement specimens. The heating system is achieved by electric resistances. The separate control panel encloses a digital thermometer to visualize the boiler temperature, pressure gauge scale 0 - 600 psi with built in pressure regulator and power switches. Supplied complete with rack for holding the specimens and safety valve with ISPEL calibration certificate.',
+                                    image: 'images/E070.jpg',
+                                    manufacturer: 'MATEST',
+                                    manufacturerUrl: 'https://www.matest.com/',
+                                    specs: [
+                                        {label: 'Application', value: 'SOUNDNESS (EXPANSION) OF PORTLAND CEMENT'},
+                                        {label: 'Boiler Material', value: 'High pressure boiler made from special alloy steel'},
+                                        {label: 'Internal Dimensions', value: 'Inside dia. 154x430 mm high'},
+                                        {label: 'Specimen Capacity', value: 'Holding rack for 10 cement specimens'},
+                                        {label: 'Heating System', value: 'Electric resistances'},
+                                        {label: 'Control Panel', value: 'Separate control panel with digital thermometer'},
+                                        {label: 'Temperature Display', value: 'Digital thermometer to visualize boiler temperature'},
+                                        {label: 'Pressure Gauge', value: 'Scale 0 - 600 psi with built in pressure regulator'},
+                                        {label: 'Controls', value: 'Power switches'},
+                                        {label: 'Included', value: 'Complete with rack for holding specimens'},
+                                        {label: 'Safety Features', value: 'Safety valve with ISPEL calibration certificate'},
+                                        {label: 'Power Supply', value: '230V 1ph 50Hz 3500W 295psi'},
+                                        {label: 'Dimensions', value: '490x490x980 mm'},
+                                        {label: 'Weight', value: '150 Kg approx.'},
+                                        {label: 'Note', value: 'Not sellable on CE market'}
+                                    ]
+                                })">
+                                    <i class="fas fa-eye"></i> View Details
+                                </button>
                             </div>
                         </div>
                         
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="images/E009-KIT.jpg" alt="E009 KIT Blaine Air Permeability Apparatus" class="product-img">
+                                <img src="images/E009-KIT.jpg" alt="E009-KIT Manual Blaine Air Permeability Apparatus" class="product-img">
                             </div>
                             <div class="product-info">
-                                <h4 class="product-code">E009 KIT</h4>
-                                <h3 class="product-name">Blaine Air Permeability Apparatus</h3>
+                                <h4 class="product-code">E009-KIT</h4>
+                                <h3 class="product-name">Manual Blaine Air Permeability Apparatus</h3>
                                 <p class="product-standard"><strong>Standard:</strong> AASHTO T153, BS 4359-2, EN 196-6, ASTM C204</p>
                                 <p class="product-description">This apparatus is used to determine the fineness of Portland cement in terms of the specific surface expressed as total surface area in square centimetres per gram of cement.</p>
+                                <button class="expand-btn" onclick="openProductModal({
+                                    code: 'E009-KIT',
+                                    name: 'Manual Blaine Air Permeability Apparatus',
+                                    standard: 'EN 196-6, ASTM C204, AASHTO T153, BS 4359-2',
+                                    description: 'This apparatus is used to determine the fineness of Portland cement in terms of the specific surface expressed as total surface area in square centimetres per gram of cement. The apparatus is supplied with a glass U-tube manometer with valve, steel stand, test cell with disk and plunger all in stainless steel, rubber aspirator bulb, 1000 filter paper disks, manometric liquid, vaseline grease for better coupling tube/cell, funnel, brush. The instrument conforms to EN 196-6 Standard and it is comparable to ASTM, AASHTO and BS standards.',
+                                    image: 'images/E009-KIT.jpg',
+                                    manufacturer: 'MATEST',
+                                    manufacturerUrl: 'https://www.matest.com/',
+                                    specs: [
+                                        {label: 'Function', value: 'Determine the fineness of Portland cement'},
+                                        {label: 'Measurement', value: 'Specific surface expressed as total surface area in square centimetres per gram of cement'},
+                                        {label: 'Manometer', value: 'Glass U-tube manometer with valve'},
+                                        {label: 'Stand', value: 'Steel stand'},
+                                        {label: 'Test Cell', value: 'Test cell with disk and plunger all in stainless steel'},
+                                        {label: 'Aspirator', value: 'Rubber aspirator bulb'},
+                                        {label: 'Filter Papers', value: '1000 filter paper disks included'},
+                                        {label: 'Manometric Liquid', value: 'Included'},
+                                        {label: 'Coupling', value: 'Vaseline grease for better coupling tube/cell'},
+                                        {label: 'Accessories', value: 'Funnel and brush included'},
+                                        {label: 'Primary Standard', value: 'EN 196-6'},
+                                        {label: 'Compatible Standards', value: 'ASTM, AASHTO and BS'},
+                                        {label: 'Dimensions', value: '220x180x470 mm'},
+                                        {label: 'Weight', value: '12 Kg approx.'}
+                                    ]
+                                })">
+                                    <i class="fas fa-eye"></i> View Details
+                                </button>
                             </div>
                         </div>
                         
@@ -182,6 +237,34 @@
                                 <h3 class="product-name">Large Capacity Curing Cabinet</h3>
                                 <p class="product-standard"><strong>Standard:</strong> EN 196-1, 196-08 | ISO 679 | ASTM C109, C511</p>
                                 <p class="product-description">For curing large quantities of mortar, cement and concrete specimens at controlled humidity and temperature</p>
+                                <button class="expand-btn" onclick="openProductModal({
+                                    code: 'E138',
+                                    name: 'Large Capacity Curing Cabinet',
+                                    standard: 'EN 196-1, EN 196-08, ISO 679, ASTM C109, ASTM C511',
+                                    description: 'For curing large quantities of mortar, cement and concrete specimens at controlled humidity and temperature. Aluminium and polycarbonate made, it is complete with a precision digital thermostat and four robust shelves. The humidity from 90% to saturation is maintained through water nebulizers activated by compressed air, and the temperature by an immersion heater and refrigerator unit (accessory mod. E141). The cabinet requires a compressed air source (see accessory).',
+                                    image: 'images/E138.jpg',
+                                    manufacturer: 'MATEST',
+                                    manufacturerUrl: 'https://www.matest.com/',
+                                    specs: [
+                                        {label: 'Application', value: 'Curing large quantities of mortar, cement and concrete specimens'},
+                                        {label: 'Control', value: 'Controlled humidity and temperature'},
+                                        {label: 'Construction', value: 'Aluminium and polycarbonate made'},
+                                        {label: 'Thermostat', value: 'Precision digital thermostat'},
+                                        {label: 'Shelves', value: 'Four robust shelves'},
+                                        {label: 'Humidity Range', value: 'From 90% to saturation'},
+                                        {label: 'Humidity System', value: 'Water nebulizers activated by compressed air'},
+                                        {label: 'Temperature Control', value: 'Immersion heater and refrigerator unit (accessory mod. E141)'},
+                                        {label: 'Temperature Range', value: 'From ambient to +30 °C'},
+                                        {label: 'Temperature Accuracy', value: '± 1 °C'},
+                                        {label: 'Air Supply Required', value: 'Compressed air source (see accessory)'},
+                                        {label: 'Inside Dimensions', value: '1090x470x1200 mm'},
+                                        {label: 'Overall Dimensions', value: '1350x570x1600 mm'},
+                                        {label: 'Power Supply', value: '230 V 1ph 50/60 Hz 2000 W'},
+                                        {label: 'Weight', value: '100 Kg approx.'}
+                                    ]
+                                })">
+                                    <i class="fas fa-eye"></i> View Details
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -203,37 +286,112 @@
                     <div class="products-grid">
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="images\NL-3031-X-005.png" alt="NL 3031X / 005 Cement Mortar Mixer ECO-SMARTZ" class="product-img">
+                                <img src="images\nl3031x006-01.jpg" alt="NL 3031 X / 006 Mortar Mixer (Automatic)" class="product-img">
                             </div>
                             <div class="product-info">
-                                <h4 class="product-code">NL 3031X / 005</h4>
-                                <h3 class="product-name">Cement Mortar Mixer ECO-SMARTZ</h3>
-                                <p class="product-standard"><strong>Standard:</strong> EN 196-1, EN 196, ASTM C 305, AASHTO T 162, ISO 679-1989</p>
+                                <h4 class="product-code">NL 3031 X / 006</h4>
+                                <h3 class="product-name">Mortar Mixer (Automatic)</h3>
+                                <p class="product-standard"><strong>Standard:</strong> EN 196-1, ASTM C 305, AASHTO T 162, ISO 679</p>
                                 <p class="product-description">This apparatus has specially been designed to prepare cement mortar for strength determination as specified in standard. It can also be used in mixing lime with pozzolanic materials for determination of lime reactivity (as per IS 1727) & for uniform mixing of soils with additives such as lime, cement, etc.</p>
+                                <button class="expand-btn" onclick="openProductModal({
+                                    code: 'NL 3031 X / 006',
+                                    name: 'Mortar Mixer (Automatic)',
+                                    standard: 'EN 196-1, ASTM C 305, AASHTO T 162, ISO 679',
+                                    description: 'Automatic mortar mixers are machines designed specifically to streamline the mixing process. In construction, mortar is a vital material used for binding bricks, stones, or other building units together. This apparatus has specially been designed to prepare cement mortar for strength determination as specified in standard. It can also be used in mixing lime with pozzolanic materials for determination of lime reactivity & for uniform mixing of soils with additives such as lime, cement, etc. New Mortar Mixer comes with built in door for better safety.',
+                                    image: 'images\\nl3031x006-01.jpg',
+                                    manufacturer: 'NL Scientific',
+                                    manufacturerUrl: 'https://nl-test.com/',
+                                    specs: [
+                                        {label: 'Model Number', value: 'NL 3031 X / 006'},
+                                        {label: 'Capacity', value: '5L'},
+                                        {label: 'Planetary Speeds', value: '62/125 r.p.m.'},
+                                        {label: 'Beater Speeds', value: '140/285 r.p.m.'},
+                                        {label: 'Dimension', value: '480 (L) x 313 (W) x 770 (H) mm'},
+                                        {label: 'Approx. Weight', value: '44 kg'},
+                                        {label: 'Power', value: '220 V, 1 ph, 50 / 60 Hz, 0.5 Hp'},
+                                        {label: 'Automation', value: 'Automatically mix mortar ingredients without manual intervention'},
+                                        {label: 'Loading/Unloading', value: 'Efficient mechanisms with tilting drums or removable mixing paddles'},
+                                        {label: 'Power Options', value: 'Can be powered by electricity, gasoline, or diesel'},
+                                        {label: 'Speed Control', value: 'Variable speed settings for different mortar types and consistency'},
+                                        {label: 'Safety Feature', value: 'Built-in door for better safety'},
+                                        {label: 'Applications', value: 'Cement mortar preparation, lime with pozzolanic materials mixing, soil additives mixing'},
+                                        {label: 'Design', value: 'Rotating drum or paddles with automatic rotation and agitation'}
+                                    ]
+                                })">
+                                    <i class="fas fa-eye"></i> View Details
+                                </button>
                             </div>
                         </div>
                         
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="images\NL-3004-X-001.png" alt="NL3004X / 001 Flow cone Apparatus" class="product-img">
+                                <img src="images\NL-3004-X-001.png" alt="NL 3004 A / 001 Flow Cone Apparatus" class="product-img">
                             </div>
                             <div class="product-info">
-                                <h4 class="product-code">NL3004X / 001</h4>
-                                <h3 class="product-name">Flow cone Apparatus</h3>
+                                <h4 class="product-code">NL 3004 A / 001</h4>
+                                <h3 class="product-name">Flow Cone Apparatus</h3>
                                 <p class="product-standard"><strong>Standard:</strong> EN 445</p>
                                 <p class="product-description">Used for determining the flow properties of mortars, grouts, muds and many other type of fluid materials.</p>
+                                <button class="expand-btn" onclick="openProductModal({
+                                    code: 'NL 3004 A / 001',
+                                    name: 'Flow Cone Apparatus',
+                                    standard: 'EN 445',
+                                    description: 'Used for determining the flow properties of mortars, grouts, muds and many other type of fluid materials. This apparatus is designed to measure the flow proprieties of grouts, muds & other fluid materials, providing essential data for construction and engineering applications where material flow characteristics are critical for proper application and performance.',
+                                    image: 'images\\NL-3004-X-001.png',
+                                    manufacturer: 'NL Scientific',
+                                    manufacturerUrl: 'https://nl-test.com/',
+                                    specs: [
+                                        {label: 'Model Number', value: 'NL 3004 A / 001'},
+                                        {label: 'Application', value: 'Flow Properties Of Grouts, Muds & Other Fluid Materials'},
+                                        {label: 'Function', value: 'Determining the flow properties of mortars, grouts, muds and fluid materials'},
+                                        {label: 'Dimension', value: '240 (L) x 160 (W) x 610 (H) mm'},
+                                        {label: 'Approx. Weight', value: '7 kg'},
+                                        {label: 'Material Testing', value: 'Mortars, grouts, muds, and various fluid materials'},
+                                        {label: 'Design', value: 'Cone-shaped apparatus for consistent flow measurement'},
+                                        {label: 'Purpose', value: 'Quality control and material characterization'},
+                                        {label: 'Construction Applications', value: 'Essential for proper material application and performance evaluation'}
+                                    ]
+                                })">
+                                    <i class="fas fa-eye"></i> View Details
+                                </button>
                             </div>
                         </div>
                         
                         <div class="product-card">
                             <div class="product-image">
-                                <img src="images\NL-3012-X-003.png" alt="NL 3012X / 004 Vicat Apparatus" class="product-img">
+                                <img src="images\NL-3012-X-003.png" alt="NL 3012 X / 004 Vicat Apparatus, Manual, ASTM & AASHTO" class="product-img">
                             </div>
                             <div class="product-info">
-                                <h4 class="product-code">NL 3012X / 004</h4>
-                                <h3 class="product-name">Vicat Apparatus</h3>
+                                <h4 class="product-code">NL 3012 X / 004</h4>
+                                <h3 class="product-name">Vicat Apparatus, Manual, ASTM & AASHTO</h3>
                                 <p class="product-standard"><strong>Standard:</strong> ASTM C187-04, ASTM C191-04, AASHTO T 129-06, AASHTO T131-06</p>
                                 <p class="product-description">The vicat frame consists essentially of a metal stand with a sliding rod. An adjustable indicator moves over a graduated scale. The needle or plunger is attached to the bottom end of the rod to make up the test weight of 300 g.</p>
+                                <button class="expand-btn" onclick="openProductModal({
+                                    code: 'NL 3012 X / 004',
+                                    name: 'Vicat Apparatus, Manual, ASTM & AASHTO',
+                                    standard: 'ASTM C187-04, ASTM C191-04, AASHTO T 129-06, AASHTO T131-06',
+                                    description: 'The Vicat Apparatus is used to determine the setting time and consistency of cement paste, mortar, and concrete. The apparatus consists of a plunger, a mold, and a measuring device. The test involves placing a cement sample in the mold and applying a standard plunger to create an indentation in the sample. The setting time is determined by measuring the depth of penetration of the plunger over time. The vicat frame consists essentially of a metal stand with a sliding rod.',
+                                    image: 'images\\NL-3012-X-003.png',
+                                    manufacturer: 'NL Scientific',
+                                    manufacturerUrl: 'https://nl-test.com/',
+                                    specs: [
+                                        {label: 'Model Number', value: 'NL 3012 X / 004'},
+                                        {label: 'Standard Compliance', value: 'ASTM / AASHTO'},
+                                        {label: 'Dimension', value: '215(W)x160(L)x323(H) mm'},
+                                        {label: 'Approx. Weight', value: '4.0 kg'},
+                                        {label: 'Function', value: 'Determine setting time and consistency of cement paste, mortar, and concrete'},
+                                        {label: 'Metal Stand', value: 'Metal frame with sliding rod mechanism'},
+                                        {label: 'Adjustable Indicator', value: 'Moves over graduated scale for accurate measurement'},
+                                        {label: 'Plunger/Needle', value: 'Attached to bottom end of sliding rod'},
+                                        {label: 'Test Weight', value: '300 g standard test weight'},
+                                        {label: 'Graduated Scale', value: 'Marked in millimeters for precise penetration measurement'},
+                                        {label: 'Accessories', value: 'ASTM & AASHTO compliant accessories included'},
+                                        {label: 'Measurement', value: 'Depth of penetration over time for setting time determination'},
+                                        {label: 'Application', value: 'Construction material testing and quality control'}
+                                    ]
+                                })">
+                                    <i class="fas fa-eye"></i> View Details
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -271,19 +429,62 @@
         </div>
     </footer>
 
-    <!-- Floating Social Media Buttons -->
-    <div class="floating-social">
-        <a href="https://www.facebook.com/gmrcsales/" class="floating-btn facebook-btn" target="_blank">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="viber://chat?number=%2B639090879416" class="floating-btn viber-btn" target="_blank">
-            <i class="fab fa-viber"></i>
-        </a>
+    <!-- Product Modal -->
+    <div id="productModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Product Details</h2>
+                <button class="modal-close" onclick="closeProductModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-product-info">
+                    <div class="modal-product-image">
+                        <img id="modalProductImage" src="" alt="" class="modal-product-img">
+                    </div>
+                    <div class="modal-product-details">
+                        <div class="modal-product-code">
+                            <strong>Product Code:</strong> <span id="modalProductCode"></span>
+                            <span id="modalProductCodeSub" style="display: none;"></span>
+                        </div>
+                        <h3 class="modal-product-name" id="modalProductName"></h3>
+                        <div class="modal-product-standard">
+                            <strong>Standard:</strong> <span id="modalProductStandard"></span>
+                        </div>
+                        <div class="modal-product-description">
+                            <strong>Description:</strong>
+                            <p id="modalProductDescription"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-specs-section">
+                    <h4 class="modal-specs-title">Technical Specifications</h4>
+                    <div id="modalSpecsGrid" class="modal-specs-grid">
+                        <!-- Specifications will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="modal-contact-section">
+                    <h4 class="modal-contact-title">Need More Information?</h4>
+                    <div class="modal-contact-buttons">
+                        <a href="mailto:info@gemarcenterprises.com?subject=Inquiry about Product Code: " id="modalEmailBtn" class="modal-contact-btn modal-email-btn">
+                            <i class="fas fa-envelope"></i> Send Email Inquiry
+                        </a>
+                        <a href="tel:+639171234567" class="modal-contact-btn modal-call-btn">
+                            <i class="fas fa-phone"></i> Call Us
+                        </a>
+                        <a href="#" id="modalWebsiteBtn" target="_blank" class="modal-contact-btn modal-website-btn">
+                            <i class="fas fa-external-link-alt"></i> Visit Manufacturer Website
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
     <script src="search.js"></script>
+
 </body>
 </html>
-
 
