@@ -235,54 +235,76 @@ let slideIndex = 1;
 let employeeSlideIndex = 1;
 
 function changeSlide(direction) {
-    const slides = document.querySelectorAll('.news-slide');
-    const indicators = document.querySelectorAll('.slideshow-indicators .indicator');
+    const container = document.querySelector('.slideshow-container:not(.employee-recognition-slides)');
+    if (!container) return;
+    
+    const slides = container.querySelectorAll('.slide');
+    const indicators = container.querySelectorAll('.indicator');
     
     slideIndex += direction;
     
     if (slideIndex > slides.length) slideIndex = 1;
     if (slideIndex < 1) slideIndex = slides.length;
     
-    showSlide(slideIndex);
+    showSlide(slideIndex, container);
 }
 
 function currentSlide(index) {
+    const container = document.querySelector('.slideshow-container:not(.employee-recognition-slides)');
+    if (!container) return;
+    
     slideIndex = index;
-    showSlide(slideIndex);
+    showSlide(slideIndex, container);
 }
 
-function showSlide(index) {
-    const slides = document.querySelectorAll('.news-slide');
-    const indicators = document.querySelectorAll('.slideshow-indicators .indicator');
+function showSlide(index, container) {
+    if (!container) {
+        container = document.querySelector('.slideshow-container:not(.employee-recognition-slides)');
+    }
+    if (!container) return;
     
-    slides.forEach(slide => slide.style.display = 'none');
+    const slides = container.querySelectorAll('.slide');
+    const indicators = container.querySelectorAll('.indicator');
+    
+    slides.forEach(slide => slide.classList.remove('active'));
     indicators.forEach(indicator => indicator.classList.remove('active'));
     
-    if (slides[index - 1]) slides[index - 1].style.display = 'block';
+    if (slides[index - 1]) slides[index - 1].classList.add('active');
     if (indicators[index - 1]) indicators[index - 1].classList.add('active');
 }
 
 // Employee Recognition Slideshow
 function changeEmployeeSlide(direction) {
-    const slides = document.querySelectorAll('.employee-slide');
-    const indicators = document.querySelectorAll('.employee-indicators .indicator');
+    const container = document.querySelector('.employee-recognition-slides');
+    if (!container) return;
+    
+    const slides = container.querySelectorAll('.slide');
+    const indicators = container.querySelectorAll('.indicator');
     
     employeeSlideIndex += direction;
     
     if (employeeSlideIndex > slides.length) employeeSlideIndex = 1;
     if (employeeSlideIndex < 1) employeeSlideIndex = slides.length;
     
-    showEmployeeSlide(employeeSlideIndex);
+    showEmployeeSlide(employeeSlideIndex, container);
 }
 
 function currentEmployeeSlide(index) {
+    const container = document.querySelector('.employee-recognition-slides');
+    if (!container) return;
+    
     employeeSlideIndex = index;
-    showEmployeeSlide(employeeSlideIndex);
+    showEmployeeSlide(employeeSlideIndex, container);
 }
 
-function showEmployeeSlide(index) {
-    const slides = document.querySelectorAll('.employee-slide');
-    const indicators = document.querySelectorAll('.employee-indicators .indicator');
+function showEmployeeSlide(index, container) {
+    if (!container) {
+        container = document.querySelector('.employee-recognition-slides');
+    }
+    if (!container) return;
+    
+    const slides = container.querySelectorAll('.slide');
+    const indicators = container.querySelectorAll('.indicator');
     
     slides.forEach(slide => slide.style.display = 'none');
     indicators.forEach(indicator => indicator.classList.remove('active'));
@@ -858,3 +880,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// News dropdown functionality
+function toggleNewsContent(header) {
+    const content = header.nextElementSibling;
+    const icon = header.querySelector('.dropdown-icon i');
+    
+    if (content.classList.contains('collapsed')) {
+        content.classList.remove('collapsed');
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+        header.querySelector('.dropdown-icon').classList.add('rotated');
+    } else {
+        content.classList.add('collapsed');
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+        header.querySelector('.dropdown-icon').classList.remove('rotated');
+    }
+}

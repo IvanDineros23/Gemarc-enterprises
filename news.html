@@ -136,15 +136,18 @@
             
             <!-- Featured News -->
             <article class="featured-news">
-                <div class="news-header">
+                <div class="news-header clickable-header" onclick="toggleNewsContent(this)">
                     <span class="news-badge">Featured</span>
                     <h2>Gemarc Enterprises Pursues ISO 9001 Quality Management System Certification</h2>
                     <div class="news-meta">
                         <span class="news-category"><i class="fas fa-tag"></i> Quality Management</span>
                     </div>
+                    <div class="dropdown-icon">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
                 </div>
 
-                <div class="news-content">
+                <div class="news-content collapsed">
                     <p class="lead">We are proud to announce that Gemarc Enterprises Incorporated is currently in the process of implementing and pursuing ISO 9001 Quality Management System certification, demonstrating our unwavering commitment to delivering exceptional quality and service to our valued clients.</p>
                     
                     <div class="slideshow-container">
@@ -224,20 +227,29 @@
             
             <!-- Employee Recognition Article -->
             <article class="news-article">
-                <div class="news-header">
+                <div class="news-header clickable-header" onclick="toggleNewsContent(this)">
                     <span class="news-badge recent">Recent</span>
                     <h2>Employee Recognition for the First Half of the Year 2025</h2>
                     <div class="news-meta">
                         <span class="news-category"><i class="fas fa-award"></i> Employee Recognition</span>
-                        <span class="news-date"><i class="fas fa-calendar"></i> September 2025</span>
+                    </div>
+                    <div class="dropdown-icon">
+                        <i class="fas fa-chevron-down"></i>
                     </div>
                 </div>
 
-                <div class="news-content">
+                <div class="news-content collapsed">
                     <p class="lead">We are thrilled to celebrate and recognize the outstanding contributions of our dedicated employees during the first half of 2025. This recognition program acknowledges the hard work, dedication, and exceptional performance of our team members who have gone above and beyond in their roles.</p>
                     
                     <div class="slideshow-container employee-recognition-slides">
                         <div class="slide active">
+                            <img src="images/news/viber_image_2025-09-05_10-41-23-739.jpg" alt="Recognition Program">
+                            <div class="slide-caption">
+                                <h3>Recognition Program Overview</h3>
+                                <p>Our comprehensive employee recognition program highlights excellence and dedication</p>
+                            </div>
+                        </div>
+                        <div class="slide">
                             <img src="images/news/viber_image_2025-09-05_10-41-22-958.jpg" alt="Employee Recognition Ceremony">
                             <div class="slide-caption">
                                 <h3>Employee Recognition Ceremony</h3>
@@ -259,10 +271,31 @@
                             </div>
                         </div>
                         <div class="slide">
-                            <img src="images/news/viber_image_2025-09-05_10-41-23-739.jpg" alt="Recognition Program">
+                            <img src="images/news/viber_image_2025-09-05_13-17-06-854.jpg" alt="Recognition Event">
                             <div class="slide-caption">
-                                <h3>Recognition Program</h3>
-                                <p>Our comprehensive employee recognition program highlights excellence and dedication</p>
+                                <h3>Recognition Event</h3>
+                                <p>Special recognition event highlighting outstanding team performance</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/news/viber_image_2025-09-05_13-17-23-930.jpg" alt="Achievement Celebration">
+                            <div class="slide-caption">
+                                <h3>Achievement Celebration</h3>
+                                <p>Celebrating individual and team achievements throughout the first half of 2025</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/news/viber_image_2025-09-05_13-17-46-318.jpg" alt="Performance Recognition">
+                            <div class="slide-caption">
+                                <h3>Performance Recognition</h3>
+                                <p>Acknowledging exceptional performance and dedication to company values</p>
+                            </div>
+                        </div>
+                        <div class="slide">
+                            <img src="images/news/viber_image_2025-09-05_13-18-06-635.jpg" alt="Team Success">
+                            <div class="slide-caption">
+                                <h3>Team Success</h3>
+                                <p>Celebrating the success and achievements of our dedicated team members</p>
                             </div>
                         </div>
 
@@ -280,6 +313,10 @@
                             <span class="indicator" onclick="currentEmployeeSlide(2)"></span>
                             <span class="indicator" onclick="currentEmployeeSlide(3)"></span>
                             <span class="indicator" onclick="currentEmployeeSlide(4)"></span>
+                            <span class="indicator" onclick="currentEmployeeSlide(5)"></span>
+                            <span class="indicator" onclick="currentEmployeeSlide(6)"></span>
+                            <span class="indicator" onclick="currentEmployeeSlide(7)"></span>
+                            <span class="indicator" onclick="currentEmployeeSlide(8)"></span>
                         </div>
                     </div>
 
@@ -339,6 +376,16 @@
             </div>
         </div>
     </footer>
+
+    <!-- Floating Social Buttons -->
+    <div class="floating-buttons">
+        <a href="https://www.facebook.com/gmrcsales" target="_blank" class="floating-btn facebook-btn" title="Visit our Facebook Page">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="viber://chat?number=09090879416" class="floating-btn viber-btn" title="Contact us on Viber: 0909 087 9416">
+            <i class="fab fa-viber"></i>
+        </a>
+    </div>
 
     <script src="script.js"></script>
     <script src="search.js"></script>
