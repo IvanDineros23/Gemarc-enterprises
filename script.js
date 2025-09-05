@@ -898,3 +898,64 @@ function toggleNewsContent(header) {
         header.querySelector('.dropdown-icon').classList.remove('rotated');
     }
 }
+
+// ===================================================================
+// CALIBRATION GALLERY FUNCTIONS
+// ===================================================================
+function toggleGalleryContent(header) {
+    const content = header.nextElementSibling;
+    const icon = header.querySelector('.dropdown-icon i');
+    
+    if (content.classList.contains('collapsed')) {
+        content.classList.remove('collapsed');
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+        header.querySelector('.dropdown-icon').classList.add('rotated');
+    } else {
+        content.classList.add('collapsed');
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+        header.querySelector('.dropdown-icon').classList.remove('rotated');
+    }
+}
+
+function openImageModal(img) {
+window.openImageModal = openImageModal;
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    
+    modal.style.display = 'block';
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+    
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageModal() {
+window.closeImageModal = closeImageModal;
+    const modal = document.getElementById('imageModal');
+    modal.style.display = 'none';
+    
+    // Restore body scroll
+    document.body.style.overflow = '';
+}
+
+// Close modal when clicking outside the image
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('imageModal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeImageModal();
+            }
+        });
+    }
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeImageModal();
+        }
+    });
+});
