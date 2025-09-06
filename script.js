@@ -144,6 +144,59 @@ function moveProductsCarousel(direction) {
 
 // ===================================================================
 // GENERAL CAROUSEL FUNCTIONS (for news/testimonials)
+
+// BLOG POST SLIDESHOW FOR MULTIPLE IMAGES
+
+// Auto-sliding blog slideshow with left-slide animation
+function updateSlideshowDots(container, activeIdx, total) {
+    const dotsContainer = container.querySelector('.slideshow-dots');
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'slideshow-dot' + (i === activeIdx ? ' active' : '');
+        dot.onclick = () => {
+            showBlogSlideshowImage(container, i, true);
+        };
+        dotsContainer.appendChild(dot);
+    }
+}
+
+function showBlogSlideshowImage(container, idx, animate) {
+    const img = container.querySelector('.slideshow-img');
+    const images = JSON.parse(container.getAttribute('data-images'));
+    img.src = images[idx];
+    container.setAttribute('data-idx', idx);
+    updateSlideshowDots(container, idx, images.length);
+    if (animate) {
+        img.classList.remove('slide-left');
+        void img.offsetWidth; // force reflow
+        img.classList.add('slide-left');
+    }
+}
+
+function startBlogSlideshow(container) {
+    const images = JSON.parse(container.getAttribute('data-images'));
+    let idx = 0;
+    container.setAttribute('data-idx', idx);
+    showBlogSlideshowImage(container, idx, false);
+    updateSlideshowDots(container, idx, images.length);
+    if (images.length < 2) return; // No animation for single image
+    const delay = parseInt(container.getAttribute('data-delay') || '0', 10);
+    setTimeout(() => {
+        setInterval(() => {
+            idx = parseInt(container.getAttribute('data-idx') || '0', 10);
+            idx = (idx + 1) % images.length;
+            showBlogSlideshowImage(container, idx, true);
+        }, 3000);
+    }, delay);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.slideshow-container').forEach(container => {
+        startBlogSlideshow(container);
+    });
+});
 // ===================================================================
 let currentCarouselIndex = 0;
 
