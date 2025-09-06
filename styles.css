@@ -1,3 +1,23 @@
+/* Product label below image in carousel */
+.product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.product-logo {
+    display: block;
+    margin: 0 auto;
+}
+.product-label {
+    margin-top: 12px;
+    font-size: 1rem;
+    color: #222;
+    text-align: center;
+    font-weight: 500;
+    min-height: 2.2em;
+    line-height: 1.2;
+    word-break: break-word;
+}
 .equipment-cards {
     max-height: 70vh;
     overflow-y: auto;
