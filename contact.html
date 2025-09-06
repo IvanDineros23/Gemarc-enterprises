@@ -194,48 +194,53 @@
                 
                 <div class="contact-form">
                     <h2>Send Us a Message</h2>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="company">Company</label>
-                            <input type="text" id="company" name="company">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">Service Interest</label>
-                            <select id="service" name="service">
-                                <option value="">Select a service</option>
-                                <option value="supply">Supply</option>
-                                <option value="calibration">Calibration & Verification</option>
-                                <option value="repair">Repair & Maintenance</option>
-                                <option value="general">General Inquiry</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Message *</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">
-                            <i class="fas fa-paper-plane"></i>
-                            Send Message
-                        </button>
-                    </form>
+                                         <div id="form-status" style="display:none; margin-bottom:1rem; padding:10px; border-radius:6px;"></div>
+                                         <form id="contactForm" action="https://formspree.io/f/xpwjkakq" method="POST">
+                                                 <div class="form-group">
+                                                         <label for="fullname">Full Name *</label>
+                                                         <input type="text" id="fullname" name="fullname" required>
+                                                 </div>
+                                                 <div class="form-group">
+                                                         <label for="email">Email Address *</label>
+                                                         <input type="email" id="email" name="email" required>
+                                                 </div>
+                                                 <div class="form-group">
+                                                         <label for="phone">Phone Number</label>
+                                                         <input type="tel" id="phone" name="phone">
+                                                 </div>
+                                                 <div class="form-group">
+                                                         <label for="company">Company</label>
+                                                         <input type="text" id="company" name="company">
+                                                 </div>
+                                                 <div class="form-group">
+                                                         <label for="service">Service Interest</label>
+                                                         <select id="service" name="service" required>
+                                                                 <option value="" disabled selected>Select a service</option>
+                                                                 <option value="Supply">Supply</option>
+                                                                 <option value="Calibration & Verification">Calibration & Verification</option>
+                                                                 <option value="Repair & Maintenance">Repair & Maintenance</option>
+                                                                 <option value="General Inquiry">General Inquiry</option>
+                                                         </select>
+                                                 </div>
+                                                 <div class="form-group">
+                                                         <label for="message">Message *</label>
+                                                         <textarea id="message" name="message" rows="5" required></textarea>
+                                                 </div>
+                                                 <button type="submit" class="submit-btn">
+                                                         <i class="fas fa-paper-plane"></i>
+                                                         Send Message
+                                                 </button>
+                                                             </form>
+                                                                                                                         <script>
+                                                                                                                             const form = document.getElementById("contactForm");
+                                                                                                                             const statusDiv = document.getElementById("form-status");
+                                                                                                                             form.addEventListener("submit", function() {
+                                                                                                                                 statusDiv.style.display = "block";
+                                                                                                                                 statusDiv.textContent = "Sending...";
+                                                                                                                                 statusDiv.style.background = "#fff3cd";
+                                                                                                                                 statusDiv.style.color = "#856404";
+                                                                                                                             });
+                                                                                                                         </script>
                 </div>
             </div>
         </div>
