@@ -452,26 +452,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Auto-advance highlights (optional)
-function startHighlightsAutoplay() {
-    setInterval(() => {
+// Add keyboard navigation for highlights
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') {
+        previousHighlight();
+    } else if (e.key === 'ArrowRight') {
         nextHighlight();
-    }, 6000); // Change slide every 6 seconds for smoother experience
-}
-
-// Initialize highlights carousel
-document.addEventListener('DOMContentLoaded', function() {
-    // Start autoplay after page load
-    setTimeout(startHighlightsAutoplay, 5000);
-    
-    // Add keyboard navigation
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft') {
-            previousHighlight();
-        } else if (e.key === 'ArrowRight') {
-            nextHighlight();
-        }
-    });
+    }
 });
 
 // Product Categories Showcase Functions
