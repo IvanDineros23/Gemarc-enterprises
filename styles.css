@@ -1863,16 +1863,18 @@ body {
     overflow: hidden;
 }
 
-.highlights-container {
-    display: flex;
-    width: 100%;
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
+.highlights-slide {
+    display: none;
+    animation: slideIn 2s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(30px);
 }
 
-.highlights-slide {
-    min-width: 100%;
-    box-sizing: border-box;
+.highlights-slide.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
 }
 
 @keyframes slideIn {
