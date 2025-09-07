@@ -1005,30 +1005,31 @@ window.openImageModal = openImageModal;
     document.body.style.overflow = 'hidden';
 }
 
+// Close modal function (safe kahit wala ang #imageModal)
 function closeImageModal() {
-window.closeImageModal = closeImageModal;
-    const modal = document.getElementById('imageModal');
-    modal.style.display = 'none';
-    
-    // Restore body scroll
-    document.body.style.overflow = '';
+  const modal = document.getElementById('imageModal');
+  if (!modal) return;                  // <-- guard para di mag-error
+  modal.style.display = 'none';
+  document.body.style.overflow = '';   // restore scroll
 }
+// gawing available globally kung may inline onclick
+window.closeImageModal = closeImageModal;
 
-// Close modal when clicking outside the image
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('imageModal');
-    if (modal) {
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                closeImageModal();
-            }
-        });
+// Close modal when clicking outside the image + Esc key
+document.addEventListener('DOMContentLoaded', function () {
+  const modal = document.getElementById('imageModal');
+  if (!modal) return;                  // <-- huwag mag-setup ng listeners kung wala
+
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) {
+      closeImageModal();
     }
-    
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeImageModal();
-        }
-    });
+  });
+
+  // Close modal with Escape key (activate lang kung may modal)
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      closeImageModal();
+    }
+  });
 });
