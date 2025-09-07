@@ -146,6 +146,48 @@ function moveProductsCarousel(direction) {
     const translateX = -(currentProductIndex * (100 / itemsToShow));
     productsTrack.style.transform = `translateX(${translateX}%)`;
 }
+// === Our Products carousel autoplay ===
+// (Place this right after moveProductsCarousel)
+
+function startProductsAutoPlay() {
+  if (typeof autoProductSlideInterval !== 'undefined' && autoProductSlideInterval) {
+    clearInterval(autoProductSlideInterval);
+  }
+  autoProductSlideInterval = setInterval(() => moveProductsCarousel(1), 2500); // speed
+}
+
+function stopProductsAutoPlay() {
+  if (typeof autoProductSlideInterval !== 'undefined' && autoProductSlideInterval) {
+    clearInterval(autoProductSlideInterval);
+    autoProductSlideInterval = null;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('productsTrack');
+  if (!track) return; // only run on pages that have the products carousel
+
+  const container = track.closest('.products-carousel-container');
+
+  // kick off
+  startProductsAutoPlay();
+
+  // pause on hover/touch/focus
+  ['mouseenter','focusin','touchstart'].forEach(evt =>
+    container.addEventListener(evt, stopProductsAutoPlay, { passive: true })
+  );
+  ['mouseleave','focusout','touchend'].forEach(evt =>
+    container.addEventListener(evt, startProductsAutoPlay, { passive: true })
+  );
+
+  // pause when tab is hidden
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? stopProductsAutoPlay() : startProductsAutoPlay();
+  });
+
+  // keep layout correct on resize (optional)
+  window.addEventListener('resize', () => moveProductsCarousel(0));
+});
 
 // ===================================================================
 // GENERAL CAROUSEL FUNCTIONS (for news/testimonials)
@@ -1031,5 +1073,31 @@ document.addEventListener('DOMContentLoaded', function () {
     if (e.key === 'Escape') {
       closeImageModal();
     }
+  });
+});
+// === Partners carousel autoplay (uses your existing moveCarousel) ===
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.getElementById('partnersTrack');
+  if (!track) return;
+
+  const container = track.closest('.partners-carousel-container');
+  let timer = null;
+
+  function startAuto() { stopAuto(); timer = setInterval(() => moveCarousel(1), 2500); }
+  function stopAuto()  { if (timer) { clearInterval(timer); timer = null; } }
+
+  startAuto();
+
+  // pause on hover/focus, resume on leave
+  ['mouseenter','focusin','touchstart'].forEach(evt =>
+    container.addEventListener(evt, stopAuto, {passive:true})
+  );
+  ['mouseleave','focusout','touchend'].forEach(evt =>
+    container.addEventListener(evt, startAuto, {passive:true})
+  );
+
+  // pause when tab is hidden (saves CPU)
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? stopAuto() : startAuto();
   });
 });
