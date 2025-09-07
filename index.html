@@ -7,6 +7,8 @@
     <link rel="icon" type="image/png" href="images/gemarclogo.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
@@ -119,7 +121,7 @@
     </header>
 
     <!-- Material Testing Highlights Section -->
-    <section class="material-testing-highlights">
+    <section class="material-testing-highlights" data-aos="fade-up">
         <div class="highlights-background"></div>
         <div class="container">
             <!-- Search Bar -->
@@ -145,8 +147,9 @@
                 <i class="fas fa-chevron-right"></i>
             </button>
             
-            <div class="highlights-carousel">
-                <div class="highlights-slide active" data-slide="0">
+            <div class="highlights-container">
+                <div class="highlights-carousel">
+                <div class="highlights-slide active" data-slide="0" data-aos="fade-right">
                     <div class="highlights-content">
                         <div class="highlights-text">
                             <h1 class="highlights-title">
@@ -174,7 +177,7 @@
                     </div>
                 </div>
                 
-                <div class="highlights-slide" data-slide="1">
+                <div class="highlights-slide" data-slide="1" data-aos="fade-left">
                     <div class="highlights-content">
                         <div class="highlights-text">
                             <h1 class="highlights-title">
@@ -202,7 +205,7 @@
                     </div>
                 </div>
                 
-                <div class="highlights-slide" data-slide="2">
+                <div class="highlights-slide" data-slide="2" data-aos="fade-up">
                     <div class="highlights-content">
                         <div class="highlights-text">
                             <h1 class="highlights-title">
@@ -230,7 +233,7 @@
                     </div>
                 </div>
 
-                <div class="highlights-slide" data-slide="3">
+                <div class="highlights-slide" data-slide="3" data-aos="fade-up">
                     <div class="highlights-content">
                         <div class="highlights-text">
                             <h1 class="highlights-title">
@@ -258,7 +261,7 @@
                     </div>
                 </div>
                 
-                <div class="highlights-slide" data-slide="4">
+                <div class="highlights-slide" data-slide="4" data-aos="fade-up">
                     <div class="highlights-content">
                         <div class="highlights-text">
                             <h1 class="highlights-title">
@@ -285,7 +288,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
+            <!-- End highlights-carousel and highlights-container -->
         </div>
     </section>
 
@@ -608,7 +612,7 @@
     </section>
 
     <!-- Contact CTA Section -->
-    <section class="contact-cta-section" id="about">
+    <section class="contact-cta-section" id="about" data-aos="zoom-in">
         <div class="container">
             <div class="contact-cta-content">
                 <h2>Finding something interesting ?</h2>
@@ -618,7 +622,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer" data-aos="fade-up">
         <div class="container">
             <div class="footer-content horizontal-footer">
                 <div class="footer-section">
@@ -656,5 +660,8 @@
 
     <script src="script.js"></script>
     <script src="search.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>AOS.init({ once: true });</script>
 </body>
 </html>

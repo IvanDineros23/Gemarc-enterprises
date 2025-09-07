@@ -1,3 +1,25 @@
+/* Highlights Carousel Sliding Fix */
+.highlights-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.highlights-carousel {
+    display: flex;
+    transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    will-change: transform;
+}
+.highlights-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.7s ease-in-out;
+}
+.highlights-slide.active {
+    display: block;
+    opacity: 1;
+}
 /* Product label below image in carousel */
 .product-item {
     display: flex;
@@ -1856,26 +1878,7 @@ body {
     margin-right: -100px;
 }
 
-/* Carousel Container */
-.highlights-carousel {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-}
-
-.highlights-slide {
-    display: none;
-    animation: slideIn 2s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0;
-    transition: all 2s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateX(30px);
-}
-
-.highlights-slide.active {
-    display: block;
-    opacity: 1;
-    transform: translateX(0);
-}
+/* Carousel Container - Remove duplicate styles */
 
 @keyframes slideIn {
     0% {
@@ -6720,6 +6723,9 @@ body {
     transition: all 0.3s ease;
     position: relative;
     min-width: 280px;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .product-card:hover {
@@ -6738,7 +6744,9 @@ body {
 }
 
 .product-image {
-    height: 200px;
+    width: 200px;
+    min-width: 200px;
+    height: auto;
     overflow: hidden;
     background: #f8f9fa;
     display: flex;
@@ -6760,6 +6768,10 @@ body {
 
 .product-info {
     padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .product-code {
@@ -6846,7 +6858,9 @@ body {
     }
     
     .product-image {
-        height: 150px;
+        width: 150px;
+        min-width: 150px;
+        height: auto;
         padding: 10px;
     }
     
@@ -6904,7 +6918,9 @@ body {
     }
     
     .product-image {
-        height: 120px;
+        width: 120px;
+        min-width: 120px;
+        height: auto;
         padding: 8px;
     }
     
@@ -9524,13 +9540,7 @@ html, body {
     display: none;
 }
 
-.modal-content {
-    display: none;
-}
-
-.modal-content img {
-    display: none;
-}
+/* Remove conflicting modal styles */
 
 .close-modal {
     display: none;

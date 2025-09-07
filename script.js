@@ -60,16 +60,21 @@ const totalHighlights = 5; // Total number of highlights
 let highlightAutoPlay;
 
 function showHighlight(index) {
-    const highlightsContainer = document.querySelector('.highlights-container');
+    const highlightsSlides = document.querySelectorAll('.highlights-slide');
     const navDots = document.querySelectorAll('.nav-dot');
+    if (!highlightsSlides.length) return;
     
-    if (!highlightsContainer) return;
-    
-    // Update current index
     currentHighlightIndex = index;
     
-    // Move to the selected highlight
-    highlightsContainer.style.transform = `translateX(-${index * 100}%)`;
+    // Hide all slides
+    highlightsSlides.forEach(slide => {
+        slide.classList.remove('active');
+    });
+    
+    // Show current slide
+    if (highlightsSlides[index]) {
+        highlightsSlides[index].classList.add('active');
+    }
     
     // Update navigation dots
     navDots.forEach((dot, i) => {
@@ -127,7 +132,7 @@ function moveProductsCarousel(direction) {
     
     const totalItems = productItems.length;
     const itemsToShow = window.innerWidth <= 768 ? 1 : (window.innerWidth <= 1024 ? 2 : 3);
-    const maxIndex = totalItems - itemsToShow;
+    const maxIndex = Math.max(0, totalItems - itemsToShow);
     
     currentProductIndex += direction;
     
@@ -201,6 +206,31 @@ document.addEventListener('DOMContentLoaded', function() {
 let currentCarouselIndex = 0;
 
 function moveCarousel(direction) {
+    // Check for partners carousel first
+    const partnersTrack = document.getElementById('partnersTrack');
+    if (partnersTrack) {
+        const partnerItems = document.querySelectorAll('.partner-item');
+        if (partnerItems.length > 0) {
+            const totalItems = partnerItems.length;
+            const itemsToShow = window.innerWidth <= 768 ? 2 : (window.innerWidth <= 1024 ? 3 : 4);
+            const maxIndex = Math.max(0, totalItems - itemsToShow);
+            
+            currentCarouselIndex += direction;
+            
+            // Loop around
+            if (currentCarouselIndex > maxIndex) {
+                currentCarouselIndex = 0;
+            } else if (currentCarouselIndex < 0) {
+                currentCarouselIndex = maxIndex;
+            }
+            
+            const translateX = -(currentCarouselIndex * (100 / itemsToShow));
+            partnersTrack.style.transform = `translateX(${translateX}%)`;
+            return;
+        }
+    }
+    
+    // Fallback to general carousel
     const carouselTrack = document.getElementById('carouselTrack');
     const carouselItems = document.querySelectorAll('.carousel-item, .testimonial-item');
     
@@ -208,7 +238,7 @@ function moveCarousel(direction) {
     
     const totalItems = carouselItems.length;
     const itemsToShow = window.innerWidth <= 768 ? 1 : 2;
-    const maxIndex = totalItems - itemsToShow;
+    const maxIndex = Math.max(0, totalItems - itemsToShow);
     
     currentCarouselIndex += direction;
     
@@ -452,18 +482,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Auto-advance highlights (optional)
-function startHighlightsAutoplay() {
-    setInterval(() => {
-        nextHighlight();
-    }, 6000); // Change slide every 6 seconds for smoother experience
-}
-
-// Initialize highlights carousel
+// Add keyboard navigation for highlights
 document.addEventListener('DOMContentLoaded', function() {
-    // Start autoplay after page load
-    setTimeout(startHighlightsAutoplay, 5000);
-    
     // Add keyboard navigation
     document.addEventListener('keydown', function(e) {
         if (e.key === 'ArrowLeft') {
