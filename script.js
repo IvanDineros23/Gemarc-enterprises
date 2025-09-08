@@ -899,18 +899,7 @@ function openProductModal(productData) {
     document.getElementById('modalProductDescription').textContent = productData.description;
     document.getElementById('modalProductImage').src = productData.image;
     document.getElementById('modalProductImage').alt = productData.name;
-    
-    // Update manufacturer website button
-    const websiteBtn = document.getElementById('modalWebsiteBtn');
-    if (websiteBtn) {
-        if (productData.manufacturerUrl && productData.manufacturer) {
-            websiteBtn.href = productData.manufacturerUrl;
-            websiteBtn.innerHTML = `<i class="fas fa-external-link-alt"></i> Visit ${productData.manufacturer} Website`;
-            websiteBtn.style.display = 'flex';
-        } else {
-            websiteBtn.style.display = 'none';
-        }
-    }
+
     
     // Update email button subject
     const emailBtn = document.getElementById('modalEmailBtn');
@@ -1101,3 +1090,63 @@ document.addEventListener('DOMContentLoaded', () => {
     document.hidden ? stopAuto() : startAuto();
   });
 });
+// ===== GEMARC Inline Inquiry - initializer (multi-modal support) =====
+document.addEventListener('DOMContentLoaded', function () {
+  // Render rows + wire up events for every .gem-inquiry
+  document.querySelectorAll('.gem-inquiry').forEach(container => {
+    const emailsAttr = (container.getAttribute('data-emails') || '').trim();
+    const emails = emailsAttr.split(',').map(e => e.trim()).filter(Boolean);
+    const panel = container.querySelector('.js-inquiry-panel');
+    const btn   = container.querySelector('.js-show-inquiry');
+
+    // Build the panel only once
+    if (panel && !panel.dataset.rendered) {
+      let html = '<p class="inquiry-help">You can send your inquiries to any of the emails below:</p>';
+      emails.forEach(mail => {
+        html += `
+          <div class="inquiry-email-row">
+            <span class="inquiry-email">${mail}</span>
+            <button type="button" class="inquiry-copy" data-email="${mail}">Copy</button>
+          </div>`;
+      });
+      html += `
+        <div class="inquiry-note">
+          Prefer your mail app? <a class="inquiry-mailto" href="mailto:${encodeURIComponent(emails[0] || 'sales@gemarcph.com')}">Open mail app</a>
+        </div>`;
+      panel.innerHTML = html;
+      panel.dataset.rendered = '1';
+    }
+
+    // Toggle show/hide
+    if (btn && panel) {
+      btn.addEventListener('click', () => {
+        const hidden = panel.hasAttribute('hidden');
+        if (hidden) {
+          panel.removeAttribute('hidden');
+          btn.classList.add('active');
+          btn.innerHTML = '<i class="fas fa-envelope-open-text"></i> Show Less';
+        } else {
+          panel.setAttribute('hidden', '');
+          btn.classList.remove('active');
+          btn.innerHTML = '<i class="fas fa-envelope"></i> Send Inquiry';
+        }
+      });
+    }
+
+    // Delegate copy buttons inside this panel
+    panel?.addEventListener('click', async (ev) => {
+      const target = ev.target.closest('.inquiry-copy');
+      if (!target) return;
+      const email = target.getAttribute('data-email') || '';
+      try {
+        await navigator.clipboard.writeText(email);
+        const prev = target.textContent;
+        target.textContent = 'Copied!';
+        setTimeout(() => { target.textContent = prev; }, 1200);
+      } catch {
+        alert('Copy failed. Please select and copy:\n' + email);
+      }
+    });
+  });
+});
+

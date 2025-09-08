@@ -311,21 +311,15 @@
                         <!-- Specifications will be populated by JavaScript -->
                     </div>
                 </div>
-                
-                <div class="modal-contact-section">
-                    <h4 class="modal-contact-title">Need More Information?</h4>
-                    <div class="modal-contact-buttons">
-                        <a href="mailto:info@gemarcenterprises.com?subject=Inquiry about Product Code: " id="modalEmailBtn" class="modal-contact-btn modal-email-btn">
-                            <i class="fas fa-envelope"></i> Send Email Inquiry
-                        </a>
-                        <a href="tel:+639171234567" class="modal-contact-btn modal-call-btn">
-                            <i class="fas fa-phone"></i> Call Us
-                        </a>
-                        <a href="#" id="modalWebsiteBtn" target="_blank" class="modal-contact-btn modal-website-btn">
-                            <i class="fas fa-external-link-alt"></i> Visit Manufacturer Website
-                        </a>
-                    </div>
+                <br>
+                                <!-- GEMARC Inline Inquiry (drop-in) -->
+                <div class="gem-inquiry" data-emails="sales@gemarcph.com,technical@gemarcph.com">
+                <button type="button" class="modal-contact-btn modal-email-btn js-show-inquiry is-full">
+                    <i class="fas fa-envelope"></i> Send Inquiry
+                </button>
+                <div class="inquiry-email-panel js-inquiry-panel" hidden></div>
                 </div>
+
             </div>
         </div>
     </div>

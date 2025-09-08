@@ -9022,19 +9022,6 @@ html, body {
     color: white;
 }
 
-.modal-website-btn {
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white;
-    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
-}
-
-.modal-website-btn:hover {
-    background: linear-gradient(135deg, #0056b3, #004085);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
-    color: white;
-}
-
 .modal-contact-btn i {
     font-size: 1.1rem;
 }
@@ -9643,3 +9630,33 @@ html, body {
   position: relative;
   z-index: 2; /* just in case may element na nag-o-overlap */
 }
+/* ===== Big CTA button style ===== */
+.modal-contact-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 14px 22px; font-size: 1.05rem; line-height: 1.2;
+  border-radius: 12px; font-weight: 700;
+}
+.modal-contact-btn i { font-size: 1.15em; }
+.modal-email-btn { background:#25a244; color:#fff; border:1px solid #1d7f36; box-shadow:0 6px 18px rgba(37,162,68,.25); }
+.modal-email-btn:hover { background:#1f8e3b; transform:translateY(-1px); box-shadow:0 8px 22px rgba(37,162,68,.32); }
+.modal-contact-section .modal-email-btn.is-full, .gem-inquiry .modal-email-btn.is-full { display:block; width:100%; }
+
+/* ===== Inline Inquiry Email Panel ===== */
+.inquiry-email-panel {
+  margin-top:12px; border:1px solid #e6ebf1; border-radius:10px; background:#f9fbfa;
+  padding:12px 15px; animation:fadeIn .25s ease-in-out;
+}
+.inquiry-help { margin:0 0 10px 0; font-size:.95rem; color:#333; }
+.inquiry-email-row {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 12px; margin-bottom:8px; background:#fff; border:1px solid #dce3e8; border-radius:8px;
+}
+.inquiry-email { font-family:monospace; font-size:.95rem; color:#1b5e20; word-break:break-all; }
+.inquiry-copy {
+  border:1px solid #c8e6c9; background:#e8f5e9; color:#1b5e20;
+  padding:6px 12px; border-radius:6px; font-size:.85rem; font-weight:600; cursor:pointer; transition:.2s;
+}
+.inquiry-copy:hover { background:#d6f0d7; }
+.inquiry-note { margin-top:6px; font-size:.85rem; color:#444; }
+.inquiry-mailto { color:#2e7d32; text-decoration:underline; }
+@keyframes fadeIn { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)} }
