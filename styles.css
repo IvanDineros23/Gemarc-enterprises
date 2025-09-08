@@ -9660,3 +9660,148 @@ html, body {
 .inquiry-note { margin-top:6px; font-size:.85rem; color:#444; }
 .inquiry-mailto { color:#2e7d32; text-decoration:underline; }
 @keyframes fadeIn { from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)} }
+/* Suggestion dropdown positioning for your .products-search */
+.products-search { position: relative; }
+
+/* Suggestion dropdown (reuse your earlier styles if present) */
+.search-suggest {
+  position: absolute;
+  z-index: 9999;
+  left: 0; right: 0;
+  top: calc(100% + 6px);
+  background: #fff;
+  border: 1px solid #e5e9ee;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  overflow: hidden;
+  display: none;
+}
+.search-suggest.show { display: block; }
+
+.search-suggest-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 12px;
+  cursor:pointer;
+  border-top:1px solid #f2f4f7;
+}
+.search-suggest-item:hover,
+.search-suggest-item.active{ background:#f5fbf7; }
+
+
+.search-suggest-thumb {
+  width: 44px; height: 44px; border-radius: 8px;
+  object-fit: contain; background:#f6f7f8; border:1px solid #edf0f3;
+}
+
+.search-suggest-title { font-weight: 700; line-height: 1.2; }
+.search-suggest-meta  { font-size: .82rem; color: #567; }
+.search-suggest-code  { font: 600 .82rem ui-monospace, Menlo, Consolas, monospace; color: #1f8e3b; }
+
+/* Pulse highlight when scrolling to a card */
+.card-pulse {
+  box-shadow: 0 0 0 3px #b8eec7, 0 10px 24px rgba(0,0,0,.12) !important;
+  animation: cardPulse 1.2s ease-out 1;
+}
+@keyframes cardPulse {
+  0% { box-shadow: 0 0 0 0 rgba(31,142,59,.35); }
+  100% { box-shadow: 0 0 0 3px rgba(31,142,59,0); }
+}
+/* ===== Search suggestions (works inside .products-search) ===== */
+.products-search { position: relative; }
+
+.search-suggest {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px);
+  z-index: 9999; background: #fff; border: 1px solid #e5e9ee;
+  border-radius: 12px; box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  overflow: hidden; display: none;
+}
+.search-suggest.show { display: block; }
+
+.search-suggest-group { padding: 6px 0; }
+.search-suggest-header {
+  font-size: .75rem; font-weight: 800; opacity: .65; padding: 6px 12px;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.search-suggest-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 12px;
+  cursor:pointer;
+  border-top:1px solid #f2f4f7;
+}
+.search-suggest-item:hover,
+.search-suggest-item.active{ background:#f5fbf7; }
+
+.search-suggest-item:hover, .search-suggest-item.active { background: #f5fbf7; }
+
+.suggest-thumb { width: 44px; height: 44px; border-radius: 8px; object-fit: contain;
+  background:#f6f7f8; border:1px solid #edf0f3; }
+.suggest-title { font-weight: 700; line-height: 1.2; }
+.suggest-meta  { font-size: .82rem; color: #567; }
+.suggest-code  { font: 600 .82rem ui-monospace, Menlo, Consolas, monospace; color: #1f8e3b; }
+
+/* Pulse highlight kapag nag-scroll tayo sa card */
+.card-pulse { box-shadow: 0 0 0 3px #b8eec7, 0 10px 24px rgba(0,0,0,.12)!important; animation: cardPulse 1.2s ease-out 1; }
+@keyframes cardPulse { 0%{box-shadow:0 0 0 0 rgba(31,142,59,.35)} 100%{box-shadow:0 0 0 3px rgba(31,142,59,0)} }
+/* ====== Search Suggestions Styling ====== */
+.search-suggest-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  border-top: 1px solid #f2f4f7;
+}
+
+.search-suggest-item > div:first-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.suggest-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #222;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggest-meta {
+  font-size: 0.8rem;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggest-code {
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: #1b5e20;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #e8f5e9;
+  white-space: nowrap;
+}
+/* Let suggestion text wrap to full names */
+.search-suggest-item { align-items: flex-start; } /* rows can grow vertically */
+.search-suggest-item > div:first-child {
+  overflow: visible;      /* remove clipping */
+}
+.suggest-title,
+.suggest-meta {
+  white-space: normal;    /* allow wrapping */
+  overflow: visible;
+  text-overflow: unset;
+  line-height: 1.2;
+}

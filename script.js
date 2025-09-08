@@ -1149,4 +1149,146 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
+/* ===== Search Suggestions for .products-search .search-input (multi-instance) ===== */
+document.addEventListener('DOMContentLoaded', () => {
+  // Build one shared index of all product cards on the page
+  function buildProductIndex() {
+    const cards = document.querySelectorAll('.product-card, [data-product-card]');
+    const list = [];
+    cards.forEach(card => {
+      const name = card.querySelector('.product-name, [data-product-name]')?.textContent.trim() || '';
+      const code = card.querySelector('.product-code, [data-product-code]')?.textContent.trim() || '';
+      const std  = card.querySelector('.product-standard, [data-product-standard]')?.textContent.replace(/^Standard:\s*/i,'').trim() || '';
+      const desc = card.querySelector('.product-description, [data-product-desc]')?.textContent.trim() || '';
+      const img  = card.querySelector('img')?.getAttribute('src') || '';
+      if (name || code) list.push({ name, code, standard: std, description: desc, image: img, card });
+    });
+    return list;
+  }
+  let index = buildProductIndex();
 
+  // Init each search bar on the page
+  document.querySelectorAll('.products-search .search-input').forEach(initSearchBox);
+
+  // Rebuild index when everything is loaded (images, etc.)
+  window.addEventListener('load', () => { index = buildProductIndex(); });
+
+  function initSearchBox(input) {
+    const wrap = input.closest('.products-search');
+    if (!wrap) return;
+
+    // Create dropdown
+    const dd = document.createElement('div');
+    dd.className = 'search-suggest';
+    wrap.appendChild(dd);
+
+    let active = -1;
+    let results = [];
+
+    const escapeHtml = (s) => String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    const escapeReg  = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const highlight  = (text, q) => {
+      if (!text) return '';
+      try {
+        const re = new RegExp(`(${escapeReg(q)})`, 'ig');
+        return escapeHtml(text).replace(re, '<mark>$1</mark>');
+      } catch { return escapeHtml(text); }
+    };
+
+    function scoreAndFilter(list, q) {
+      if (!q) return list.slice(0, 8);
+      const Q = q.toLowerCase();
+      const r = [];
+      for (const item of list) {
+        const name = item.name.toLowerCase();
+        const code = item.code.toLowerCase();
+        const std  = (item.standard || '').toLowerCase();
+        let score = Infinity;
+        if (code.includes(Q)) score = Math.min(score, code.indexOf(Q));
+        if (name.includes(Q)) score = Math.min(score, name.indexOf(Q));
+        if (std.includes(Q))  score = Math.min(score, std.indexOf(Q));
+        if (score !== Infinity) r.push({ ...item, _score: score });
+      }
+      return r.sort((a,b) => a._score - b._score || (a.code > b.code ? 1 : -1)).slice(0, 8);
+    }
+
+    function render(q) {
+      results = scoreAndFilter(index, q);
+      if (!results.length) { dd.classList.remove('show'); dd.innerHTML = ''; return; }
+      dd.innerHTML = results.map((r, i) => `
+        <div class="search-suggest-item" data-i="${i}">
+          <img class="search-suggest-thumb" src="${escapeHtml(r.image || '')}" alt="">
+          <div>
+            <div class="search-suggest-title">${highlight(r.name || '', q)}</div>
+            <div class="search-suggest-meta">${highlight(r.standard || '', q)}</div>
+          </div>
+          <div class="search-suggest-code">${highlight(r.code || '', q)}</div>
+        </div>
+      `).join('');
+      dd.classList.add('show');
+    }
+
+    // show on focus (top items), filter on input
+    const DEBOUNCE = 120;
+    let t;
+    input.addEventListener('focus', () => { active = -1; render((input.value || '').trim().toLowerCase()); });
+    input.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => {
+      active = -1; render((input.value || '').trim().toLowerCase());
+    }, DEBOUNCE); });
+
+    // click suggestion
+    dd.addEventListener('click', (e) => {
+      const item = e.target.closest('.search-suggest-item');
+      if (!item) return;
+      selectResult(results[Number(item.dataset.i)]);
+    });
+
+    // keyboard: arrows, enter, esc
+    input.addEventListener('keydown', (e) => {
+      if (!dd.classList.contains('show')) return;
+      const items = Array.from(dd.querySelectorAll('.search-suggest-item'));
+      if (!items.length) return;
+
+      if (e.key === 'ArrowDown') { e.preventDefault(); active = (active + 1) % items.length; updateActive(items); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); active = (active - 1 + items.length) % items.length; updateActive(items); }
+      else if (e.key === 'Enter') { e.preventDefault(); selectResult(active >= 0 ? results[active] : results[0]); }
+      else if (e.key === 'Escape') { dd.classList.remove('show'); }
+    });
+
+    // click outside to close
+    document.addEventListener('click', (e) => {
+      if (!dd.contains(e.target) && e.target !== input) dd.classList.remove('show');
+    });
+
+    function updateActive(items) {
+      items.forEach(el => el.classList.remove('active'));
+      if (active >= 0) items[active].classList.add('active');
+    }
+
+    function selectResult(item) {
+      if (!item) return;
+      dd.classList.remove('show');
+
+      // Try to open modal if available
+      try {
+        if (typeof openProductModal === 'function') {
+          openProductModal({
+            code: item.code,
+            name: item.name,
+            standard: item.standard,
+            description: item.description,
+            image: item.image
+          });
+          return;
+        }
+      } catch(e) {}
+
+      // Fallback: scroll to card + pulse
+      if (item.card?.scrollIntoView) {
+        item.card.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        item.card.classList.add('card-pulse');
+        setTimeout(() => item.card.classList.remove('card-pulse'), 1200);
+      }
+    }
+  }
+});
