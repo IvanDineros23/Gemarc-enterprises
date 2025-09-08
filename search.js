@@ -277,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
 .search-suggest-group{padding:6px 0}
 .search-suggest-header{font-size:.75rem;font-weight:800;opacity:.65;padding:6px 12px;text-transform:uppercase;letter-spacing:.04em}
 .search-suggest-item{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;padding:10px 12px;cursor:pointer;border-top:1px solid #f2f4f7}
-.search-suggest-item:hover,.search-suggest-item.active{background:#f5fbf7}
+.search-suggest-item:hover,..search-suggest-item.active{background:#f5fbf7}
 .suggest-thumb{width:44px;height:44px;border-radius:8px;object-fit:contain;background:#f6f7f8;border:1px solid #edf0f3}
 .suggest-title{font-weight:700;line-height:1.2}
 .suggest-meta{font-size:.82rem;color:#567}

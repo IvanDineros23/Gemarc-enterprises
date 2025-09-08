@@ -904,7 +904,7 @@ function openProductModal(productData) {
     // Update email button subject
     const emailBtn = document.getElementById('modalEmailBtn');
     if (emailBtn && productData.code) {
-        emailBtn.href = `mailto:info@gemarcenterprises.com?subject=Inquiry about Product Code: ${productData.code}`;
+        emailBtn.href = `mailto:info@gemarcph.com?subject=Inquiry about Product Code: ${productData.code}`;
     }
     
     // Update specifications
