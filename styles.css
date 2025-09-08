@@ -2875,11 +2875,14 @@ body {
 }
 
 /* Bottom Section */
+/* overrides */
 .bottom-section {
-    padding: 60px 0;
-    background: white;
-    border-top: 1px solid #eee;
+  background: transparent;
+  border-top: none;
+  padding-top: 0;
+  padding-bottom: 0;
 }
+
 
 .bottom-content {
     display: grid;
@@ -9631,4 +9634,12 @@ html, body {
     grid-template-columns: 1fr !important;
     gap: 16px;
   }
+}
+/* ---- AOS fallback for CTA ---- */
+.contact-cta-section[data-aos] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  position: relative;
+  z-index: 2; /* just in case may element na nag-o-overlap */
 }
