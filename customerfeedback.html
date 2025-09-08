@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Feedback & Partners - Gemarc Enterprises Incorporated</title>
+  <link rel="icon" type="image/png" href="images/gemarclogo.png">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html" class="logo-link">
+          <img src="images/gemarclogo.png" alt="Gemarc Enterprises" class="logo-img">
+        </a>
+      </div>
+      <nav class="nav">
+        <!-- Desktop -->
+        <ul class="nav-list desktop-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle"><i class="fas fa-newspaper"></i> News <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="news.html">News</a></li>
+              <li><a href="blogs.html">Blogs</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle"><i class="fas fa-industry"></i> Products <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="aggregates.html">Aggregates</a></li>
+              <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+              <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+              <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+              <li><a href="drilling-machine.html">Drilling Machine</a></li>
+              <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+              <li><a href="soil.html">Soil Testing</a></li>
+              <li><a href="steel.html">Steel Testing</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle"><i class="fas fa-wrench"></i> Services <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="calibration.html">Calibration Services</a></li>
+              <li><a href="services.html">Repair Services</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle"><i class="fas fa-users"></i> About <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="about.html">Company</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            <li><a href="customerfeedback.html">Customer Feedback</a></li>
+</ul>
+          </li>
+        </ul>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenu">
+          <button class="mobile-menu-close" id="closeMenu">&times;</button>
+          <ul class="mobile-menu-list">
+            <li>
+              <button class="mobile-menu-main">News</button>
+              <ul class="mobile-menu-sub">
+                <li><a href="news.html">News</a></li>
+                <li><a href="blogs.html">Blogs</a></li>
+              </ul>
+            </li>
+            <li>
+              <button class="mobile-menu-main">Products</button>
+              <ul class="mobile-menu-sub">
+                <li><a href="aggregates.html">Aggregates</a></li>
+                <li><a href="asphalt-bitumen.html">Asphalt & Bitumen</a></li>
+                <li><a href="cement-mortar.html">Cement & Mortar</a></li>
+                <li><a href="concrete-mortar.html">Concrete & Mortar</a></li>
+                <li><a href="drilling-machine.html">Drilling Machine</a></li>
+                <li><a href="industrial-equipment.html">Industrial Equipment</a></li>
+                <li><a href="soil.html">Soil Testing</a></li>
+                <li><a href="steel.html">Steel Testing</a></li>
+              </ul>
+            </li>
+            <li>
+              <button class="mobile-menu-main">Services</button>
+              <ul class="mobile-menu-sub">
+                <li><a href="calibration.html">Calibration Services</a></li>
+                <li><a href="services.html">Repair Services</a></li>
+              </ul>
+            </li>
+            <li>
+              <button class="mobile-menu-main">About</button>
+              <ul class="mobile-menu-sub">
+                <li><a href="about.html">Company</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              <li><a href="customerfeedback.html">Customer Feedback</a></li>
+</ul>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="nav-actions">
+          <a href="contact.html" class="action-btn quote-btn">
+            <i class="fas fa-calculator"></i> Get Quote
+          </a>
+          <a href="tel:+639090879416" class="action-btn call-btn">
+            <i class="fas fa-phone"></i> Call Now
+          </a>
+        </div>
+
+        <div class="hamburger" onclick="toggleMobileMenu()">
+          <span></span><span></span><span></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero about-hero">
+    <div class="hero-content">
+      <h1>Customer Feedback & Partners</h1>
+      <p>Real stories, trusted partners, and proof of performance</p>
+    </div>
+  </section>
+
+  <!-- Page Content -->
+  <section class="page-content">
+    <div class="container">
+
+      <!-- Search Bar -->
+      <div class="products-search">
+        <input type="search" placeholder="Search products, services..." class="search-input" autocomplete="off">
+        <button class="search-btn" type="button"><i class="fas fa-search"></i></button>
+      </div>
+
+      <!-- Trust Metrics -->
+      <div class="stats-grid" >
+        <div class="stat-card">
+          <h2>200+</h2><p>Active Clients</p>
+        </div>
+        <div class="stat-card">
+          <h2>1,000+</h2><p>Projects Delivered</p>
+        </div>
+        <div class="stat-card">
+          <h2>30+ Years</h2><p>Industry Experience</p>
+        </div>
+        <div class="stat-card">
+          <h2>98%</h2><p>Client Satisfaction</p>
+        </div>
+      </div>
+
+      <!-- Testimonials -->
+      <section class="testimonials-section">
+        <div class="section-header">
+          <h2>What Our Customers Say</h2>
+          <p>Selected feedback from engineering firms, contractors, and laboratories</p>
+        </div>
+
+        <div class="testimonials-grid" >
+          <article class="testimonial-card">
+            <div class="testimonial-header">
+              <img src="images/avatars/avatar1.png" alt="Client 1" class="avatar">
+              <div>
+                <h4>Engr. Maria Santos</h4>
+                <span>QA/QC Head, PrimeBuild Corp.</span>
+              </div>
+            </div>
+            <p class="testimonial-quote">“Responsive service at mabilis ang delivery ng calibrated equipment. Nakaabot kami sa project milestones nang walang downtime.”</p>
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-header">
+              <img src="images/avatars/avatar2.png" alt="Client 2" class="avatar">
+              <div>
+                <h4>Ar. Kevin Dela Cruz</h4>
+                <span>Project Manager, MetroInfra</span>
+              </div>
+            </div>
+            <p class="testimonial-quote">“From procurement to after-sales, professional at maayos kausap ang Gemarc. Reliable yung test results — pasado sa audit.”</p>
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+            </div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-header">
+              <img src="images/avatars/avatar3.png" alt="Client 3" class="avatar">
+              <div>
+                <h4>Engr. Liza Ramos</h4>
+                <span>Laboratory Supervisor, GeoTest Labs</span>
+              </div>
+            </div>
+            <p class="testimonial-quote">“Complete lineup ng material testing equipment at mabilis ang support. Highly recommended for labs and contractors.”</p>
+            <div class="rating">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Case Studies -->
+      <section class="case-studies">
+        <div class="section-header">
+          <h2>Success Stories</h2>
+          <p>Highlights from recent deployments and service engagements</p>
+        </div>
+
+        <div class="products-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <img src="images/case-studies/bridge-load-test.jpg" alt="Bridge Load Test">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Bridge Load Testing for Provincial Highway</h3>
+              <p class="product-description">Delivered calibrated compression machines and on-site support. Resulted in faster certification and earlier project turnover.</p>
+              <a href="news.html" class="expand-btn"><i class="fas fa-book-open"></i> Read Story</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img src="images/case-studies/soil-lab.jpg" alt="Soil Mechanics Lab">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Soil Mechanics Lab Upgrade</h3>
+              <p class="product-description">Complete triaxial system installation with training. Improved test throughput by 35% with zero non-conformities.</p>
+              <a href="news.html" class="expand-btn"><i class="fas fa-book-open"></i> Read Story</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img src="images/case-studies/asphalt-plant.jpg" alt="Asphalt QC">
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">Asphalt Plant QC Enhancement</h3>
+              <p class="product-description">Supplied Marshall tester and centrifuge extractor with periodic calibration plan for continuous compliance.</p>
+              <a href="news.html" class="expand-btn"><i class="fas fa-book-open"></i> Read Story</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Partners Carousel -->
+      <section class="partners-section">
+        <div class="section-header">
+          <h2>Our Trusted Partners & Clients</h2>
+          <p>Some of the organizations we’ve supported</p>
+        </div>
+        <div class="carousel-wrapper">
+          <button class="carousel-btn prev" onclick="moveCarousel(-1)"><i class="fas fa-chevron-left"></i></button>
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="partnersTrack">
+              <div class="partner-item"><img src="images/clients/client1.png" alt="Client 1"></div>
+              <div class="partner-item"><img src="images/clients/client2.png" alt="Client 2"></div>
+              <div class="partner-item"><img src="images/clients/client3.png" alt="Client 3"></div>
+              <div class="partner-item"><img src="images/clients/client4.png" alt="Client 4"></div>
+              <div class="partner-item"><img src="images/clients/client5.png" alt="Client 5"></div>
+              <div class="partner-item"><img src="images/clients/client6.png" alt="Client 6"></div>
+              <div class="partner-item"><img src="images/clients/client7.png" alt="Client 7"></div>
+              <div class="partner-item"><img src="images/clients/client8.png" alt="Client 8"></div>
+            </div>
+          </div>
+          <button class="carousel-btn next" onclick="moveCarousel(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-section" >
+        <h2>Want to share your experience with Gemarc?</h2>
+        <p>We’d love to hear from you. Send us your feedback or request a case study.</p>
+        <div >
+          <a class="highlights-btn primary" href="contact.html">Send Feedback</a>
+          <a class="highlights-btn secondary" href="news.html">See More Stories</a>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- Footer scripts -->
+  <script src="script.js" defer></script>
+  <script src="search.js" defer></script>
+</body>
+</html>
