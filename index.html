@@ -16,7 +16,7 @@
         <div class="container">
             <div class="logo">
                 <a href="index.html" class="logo-link">
-                    <img src="images/gemarclogo.png" alt="Gemarc Enterprises" class="logo-img">
+                    <img src="images\gemarclogo.png" alt="Gemarc Enterprises" class="logo-img">
                 </a>
             </div>
             <nav class="nav">
@@ -643,5 +643,17 @@
     <!-- AOS Animation Library -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>AOS.init({ once: true });</script>
+
+<!-- News Modal -->
+<div id="newsModal" class="news-modal">
+  <div class="news-modal-content">
+    <span class="news-modal-close" onclick="closeNewsModal()">&times;</span>
+    <img id="newsModalImage" src="" alt="News Image">
+    <h2 id="newsModalTitle"></h2>
+    <p id="newsModalDesc"></p>
+    <a href="news.html" class="news-modal-btn">Read Full Article</a>
+  </div>
+</div>
+
 </body>
 </html>

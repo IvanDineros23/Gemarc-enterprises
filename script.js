@@ -904,7 +904,7 @@ function openProductModal(productData) {
     // Update email button subject
     const emailBtn = document.getElementById('modalEmailBtn');
     if (emailBtn && productData.code) {
-        emailBtn.href = `mailto:info@gemarcph.com?subject=Inquiry about Product Code: ${productData.code}`;
+        emailBtn.href = `mailto:info@gemarcenterprises.com?subject=Inquiry about Product Code: ${productData.code}`;
     }
     
     // Update specifications
@@ -1292,3 +1292,75 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+
+// ===================================================================
+// NEWS CARDS MODAL POPUP (works even if the card is inside <a>)
+// ===================================================================
+(function initNewsCardsModal(){
+  function ensureModal() {
+    var modal = document.getElementById('newsModal');
+    if (modal) return;
+    // create minimal modal if missing
+    var div = document.createElement('div');
+    div.innerHTML = '\
+<div id="newsModal" class="news-modal" style="display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;">\
+  <div class="news-modal-content" style="background:#fff;padding:25px;max-width:700px;width:90%;border-radius:12px;text-align:center;position:relative;">\
+    <span class="news-modal-close" style="position:absolute;top:15px;right:20px;font-size:2rem;cursor:pointer;color:#333">&times;</span>\
+    <img id="newsModalImage" src="" alt="News Image" style="max-width:100%;border-radius:8px;margin-bottom:20px">\
+    <h2 id="newsModalTitle"></h2>\
+    <p id="newsModalDesc"></p>\
+    <a href="news.html" class="news-modal-btn" style="display:inline-block;margin-top:15px;background:#2e7d32;color:#fff;padding:12px 20px;border-radius:6px;text-decoration:none;font-weight:600">Read Full Article</a>\
+  </div>\
+</div>';
+    document.body.appendChild(div.firstChild);
+  }
+
+  function openNewsModalFromCard(card){
+    ensureModal();
+    var modal = document.getElementById('newsModal');
+    var imgEl = document.getElementById('newsModalImage');
+    var titleEl = document.getElementById('newsModalTitle');
+    var descEl = document.getElementById('newsModalDesc');
+    // read preferred data-* attributes, else fallback to DOM
+    var img = card.dataset.image || (card.querySelector('img') && card.querySelector('img').getAttribute('src')) || '';
+    var title = card.dataset.title || (card.querySelector('h3, h2') && card.querySelector('h3, h2').textContent.trim()) || '';
+    var desc = card.dataset.description || (card.querySelector('p') && card.querySelector('p').textContent.trim()) || '';
+    if (imgEl) imgEl.src = img;
+    if (titleEl) titleEl.textContent = title;
+    if (descEl) descEl.textContent = desc;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(){
+    var modal = document.getElementById('newsModal');
+    if (!modal) return;
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', function(e){
+    // Close when clicking close icon or backdrop
+    if (e.target.classList && (e.target.classList.contains('news-modal') || e.target.classList.contains('news-modal-close'))) {
+      closeModal();
+      return;
+    }
+  });
+
+  // Capture-phase listener to intercept <a> inside cards (prevents navigation)
+  document.addEventListener('click', function(e){
+    var card = e.target.closest && e.target.closest('.news-card, .article-card, .blog-card');
+    if (!card) return;
+    // stop link navigation inside the card
+    var link = e.target.closest('a');
+    if (link) e.preventDefault();
+    e.stopPropagation();
+    openNewsModalFromCard(card);
+  }, true);
+
+  // ESC to close
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeModal();
+  });
+})();
