@@ -9816,3 +9816,70 @@ html, body {
 .carousel-btn.prev{ left:-12px; } 
 .carousel-btn.next{ right:-12px; }
 .carousel-btn:hover{ background:#d1ead4; }
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.testimonials-section .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.testimonial-header img.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.testimonial-header h4 {
+    font-size: 1.2rem;
+    color: #333;
+}
+.cta-section {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.cta-buttons {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center; /* center horizontally */
+  gap: 16px;               /* space between buttons kung madami */
+  flex-wrap: wrap;         /* para responsive sa small screen */
+}
