@@ -9883,3 +9883,31 @@ html, body {
   gap: 16px;               /* space between buttons kung madami */
   flex-wrap: wrap;         /* para responsive sa small screen */
 }
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: rgba(46, 125, 50, 0.9); /* darker green para kita */
+  color: #fff; /* white arrow icon */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 5;
+}
+
+.carousel-btn:hover {
+  background: #2e7d32; /* solid green on hover */
+  transform: translateY(-50%) scale(1.05);
+}
+
+.carousel-btn i {
+  font-size: 20px;
+  pointer-events: none; /* para click-through */
+}
