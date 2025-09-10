@@ -221,29 +221,88 @@ function showBlogSlideshowImage(container, idx, animate) {
         img.classList.add('slide-left');
     }
 }
-
-function startBlogSlideshow(container) {
-    const images = JSON.parse(container.getAttribute('data-images'));
-    let idx = 0;
-    container.setAttribute('data-idx', idx);
-    showBlogSlideshowImage(container, idx, false);
-    updateSlideshowDots(container, idx, images.length);
-    if (images.length < 2) return; // No animation for single image
-    const delay = parseInt(container.getAttribute('data-delay') || '0', 10);
-    setTimeout(() => {
-        setInterval(() => {
-            idx = parseInt(container.getAttribute('data-idx') || '0', 10);
-            idx = (idx + 1) % images.length;
-            showBlogSlideshowImage(container, idx, true);
-        }, 3000);
-    }, delay);
+// ---- Utilities ----
+function parseSlideshowImages(container) {
+  const raw = container.getAttribute('data-images') || '[]';
+  try {
+    // normalize backslashes to forward slashes before parsing
+    const fixed = raw.replace(/\\/g, '/');
+    const arr = JSON.parse(fixed);
+    return Array.isArray(arr) ? arr.filter(Boolean) : [];
+  } catch (e) {
+    console.warn('[slideshow] Bad data-images JSON:', raw, e);
+    return [];
+  }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.slideshow-container').forEach(container => {
-        startBlogSlideshow(container);
-    });
+function buildDots(dotsEl, n) {
+  if (!dotsEl) return [];
+  dotsEl.innerHTML = '';
+  const dots = [];
+  for (let i = 0; i < n; i++) {
+    const d = document.createElement('span');
+    d.className = 'slideshow-dot' + (i === 0 ? ' active' : '');
+    dotsEl.appendChild(d);
+    dots.push(d);
+  }
+  return dots;
+}
+
+// ---- Safer image switcher ----
+function showBlogSlideshowImage(state, idx) {
+  const { images, imgEl, dots } = state;
+  if (!imgEl || !images || images.length === 0) return;   // nothing to do
+  const i = ((idx % images.length) + images.length) % images.length; // safe modulo
+  state.index = i;
+
+  // swap image
+  imgEl.src = images[i];
+
+  // update dots
+  if (dots && dots.length) {
+    dots.forEach((d, k) => d.classList.toggle('active', k === i));
+  }
+}
+
+// ---- Start slideshow on a container ----
+function startBlogSlideshow(container) {
+  const imgEl  = container.querySelector('.slideshow-img');
+  const dotsEl = container.querySelector('.slideshow-dots');
+  const images = parseSlideshowImages(container);
+  const delay  = parseInt(container.getAttribute('data-delay'), 10) || 2200;
+
+  // If required nodes or images are missing, skip quietly
+  if (!imgEl || images.length === 0) {
+    container.classList.add('slideshow-disabled');
+    return;
+  }
+
+  const dots = buildDots(dotsEl, images.length);
+  const state = { images, imgEl, dots, index: 0 };
+
+  // initial frame
+  showBlogSlideshowImage(state, 0);
+
+  // cycle
+  let timer = setInterval(() => {
+    showBlogSlideshowImage(state, state.index + 1);
+  }, delay);
+
+  // optional: pause on hover
+  container.addEventListener('mouseenter', () => clearInterval(timer));
+  container.addEventListener('mouseleave', () => {
+    clearInterval(timer);
+    timer = setInterval(() => {
+      showBlogSlideshowImage(state, state.index + 1);
+    }, delay);
+  });
+}
+
+// ---- Auto-init for all slideshows on the page ----
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.slideshow-container').forEach(startBlogSlideshow);
 });
+
 // ===================================================================
 let currentCarouselIndex = 0;
 
