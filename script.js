@@ -1364,3 +1364,32 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Escape') closeModal();
   });
 })();
+// Calibration gallery toggle (for the consolidated showcase)
+function toggleCalibGallery(headerEl) {
+  const chev = headerEl.querySelector('.chev i');
+  const panel = document.getElementById('calibGallery');
+  if (!panel) return;
+  panel.classList.toggle('collapsed');
+  // rotate chevron
+  if (panel.classList.contains('collapsed')) {
+    chev.classList.remove('fa-chevron-up');
+    chev.classList.add('fa-chevron-down');
+  } else {
+    chev.classList.remove('fa-chevron-down');
+    chev.classList.add('fa-chevron-up');
+  }
+}
+// Services gallery toggle (Demos & Trainings)
+function toggleSvcGallery(headerEl){
+  const chev = headerEl.querySelector('.chev i');
+  const panel = document.getElementById('svcGallery');
+  if(!panel) return;
+  panel.classList.toggle('collapsed');
+  if(panel.classList.contains('collapsed')){
+    chev.classList.remove('fa-chevron-up');
+    chev.classList.add('fa-chevron-down');
+  }else{
+    chev.classList.remove('fa-chevron-down');
+    chev.classList.add('fa-chevron-up');
+  }
+}
