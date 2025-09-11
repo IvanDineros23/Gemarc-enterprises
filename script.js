@@ -1503,3 +1503,33 @@ function toggleSvcGallery(headerEl){
     });
   });
 })();
+function doPost(e) {
+  var p = e.parameter || {};
+  var token = p['g-recaptcha-response'];  // galing sa form
+
+  // Verify with Google reCAPTCHA
+  var url = "https://www.google.com/recaptcha/api/siteverify";
+  var response = UrlFetchApp.fetch(url, {
+    method: "post",
+    payload: {
+      secret: RECAPTCHA_SECRET,
+      response: token
+    }
+  });
+  var result = JSON.parse(response.getContentText());
+
+  if (!result.success) {
+    // ❌ Hindi pumasa sa captcha
+    return ContentService.createTextOutput(
+      JSON.stringify({ status: "captcha_failed" })
+    ).setMimeType(ContentService.MimeType.JSON);
+  }
+
+  // ✅ Kung pumasa, saka lang i-log sa sheet
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.appendRow([new Date(), p.fullname, p.email, p.phone, p.message]);
+
+  return ContentService.createTextOutput(
+    JSON.stringify({ status: "ok" })
+  ).setMimeType(ContentService.MimeType.JSON);
+}
