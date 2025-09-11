@@ -192,35 +192,22 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===================================================================
 // GENERAL CAROUSEL FUNCTIONS (for news/testimonials)
 
-// BLOG POST SLIDESHOW FOR MULTIPLE IMAGES
+// ---- Safer image switcher ----
+function showBlogSlideshowImageSafe(state, idx) {
+  const { images, imgEl, dots } = state;
+  if (!imgEl || !images || images.length === 0) return;
+  const i = ((idx % images.length) + images.length) % images.length;
+  state.index = i;
 
-// Auto-sliding blog slideshow with left-slide animation
-function updateSlideshowDots(container, activeIdx, total) {
-    const dotsContainer = container.querySelector('.slideshow-dots');
-    if (!dotsContainer) return;
-    dotsContainer.innerHTML = '';
-    for (let i = 0; i < total; i++) {
-        const dot = document.createElement('span');
-        dot.className = 'slideshow-dot' + (i === activeIdx ? ' active' : '');
-        dot.onclick = () => {
-            showBlogSlideshowImage(container, i, true);
-        };
-        dotsContainer.appendChild(dot);
-    }
+  // swap image
+  imgEl.src = images[i];
+
+  // update dots
+  if (dots && dots.length) {
+    dots.forEach((d, k) => d.classList.toggle('active', k === i));
+  }
 }
 
-function showBlogSlideshowImage(container, idx, animate) {
-    const img = container.querySelector('.slideshow-img');
-    const images = JSON.parse(container.getAttribute('data-images'));
-    img.src = images[idx];
-    container.setAttribute('data-idx', idx);
-    updateSlideshowDots(container, idx, images.length);
-    if (animate) {
-        img.classList.remove('slide-left');
-        void img.offsetWidth; // force reflow
-        img.classList.add('slide-left');
-    }
-}
 // ---- Utilities ----
 function parseSlideshowImages(container) {
   const raw = container.getAttribute('data-images') || '[]';
@@ -1452,3 +1439,67 @@ function toggleSvcGallery(headerEl){
     chev.classList.add('fa-chevron-up');
   }
 }
+/* ================== CONTACT FORM → GOOGLE SHEETS (FormData, no CORS) ================== */
+(function () {
+  // 1) PASTE your Apps Script /exec URL here:
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz_XH-PjhtH70XSActWihepoEZTsGTwhWijqo7k1qh78lNH-GZ-0nswPRYGWm5UCsV8pA/exec';
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contactForm');
+    const statusDiv = document.getElementById('form-status');
+    if (!form) return; // walang form sa page
+
+    // helper to show status
+    function showStatus(msg, type) {
+      if (!statusDiv) return;
+      statusDiv.style.display = 'block';
+      statusDiv.textContent = msg;
+      statusDiv.style.borderRadius = '6px';
+      if (type === 'loading') {
+        statusDiv.style.background = '#fff3cd';
+        statusDiv.style.color = '#856404';
+        statusDiv.style.border = '1px solid #ffeeba';
+      } else if (type === 'success') {
+        statusDiv.style.background = '#d4edda';
+        statusDiv.style.color = '#155724';
+        statusDiv.style.border = '1px solid #c3e6cb';
+      } else {
+        statusDiv.style.background = '#f8d7da';
+        statusDiv.style.color = '#721c24';
+        statusDiv.style.border = '1px solid #f5c6cb';
+      }
+    }
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
+      showStatus('Sending...', 'loading');
+
+      // 2) Send as FormData (walang custom headers → walang preflight/CORS)
+      const fd = new FormData(form);
+
+      try {
+        const res = await fetch(APPS_SCRIPT_URL, { method: 'POST', body: fd, redirect: 'follow' });
+        const text = await res.text(); // Apps Script often returns plain text
+        // accept 'ok' or JSON {status:"ok"}
+        let ok = false;
+        try { ok = JSON.parse(text)?.status === 'ok'; } catch (_) { ok = /\bok\b/i.test(text); }
+
+        if (res.ok && ok) {
+          showStatus('Thank you! Your message has been recorded.', 'success');
+          form.reset();
+        } else {
+          console.warn('Apps Script response:', text);
+          showStatus('There was a problem sending your message. Please try again.', 'error');
+        }
+      } catch (err) {
+        console.error('Contact form error:', err);
+        showStatus('Network error. Please check your connection and try again.', 'error');
+      } finally {
+        if (btn) { btn.disabled = false; btn.style.opacity = ''; }
+      }
+    });
+  });
+})();
