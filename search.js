@@ -7,6 +7,83 @@
 /* -------------------------
    1) Setup core search
    ------------------------- */
+// Product list for search suggestions (code, name, page)
+const allProducts = [
+  // Aggregates
+  { code: "A024N", name: "Ceramic Muffle Furnace", page: "aggregates.html" },
+  { code: "A075N", name: "LOS ANGELES ABRASION MACHINE", page: "aggregates.html" },
+  { code: "A125N", name: "Digital Point Load Tester 56 KN (ROCK STRENGTH INDEX)", page: "aggregates.html" },
+  { code: "NL 1015 X / 011", name: "Sieve Shaker, Triple Motion (From 200 up to 450 mm Dia.)", page: "aggregates.html" },
+  { code: "NL 1003 X", name: "Bulk Density Measure", page: "aggregates.html" },
+  { code: "LDO-060E", name: "Natural Convection Oven", page: "aggregates.html" },
+  { code: "LBD-2045D", name: "Hotplate & Stirrer", page: "aggregates.html" },
+  { code: "LWB-111D", name: "Digital Water Bath", page: "aggregates.html" },
+
+  // Asphalt & Bitumen
+  { code: "B011", name: "Centrifuge Extractor", page: "asphalt-bitumen.html" },
+  { code: "B043 KIT", name: "Digital Marshall Tester 50kN Capacity", page: "asphalt-bitumen.html" },
+  { code: "B055", name: "Ductilometer with Cooling System", page: "asphalt-bitumen.html" },
+  { code: "NL 1012 X / 008", name: "Point Load Tester, Digimatic", page: "asphalt-bitumen.html" },
+  { code: "NL 2001 X / 005", name: "Digital Penetrometer", page: "asphalt-bitumen.html" },
+  { code: "NL 2007 X", name: "Vacuum Pyknometer", page: "asphalt-bitumen.html" },
+
+  // Cement & Mortar
+  { code: "E070", name: "Autoclave", page: "cement-mortar.html" },
+  { code: "E009-KIT", name: "Manual Blaine Air Permeability Apparatus", page: "cement-mortar.html" },
+  { code: "E138", name: "Large Capacity Curing Cabinet", page: "cement-mortar.html" },
+  { code: "NL 3031 X / 006", name: "Mortar Mixer (Automatic)", page: "cement-mortar.html" },
+  { code: "NL 3004 A / 001", name: "Flow Cone Apparatus", page: "cement-mortar.html" },
+  { code: "NL 3012 X / 004", name: "Vicat Apparatus, Manual, ASTM & AASHTO", page: "cement-mortar.html" },
+
+  // Concrete & Mortar
+  { code: "C386M", name: "Digital Concrete Test Hammer with Microprocessor", page: "concrete-mortar.html" },
+  { code: "C093-05", name: "Concrete Pipe Testing Machine", page: "concrete-mortar.html" },
+  { code: "C089-21N", name: "Compression Testing Machine (High end)", page: "concrete-mortar.html" },
+  { code: "NL 4000 X / 016U", name: "Automatic Compression Machine 2000kN Touch Screen", page: "concrete-mortar.html" },
+  { code: "NL 4021 X / 004", name: "Digital Concrete Test Hammer", page: "concrete-mortar.html" },
+  { code: "NL4023X / 002 & 003", name: "Air Entrainment Meter", page: "concrete-mortar.html" },
+  { code: "CAPSTONE S-350", name: "CAPSTONE S-350", page: "concrete-mortar.html" },
+  { code: "CAPSTONE S-560", name: "CAPSTONE S-560", page: "concrete-mortar.html" },
+  { code: "CAPSTONE S-630", name: "CAPSTONE S-630", page: "concrete-mortar.html" },
+  { code: "EHWA-CB-001", name: "Core Bits for Drilling", page: "concrete-mortar.html" },
+  { code: "TBTCTM-2000N", name: "Compression Testing Machine w/ Digital Display", page: "concrete-mortar.html" },
+
+  // Drilling Machine
+  { code: "AK-01", name: "Air operated Drill type", page: "drilling-machine.html" },
+  { code: "D2-K92", name: "Spindle Type", page: "drilling-machine.html" },
+  { code: "DM-03", name: "Drilling Machine", page: "drilling-machine.html" },
+  { code: "TS-IDCB-001", name: "Impregnated Diamond Core Bits", page: "drilling-machine.html" },
+  { code: "TS-DRS-002", name: "Diamond Reaming Shells", page: "drilling-machine.html" },
+  { code: "TS-SSDCB-003", name: "Surface Set Diamond Core Bits", page: "drilling-machine.html" },
+  { code: "TS-IDCS-004", name: "Impregnated Diamond Casing Shoe", page: "drilling-machine.html" },
+  { code: "TS-PDC-005", name: "PDC Bits & Tricone Bits", page: "drilling-machine.html" },
+  { code: "TS-CB-006", name: "Core Barrels", page: "drilling-machine.html" },
+  { code: "TS-DRC-007", name: "Drill Rods & Casing Pipe", page: "drilling-machine.html" },
+
+  // Industrial Equipment
+  { code: "GT-7010-D2ELP", name: "Micro-Computer Tensile Strength Tester", page: "industrial-equipment.html" },
+  { code: "GT-7013-MPA", name: "Digital Type Bursting Strength Tester", page: "industrial-equipment.html" },
+  { code: "GT-7001-DSU", name: "Servo Control Container Compression Tester", page: "industrial-equipment.html" },
+
+  // Soil
+  { code: "S172-01N", name: "Motorized liquid limit device, NF", page: "soil.html" },
+  { code: "S165-02", name: "Semiautomatic cone digital penetrometer", page: "soil.html" },
+  { code: "S276-01M", name: "Auto ShearLab - Direct and Residual Shear Testing Machine", page: "soil.html" },
+  { code: "NL 5002 X / 010", name: "Eco Smartz Advanced CBR Loading Tester 50kN", page: "soil.html" },
+  { code: "NL 5032 X / 001", name: "Electrical Density Gauge (EDG)", page: "soil.html" },
+  { code: "NL 5025 X / SAS", name: "Automatic CBR or MOD Soil Compactor", page: "soil.html" },
+  { code: "PSK-001", name: "Polycarbonate Sieve Kits", page: "soil.html" },
+  { code: "MFS-001", name: "Metric Frame Sieves", page: "soil.html" },
+
+  // Steel
+  { code: "AI-7000-LAU", name: "Servo Control System Universal Testing Machine", page: "steel.html" },
+  { code: "WA-100C/WA-300C/WA-600C/WA-1000C", name: "Universal Testing Machine with PC&Servo Control", page: "steel.html" },
+
+  // Pavetest
+  { code: "B210", name: "Pavement Deflectometer", page: "pavetest.html" },
+  { code: "B220-01-KIT", name: "Servo-pneumatic Dynamic Testing System - DTS-16 Manual", page: "pavetest.html" },
+  { code: "B265", name: "SmartPulse | Electro-Mechanical Dynamic Testing System", page: "pavetest.html" }
+];
 function setupSearch() {
   // A) Main navigation / top-level pages
   const searchMappings = {
