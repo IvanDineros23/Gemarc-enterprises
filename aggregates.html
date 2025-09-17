@@ -224,20 +224,25 @@
                         </div>
                     </div>
                     <div class="products-grid">
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="images/A075N.jpg" alt="A075N Los Angeles Machine" class="product-img">
-                            </div>
-                            <div class="product-info">
-                                <h4 class="product-code">A075N</h4>
-                                <h3 class="product-name">LOS ANGELES ABRASION MACHINE</h3>
-                                <p class="product-standard"><strong>Standard:</strong> ASTM C131, EN 12697-17, EN 12697-43, NF P18-573, AASHTO T96, CNR N. 34</p>
-                                <p class="product-description">Used to determine the resistance of aggregates to abrasion.</p>
-                                <button class="expand-btn" onclick="openA075NModal()">
-                                    <i class="fas fa-eye"></i> View Details
-                                </button>
-                            </div>
-                        </div>
+                       <div class="product-card">
+    <div class="product-image">
+        <img src="images/nl1002x002-01.jpg" alt="NL 1002 X / 002 Aggregate Impact Value Apparatus (AIV)" class="product-img">
+    </div>
+    <div class="product-info">
+        <h4 class="product-code">NL 1002 X / 002</h4>
+        <h3 class="product-name">Aggregate Impact Value Apparatus (AIV)</h3>
+        <p class="product-standard"><strong>Standard:</strong> BS 812, NF P18-574</p>
+        <p class="product-description">
+            Used to determine the aggregate impact value by measuring the resistance of an aggregate to sudden impact or shock loading,
+            which may vary from its resistance to gradually applied compressive loads on construction materials such as crushed stones and gravel.
+            It is determined by subjecting a sample of aggregate to a standard amount of impact, usually in a testing machine,
+            and then measuring the percentage of fines produced.
+        </p>
+        <button class="expand-btn" onclick="openNL1002X002Modal()">
+            <i class="fas fa-eye"></i> View Details
+        </button>
+    </div>
+</div>
                         <div class="product-card">
                             <div class="product-image">
                                 <img src="images/NL-1015-X-011.jpg" alt="NL 1015 X / 011 ECO-SMARTZ Multi Amplitude Triple Motion Sieves Shaker" class="product-img">
@@ -587,6 +592,23 @@
             ]
         });
     }
+
+    function openNL1002X002Modal() {
+    openProductModal({
+        code: 'NL 1002 X / 002',
+        name: 'Aggregate Impact Value Apparatus (AIV)',
+        standard: 'BS 812, NF P18-574',
+        description: 'Used to determine the aggregate impact value by measuring the resistance of an aggregate to sudden impact or shock loading, which may vary from its resistance to gradually applied compressive loads on construction materials such as crushed stones and gravel. It is determined by subjecting a sample of aggregate to a standard amount of impact, usually in a testing machine, and then measuring the percentage of fines produced.',
+        image: 'images/nl1002x002-01.jpg',
+        manufacturer: 'NL Scientific',
+        manufacturerUrl: 'https://nl-test.com/',
+        specs: [
+            {label: 'Dimensions', value: '470 (L) x 330 (W) x 850 (H)'},
+            {label: 'Weight', value: '48 kg'}
+        ]
+    });
+}
+
 
     function openNL1015X011Modal() {
         openProductModal({
