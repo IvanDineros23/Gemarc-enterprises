@@ -700,6 +700,20 @@ body {
     white-space: nowrap;
 }
 
+/* Call Now Button Style */
+.call-btn {
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+    color: white !important;
+    border: none;
+}
+
+.call-btn:hover {
+    background: linear-gradient(135deg, #f57c00, #ef6c00);
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
+}
+
 .action-btn::before {
     content: '';
     position: absolute;
@@ -727,23 +741,22 @@ body {
     box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
 }
 
-.call-btn {
-    background: linear-gradient(135deg, #ff6b35, #ff8f00);
-    color: white;
+.expand-btn {
+    display: inline-block;
+    background: #218838;
+    color: #fff;
     border: none;
-}
-
-.call-btn:hover {
-    background: linear-gradient(135deg, #e65100, #ff6b35);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.3);
-}
-
-/* Dropdown Menu Improvements */
-.dropdown-menu {
-    min-width: 180px;
-    max-height: 400px;
-    overflow-y: auto;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 8px 0 0 0;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    outline: none;
+    text-align: center;
+    text-decoration: none;
 }
 
 /* Enhanced Dropdown Menu Items with Icons */
@@ -784,33 +797,35 @@ body {
 
 /* Responsive Enhancements */
 @media (max-width: 1200px) {
-    .search-input {
-        width: 100px;
-    }
-    
-    .search-input:focus {
-        width: 140px;
-    }
-    
-    .action-btn {
-        padding: 6px 10px;
-        font-size: 11px;
-    }
-}
 
-@media (max-width: 1024px) {
-    .nav-search {
-        display: none;
+    .action-btn {
+        padding: 8px 12px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
     }
-    
-    .nav-actions {
-        display: none;
+
+    /* Call Now Button Style */
+    .call-btn {
+        background: linear-gradient(135deg, #ff9800, #f57c00);
+        color: white;
+        border: none;
     }
-    
-    .nav-list.desktop-nav {
-        display: none;
+
+    .call-btn:hover {
+        background: linear-gradient(135deg, #f57c00, #ef6c00);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 152, 0, 0.3);
     }
-    
     .hamburger {
         display: flex;
     }
