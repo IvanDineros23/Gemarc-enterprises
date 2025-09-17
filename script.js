@@ -557,15 +557,13 @@ document.addEventListener('DOMContentLoaded', function() {
     smoothScrollLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement && targetId !== '#') {
-                e.preventDefault();
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+if (!targetId || targetId === '#') return; // iwas querySelector('#')
+
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+  e.preventDefault();
+  targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
         });
     });
 });
@@ -966,7 +964,21 @@ function openProductModal(productData) {
         `;
         specsGrid.appendChild(specItem);
     });
-    
+    // SET "View PDF Specs" button (inside openProductModal)
+const pdfBtn = document.getElementById('modalSpecLink');
+if (pdfBtn) {
+  if (productData.pdf && productData.pdf.trim()) {
+    // encode para hindi sumablay kapag may spaces/underscores
+    pdfBtn.href = encodeURI(productData.pdf);
+    pdfBtn.style.display = 'inline-flex';
+    pdfBtn.onclick = null; // siguraduhing walang preventDefault
+  } else {
+    pdfBtn.removeAttribute('href');
+    pdfBtn.style.display = 'none';
+    pdfBtn.onclick = (e) => e.preventDefault();
+  }
+}
+
     // Show modal
     modalOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -1328,6 +1340,23 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
       } catch(e) {}
+
+        // Set PDF link if provided
+const pdfBtn = document.getElementById('modalSpecLink');
+if (pdfBtn) {
+  if (product.pdf && product.pdf.trim()) {
+    // Encode spaces para sure na tama kahit may spaces/underscore ang path
+    const encoded = encodeURI(product.pdf);
+    pdfBtn.href = encoded;
+    pdfBtn.style.display = 'inline-flex';
+    pdfBtn.onclick = null; // siguraduhin na walang preventDefault handler
+  } else {
+    // walang pdf => itago para hindi "#"
+    pdfBtn.removeAttribute('href');
+    pdfBtn.style.display = 'none';
+    pdfBtn.onclick = (e) => e.preventDefault();
+  }
+}
 
       // Fallback: scroll to card + pulse
       if (item.card?.scrollIntoView) {

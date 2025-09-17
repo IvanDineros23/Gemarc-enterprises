@@ -512,6 +512,17 @@
                         <i class="fas fa-envelope"></i> Send Inquiry
                     </button>
 
+                      <!-- PDF Specs Button -->
+                        <div class="modal-downloads" style="margin-top:12px;">
+                        <a id="modalSpecLink"
+                            class="modal-contact-btn modal-pdf-btn is-full"
+                            href="#"
+                            target="_blank" rel="noopener">
+                            <i class="fas fa-file-pdf"></i> View PDF Specs
+                        </a>
+                        </div>
+
+
                     <!-- auto-filled panel; leave empty -->
                     <div class="inquiry-email-panel js-inquiry-panel" hidden></div>
                     </div>
@@ -531,6 +542,7 @@
             image: 'images/A024N.jpg',
             manufacturer: 'MATEST',
             manufacturerUrl: 'https://www.matest.com/',
+            pdf: 'downloadable content/A024N.pdf',
             specs: [
                 {label: 'Temperature Range', value: 'Up to 1100°C'},
                 {label: 'Chamber Size', value: '300 x 200 x 100 mm'},
@@ -553,6 +565,7 @@
             image: 'images/A075N.jpg',
             manufacturer: 'MATEST',
             manufacturerUrl: 'https://www.matest.com/',
+            pdf: 'downloadable content/A075N.pdf',
             specs: [
                 {label: 'Cylinder Dimensions', value: '711 mm (ID) x 508 mm (Length)'},
                 {label: 'Rotation Speed', value: '31-33 rpm'},
@@ -577,6 +590,7 @@
             image: 'images/A125N.jpg',
             manufacturer: 'MATEST',
             manufacturerUrl: 'https://www.matest.com/',
+            pdf: 'downloadable content/A125N.pdf',
             specs: [
                 {label: 'Load Cell', value: 'High precision electric'},
                 {label: 'Capacity', value: '56 kN (100 kN mod. A126)'},
@@ -602,6 +616,7 @@
         image: 'images/nl1002x002-01.jpg',
         manufacturer: 'NL Scientific',
         manufacturerUrl: 'https://nl-test.com/',
+        pdf: 'downloadable content/NL 1002 X _ 002.pdf',
         specs: [
             {label: 'Dimensions', value: '470 (L) x 330 (W) x 850 (H)'},
             {label: 'Weight', value: '48 kg'}
@@ -619,6 +634,7 @@
             image: 'images/NL-1015-X-011.jpg',
             manufacturer: 'NL Scientific',
             manufacturerUrl: 'https://nl-test.com/',
+            pdf: 'downloadable content/NL 1015 X _ 011.pdf',
             specs: [
                 {label: 'Model Number', value: 'NL 1015 X / 009A'},
                 {label: 'Accommodates', value: '11 nos 200mm/8" Dia. Full Height Sieves plus lid and receiver, 9 nos 300mm/12" Dia. Full Height Sieves plus lid and receiver, 7 nos. 450mm Dia. Full Height Sieves plus lid and pan'},
@@ -645,6 +661,7 @@
             image: 'images/NL-1003-X.jpg',
             manufacturer: 'NL Scientific',
             manufacturerUrl: 'https://nl-test.com/',
+            pdf: 'downloadable content/NL 1003 X.pdf',
             specs: [
                 {label: 'Construction', value: 'Steel with handles'},
                 {label: 'Application', value: 'Determination of loose bulk density and void of aggregate'},
@@ -669,6 +686,7 @@
             image: 'images/LDO-060E.jpg',
             manufacturer: 'LabTech BioMedic',
             manufacturerUrl: 'https://www.labtech.co.kr/',
+            pdf: 'downloadable content/LDO-060E.pdf',
             specs: [
                 {label: 'Chamber Material', value: 'Stainless steel for excellent corrosion resistance and easy cleaning'},
                 {label: 'Insulation', value: 'Sealing structure with silicone packing for excellent temperature uniformity'},
@@ -694,6 +712,59 @@
             ]
         });
     }
+    function openLBD2045DModal() {
+  openProductModal({
+    code: 'LBD-2045D',
+    name: 'Hotplate & Stirrer',
+    standard: 'High Density Ceramic Coating & Temperature Control',
+    description: 'High density ceramic coated stainless steel top plate for excellent chemical resistance. High class powder coated aluminium casting body for excellent heat and corrosion resistance. A heater that is durable and excellent in heat transfer is equipped.',
+    image: 'images/LBD-2045-D.jpg',
+    manufacturer: 'LabTech BioMedic',
+    manufacturerUrl: 'https://www.labtech.co.kr/',
+
+    // PDF specs (forward slashes para safe):
+    pdf: 'downloadable content\LBD-2045D.pdf',
+    specs: [
+      {label: 'Top Plate', value: 'High density ceramic coated stainless steel for excellent chemical resistance'},
+      {label: 'Body', value: 'High class powder coated aluminium casting body for excellent heat and corrosion resistance'},
+      {label: 'Heater', value: 'Durable heater with excellent heat transfer'},
+      {label: 'Application', value: 'Laboratory heating and stirring applications'},
+      {label: 'Features', value: 'Temperature control and stirring capabilities'}
+    ]
+  });
+}
+
+function openLWB111DModal() {
+  openProductModal({
+    code: 'LWB-111D',
+    name: 'Digital Water Bath',
+    standard: 'Stainless Steel Construction & Auto Tuning',
+    description: 'Durable to use in many fields for general purpose. Seamless stainless-steel bath for excellent corrosion resistance and easy cleaning. Heater cover is provided to protect the heater and sensor from unexpected damage. Temp. auto tuning function available',
+    image: 'images/LWB-111D.jpg',
+    manufacturer: 'LabTech BioMedic',
+    manufacturerUrl: 'https://www.labtech.co.kr/',
+    // PDF specs:
+    pdf: 'downloadable content\LWB-111D.pdf',
+    specs: [
+      {label: 'General Purpose', value: 'Durable to use in many fields for general purpose'},
+      {label: 'Bath Construction', value: 'Seamless stainless steel bath for excellent corrosion resistance and easy cleaning'},
+      {label: 'Design', value: 'Compact design to be able to use in various places'},
+      {label: 'Protection', value: 'Heater cover protects heater and sensor from unexpected damage'},
+      {label: 'Standard Accessory', value: 'Stainless steel flat lid included as standard'},
+      {label: 'Controller', value: 'Digital PID controller provides precise control (LED display)'},
+      {label: 'Auto-Tuning', value: 'Temperature auto-tuning function available'},
+      {label: 'Timer', value: '99 hr. 59 min. / Continuous (with end alarm)'},
+      {label: 'Temperature Alarm', value: 'High/Low temperature alarm'},
+      {label: 'Memory Function', value: 'Settings preserved even after power interruption'},
+      {label: 'Temperature Range', value: 'Ambient + 5°C to 99°C'},
+      {label: 'Material Interior', value: 'Seamless stainless steel (STS304)'},
+      {label: 'Material Exterior', value: 'Powder coated steel'},
+      {label: 'Safety Features', value: 'Over temperature protection, Earth leakage circuit breaker'},
+      {label: 'Electric Supply', value: '110 V 60 Hz or 220 V 50/60 Hz, 1 Phase'},
+      {label: 'Power Consumption (220V)', value: '3 A (LWB-106D), 4 A (LWB-111D), 7 A (LWB-122D)'}
+    ]
+  });
+}
     </script>
     </body>
 </html>
