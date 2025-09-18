@@ -37,18 +37,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Accordion dropdown logic
-    mainButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            // Close other submenus
-            mainButtons.forEach(otherBtn => {
-                if (otherBtn !== btn) {
-                    otherBtn.classList.remove('active');
-                }
-            });
-            // Toggle current submenu
-            btn.classList.toggle('active');
-        });
+    // Accordion dropdown logic (parents only expand/collapse)
+mainButtons.forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Close other submenus
+    mainButtons.forEach(otherBtn => {
+      if (otherBtn !== btn) {
+        otherBtn.classList.remove('active');
+      }
     });
+
+    // Toggle current submenu
+    btn.classList.toggle('active');
+  });
+});
+
+// Submenu links should close the menu on navigation
+document.querySelectorAll('.mobile-menu-sub a').forEach(link => {
+  link.addEventListener('click', () => {
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu) {
+      mobileMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+});
+
 });
 
 // ===================================================================
