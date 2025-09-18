@@ -10077,3 +10077,40 @@ html, body {
 .slideshow-dot.active {
   background-color: #2e7d32; /* brand green */
 }
+
+@media (max-width:1024px){
+  .nav-list.desktop-nav{display:none !important;}
+}
+
+
+/* --- MOBILE: hide desktop actions --- */
+@media (max-width: 1024px){
+  .nav-actions{ display:none !important; }
+}
+
+/* --- MOBILE drawer actions (inside overlay) --- */
+.mobile-actions{
+  margin: 16px 20px 24px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+}
+.mobile-actions .action-btn{
+  justify-content:center;
+  width:100%;
+}
+@media (max-width:600px){
+  .mobile-menu-overlay{
+    padding-bottom: 96px; /* space for actions */
+  }
+  .mobile-actions{
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 16px 20px 20px;
+    box-shadow: 0 -6px 20px rgba(0,0,0,.08);
+    z-index: 10002;
+  }
+}

@@ -6,12 +6,11 @@
 // ===================================================================
 // MOBILE MENU FUNCTIONS
 // ===================================================================
-function toggleMobileMenu() {
-    const navList = document.querySelector('.nav-list');
-    const hamburger = document.querySelector('.hamburger');
-    
-    navList.classList.toggle('mobile-active');
-    hamburger.classList.toggle('active');
+function toggleMobileMenu(){
+  const mobileMenu = document.getElementById("mobileMenu");
+  if(!mobileMenu) return;
+  mobileMenu.classList.add("active");
+  document.body.style.overflow = "hidden";
 }
 
 // Initialize mobile menu when DOM loads
