@@ -257,13 +257,18 @@ document.addEventListener("DOMContentLoaded", () => {
     ${pages.length ? `
       <div class="search-suggest-group" data-group="pages">
         <div class="search-suggest-header">Pages & Categories</div>
-        ${pages.map((p,i)=>`
+        ${pages.map((p,i)=>{
+          // Remove .html for display
+          const cleanTitle = p.key;
+          const cleanMeta = p.href.replace(/\.html$/, "");
+          return `
           <div class="search-suggest-item" data-type="page" data-i="${i}">
             <div>
-              <div class="suggest-title">${mark(p.key, q)}</div>
-              <div class="suggest-meta">${escH(p.href)}</div>
+              <div class="suggest-title">${mark(cleanTitle, q)}</div>
+              <div class="suggest-meta">${escH(cleanMeta)}</div>
             </div>
-          </div>`).join("")}
+          </div>`;
+        }).join("")}
       </div>` : ""}
 
     ${prods.length ? `
@@ -320,7 +325,14 @@ document.addEventListener("DOMContentLoaded", () => {
       dd.classList.remove("show");
       if (type === "page"){
         const row = results.pages[idx]; if(!row) return;
-        window.location.href = row.href;
+        // Remove .html for URL, but keep for local navigation
+        let cleanUrl = row.href.replace(/\.html$/, "");
+        // If running locally (file:// or localhost), still use .html for navigation
+        if (window.location.protocol === "file:" || window.location.hostname === "localhost") {
+          window.location.href = row.href;
+        } else {
+          window.location.href = cleanUrl;
+        }
         return;
       }
       if (type === "prod"){
