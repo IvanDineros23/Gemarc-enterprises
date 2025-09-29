@@ -82,15 +82,22 @@ function showHighlight(index) {
     
     currentHighlightIndex = index;
     
-    // Hide all slides
-    highlightsSlides.forEach(slide => {
-        slide.classList.remove('active');
-    });
-    
-    // Show current slide
-    if (highlightsSlides[index]) {
-        highlightsSlides[index].classList.add('active');
-    }
+  // Hide all slides with transition
+  highlightsSlides.forEach((slide, i) => {
+    slide.style.transition = 'opacity 0.7s, transform 0.7s';
+    slide.style.opacity = '0';
+    slide.style.transform = 'translateX(' + (i < index ? '-40px' : '40px') + ')';
+    slide.classList.remove('active');
+  });
+
+  // Show current slide with fade/slide in
+  if (highlightsSlides[index]) {
+    highlightsSlides[index].classList.add('active');
+    setTimeout(() => {
+      highlightsSlides[index].style.opacity = '1';
+      highlightsSlides[index].style.transform = 'translateX(0)';
+    }, 50);
+  }
     
     // Update navigation dots
     navDots.forEach((dot, i) => {
@@ -110,9 +117,9 @@ function previousHighlight() {
 
 // Auto-play highlights
 function startHighlightAutoPlay() {
-    highlightAutoPlay = setInterval(() => {
-        nextHighlight();
-    }, 5000); // Change every 5 seconds
+  highlightAutoPlay = setInterval(() => {
+    nextHighlight();
+  }, 6500); // Change every 6.5 seconds
 }
 
 function stopHighlightAutoPlay() {
