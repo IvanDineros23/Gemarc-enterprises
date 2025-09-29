@@ -260,12 +260,10 @@ document.addEventListener("DOMContentLoaded", () => {
         ${pages.map((p,i)=>{
           // Remove .html for display
           const cleanTitle = p.key;
-          const cleanMeta = p.href.replace(/\.html$/, "");
           return `
           <div class="search-suggest-item" data-type="page" data-i="${i}">
             <div>
               <div class="suggest-title">${mark(cleanTitle, q)}</div>
-              <div class="suggest-meta">${escH(cleanMeta)}</div>
             </div>
           </div>`;
         }).join("")}
@@ -337,6 +335,20 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (type === "prod"){
         const row = results.prods[idx]; if(!row) return;
+        // Redirect to category page if available
+        const card = row.card;
+        const categoryPage = card?.getAttribute("data-category-page");
+        if (categoryPage) {
+          // Remove .html for live site, keep for localhost/file
+          let cleanUrl = categoryPage.replace(/\.html$/, "");
+          if (window.location.protocol === "file:" || window.location.hostname === "localhost") {
+            window.location.href = categoryPage;
+          } else {
+            window.location.href = cleanUrl;
+          }
+          return;
+        }
+        // Fallback: open modal or scroll to card
         try {
           if (typeof openProductModal === "function"){
             openProductModal({
@@ -346,10 +358,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
           }
         } catch {}
-        if (row.card?.scrollIntoView) {
-          row.card.scrollIntoView({behavior:"smooth", block:"center"});
-          row.card.classList.add("card-pulse");
-          setTimeout(()=>row.card.classList.remove("card-pulse"), 1200);
+        if (card?.scrollIntoView) {
+          card.scrollIntoView({behavior:"smooth", block:"center"});
+          card.classList.add("card-pulse");
+          setTimeout(()=>card.classList.remove("card-pulse"), 1200);
         }
       }
     }

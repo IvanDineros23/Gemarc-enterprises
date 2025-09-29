@@ -7440,6 +7440,8 @@ body {
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     border: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
 }
 
 .blog-post:hover {
@@ -7447,16 +7449,25 @@ body {
     box-shadow: 0 15px 40px rgba(0,0,0,0.15);
 }
 
+
 .blog-image {
-    height: 200px;
+    height: 240px;
+    width: 100%;
     overflow: hidden;
+    background: #f8f8f8;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-top: 0;
 }
 
 .blog-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform 0.3s ease;
+    border-radius: 0;
+    display: block;
 }
 
 .blog-post:hover .blog-image img {
@@ -8736,20 +8747,14 @@ html, body {
 .modal-overlay {
     position: fixed;
     inset: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 9999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    overflow-y: auto;
-    padding: 20px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+    transition: opacity 1.2s;
 }
+/* Removed stray properties and closing brace from previous syntax error. */
 .modal-content {
     pointer-events: auto;
 }

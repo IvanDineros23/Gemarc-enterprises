@@ -245,6 +245,18 @@ function buildDots(dotsEl, n) {
   for (let i = 0; i < n; i++) {
     const d = document.createElement('span');
     d.className = 'slideshow-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('tabindex', '0');
+    d.setAttribute('role', 'button');
+    d.setAttribute('aria-label', `Go to image ${i + 1}`);
+    d.addEventListener('click', function(e) {
+      e.stopPropagation();
+      // Find the slideshow container and state
+      const container = dotsEl.closest('.slideshow-container');
+      if (!container) return;
+      if (container._slideshowState) {
+        showBlogSlideshowImage(container._slideshowState, i);
+      }
+    });
     dotsEl.appendChild(d);
     dots.push(d);
   }
@@ -258,8 +270,22 @@ function showBlogSlideshowImage(state, idx) {
   const i = ((idx % images.length) + images.length) % images.length; // safe modulo
   state.index = i;
 
-  // swap image
-  imgEl.src = images[i];
+  // Only animate if there are multiple images
+  if (images.length > 1) {
+    imgEl.style.transition = 'none';
+    imgEl.style.transform = 'translateX(100%)';
+    setTimeout(() => {
+      imgEl.src = images[i];
+      imgEl.onload = () => {
+        imgEl.style.transition = 'transform 0.7s cubic-bezier(0.4,0,0.2,1)';
+        imgEl.style.transform = 'translateX(0)';
+      };
+    }, 50);
+  } else {
+    imgEl.src = images[i];
+    imgEl.style.transition = '';
+    imgEl.style.transform = '';
+  }
 
   // update dots
   if (dots && dots.length) {
@@ -282,7 +308,7 @@ function startBlogSlideshow(container) {
 
   const dots = buildDots(dotsEl, images.length);
   const state = { images, imgEl, dots, index: 0 };
-
+  container._slideshowState = state;
   // initial frame
   showBlogSlideshowImage(state, 0);
 
@@ -304,6 +330,21 @@ function startBlogSlideshow(container) {
 // ---- Auto-init for all slideshows on the page ----
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.slideshow-container').forEach(startBlogSlideshow);
+  // Ensure green buttons are always clickable for posts with multiple images
+  document.querySelectorAll('.expand-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      // If button has href, open in new tab
+      if (btn.href) {
+        window.open(btn.href, '_blank');
+      } else if (btn.hasAttribute('data-modal')) {
+        // If modal logic, trigger modal
+        const modalId = btn.getAttribute('data-modal');
+        const modal = document.getElementById(modalId);
+        if (modal) modal.classList.add('active');
+      }
+    });
+  });
 });
 
 // ===================================================================
