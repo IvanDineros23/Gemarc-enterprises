@@ -8746,13 +8746,15 @@ html, body {
 
 .modal-overlay {
     position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
     border-radius: 0;
     box-shadow: 0 2px 16px rgba(0,0,0,0.10);
     transition: opacity 1.2s;
+    z-index: 1000;
 }
 /* Removed stray properties and closing brace from previous syntax error. */
 .modal-content {
@@ -8763,6 +8765,11 @@ html, body {
 .modal-overlay.active {
     display: flex;
     opacity: 1;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 80px; /* Space for navbar */
+    background: rgba(0,0,0,0.18);
+    backdrop-filter: blur(8px);
 }
 
 /* Modal Content Container - Smaller and more centered */

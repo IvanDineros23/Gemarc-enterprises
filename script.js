@@ -996,87 +996,83 @@ function toggleEquipment(equipmentId) {
 
 // Open product modal
 function openProductModal(productData) {
-    const modalOverlay = document.getElementById('productModal');
-    if (!modalOverlay) return;
-    
-    // Update modal content
-    document.getElementById('modalProductCode').textContent = productData.code;
-    document.getElementById('modalProductCodeSub').textContent = productData.code;
-    document.getElementById('modalProductName').textContent = productData.name;
-    document.getElementById('modalProductStandard').textContent = productData.standard;
-    document.getElementById('modalProductDescription').textContent = productData.description;
-    document.getElementById('modalProductImage').src = productData.image;
-    document.getElementById('modalProductImage').alt = productData.name;
+  const modalOverlay = document.getElementById('productModal');
+  if (!modalOverlay) return;
+  // Only open modal if triggered by user action (not on page load)
+  if (!productData || typeof productData !== 'object') return;
 
-    
-    // Update email button subject
-    const emailBtn = document.getElementById('modalEmailBtn');
-    if (emailBtn && productData.code) {
-        emailBtn.href = `mailto:info@gemarcenterprises.com?subject=Inquiry about Product Code: ${productData.code}`;
-    }
-    
-    // Update specifications
-    const specsGrid = document.getElementById('modalSpecsGrid');
-    specsGrid.innerHTML = '';
-    
-    productData.specs.forEach(spec => {
-        const specItem = document.createElement('div');
-        specItem.className = 'modal-spec-item';
-        specItem.innerHTML = `
-            <span class="modal-spec-label">${spec.label}:</span>
-            <span class="modal-spec-value">${spec.value}</span>
-        `;
-        specsGrid.appendChild(specItem);
-    });
-    // SET "View PDF Specs" button (inside openProductModal)
-const pdfBtn = document.getElementById('modalSpecLink');
-if (pdfBtn) {
-  if (productData.pdf && productData.pdf.trim()) {
-    // encode para hindi sumablay kapag may spaces/underscores
-    pdfBtn.href = encodeURI(productData.pdf);
-    pdfBtn.style.display = 'inline-flex';
-    pdfBtn.onclick = null; // siguraduhing walang preventDefault
-  } else {
-    pdfBtn.removeAttribute('href');
-    pdfBtn.style.display = 'none';
-    pdfBtn.onclick = (e) => e.preventDefault();
+  // Update modal content
+  document.getElementById('modalProductCode').textContent = productData.code || '';
+  document.getElementById('modalProductCodeSub').textContent = productData.code || '';
+  document.getElementById('modalProductName').textContent = productData.name || '';
+  document.getElementById('modalProductStandard').textContent = productData.standard || '';
+  document.getElementById('modalProductDescription').textContent = productData.description || '';
+  document.getElementById('modalProductImage').src = productData.image || '';
+  document.getElementById('modalProductImage').alt = productData.name || '';
+
+  // Update email button subject
+  const emailBtn = document.getElementById('modalEmailBtn');
+  if (emailBtn && productData.code) {
+    emailBtn.href = `mailto:info@gemarcenterprises.com?subject=Inquiry about Product Code: ${productData.code}`;
   }
-}
 
-    // Show modal
-    modalOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    // Add keyboard event listener for ESC key
-    document.addEventListener('keydown', handleModalKeydown);
-    
-    // Ensure modal is scrolled into view (for small screens)
-    setTimeout(function() {
-        const modalContent = modalOverlay.querySelector('.modal-content');
-        if (modalContent) {
-            modalContent.scrollIntoView({behavior: 'auto', block: 'center'});
-        }
-    }, 50);
+  // Update specifications
+  const specsGrid = document.getElementById('modalSpecsGrid');
+  specsGrid.innerHTML = '';
+  if (Array.isArray(productData.specs)) {
+    productData.specs.forEach(spec => {
+      const specItem = document.createElement('div');
+      specItem.className = 'modal-spec-item';
+      specItem.innerHTML = `
+        <span class="modal-spec-label">${spec.label}:</span>
+        <span class="modal-spec-value">${spec.value}</span>
+      `;
+      specsGrid.appendChild(specItem);
+    });
+  }
+  // SET "View PDF Specs" button (inside openProductModal)
+  const pdfBtn = document.getElementById('modalSpecLink');
+  if (pdfBtn) {
+    if (productData.pdf && productData.pdf.trim()) {
+      pdfBtn.href = encodeURI(productData.pdf);
+      pdfBtn.style.display = 'inline-flex';
+      pdfBtn.onclick = null;
+    } else {
+      pdfBtn.removeAttribute('href');
+      pdfBtn.style.display = 'none';
+      pdfBtn.onclick = (e) => e.preventDefault();
+    }
+  }
+
+  // Show modal only if triggered by user action
+  modalOverlay.style.display = 'flex';
+  modalOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  // Add keyboard event listener for ESC key
+  document.addEventListener('keydown', handleModalKeydown);
+
+  // Ensure modal is scrolled into view (for small screens)
+  setTimeout(function() {
+    const modalContent = modalOverlay.querySelector('.modal-content');
+    if (modalContent) {
+      modalContent.scrollIntoView({behavior: 'auto', block: 'center'});
+    }
+  }, 50);
 }
 
 // Close product modal
 function closeProductModal() {
     const modalOverlay = document.getElementById('productModal');
-    if (modalOverlay) {
-        // Fade out animation
-        modalOverlay.style.opacity = '0';
-        modalOverlay.style.transition = 'opacity 0.25s ease-out';
-        
-        // Remove keyboard event listener
-        document.removeEventListener('keydown', handleModalKeydown);
-        
-        setTimeout(() => {
-            modalOverlay.classList.remove('active');
-            modalOverlay.style.opacity = '';
-            modalOverlay.style.transition = '';
-            document.body.style.overflow = '';
-        }, 250);
-    }
+  if (modalOverlay) {
+    // Remove keyboard event listener
+    document.removeEventListener('keydown', handleModalKeydown);
+    modalOverlay.classList.remove('active');
+    modalOverlay.style.display = 'none';
+    modalOverlay.style.opacity = '';
+    modalOverlay.style.transition = '';
+    document.body.style.overflow = '';
+  }
 }
 
 // Handle keyboard events for modal (only when modal is active)
