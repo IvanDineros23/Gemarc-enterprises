@@ -1,0 +1,110 @@
+{
+  "siteUrl": "https://gemarcph.com",
+  "siteName": "Gemarc Enterprises Inc.",
+  "favicon": "images/gemarclogo.png",
+  "defaultOgImage": "images/og/og-image.jpg",
+  "defaults": {
+    "titleSuffix": " | Gemarc Enterprises Philippines",
+    "description": "Industrial & material testing equipment supplier in the Philippines.",
+    "twitterCard": "summary_large_image",
+    "robots": "index,follow"
+  },
+  "pages": {
+    "index.html": {
+      "title": "Industrial & Material Testing Equipment",
+      "description": "Pavement, aggregates, asphalt, concrete, soil and lab testing solutions in the Philippines.",
+      "ogImage": "images/og/og-image.jpg",
+      "type": "website"
+    },
+    "aggregates.html": {
+      "title": "Aggregates Testing Equipment",
+      "description": "Sieve shakers, abrasion & strength testers — available in the Philippines.",
+      "ogImage": "images/A075N.jpg",
+      "type": "article"
+    },
+    "asphalt-bitumen.html": {
+      "title": "Asphalt & Bitumen Testing Equipment",
+      "description": "Marshall, ductility, centrifuge extractor, vacuum pyknometer and more.",
+      "ogImage": "images/B043-KIT.jpg",
+      "type": "article"
+    },
+    "blogs.html": {
+      "title": "Gemarc Blog & News",
+      "description": "Latest updates, news, and technical articles from Gemarc Enterprises.",
+      "ogImage": "images/og/blogs.jpg",
+      "type": "article"
+    },
+    "calibration.html": {
+      "title": "Calibration Services",
+      "description": "Professional calibration for industrial and laboratory equipment.",
+      "ogImage": "images/og/calibration.jpg",
+      "type": "article"
+    },
+    "cement-mortar.html": {
+      "title": "Cement & Mortar Testing Equipment",
+      "description": "Compression, flexural, and consistency testers for cement and mortar.",
+      "ogImage": "images/og/cement.jpg",
+      "type": "article"
+    },
+    "concrete-mortar.html": {
+      "title": "Concrete & Mortar Testing Equipment",
+      "description": "Slump, cube, and beam testing equipment for concrete and mortar.",
+      "ogImage": "images/og/concrete.jpg",
+      "type": "article"
+    },
+    "contact.html": {
+      "title": "Contact Gemarc Enterprises",
+      "description": "Get in touch for inquiries, quotations, and support.",
+      "ogImage": "images/og/contact.jpg",
+      "type": "website"
+    },
+    "customerfeedback.html": {
+      "title": "Customer Feedback",
+      "description": "Read testimonials and feedback from our valued clients.",
+      "ogImage": "images/og/feedback.jpg",
+      "type": "article"
+    },
+    "drilling-machine.html": {
+      "title": "Drilling Machine Equipment",
+      "description": "Core drilling machines for soil and concrete testing.",
+      "ogImage": "images/og/drilling.jpg",
+      "type": "article"
+    },
+    "industrial-equipment.html": {
+      "title": "Industrial Equipment",
+      "description": "Heavy-duty industrial equipment for material testing.",
+      "ogImage": "images/og/industrial.jpg",
+      "type": "article"
+    },
+    "news.html": {
+      "title": "Gemarc News",
+      "description": "Company news, events, and industry updates.",
+      "ogImage": "images/og/news.jpg",
+      "type": "article"
+    },
+    "pavetest.html": {
+      "title": "Pavetest Equipment",
+      "description": "Advanced pavement testing equipment and solutions.",
+      "ogImage": "images/og/pavetest.jpg",
+      "type": "article"
+    },
+    "services.html": {
+      "title": "Gemarc Services",
+      "description": "Comprehensive services for material testing and calibration.",
+      "ogImage": "images/og/services.jpg",
+      "type": "website"
+    },
+    "soil.html": {
+      "title": "Soil Testing Equipment",
+      "description": "Soil classification, compaction, and permeability testers.",
+      "ogImage": "images/og/soil.jpg",
+      "type": "article"
+    },
+    "steel.html": {
+      "title": "Steel Testing Equipment",
+      "description": "Universal testing machines and hardness testers for steel.",
+      "ogImage": "images/og/steel.jpg",
+      "type": "article"
+    }
+  }
+}
