@@ -187,7 +187,8 @@
 </div>
 <div class="contact-details">
 <h4>Business Hours</h4>
-<p>Monday - Friday: 7:00 AM - 5:00 PM</p>
+<p>Monday - Thursday: 7:00 AM - 5:00 PM</p>
+<p>Friday: 7:00 AM - 4:00 PM</p>
 </div>
 </div>
 </div>
@@ -195,7 +196,7 @@
 <div class="contact-form">
 <h2>Send Us a Message</h2>
 <div id="form-status" style="display:none; margin-bottom:1rem; padding:10px; border-radius:6px;"></div>
-<form id="contactForm" method="POST" action="https://script.google.com/a/macros/gemarcph.com/s/AKfycbwVc7BUtJRHpHvpGMw9dsxGVZRtlddBXLBQfJ40fQ-ODZLD2zJuPZ1q0sze50WF1I9caA/exec" novalidate="">
+<form id="contactForm" method="POST" action="https://script.google.com/a/macros/gemarcph.com/s/AKfycbxs6fHQpQaX8JULykoe1x5MBdYHrOPlW87_jFdHOLN7VWiTW2_Fn-pnckSU4yjMHlJv7Q/exec" novalidate="">
   <!-- Honeypot field for spam bots -->
   <div style="display:none;">
     <label for="website">Website (leave blank)</label>
@@ -231,25 +232,14 @@
 <label for="message">Message *</label>
 <textarea id="message" name="message" required="" rows="5"></textarea>
 </div>
-<br/>
-<!-- reCAPTCHA widget -->
-<!-- reCAPTCHA v3 integration -->
-<input type="hidden" id="recaptchaToken" name="recaptchaToken" />
-<br/>
-<button class="submit-btn" type="submit">
-<i class="fas fa-paper-plane"></i>
-                                                         Send Message
-                                                 </button>
-  <!-- Google reCAPTCHA v3 integration -->
-  <input type="hidden" id="recaptchaToken" name="recaptchaToken" />
-  <script src="https://www.google.com/recaptcha/api.js?render=6LevkPorAAAAAN3pmQlmJ46DVpXAcf4_4QLeU9Rz"></script>
-  <script>
-    grecaptcha.ready(function() {
-      grecaptcha.execute('6LevkPorAAAAAN3pmQlmJ46DVpXAcf4_4QLeU9Rz', {action: 'submit'}).then(function(token) {
-        document.getElementById('recaptchaToken').value = token;
-      });
-    });
-  </script>
+<div style="display: flex; justify-content: center; margin-bottom: 16px;">
+  <div class="g-recaptcha" data-sitekey="6LcBk_orAAAAAFz9iclbp1wHknqbmdRk0yOcJn41"></div>
+</div>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<button class="submit-btn" type="submit" style="display: block; margin: 0 auto;">
+  <i class="fas fa-paper-plane"></i>
+  Send Message
+</button>
 </form>
 <script src="https://www.google.com/recaptcha/api.js?render=6LevkPorAAAAAN3pmQlmJ46DVpXAcf4_4QLeU9Rz"></script>
 <script>

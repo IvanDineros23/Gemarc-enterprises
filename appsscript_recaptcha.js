@@ -1,7 +1,7 @@
 
 // Google Apps Script for Gemarc Contact Form with reCAPTCHA v3 and Honeypot
 function verifyRecaptcha(token) {
-  var secretKey = '6LevkPorAAAAABIj9h0mJBrrgeUZX0VoRH6Mmuf5';
+  var secretKey = '6LcBk_orAAAAAEaFa8UAZtSB5J3umcJtCGjCK9A1';
   var url = 'https://www.google.com/recaptcha/api/siteverify';
   var payload = {
     'secret': secretKey,
@@ -23,8 +23,8 @@ function doPost(e) {
     if (p.website && p.website.trim() !== '') {
       return ContentService.createTextOutput("error: spam detected").setMimeType(ContentService.MimeType.TEXT);
     }
-    // reCAPTCHA v3 check
-    if (!verifyRecaptcha(p.recaptchaToken)) {
+    // reCAPTCHA v2 check
+    if (!verifyRecaptcha(p['g-recaptcha-response'])) {
       return ContentService.createTextOutput("error: reCAPTCHA failed").setMimeType(ContentService.MimeType.TEXT);
     }
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
