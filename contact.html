@@ -195,7 +195,12 @@
 <div class="contact-form">
 <h2>Send Us a Message</h2>
 <div id="form-status" style="display:none; margin-bottom:1rem; padding:10px; border-radius:6px;"></div>
-<form id="contactForm" method="POST" novalidate="">
+<form id="contactForm" method="POST" action="https://script.google.com/a/macros/gemarcph.com/s/AKfycbwVc7BUtJRHpHvpGMw9dsxGVZRtlddBXLBQfJ40fQ-ODZLD2zJuPZ1q0sze50WF1I9caA/exec" novalidate="">
+  <!-- Honeypot field for spam bots -->
+  <div style="display:none;">
+    <label for="website">Website (leave blank)</label>
+    <input type="text" id="website" name="website" autocomplete="off" tabindex="-1" />
+  </div>
 <div class="form-group">
 <label for="fullname">Full Name *</label>
 <input id="fullname" name="fullname" required="" type="text"/>
@@ -228,14 +233,32 @@
 </div>
 <br/>
 <!-- reCAPTCHA widget -->
-<div class="g-recaptcha" data-sitekey="6LcgmsUrAAAAAIj2wLxxrKoNsxrQ_CBXXBriafOF">
-</div>
+<!-- reCAPTCHA v3 integration -->
+<input type="hidden" id="recaptchaToken" name="recaptchaToken" />
 <br/>
 <button class="submit-btn" type="submit">
 <i class="fas fa-paper-plane"></i>
                                                          Send Message
                                                  </button>
+  <!-- Google reCAPTCHA v3 integration -->
+  <input type="hidden" id="recaptchaToken" name="recaptchaToken" />
+  <script src="https://www.google.com/recaptcha/api.js?render=6LevkPorAAAAAN3pmQlmJ46DVpXAcf4_4QLeU9Rz"></script>
+  <script>
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6LevkPorAAAAAN3pmQlmJ46DVpXAcf4_4QLeU9Rz', {action: 'submit'}).then(function(token) {
+        document.getElementById('recaptchaToken').value = token;
+      });
+    });
+  </script>
 </form>
+<script src="https://www.google.com/recaptcha/api.js?render=6LevkPorAAAAAN3pmQlmJ46DVpXAcf4_4QLeU9Rz"></script>
+<script>
+  grecaptcha.ready(function() {
+    grecaptcha.execute('6LevkPorAAAAAN3pmQlmJ46DVpXAcf4_4QLeU9Rz', {action: 'submit'}).then(function(token) {
+      document.getElementById('recaptchaToken').value = token;
+    });
+  });
+</script>
 <script>
                                                                                                                              const form = document.getElementById("contactForm");
                                                                                                                              const statusDiv = document.getElementById("form-status");
