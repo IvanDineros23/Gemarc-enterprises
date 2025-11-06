@@ -149,34 +149,164 @@ let autoProductSlideInterval;
 
 function moveProductsCarousel(direction) {
     const productsTrack = document.getElementById('productsTrack');
-    const productItems = document.querySelectorAll('.product-item');
+    const productItems = document.querySelectorAll('.product-card');
+    const container = document.querySelector('.products-carousel-container');
     
-    if (!productsTrack || !productItems.length) return;
+    if (!productsTrack || !productItems.length || !container) return;
     
     const totalItems = productItems.length;
-    const itemsToShow = window.innerWidth <= 768 ? 1 : (window.innerWidth <= 1024 ? 2 : 3);
-    const maxIndex = Math.max(0, totalItems - itemsToShow);
+    let itemsToShow;
     
-    currentProductIndex += direction;
-    
-    // Loop around
-    if (currentProductIndex > maxIndex) {
-        currentProductIndex = 0;
-    } else if (currentProductIndex < 0) {
-        currentProductIndex = maxIndex;
+    // Responsive items to show
+    if (window.innerWidth <= 480) {
+        itemsToShow = 1;
+    } else if (window.innerWidth <= 768) {
+        itemsToShow = 2;
+    } else if (window.innerWidth <= 1024) {
+        itemsToShow = 3;
+    } else {
+        itemsToShow = 4;
     }
     
-    const translateX = -(currentProductIndex * (100 / itemsToShow));
-    productsTrack.style.transform = `translateX(${translateX}%)`;
+    // Calculate container width without padding
+    const containerWidth = container.clientWidth - 80; // Subtract padding (40px on each side)
+    
+    // Calculate item dimensions
+    const itemWidth = productItems[0].offsetWidth;
+    const gap = 32; // 2rem = 32px
+    const itemTotalWidth = itemWidth + gap;
+    
+    // Calculate how many items actually fit in the container
+    const actualItemsToShow = Math.floor(containerWidth / itemTotalWidth);
+    
+    // Use the smaller of calculated or responsive itemsToShow
+    itemsToShow = Math.min(actualItemsToShow, itemsToShow);
+    
+    // Calculate last possible position that shows the last item
+    const maxScroll = (totalItems - itemsToShow) * itemTotalWidth;
+    const maxIndex = Math.max(0, totalItems - itemsToShow);
+    
+    // If all items fit in view or there are no items, reset to initial position
+    if (maxIndex <= 0 || totalItems === 0) {
+        currentProductIndex = 0;
+        productsTrack.style.transform = 'translateX(0)';
+        updateCarouselButtons();
+        stopProductsAutoPlay();
+        return;
+    }
+    
+    // Calculate new index with strict boundaries
+    let newIndex = currentProductIndex + direction;
+    
+    // Ensure we don't scroll past the last item
+    if (direction > 0 && newIndex > maxIndex) {
+        newIndex = maxIndex;
+    } else if (direction < 0 && newIndex < 0) {
+        newIndex = 0;
+    }
+    
+    // Only move if the index actually changed
+    if (newIndex === currentProductIndex) {
+        return;
+    }
+    
+    // Update current index
+    currentProductIndex = newIndex;
+    
+    // Calculate exact pixel translation, ensuring last item is fully visible
+    const translateX = -Math.min(currentProductIndex * itemTotalWidth, maxScroll);
+    productsTrack.style.transform = `translateX(${translateX}px)`;
+    
+    // Update button states
+    updateCarouselButtons();
+}
+
+function updateCarouselButtons() {
+    const productsTrack = document.getElementById('productsTrack');
+    if (!productsTrack) return;
+    
+    const container = productsTrack.closest('.products-carousel-container');
+    const leftBtn = container.querySelector('.carousel-btn-left');
+    const rightBtn = container.querySelector('.carousel-btn-right');
+    const productItems = document.querySelectorAll('.product-card');
+    
+    if (!leftBtn || !rightBtn || !productItems.length) return;
+    
+    const totalItems = productItems.length;
+    let itemsToShow;
+    
+    // Responsive items to show
+    if (window.innerWidth <= 480) {
+        itemsToShow = 1;
+    } else if (window.innerWidth <= 768) {
+        itemsToShow = 2;
+    } else if (window.innerWidth <= 1024) {
+        itemsToShow = 3;
+    } else {
+        itemsToShow = 4;
+    }
+    
+    const maxIndex = Math.max(0, totalItems - itemsToShow);
+    
+    // Hide both buttons if there aren't enough items to scroll
+    if (maxIndex <= 0 || totalItems === 0) {
+        leftBtn.style.visibility = 'hidden';
+        rightBtn.style.visibility = 'hidden';
+        return;
+    }
+    
+    // Show both buttons if we have items to scroll
+    leftBtn.style.visibility = 'visible';
+    rightBtn.style.visibility = 'visible';
+    
+    // Update button states
+    leftBtn.classList.toggle('disabled', currentProductIndex <= 0);
+    rightBtn.classList.toggle('disabled', currentProductIndex >= maxIndex);
+    
+    // Stop autoplay if we're at either end
+    if (currentProductIndex <= 0 || currentProductIndex >= maxIndex) {
+        stopProductsAutoPlay();
+    }
 }
 // === Our Products carousel autoplay ===
 // (Place this right after moveProductsCarousel)
 
 function startProductsAutoPlay() {
-  if (typeof autoProductSlideInterval !== 'undefined' && autoProductSlideInterval) {
-    clearInterval(autoProductSlideInterval);
+  const productItems = document.querySelectorAll('.product-card');
+  const productsTrack = document.getElementById('productsTrack');
+  if (!productItems.length || !productsTrack) return;
+  
+  let itemsToShow;
+  if (window.innerWidth <= 480) {
+      itemsToShow = 1;
+  } else if (window.innerWidth <= 768) {
+      itemsToShow = 2;
+  } else if (window.innerWidth <= 1024) {
+      itemsToShow = 3;
+  } else {
+      itemsToShow = 4;
   }
-  autoProductSlideInterval = setInterval(() => moveProductsCarousel(1), 2500); // speed
+  
+  const maxIndex = Math.max(0, productItems.length - itemsToShow);
+  
+  // Don't start autoplay if all items fit in view or we're at the end
+  if (maxIndex <= 0 || currentProductIndex >= maxIndex) {
+    stopProductsAutoPlay();
+    return;
+  }
+  
+  // Clear any existing interval
+  stopProductsAutoPlay();
+  
+  autoProductSlideInterval = setInterval(() => {
+    // Check if we can move forward
+    if (currentProductIndex < maxIndex) {
+      moveProductsCarousel(1);
+    } else {
+      // Stop autoplay at the end
+      stopProductsAutoPlay();
+    }
+  }, 3000);
 }
 
 function stopProductsAutoPlay() {
@@ -191,8 +321,33 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!track) return; // only run on pages that have the products carousel
 
   const container = track.closest('.products-carousel-container');
+  
+  // Add event listeners for carousel buttons
+  const leftBtn = container.querySelector('.carousel-btn-left');
+  const rightBtn = container.querySelector('.carousel-btn-right');
+  
+  if (leftBtn) {
+    leftBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!leftBtn.classList.contains('disabled')) {
+        moveProductsCarousel(-1);
+      }
+    });
+  }
+  
+  if (rightBtn) {
+    rightBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!rightBtn.classList.contains('disabled')) {
+        moveProductsCarousel(1);
+      }
+    });
+  }
 
-  // kick off
+  // Initial button state update
+  updateCarouselButtons();
+
+  // kick off autoplay
   startProductsAutoPlay();
 
   // pause on hover/touch/focus
@@ -208,8 +363,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.hidden ? stopProductsAutoPlay() : startProductsAutoPlay();
   });
 
-  // keep layout correct on resize (optional)
-  window.addEventListener('resize', () => moveProductsCarousel(0));
+  // keep layout correct on resize and update buttons
+  window.addEventListener('resize', () => {
+    moveProductsCarousel(0);
+    updateCarouselButtons();
+  });
 });
 
 // ===================================================================
