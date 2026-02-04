@@ -231,7 +231,7 @@
 <div class="form-group">
 <label for="phone">Phone Number</label>
 <div style="display: flex; gap: 8px;">
-  <select id="countryCode" name="countryCode" style="width: 110px; padding: 8px; font-size: 16px;">
+  <select id="countryCode" style="width: 110px; padding: 8px; font-size: 16px;">
     <option value="+63">+63 PH</option>
     <option value="+1">+1 US</option>
     <option value="+44">+44 UK</option>
@@ -354,24 +354,26 @@
   };
 </script>
 </form>
-<script src="https://www.google.com/recaptcha/api.js?render=6LevkPorAAAAAN3pmQlmJ46DVpXAcf4_4QLeU9Rz"></script>
 <script>
-  grecaptcha.ready(function() {
-    grecaptcha.execute('6LevkPorAAAAAN3pmQlmJ46DVpXAcf4_4QLeU9Rz', {action: 'submit'}).then(function(token) {
-      document.getElementById('recaptchaToken').value = token;
-    });
+  const form = document.getElementById("contactForm");
+  const statusDiv = document.getElementById("form-status");
+  
+  form.addEventListener("submit", function(e) {
+    // Combine country code and phone number
+    const countryCodeEl = document.getElementById("countryCode");
+    const phoneEl = document.getElementById("phone");
+    
+    if (phoneEl && phoneEl.value.trim() !== '') {
+      const fullPhone = countryCodeEl.value + ' ' + phoneEl.value;
+      phoneEl.value = fullPhone;
+    }
+    
+    statusDiv.style.display = "block";
+    statusDiv.textContent = "Sending...";
+    statusDiv.style.background = "#fff3cd";
+    statusDiv.style.color = "#856404";
   });
 </script>
-<script>
-                                                                                                                             const form = document.getElementById("contactForm");
-                                                                                                                             const statusDiv = document.getElementById("form-status");
-                                                                                                                             form.addEventListener("submit", function() {
-                                                                                                                                 statusDiv.style.display = "block";
-                                                                                                                                 statusDiv.textContent = "Sending...";
-                                                                                                                                 statusDiv.style.background = "#fff3cd";
-                                                                                                                                 statusDiv.style.color = "#856404";
-                                                                                                                             });
-                                                                                                                         </script>
 </div>
 </div>
 </div>
