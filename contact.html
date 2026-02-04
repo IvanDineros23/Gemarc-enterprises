@@ -278,7 +278,8 @@
     <option value="+40">+40 RO</option>
     <option value="+30">+30 GR</option>
   </select>
-  <input id="phone" name="phone" type="tel" pattern="[0-9]{7,15}" maxlength="15" placeholder="9123456789" inputmode="numeric" style="flex:1; padding:8px; font-size:16px;" />
+  <input id="phoneNumber" type="tel" pattern="[0-9]{7,15}" maxlength="15" placeholder="9123456789" inputmode="numeric" style="flex:1; padding:8px; font-size:16px;" />
+  <input type="hidden" id="phone" name="phone" value="" />
 </div>
 </div>
 <div class="form-group">
@@ -323,7 +324,7 @@
     const emailEl = document.getElementById('email');
     let emailValid = emailEl && emailEl.value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
     // Phone validation (if filled)
-    const phoneEl = document.getElementById('phone');
+    const phoneEl = document.getElementById('phoneNumber');
     let phoneValid = true;
     if (phoneEl && phoneEl.value.trim() !== '') {
       phoneValid = phoneEl.value.match(/^[0-9]{7,15}$/);
@@ -338,12 +339,12 @@
   }
 
   // Prevent non-numeric input in phone field
-  document.getElementById('phone').addEventListener('input', function(e) {
+  document.getElementById('phoneNumber').addEventListener('input', function(e) {
     this.value = this.value.replace(/[^0-9]/g, '');
   });
 
   // Listen for input changes
-  ['fullname', 'email', 'service', 'message', 'phone'].forEach(id => {
+  ['fullname', 'email', 'service', 'message', 'phoneNumber'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', validateForm);
   });
@@ -359,13 +360,17 @@
   const statusDiv = document.getElementById("form-status");
   
   form.addEventListener("submit", function(e) {
-    // Combine country code and phone number
+    // Combine country code and phone number into hidden field
     const countryCodeEl = document.getElementById("countryCode");
-    const phoneEl = document.getElementById("phone");
+    const phoneNumberEl = document.getElementById("phoneNumber");
+    const phoneHiddenEl = document.getElementById("phone");
     
-    if (phoneEl && phoneEl.value.trim() !== '') {
-      const fullPhone = countryCodeEl.value + ' ' + phoneEl.value;
-      phoneEl.value = fullPhone;
+    if (phoneNumberEl && phoneNumberEl.value.trim() !== '') {
+      // Remove + sign to prevent Google Sheets formula error, format: "63 9776172809"
+      const countryCodeClean = countryCodeEl.value.replace('+', '');
+      phoneHiddenEl.value = countryCodeClean + ' ' + phoneNumberEl.value;
+    } else {
+      phoneHiddenEl.value = '';
     }
     
     statusDiv.style.display = "block";
