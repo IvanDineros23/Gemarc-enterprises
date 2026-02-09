@@ -435,25 +435,27 @@ let currentCarouselIndex = 0;
 
 function moveCarousel(direction) {
     // Check for partners carousel first
-    const partnersTrack = document.getElementById('partnersTrack');
-    if (partnersTrack) {
+    const partnersCarousel = document.querySelector('.partners-carousel');
+    const partnersContainer = document.querySelector('.partners-carousel-container');
+    
+    if (partnersCarousel && partnersContainer) {
         const partnerItems = document.querySelectorAll('.partner-item');
         if (partnerItems.length > 0) {
-            const totalItems = partnerItems.length;
-            const itemsToShow = window.innerWidth <= 768 ? 2 : (window.innerWidth <= 1024 ? 3 : 4);
-            const maxIndex = Math.max(0, totalItems - itemsToShow);
+            // Calculate scroll amount based on item width
+            const itemWidth = partnerItems[0].offsetWidth;
+            const gap = 30;
+            const scrollAmount = (itemWidth + gap) * 2; // Scroll 2 items at a time
             
-            currentCarouselIndex += direction;
+            // Smooth scroll the carousel
+            partnersCarousel.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
             
-            // Loop around
-            if (currentCarouselIndex > maxIndex) {
-                currentCarouselIndex = 0;
-            } else if (currentCarouselIndex < 0) {
-                currentCarouselIndex = maxIndex;
-            }
-            
-            const translateX = -(currentCarouselIndex * (100 / itemsToShow));
-            partnersTrack.style.transform = `translateX(${translateX}%)`;
+            // Update button states after scroll animation
+            setTimeout(() => {
+                updatePartnersCarouselButtons();
+            }, 300);
             return;
         }
     }
@@ -479,6 +481,33 @@ function moveCarousel(direction) {
     
     const translateX = -(currentCarouselIndex * (100 / itemsToShow));
     carouselTrack.style.transform = `translateX(${translateX}%)`;
+}
+
+function updatePartnersCarouselButtons() {
+    const carousel = document.querySelector('.partners-carousel');
+    const container = document.querySelector('.partners-carousel-container');
+    
+    if (!carousel || !container) return;
+    
+    const leftBtn = container.querySelector('.carousel-btn-left');
+    const rightBtn = container.querySelector('.carousel-btn-right');
+    
+    if (!leftBtn || !rightBtn) return;
+    
+    // Check if we're at the start (can't scroll left)
+    const atStart = carousel.scrollLeft <= 0;
+    
+    // Check if we're at the end (can't scroll right)
+    const atEnd = carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth - 1);
+    
+    // Update button states
+    leftBtn.classList.toggle('disabled', atStart);
+    rightBtn.classList.toggle('disabled', atEnd);
+    
+    // Show/hide buttons based on scroll capability
+    const canScroll = carousel.scrollWidth > carousel.clientWidth;
+    leftBtn.style.visibility = canScroll ? 'visible' : 'hidden';
+    rightBtn.style.visibility = canScroll ? 'visible' : 'hidden';
 }
 
 // ===================================================================
@@ -1258,32 +1287,49 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
-// === Partners carousel autoplay (uses your existing moveCarousel) ===
+// === Partners carousel initialization ===
 document.addEventListener('DOMContentLoaded', () => {
-  const track = document.getElementById('partnersTrack');
-  if (!track) return;
+  const carousel = document.querySelector('.partners-carousel');
+  const container = document.querySelector('.partners-carousel-container');
+  
+  if (!carousel || !container) return;
 
-  const container = track.closest('.partners-carousel-container');
-  let timer = null;
+  const leftBtn = container.querySelector('.carousel-btn-left');
+  const rightBtn = container.querySelector('.carousel-btn-right');
 
-  function startAuto() { stopAuto(); timer = setInterval(() => moveCarousel(1), 2500); }
-  function stopAuto()  { if (timer) { clearInterval(timer); timer = null; } }
+  // Add click listeners for navigation buttons
+  if (leftBtn) {
+    leftBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!leftBtn.classList.contains('disabled')) {
+        moveCarousel(-1);
+      }
+    });
+  }
 
-  startAuto();
+  if (rightBtn) {
+    rightBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!rightBtn.classList.contains('disabled')) {
+        moveCarousel(1);
+      }
+    });
+  }
 
-  // pause on hover/focus, resume on leave
-  ['mouseenter','focusin','touchstart'].forEach(evt =>
-    container.addEventListener(evt, stopAuto, {passive:true})
-  );
-  ['mouseleave','focusout','touchend'].forEach(evt =>
-    container.addEventListener(evt, startAuto, {passive:true})
-  );
+  // Update button states when user scrolls manually
+  carousel.addEventListener('scroll', () => {
+    updatePartnersCarouselButtons();
+  });
 
-  // pause when tab is hidden (saves CPU)
-  document.addEventListener('visibilitychange', () => {
-    document.hidden ? stopAuto() : startAuto();
+  // Initial button state update
+  updatePartnersCarouselButtons();
+
+  // Update button states on window resize
+  window.addEventListener('resize', () => {
+    updatePartnersCarouselButtons();
   });
 });
+
 // ===== GEMARC Inline Inquiry - initializer (multi-modal support) =====
 document.addEventListener('DOMContentLoaded', function () {
   // Render rows + wire up events for every .gem-inquiry

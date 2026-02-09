@@ -2614,26 +2614,37 @@ body {
 .partners-carousel-container {
     position: relative;
     width: 100%;
-    padding: 0 60px; /* Add padding to accommodate buttons */
+    padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 .partners-carousel {
     width: 100%;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     margin: 0 auto;
+    /* Fade mask effect on left and right edges */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+    mask-image: linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);
+    overscroll-behavior-x: contain;
+    scroll-behavior: smooth;
+    /* Hide scrollbar for cleaner look */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.partners-carousel::-webkit-scrollbar {
+    display: none;
 }
 
 .partners-track {
     display: flex;
     gap: 30px;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.partners-track:hover {
-    transition-duration: 1.2s;
+    padding: 10px 40px;
+    width: fit-content;
 }
 
 .partner-item {
@@ -2673,7 +2684,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(46, 125, 50, 0.3); /* Lower opacity like Facebook button */
+    background: rgba(46, 125, 50, 0.3);
     color: white;
     border: none;
     width: 40px;
@@ -2683,21 +2694,64 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    z-index: 100;
     transition: all 0.3s ease;
-    opacity: 0.5; /* Additional opacity for subtle appearance */
+    opacity: 0.8;
     backdrop-filter: blur(10px);
 }
 
 .carousel-btn:hover {
-    background: rgba(46, 125, 50, 0.9); /* Pop with color on hover */
-    opacity: 1; /* Full opacity on hover */
+    background: rgba(46, 125, 50, 0.9);
+    opacity: 1;
     transform: translateY(-50%) scale(1.1);
     box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
 }
 
+.carousel-btn.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .carousel-btn-left {
     left: 5px;
+}
+
+.carousel-btn-right {
+    right: 5px;
+}
+
+/* Desktop-specific styles for partners carousel */
+@media (min-width: 1025px) {
+    .partners-carousel-container {
+        padding: 0 80px;
+    }
+    
+    .partners-carousel-container .carousel-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .partners-carousel-container .carousel-btn-left {
+        left: 5px;
+    }
+    
+    .partners-carousel-container .carousel-btn-right {
+        right: 5px;
+    }
+}
+
+/* Tablet - hide buttons */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .partners-carousel-container {
+        padding: 0 30px;
+    }
+    
+    .partners-carousel-container .carousel-btn {
+        display: none;
+    }
+}
 }
 
 .carousel-btn-right {
@@ -4079,37 +4133,19 @@ body {
     
     .partners-carousel-container {
         margin: 0 20px;
-        padding: 0 50px;
+        padding: 0 20px;
         position: relative;
     }
     
-    .partners-carousel {
-        overflow: hidden;
-        width: 100%;
+    /* Hide navigation buttons on mobile */
+    .partners-carousel-container .carousel-btn {
+        display: none;
     }
     
     .partner-item {
         height: 100px;
         padding: 20px;
         min-width: 150px;
-    }
-    
-    .carousel-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1rem;
-        box-shadow: 0 2px 8px rgba(46, 125, 50, 0.2); /* Softer shadow for mobile */
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-    
-    .carousel-btn-left {
-        left: 5px;
-    }
-    
-    .carousel-btn-right {
-        right: 5px;
     }
     
     /* Contact CTA Section */
@@ -4453,7 +4489,12 @@ body {
     
     .partners-carousel-container {
         margin: 0 5px;
-        padding: 0 40px;
+        padding: 0 15px;
+    }
+    
+    /* Hide buttons on extra small screens */
+    .partners-carousel-container .carousel-btn {
+        display: none;
     }
     
     .partner-item {
@@ -4461,12 +4502,6 @@ body {
         height: 70px;
         padding: 10px;
     }
-    
-    .carousel-btn {
-        width: 30px;
-        height: 30px;
-        font-size: 0.8rem;
-        box-shadow: 0 1px 4px rgba(46, 125, 50, 0.2); /* Very soft shadow for smallest screens */
     }
     
     .carousel-btn-left {
