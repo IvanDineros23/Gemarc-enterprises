@@ -2752,7 +2752,6 @@ body {
         display: none;
     }
 }
-}
 
 .carousel-btn-right {
     right: 5px;
@@ -4511,7 +4510,6 @@ body {
     .carousel-btn-right {
         right: 0;
     }
-}
 
 /* Background patterns for service cards */
 .service-card::before {
