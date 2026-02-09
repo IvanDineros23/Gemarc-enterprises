@@ -148,125 +148,54 @@ let currentProductIndex = 0;
 let autoProductSlideInterval;
 
 function moveProductsCarousel(direction) {
-    const productsTrack = document.getElementById('productsTrack');
+    const carousel = document.querySelector('.products-carousel');
     const productItems = document.querySelectorAll('.product-card');
     const container = document.querySelector('.products-carousel-container');
     
-    if (!productsTrack || !productItems.length || !container) return;
+    if (!carousel || !productItems.length || !container) return;
     
-    const totalItems = productItems.length;
-    let itemsToShow;
-    
-    // Responsive items to show
-    if (window.innerWidth <= 480) {
-        itemsToShow = 1;
-    } else if (window.innerWidth <= 768) {
-        itemsToShow = 2;
-    } else if (window.innerWidth <= 1024) {
-        itemsToShow = 3;
-    } else {
-        itemsToShow = 4;
-    }
-    
-    // Calculate container width without padding
-    const containerWidth = container.clientWidth - 80; // Subtract padding (40px on each side)
-    
-    // Calculate item dimensions
+    // Calculate item dimensions for smooth scrolling
     const itemWidth = productItems[0].offsetWidth;
-    const gap = 32; // 2rem = 32px
-    const itemTotalWidth = itemWidth + gap;
+    const gap = 30; // gap between items
+    const scrollAmount = (itemWidth + gap) * 2; // Scroll 2 items at a time
     
-    // Calculate how many items actually fit in the container
-    const actualItemsToShow = Math.floor(containerWidth / itemTotalWidth);
+    // Smooth scroll the carousel
+    carousel.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+    });
     
-    // Use the smaller of calculated or responsive itemsToShow
-    itemsToShow = Math.min(actualItemsToShow, itemsToShow);
-    
-    // Calculate last possible position that shows the last item
-    const maxScroll = (totalItems - itemsToShow) * itemTotalWidth;
-    const maxIndex = Math.max(0, totalItems - itemsToShow);
-    
-    // If all items fit in view or there are no items, reset to initial position
-    if (maxIndex <= 0 || totalItems === 0) {
-        currentProductIndex = 0;
-        productsTrack.style.transform = 'translateX(0)';
+    // Update button states after scroll animation
+    setTimeout(() => {
         updateCarouselButtons();
-        stopProductsAutoPlay();
-        return;
-    }
-    
-    // Calculate new index with strict boundaries
-    let newIndex = currentProductIndex + direction;
-    
-    // Ensure we don't scroll past the last item
-    if (direction > 0 && newIndex > maxIndex) {
-        newIndex = maxIndex;
-    } else if (direction < 0 && newIndex < 0) {
-        newIndex = 0;
-    }
-    
-    // Only move if the index actually changed
-    if (newIndex === currentProductIndex) {
-        return;
-    }
-    
-    // Update current index
-    currentProductIndex = newIndex;
-    
-    // Calculate exact pixel translation, ensuring last item is fully visible
-    const translateX = -Math.min(currentProductIndex * itemTotalWidth, maxScroll);
-    productsTrack.style.transform = `translateX(${translateX}px)`;
-    
-    // Update button states
-    updateCarouselButtons();
+    }, 300);
 }
 
 function updateCarouselButtons() {
-    const productsTrack = document.getElementById('productsTrack');
-    if (!productsTrack) return;
+    const carousel = document.querySelector('.products-carousel');
+    const container = document.querySelector('.products-carousel-container');
     
-    const container = productsTrack.closest('.products-carousel-container');
+    if (!carousel || !container) return;
+    
     const leftBtn = container.querySelector('.carousel-btn-left');
     const rightBtn = container.querySelector('.carousel-btn-right');
-    const productItems = document.querySelectorAll('.product-card');
     
-    if (!leftBtn || !rightBtn || !productItems.length) return;
+    if (!leftBtn || !rightBtn) return;
     
-    const totalItems = productItems.length;
-    let itemsToShow;
+    // Check if we're at the start (can't scroll left)
+    const atStart = carousel.scrollLeft <= 0;
     
-    // Responsive items to show
-    if (window.innerWidth <= 480) {
-        itemsToShow = 1;
-    } else if (window.innerWidth <= 768) {
-        itemsToShow = 2;
-    } else if (window.innerWidth <= 1024) {
-        itemsToShow = 3;
-    } else {
-        itemsToShow = 4;
-    }
-    
-    const maxIndex = Math.max(0, totalItems - itemsToShow);
-    
-    // Hide both buttons if there aren't enough items to scroll
-    if (maxIndex <= 0 || totalItems === 0) {
-        leftBtn.style.visibility = 'hidden';
-        rightBtn.style.visibility = 'hidden';
-        return;
-    }
-    
-    // Show both buttons if we have items to scroll
-    leftBtn.style.visibility = 'visible';
-    rightBtn.style.visibility = 'visible';
+    // Check if we're at the end (can't scroll right)
+    const atEnd = carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth - 1);
     
     // Update button states
-    leftBtn.classList.toggle('disabled', currentProductIndex <= 0);
-    rightBtn.classList.toggle('disabled', currentProductIndex >= maxIndex);
+    leftBtn.classList.toggle('disabled', atStart);
+    rightBtn.classList.toggle('disabled', atEnd);
     
-    // Stop autoplay if we're at either end
-    if (currentProductIndex <= 0 || currentProductIndex >= maxIndex) {
-        stopProductsAutoPlay();
-    }
+    // Show/hide buttons based on scroll capability
+    const canScroll = carousel.scrollWidth > carousel.clientWidth;
+    leftBtn.style.visibility = canScroll ? 'visible' : 'hidden';
+    rightBtn.style.visibility = canScroll ? 'visible' : 'hidden';
 }
 // === Our Products carousel autoplay ===
 // (Place this right after moveProductsCarousel)
@@ -317,10 +246,11 @@ function stopProductsAutoPlay() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const carousel = document.querySelector('.products-carousel');
   const track = document.getElementById('productsTrack');
-  if (!track) return; // only run on pages that have the products carousel
+  if (!carousel || !track) return; // only run on pages that have the products carousel
 
-  const container = track.closest('.products-carousel-container');
+  const container = document.querySelector('.products-carousel-container');
   
   // Add event listeners for carousel buttons
   const leftBtn = container.querySelector('.carousel-btn-left');
@@ -344,28 +274,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Update button states when user scrolls manually
+  carousel.addEventListener('scroll', () => {
+    updateCarouselButtons();
+  });
+
   // Initial button state update
   updateCarouselButtons();
 
-  // kick off autoplay
-  startProductsAutoPlay();
-
-  // pause on hover/touch/focus
-  ['mouseenter','focusin','touchstart'].forEach(evt =>
-    container.addEventListener(evt, stopProductsAutoPlay, { passive: true })
-  );
-  ['mouseleave','focusout','touchend'].forEach(evt =>
-    container.addEventListener(evt, startProductsAutoPlay, { passive: true })
-  );
-
-  // pause when tab is hidden
-  document.addEventListener('visibilitychange', () => {
-    document.hidden ? stopProductsAutoPlay() : startProductsAutoPlay();
-  });
-
-  // keep layout correct on resize and update buttons
+  // Update button states on window resize
   window.addEventListener('resize', () => {
-    moveProductsCarousel(0);
     updateCarouselButtons();
   });
 });
