@@ -1655,12 +1655,79 @@ function toggleSvcGallery(headerEl){
   // 1) PASTE your Apps Script /exec URL here:
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz_XH-PjhtH70XSActWihepoEZTsGTwhWijqo7k1qh78lNH-GZ-0nswPRYGWm5UCsV8pA/exec';
 
+  // Global function to close modal (for inline onclick)
+  window.closeFormModal = function() {
+    const modal = document.getElementById('formModal');
+    const statusDiv = document.getElementById('form-status');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+    if (statusDiv) {
+      statusDiv.style.display = 'none';
+    }
+  };
+
   document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('contactForm');
     const statusDiv = document.getElementById('form-status');
+    const modal = document.getElementById('formModal');
+    const modalIcon = document.getElementById('modalIcon');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalIconContainer = modal ? modal.querySelector('.form-modal-icon') : null;
+    const modalClose = modal ? modal.querySelector('.form-modal-close') : null;
+    
     if (!form) return; // walang form sa page
 
-    // helper to show status
+    // Close modal when clicking X or outside
+    if (modalClose) {
+      modalClose.onclick = function() {
+        modal.style.display = 'none';
+        // Hide status div when modal closes
+        if (statusDiv) {
+          statusDiv.style.display = 'none';
+        }
+      };
+    }
+    
+    if (modal) {
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = 'none';
+          // Hide status div when modal closes
+          if (statusDiv) {
+            statusDiv.style.display = 'none';
+          }
+        }
+      };
+    }
+
+    // helper to show modal
+    function showModal(title, msg, type) {
+      if (!modal || !modalIcon || !modalTitle || !modalMessage || !modalIconContainer) return;
+      
+      // Hide the status div when showing modal
+      if (statusDiv) {
+        statusDiv.style.display = 'none';
+      }
+      
+      modalTitle.textContent = title;
+      modalMessage.textContent = msg;
+      
+      if (type === 'success') {
+        modalIcon.className = 'fas fa-check-circle';
+        modalIconContainer.classList.remove('error');
+        modalTitle.classList.remove('error');
+      } else if (type === 'error') {
+        modalIcon.className = 'fas fa-exclamation-circle';
+        modalIconContainer.classList.add('error');
+        modalTitle.classList.add('error');
+      }
+      
+      modal.style.display = 'block';
+    }
+
+    // helper to show status (fallback for old code)
     function showStatus(msg, type) {
       if (!statusDiv) return;
       statusDiv.style.display = 'block';
@@ -1699,15 +1766,15 @@ function toggleSvcGallery(headerEl){
         try { ok = JSON.parse(text)?.status === 'ok'; } catch (_) { ok = /\bok\b/i.test(text); }
 
         if (res.ok && ok) {
-          showStatus('Thank you! Your message has been recorded.', 'success');
+          showModal('Success!', 'Thank you! Your message has been sent successfully. We will get back to you soon.', 'success');
           form.reset();
         } else {
           console.warn('Apps Script response:', text);
-          showStatus('There was a problem sending your message. Please try again.', 'error');
+          showModal('Error', 'There was a problem sending your message. Please try again or contact us directly.', 'error');
         }
       } catch (err) {
         console.error('Contact form error:', err);
-        showStatus('Network error. Please check your connection and try again.', 'error');
+        showModal('Network Error', 'Unable to send message. Please check your internet connection and try again.', 'error');
       } finally {
         if (btn) { btn.disabled = false; btn.style.opacity = ''; }
       }
