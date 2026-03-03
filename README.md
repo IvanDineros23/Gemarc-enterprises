@@ -73,9 +73,10 @@ To customize the website:
 ## Contact Information
 
 For more information about Gemarc Enterprises, please contact:
-- Phone: +63 XXX XXX XXXX
-- Email: info@gemarc.com
-- Location: Philippines
+- Phone: +63 909 087 9416
+         +63 928 395 3532 | +63 918 905 8316
+- Email: helpdesk@gemarcph.com
+- Location: Marikina, Philippines
 
 ---
 
