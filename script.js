@@ -355,19 +355,14 @@ function showBlogSlideshowImage(state, idx) {
 
   // Only animate if there are multiple images
   if (images.length > 1) {
-    imgEl.style.transition = 'none';
-    imgEl.style.transform = 'translateX(100%)';
-    setTimeout(() => {
-      imgEl.src = images[i];
-      imgEl.onload = () => {
-        imgEl.style.transition = 'transform 0.7s cubic-bezier(0.4,0,0.2,1)';
-        imgEl.style.transform = 'translateX(0)';
-      };
-    }, 50);
+    imgEl.style.animation = 'none';
+    imgEl.src = images[i];
+    // trigger reflow to restart animation
+    void imgEl.offsetWidth;
+    imgEl.style.animation = 'slideInFade 0.8s ease-in-out forwards';
   } else {
     imgEl.src = images[i];
-    imgEl.style.transition = '';
-    imgEl.style.transform = '';
+    imgEl.style.animation = 'none';
   }
 
   // update dots
@@ -395,19 +390,44 @@ function startBlogSlideshow(container) {
   // initial frame
   showBlogSlideshowImage(state, 0);
 
-  // cycle
-  let timer = setInterval(() => {
-    showBlogSlideshowImage(state, state.index + 1);
-  }, delay);
+  // On blogs page, multi-image cards only animate while hovered.
+  const isBlogsPage = !!document.querySelector('.blogs-section');
+  if (isBlogsPage && images.length > 1) {
+    let timer = null;
 
-  // optional: pause on hover
-  container.addEventListener('mouseenter', () => clearInterval(timer));
-  container.addEventListener('mouseleave', () => {
-    clearInterval(timer);
-    timer = setInterval(() => {
+    const startHoverCycle = () => {
+      if (timer) return;
+      showBlogSlideshowImage(state, state.index + 1);
+      timer = setInterval(() => {
+        showBlogSlideshowImage(state, state.index + 1);
+      }, delay);
+    };
+
+    const stopHoverCycle = () => {
+      if (!timer) return;
+      clearInterval(timer);
+      timer = null;
+    };
+
+    container.addEventListener('mouseenter', startHoverCycle);
+    container.addEventListener('mouseleave', stopHoverCycle);
+    return;
+  }
+
+  // Default behavior for non-blogs sections/pages.
+  if (images.length > 1) {
+    let timer = setInterval(() => {
       showBlogSlideshowImage(state, state.index + 1);
     }, delay);
-  });
+
+    container.addEventListener('mouseenter', () => clearInterval(timer));
+    container.addEventListener('mouseleave', () => {
+      clearInterval(timer);
+      timer = setInterval(() => {
+        showBlogSlideshowImage(state, state.index + 1);
+      }, delay);
+    });
+  }
 }
 
 // ---- Auto-init for all slideshows on the page ----
