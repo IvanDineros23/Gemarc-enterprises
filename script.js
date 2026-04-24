@@ -1575,6 +1575,32 @@ if (pdfBtn) {
 // NEWS CARDS MODAL POPUP (works even if the card is inside <a>)
 // ===================================================================
 (function initNewsCardsModal(){
+  var NEWS_MODAL_ANIM_MS = 280;
+
+  function showAnimatedModal(modal) {
+    if (!modal) return;
+    if (modal._closeTimer) {
+      clearTimeout(modal._closeTimer);
+      modal._closeTimer = null;
+    }
+    modal.style.display = 'flex';
+    requestAnimationFrame(function() {
+      modal.classList.add('news-modal-visible');
+    });
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hideAnimatedModal(modal) {
+    if (!modal) return;
+    modal.classList.remove('news-modal-visible');
+    if (modal._closeTimer) clearTimeout(modal._closeTimer);
+    modal._closeTimer = setTimeout(function() {
+      modal.style.display = 'none';
+      modal._closeTimer = null;
+    }, NEWS_MODAL_ANIM_MS);
+    document.body.style.overflow = '';
+  }
+
   function ensureModal() {
     var modal = document.getElementById('newsModal');
     if (modal) return;
@@ -1606,15 +1632,13 @@ if (pdfBtn) {
     if (imgEl) imgEl.src = img;
     if (titleEl) titleEl.textContent = title;
     if (descEl) descEl.textContent = desc;
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    showAnimatedModal(modal);
   }
 
   function closeModal(){
     var modal = document.getElementById('newsModal');
     if (!modal) return;
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
+    hideAnimatedModal(modal);
   }
 
   document.addEventListener('click', function(e){
