@@ -1,6 +1,6 @@
 AuthType Basic
 AuthName "Gemarc Certificate Management"
-AuthUserFile /home/rmno5cfxv88h/.htpasswd
+AuthUserFile /home/rmno5cfxv88h/public_html/admin/.htpasswd
 Require valid-user
 
 Options -Indexes
