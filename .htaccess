@@ -1,3 +1,5 @@
+Options -Indexes
+
 RewriteEngine On
 RewriteCond %{HTTPS} !=on [OR]
 RewriteCond %{HTTP_HOST} ^www\.gemarcph\.com$ [NC]

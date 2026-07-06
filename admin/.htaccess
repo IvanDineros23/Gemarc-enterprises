@@ -1,0 +1,10 @@
+AuthType Basic
+AuthName "Gemarc Certificate Management"
+AuthUserFile /home/rmno5cfxv88h/.htpasswd
+Require valid-user
+
+Options -Indexes
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>

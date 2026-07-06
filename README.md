@@ -70,6 +70,28 @@ To customize the website:
 - Edge (latest)
 - Internet Explorer 11+
 
+## Certificate Verification System
+
+The site now includes a no-database certificate verification workflow.
+
+- Public verification page: `verify.html`
+- Admin dashboard: `admin/index.php`
+- JSON index: `data/certificates.json`
+- Excel master backup: `uploads/Certificates.xlsx`
+
+### Setup Notes
+
+1. Run `composer install` on the hosting account or deployment environment so PhpSpreadsheet is available.
+2. Replace the placeholder `AuthUserFile` path in `admin/.htaccess` with the real server path to `admin/.htpasswd`.
+3. Add a valid Basic Auth user entry to `admin/.htpasswd` using the server's `htpasswd` tool.
+4. Upload the latest `Certificates.xlsx` workbook through the admin dashboard.
+
+### Verification URL
+
+You can verify a certificate directly with a QR-ready URL like:
+
+`https://gemarcph.com/verify.html?cert=CERT-2026-0001`
+
 ## Contact Information
 
 For more information about Gemarc Enterprises, please contact:
