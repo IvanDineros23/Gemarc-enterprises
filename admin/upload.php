@@ -1,7 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+ini_set('log_errors', 1);
+error_reporting(E_ALL);
+
 require_once __DIR__ . '/convert_excel.php';
+require_once __DIR__ . '/includes/certificate_repository.php';
 
 function gemarc_redirect_to_dashboard(string $status, string $message, array $extra = []): void
 {
@@ -14,14 +21,49 @@ function gemarc_redirect_to_dashboard(string $status, string $message, array $ex
     exit;
 }
 
+function gemarc_request_expects_json(): bool
+{
+    $accept = strtolower((string) ($_SERVER['HTTP_ACCEPT'] ?? ''));
+    $requestedWith = strtolower((string) ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? ''));
+    $format = strtolower((string) ($_GET['format'] ?? ''));
+
+    return $format === 'json' || str_contains($accept, 'application/json') || $requestedWith === 'xmlhttprequest' || $requestedWith === 'fetch';
+}
+
+function gemarc_upload_uploader_identity(): string
+{
+    $uploader = trim((string) ($_SERVER['PHP_AUTH_USER'] ?? $_SERVER['REMOTE_USER'] ?? ''));
+
+    return $uploader !== '' ? $uploader : 'Unknown';
+}
+
+function gemarc_send_json_response(array $payload, int $statusCode = 200): void
+{
+    http_response_code($statusCode);
+    header('Content-Type: application/json; charset=UTF-8');
+    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+    echo json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
+    if (gemarc_request_expects_json()) {
+        gemarc_send_json_response([
+            'success' => false,
+            'message' => 'Invalid upload request. Please use the dashboard form.',
+        ], 405);
+    }
+
     gemarc_redirect_to_dashboard('error', 'Invalid upload request. Please use the dashboard form.');
 }
 
 $stagedPath = gemarc_staging_excel_path();
+$expectsJson = gemarc_request_expects_json();
 
 try {
+
     $upload = gemarc_validate_uploaded_excel($_FILES['certificate_file'] ?? []);
+
     gemarc_ensure_directory(gemarc_uploads_dir());
     gemarc_ensure_directory(gemarc_data_dir());
 
@@ -33,20 +75,49 @@ try {
         throw new RuntimeException('The Excel file could not be saved on the server.');
     }
 
-    $result = gemarc_convert_certificate_upload($stagedPath, gemarc_excel_path(), gemarc_json_path());
+    $result = gemarc_convert_certificate_upload(
+        $stagedPath,
+        gemarc_excel_path(),
+        gemarc_json_path(),
+        gemarc_upload_metadata_path(),
+        gemarc_upload_uploader_identity()
+    );
+
     $message = sprintf(
-        'Certificates.xlsx uploaded successfully. %d certificate record(s) are now available in the public JSON file.',
+        '%s uploaded successfully. %d certificate record(s) are now available in the public verification portal.',
+        basename($result['excel_path']),
         (int) $result['count']
     );
 
-    gemarc_redirect_to_dashboard('success', $message, [
-        'count' => (string) $result['count'],
-        'filename' => (string) $result['last_upload_filename'],
-    ]);
-} catch (Throwable $throwable) {
-    if (is_file($stagedPath)) {
-        @unlink($stagedPath);
+    if ($expectsJson) {
+        gemarc_send_json_response([
+            'success'   => true,
+            'message'   => $message,
+            'result'    => $result,
+            'dashboard' => gemarc_dashboard_context(),
+        ]);
     }
 
-    gemarc_redirect_to_dashboard('error', $throwable->getMessage());
+    gemarc_redirect_to_dashboard(
+        'success',
+        $message,
+        [
+            'count'    => (string) $result['count'],
+            'filename' => basename($result['excel_path']),
+        ]
+    );
+
+} catch (Throwable $exception) {
+
+    if ($expectsJson) {
+        gemarc_send_json_response([
+            'success' => false,
+            'message' => $exception->getMessage(),
+        ], 500);
+    }
+
+    gemarc_redirect_to_dashboard(
+        'error',
+        $exception->getMessage()
+    );
 }

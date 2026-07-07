@@ -5,29 +5,34 @@ use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
 
-function gemarc_project_root(): string
+function gemarc_admin_dir(): string
 {
     return dirname(__DIR__, 2);
 }
 
-function gemarc_admin_dir(): string
+function gemarc_includes_dir(): string
 {
-    return gemarc_project_root() . DIRECTORY_SEPARATOR . 'admin';
+    return gemarc_admin_dir() . DIRECTORY_SEPARATOR . 'admin';
 }
 
 function gemarc_data_dir(): string
 {
-    return gemarc_project_root() . DIRECTORY_SEPARATOR . 'data';
+    return gemarc_admin_dir() . DIRECTORY_SEPARATOR . 'data';
 }
 
 function gemarc_uploads_dir(): string
 {
-    return gemarc_project_root() . DIRECTORY_SEPARATOR . 'uploads';
+    return gemarc_admin_dir() . DIRECTORY_SEPARATOR . 'uploads';
 }
 
 function gemarc_json_path(): string
 {
     return gemarc_data_dir() . DIRECTORY_SEPARATOR . 'certificates.json';
+}
+
+function gemarc_upload_metadata_path(): string
+{
+    return gemarc_data_dir() . DIRECTORY_SEPARATOR . 'upload_metadata.json';
 }
 
 function gemarc_excel_path(): string
@@ -55,12 +60,22 @@ function gemarc_boot_phpspreadsheet(): void
         return;
     }
 
-    $autoload = gemarc_project_root() . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-    if (!is_file($autoload)) {
-        throw new RuntimeException('PhpSpreadsheet is not installed. Run composer install before uploading certificates.');
+    $autoload = dirname(__DIR__) . '/vendor/autoload.php';
+
+    if (!file_exists($autoload)) {
+        throw new RuntimeException(
+            'Composer autoload not found: ' . $autoload
+        );
     }
 
     require_once $autoload;
+
+    if (!class_exists(\PhpOffice\PhpSpreadsheet\IOFactory::class)) {
+        throw new RuntimeException(
+            'PhpSpreadsheet failed to load after requiring autoload.php'
+        );
+    }
+
     $booted = true;
 }
 
@@ -76,13 +91,25 @@ function gemarc_expected_headers(): array
 {
     return [
         'Certificate Number',
-        'Issued To',
+        'Customer',
         'Equipment',
         'Serial Number',
         'Calibration Date',
         'Expiry Date',
-        'Issued By',
         'Status',
+    ];
+}
+
+function gemarc_required_header_aliases(): array
+{
+    return [
+        'certificate_number' => ['certificate_number', 'certificate_no', 'cert_number', 'cert_no', 'certificate'],
+        'issued_to' => ['issued_to', 'customer', 'customer_name', 'client', 'client_name'],
+        'equipment' => ['equipment', 'equipment_name', 'asset', 'asset_name', 'machine'],
+        'serial_number' => ['serial_number', 'serial_no', 'serial', 'serial_no_', 'sn'],
+        'calibration_date' => ['calibration_date', 'calibration', 'date_of_calibration', 'issued_date'],
+        'expiry_date' => ['expiry_date', 'expiry', 'expiration_date', 'valid_until', 'valid_till'],
+        'status' => ['status', 'certificate_status', 'state'],
     ];
 }
 
@@ -90,13 +117,33 @@ function gemarc_header_to_json_key(string $header): string
 {
     static $map = [
         'certificate_number' => 'certificate_number',
+        'certificate_no' => 'certificate_number',
+        'certificate_no_' => 'certificate_number',
+        'cert_number' => 'certificate_number',
+        'cert_no' => 'certificate_number',
         'issued_to' => 'issued_to',
+        'customer' => 'issued_to',
+        'customer_name' => 'issued_to',
+        'client' => 'issued_to',
+        'client_name' => 'issued_to',
         'equipment' => 'equipment',
+        'equipment_name' => 'equipment',
+        'asset' => 'equipment',
+        'machine' => 'equipment',
         'serial_number' => 'serial_number',
+        'serial_no' => 'serial_number',
+        'serial' => 'serial_number',
         'calibration_date' => 'calibration_date',
+        'date_of_calibration' => 'calibration_date',
+        'calibration' => 'calibration_date',
         'expiry_date' => 'expiry_date',
+        'expiry' => 'expiry_date',
+        'expiration_date' => 'expiry_date',
+        'valid_until' => 'expiry_date',
         'issued_by' => 'issued_by',
+        'calibrated_by' => 'issued_by',
         'status' => 'status',
+        'certificate_status' => 'status',
     ];
 
     $normalized = gemarc_normalize_header($header);
@@ -119,6 +166,173 @@ function gemarc_cell_to_string(Cell $cell): string
     }
 
     return trim((string) $cell->getFormattedValue());
+}
+
+function gemarc_read_json_records(string $jsonPath): array
+{
+    if (!is_file($jsonPath)) {
+        return [];
+    }
+
+    $decoded = json_decode((string) file_get_contents($jsonPath), true);
+    if (!is_array($decoded)) {
+        return [];
+    }
+
+    $records = [];
+    foreach ($decoded as $record) {
+        if (is_array($record)) {
+            $records[] = $record;
+        }
+    }
+
+    return $records;
+}
+
+function gemarc_normalize_certificate_record(array $record): array
+{
+    $normalized = [];
+
+    foreach ($record as $key => $value) {
+        $key = (string) $key;
+        $jsonKey = gemarc_header_to_json_key($key);
+        $textValue = is_scalar($value) || $value === null ? trim((string) $value) : (string) json_encode($value);
+
+        if ($jsonKey === 'status') {
+            $textValue = strtoupper($textValue);
+        }
+
+        $normalized[$jsonKey] = $textValue;
+    }
+
+    ksort($normalized);
+
+    return $normalized;
+}
+
+function gemarc_certificate_signature(array $record): string
+{
+    return md5(json_encode(gemarc_normalize_certificate_record($record), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?: '');
+}
+
+function gemarc_certificate_number_key(array $record): string
+{
+    return strtoupper(trim((string) ($record['certificate_number'] ?? '')));
+}
+
+function gemarc_build_certificate_diff(array $oldRecords, array $newRecords): array
+{
+    $oldIndex = [];
+    foreach ($oldRecords as $record) {
+        if (!is_array($record)) {
+            continue;
+        }
+
+        $key = gemarc_certificate_number_key($record);
+        if ($key === '') {
+            continue;
+        }
+
+        $oldIndex[$key] = $record;
+    }
+
+    $newIndex = [];
+    foreach ($newRecords as $record) {
+        if (!is_array($record)) {
+            continue;
+        }
+
+        $key = gemarc_certificate_number_key($record);
+        if ($key === '') {
+            continue;
+        }
+
+        $newIndex[$key] = $record;
+    }
+
+    $added = [];
+    $updated = [];
+    $removed = [];
+
+    foreach ($newIndex as $certificateNumber => $record) {
+        if (!isset($oldIndex[$certificateNumber])) {
+            $added[] = $certificateNumber;
+            continue;
+        }
+
+        if (gemarc_certificate_signature($oldIndex[$certificateNumber]) !== gemarc_certificate_signature($record)) {
+            $updated[] = $certificateNumber;
+        }
+    }
+
+    foreach ($oldIndex as $certificateNumber => $record) {
+        if (!isset($newIndex[$certificateNumber])) {
+            $removed[] = $certificateNumber;
+        }
+    }
+
+    return [
+        'added' => array_values($added),
+        'updated' => array_values($updated),
+        'removed' => array_values($removed),
+        'added_count' => count($added),
+        'updated_count' => count($updated),
+        'removed_count' => count($removed),
+    ];
+}
+
+function gemarc_read_upload_metadata(): array
+{
+    $path = gemarc_upload_metadata_path();
+    if (!is_file($path)) {
+        return [
+            'history' => [],
+        ];
+    }
+
+    $decoded = json_decode((string) file_get_contents($path), true);
+    if (!is_array($decoded)) {
+        return [
+            'history' => [],
+        ];
+    }
+
+    if (!isset($decoded['history']) || !is_array($decoded['history'])) {
+        $decoded['history'] = [];
+    }
+
+    return $decoded;
+}
+
+function gemarc_write_upload_metadata(array $metadata, ?string $metadataPath = null): void
+{
+    $metadataPath = $metadataPath ?? gemarc_upload_metadata_path();
+    gemarc_ensure_directory(dirname($metadataPath));
+
+    $json = json_encode($metadata, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    if ($json === false) {
+        throw new RuntimeException('Unable to encode upload metadata.');
+    }
+
+    if (file_put_contents($metadataPath, $json . PHP_EOL, LOCK_EX) === false) {
+        throw new RuntimeException('Unable to write the upload metadata file.');
+    }
+}
+
+function gemarc_append_upload_history(array $metadata, array $entry, int $limit = 10): array
+{
+    $history = $metadata['history'] ?? [];
+    if (!is_array($history)) {
+        $history = [];
+    }
+
+    array_unshift($history, $entry);
+    $history = array_slice($history, 0, max(1, $limit));
+
+    $metadata['history'] = $history;
+    $metadata['last_upload'] = $entry;
+
+    return $metadata;
 }
 
 function gemarc_validate_uploaded_excel(array $file): array
@@ -182,10 +396,17 @@ function gemarc_load_certificates_from_excel(string $excelPath): array
     }
 
     $missingHeaders = [];
-    foreach (gemarc_expected_headers() as $requiredHeader) {
-        $normalized = gemarc_normalize_header($requiredHeader);
-        if (!isset($headerMap[$normalized])) {
-            $missingHeaders[] = $requiredHeader;
+    foreach (gemarc_required_header_aliases() as $field => $aliases) {
+        $found = false;
+        foreach ($aliases as $alias) {
+            if (isset($headerMap[$alias])) {
+                $found = true;
+                break;
+            }
+        }
+
+        if (!$found) {
+            $missingHeaders[] = gemarc_header_label_from_key($field);
         }
     }
 
@@ -196,23 +417,63 @@ function gemarc_load_certificates_from_excel(string $excelPath): array
     }
 
     $records = [];
+    $seenCertificateNumbers = [];
     for ($rowNumber = 2; $rowNumber <= $highestRow; $rowNumber++) {
         $record = [];
 
-        foreach (gemarc_expected_headers() as $requiredHeader) {
-            $columnIndex = $headerMap[gemarc_normalize_header($requiredHeader)];
+        for ($columnIndex = 1; $columnIndex <= count($headerRow); $columnIndex++) {
+            $rawHeader = (string) ($headerRow[$columnIndex - 1] ?? '');
+            if (trim($rawHeader) === '') {
+                continue;
+            }
+
             $cell = $sheet->getCellByColumnAndRow($columnIndex, $rowNumber);
-            $record[gemarc_header_to_json_key($requiredHeader)] = gemarc_cell_to_string($cell);
+            $value = gemarc_cell_to_string($cell);
+            if ($value === '') {
+                continue;
+            }
+
+            $record[gemarc_header_to_json_key($rawHeader)] = $value;
         }
 
         if (trim($record['certificate_number'] ?? '') === '') {
             continue;
         }
 
+        $record['certificate_number'] = strtoupper(trim((string) $record['certificate_number']));
+        if (isset($record['status'])) {
+            $record['status'] = strtoupper(trim((string) $record['status']));
+        }
+
+        $certificateNumber = gemarc_certificate_number_key($record);
+        if (isset($seenCertificateNumbers[$certificateNumber])) {
+            throw new InvalidArgumentException('Duplicate Certificate Number found: ' . $certificateNumber);
+        }
+
+        $seenCertificateNumbers[$certificateNumber] = true;
+
         $records[] = $record;
     }
 
+    if ($records === []) {
+        throw new InvalidArgumentException('The workbook does not contain any certificate rows.');
+    }
+
     return $records;
+}
+
+function gemarc_header_label_from_key(string $key): string
+{
+    return match ($key) {
+        'certificate_number' => 'Certificate Number',
+        'issued_to' => 'Customer',
+        'equipment' => 'Equipment',
+        'serial_number' => 'Serial Number',
+        'calibration_date' => 'Calibration Date',
+        'expiry_date' => 'Expiry Date',
+        'status' => 'Status',
+        default => ucfirst(str_replace('_', ' ', $key)),
+    };
 }
 
 function gemarc_write_certificate_json(array $records, string $jsonPath): void
@@ -229,9 +490,12 @@ function gemarc_write_certificate_json(array $records, string $jsonPath): void
     }
 }
 
-function gemarc_process_uploaded_certificate_file(string $stagedExcelPath, string $finalExcelPath, string $jsonPath): array
+function gemarc_process_uploaded_certificate_file(string $stagedExcelPath, string $finalExcelPath, string $jsonPath, ?string $metadataPath = null, ?string $uploader = null): array
 {
+    $metadataPath = $metadataPath ?? gemarc_upload_metadata_path();
+    $previousRecords = gemarc_read_json_records($jsonPath);
     $records = gemarc_load_certificates_from_excel($stagedExcelPath);
+    $diff = gemarc_build_certificate_diff($previousRecords, $records);
     gemarc_write_certificate_json($records, $jsonPath);
 
     if (!rename($stagedExcelPath, $finalExcelPath)) {
@@ -246,12 +510,29 @@ function gemarc_process_uploaded_certificate_file(string $stagedExcelPath, strin
         $lastUploadDate = date('Y-m-d H:i:s', $lastUploadTimestamp);
     }
 
+    $size = is_file($jsonPath) ? (int) filesize($jsonPath) : 0;
+    $metadata = gemarc_read_upload_metadata();
+    $metadataEntry = [
+        'last_upload_date' => $lastUploadDate,
+        'uploaded_filename' => basename($finalExcelPath),
+        'certificate_count' => count($records),
+        'json_size' => $size,
+        'uploader' => trim((string) ($uploader ?? 'Unknown')) !== '' ? trim((string) $uploader) : 'Unknown',
+        'diff' => $diff,
+    ];
+
+    $metadata = gemarc_append_upload_history($metadata, $metadataEntry, 10);
+    gemarc_write_upload_metadata($metadata, $metadataPath);
+
     return [
         'count' => count($records),
         'last_upload_date' => $lastUploadDate,
         'last_upload_filename' => basename($finalExcelPath),
         'json_path' => $jsonPath,
         'excel_path' => $finalExcelPath,
+        'metadata_path' => $metadataPath,
+        'metadata' => $metadata,
+        'diff' => $diff,
     ];
 }
 
@@ -259,6 +540,7 @@ function gemarc_read_certificate_status(): array
 {
     $jsonPath = gemarc_json_path();
     $excelPath = gemarc_excel_path();
+    $metadata = gemarc_read_upload_metadata();
 
     $count = 0;
     $jsonExists = is_file($jsonPath);
@@ -286,5 +568,6 @@ function gemarc_read_certificate_status(): array
         'json_exists' => $jsonExists,
         'excel_exists' => $excelExists,
         'json_size' => $jsonExists ? filesize($jsonPath) : 0,
+        'metadata' => $metadata,
     ];
 }

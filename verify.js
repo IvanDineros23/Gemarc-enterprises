@@ -38,7 +38,7 @@ function renderLoadingState() {
     result.innerHTML = `
         <div class="verify-empty-state">
             <div class="certificate-spinner" style="margin-bottom:14px;"></div>
-            <p>Checking the latest certificate index...</p>
+            <p>Verifying certificate...</p>
         </div>
     `;
 }
@@ -49,31 +49,97 @@ function renderFoundState(record) {
 
     const status = String(record.status || 'UNKNOWN').trim();
     const normalizedStatus = status.toUpperCase();
-    const badgeClass = normalizedStatus === 'ACTIVE'
+
+    const isActive = normalizedStatus === 'ACTIVE';
+
+    const badgeClass = isActive
         ? 'certificate-badge certificate-badge-success'
         : 'certificate-badge certificate-badge-neutral';
-    const badgeIcon = normalizedStatus === 'ACTIVE' ? 'fa-check-circle' : 'fa-circle-info';
+
+    const badgeIcon = isActive
+        ? 'fa-circle-check'
+        : 'fa-circle-info';
+
+    const statusColor = isActive ? '#1e7e34' : '#8a6d3b';
 
     result.className = 'verify-result-found';
+
     result.innerHTML = `
-        <div class="verify-result-status">
-            <span class="${badgeClass}"><i class="fas ${badgeIcon}"></i> Valid Certificate</span>
-            <p>This certificate was found in the current JSON backup and matches the uploaded Excel master file.</p>
-        </div>
-        <div class="verify-field-list">
-            <div class="verify-field-row"><span>Certificate Number</span><strong>${getFieldValue(record, 'certificate_number')}</strong></div>
-            <div class="verify-field-row"><span>Customer</span><strong>${getFieldValue(record, 'issued_to')}</strong></div>
-            <div class="verify-field-row"><span>Equipment</span><strong>${getFieldValue(record, 'equipment')}</strong></div>
-            <div class="verify-field-row"><span>Date Issued</span><strong>${getFieldValue(record, 'calibration_date')}</strong></div>
-            <div class="verify-field-row"><span>Valid Until</span><strong>${getFieldValue(record, 'expiry_date')}</strong></div>
-            <div class="verify-field-row"><span>Status</span><strong>${getFieldValue(record, 'status')}</strong></div>
-            <div class="verify-field-row"><span>Issued By</span><strong>${getFieldValue(record, 'issued_by')}</strong></div>
-        </div>
-        <div class="verify-result-footnote">
-            <i class="fas fa-shield-halved"></i>
-            <span>Issued data is read directly from the latest JSON backup generated from the Excel master file.</span>
-        </div>
-    `;
+<div class="verify-result-status">
+
+    <span class="${badgeClass}">
+        <i class="fas ${badgeIcon}"></i>
+        Certificate Successfully Verified
+    </span>
+
+    <p>
+        This certificate has been successfully validated against the
+        official calibration records maintained by
+        <strong>Gemarc Enterprises Inc.</strong>
+    </p>
+
+</div>
+
+<div class="verify-field-list">
+
+    <div class="verify-field-row">
+        <span>Certificate Number</span>
+        <strong>${getFieldValue(record,'certificate_number')}</strong>
+    </div>
+
+    <div class="verify-field-row">
+        <span>Customer</span>
+        <strong>${getFieldValue(record,'issued_to')}</strong>
+    </div>
+
+    <div class="verify-field-row">
+        <span>Equipment</span>
+        <strong>${getFieldValue(record,'equipment')}</strong>
+    </div>
+
+    <div class="verify-field-row">
+        <span>Serial Number</span>
+        <strong>${getFieldValue(record,'serial_number')}</strong>
+    </div>
+
+    <div class="verify-field-row">
+        <span>Calibration Date</span>
+        <strong>${getFieldValue(record,'calibration_date')}</strong>
+    </div>
+
+    <div class="verify-field-row">
+        <span>Valid Until</span>
+        <strong>${getFieldValue(record,'expiry_date')}</strong>
+    </div>
+
+    <div class="verify-field-row">
+        <span>Status</span>
+        <strong style="color:${statusColor}">
+            ${getFieldValue(record,'status')}
+        </strong>
+    </div>
+
+</div>
+
+<div class="verify-result-footnote">
+
+    <i class="fas fa-shield-check"></i>
+
+    <span>
+
+        This verification confirms that the certificate information
+        displayed above matches the official records maintained by
+        <strong>Gemarc Enterprises Inc.</strong>
+
+        <br><br>
+
+        For questions regarding this certificate, please contact
+        Gemarc Enterprises Inc.
+
+    </span>
+
+</div>
+`;
 }
 
 function renderNotFoundState() {
@@ -81,12 +147,33 @@ function renderNotFoundState() {
     if (!result) return;
 
     result.className = 'verify-result-empty';
+
     result.innerHTML = `
-        <div class="verify-empty-state">
-            <i class="fas fa-triangle-exclamation"></i>
-            <p>Certificate Not Found</p>
-        </div>
-    `;
+<div class="verify-empty-state">
+
+    <i class="fas fa-circle-xmark"
+       style="font-size:60px;color:#dc3545;margin-bottom:20px;"></i>
+
+    <h3 style="margin-bottom:10px;">
+        Certificate Not Found
+    </h3>
+
+    <p style="max-width:520px;margin:auto;line-height:1.7">
+
+        We could not locate a certificate matching the certificate
+        number you entered.
+
+        <br><br>
+
+        Please verify the certificate number and try again.
+
+        If you believe this certificate should exist,
+        kindly contact Gemarc Enterprises Inc. for assistance.
+
+    </p>
+
+</div>
+`;
 }
 
 async function verifyCertificate(rawNumber) {
@@ -95,7 +182,7 @@ async function verifyCertificate(rawNumber) {
     const button = document.getElementById('verifyButton');
 
     if (!certificateNumber) {
-        renderEmptyState('Please enter a certificate number first.', 'fas fa-circle-exclamation');
+        renderEmptyState('Please enter a valid certificate number.', 'fas fa-circle-exclamation');
         if (input) input.focus();
         return;
     }
@@ -111,12 +198,12 @@ async function verifyCertificate(rawNumber) {
     try {
         const response = await fetch(CERTIFICATE_JSON_URL, { cache: 'no-store' });
         if (!response.ok) {
-            throw new Error('Unable to load the certificate list.');
+            throw new Error('Unable to retrieve certificate records.');
         }
 
         const certificates = await response.json();
         if (!Array.isArray(certificates)) {
-            throw new Error('The certificate index is malformed.');
+            throw new Error('Certificate records could not be processed.');
         }
 
         const match = certificates.find((record) => normalizeCertificateNumber(record?.certificate_number) === certificateNumber);
