@@ -35,14 +35,20 @@ function gemarc_upload_metadata_path(): string
     return gemarc_data_dir() . DIRECTORY_SEPARATOR . 'upload_metadata.json';
 }
 
-function gemarc_excel_path(): string
+function gemarc_excel_path(?string $filename = null): string
 {
-    return gemarc_uploads_dir() . DIRECTORY_SEPARATOR . 'Certificates.xlsx';
+    if ($filename === null || trim($filename) === '') {
+        $filename = 'Certificates.xlsx';
+    }
+
+    return gemarc_uploads_dir()
+        . DIRECTORY_SEPARATOR
+        . basename($filename);
 }
 
 function gemarc_staging_excel_path(): string
 {
-    return gemarc_uploads_dir() . DIRECTORY_SEPARATOR . 'Certificates.xlsx.uploading';
+   return gemarc_uploads_dir() . DIRECTORY_SEPARATOR . 'certificate_upload.tmp';
 }
 
 function gemarc_ensure_directory(string $path): void
@@ -595,8 +601,13 @@ function gemarc_process_uploaded_certificate_file(string $stagedExcelPath, strin
 function gemarc_read_certificate_status(): array
 {
     $jsonPath = gemarc_json_path();
-    $excelPath = gemarc_excel_path();
-    $metadata = gemarc_read_upload_metadata();
+   $metadata = gemarc_read_upload_metadata();
+
+    $uploadedFilename = $metadata['last_upload']['uploaded_filename'] ?? '';
+    
+    $excelPath = $uploadedFilename !== ''
+        ? gemarc_uploads_dir() . DIRECTORY_SEPARATOR . $uploadedFilename
+        : gemarc_excel_path();
 
     $count = 0;
     $jsonExists = is_file($jsonPath);
@@ -620,7 +631,9 @@ function gemarc_read_certificate_status(): array
     return [
         'certificate_count' => $count,
         'last_upload_date' => $lastUploadDate,
-        'last_uploaded_filename' => $excelExists ? basename($excelPath) : 'Certificates.xlsx',
+        'last_uploaded_filename' => $excelExists
+            ? basename($excelPath)
+            : '',
         'json_exists' => $jsonExists,
         'excel_exists' => $excelExists,
         'json_size' => $jsonExists ? filesize($jsonPath) : 0,

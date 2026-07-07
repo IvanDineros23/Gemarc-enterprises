@@ -3,7 +3,14 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/includes/certificate_tools.php';
 
-$requestedFile = strtolower((string) ($_GET['file'] ?? 'json'));
+$requestedFile = strtolower((string) ($_GET['file'] ?? ''));
+
+$metadata = gemarc_read_upload_metadata();
+
+$excelFilename =
+    $metadata['last_upload']['uploaded_filename']
+    ?? 'Certificates.xlsx';
+
 $downloadMap = [
     'json' => [
         'path' => gemarc_json_path(),
@@ -11,8 +18,8 @@ $downloadMap = [
         'mime' => 'application/json',
     ],
     'excel' => [
-        'path' => gemarc_excel_path(),
-        'name' => 'Certificates.xlsx',
+        'path' => gemarc_excel_path($excelFilename),
+        'name' => $excelFilename,
         'mime' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     ],
 ];

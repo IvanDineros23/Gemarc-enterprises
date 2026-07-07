@@ -113,17 +113,19 @@ function gemarc_dashboard_statistics(?array $records = null, ?array $status = nu
     $lastUploadFilename = (string) ($latestUpload['uploaded_filename'] ?? ($status['last_uploaded_filename'] ?? 'Certificates.xlsx'));
     $jsonSize = (int) ($latestUpload['json_size'] ?? ($status['json_size'] ?? (is_file($jsonPath) ? filesize($jsonPath) : 0)));
 
-    return [
-        'total_certificates' => count($records),
-        'active_certificates' => gemarc_count_active_certificates($records),
-        'expired_certificates' => gemarc_count_expired_certificates($records),
-        'last_upload_date' => $lastUploadDate,
-        'current_excel_backup' => is_file($excelPath) ? basename($excelPath) : 'Certificates.xlsx',
-        'current_json_size' => $jsonSize,
-        'current_json_size_label' => gemarc_format_json_size($jsonSize),
-        'json_exists' => !empty($status['json_exists']),
-        'excel_exists' => !empty($status['excel_exists']),
-    ];
+   return [
+    'total_certificates' => count($records),
+    'active_certificates' => gemarc_count_active_certificates($records),
+    'expired_certificates' => gemarc_count_expired_certificates($records),
+    'last_upload_date' => $lastUploadDate,
+
+    'current_excel_backup' => $lastUploadFilename,
+
+    'current_json_size' => $jsonSize,
+    'current_json_size_label' => gemarc_format_json_size($jsonSize),
+    'json_exists' => !empty($status['json_exists']),
+    'excel_exists' => !empty($status['excel_exists']),
+];
 }
 
 function gemarc_dashboard_upload_history(?array $metadata = null): array

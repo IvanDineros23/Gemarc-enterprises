@@ -75,13 +75,15 @@ try {
         throw new RuntimeException('The Excel file could not be saved on the server.');
     }
 
-    $result = gemarc_convert_certificate_upload(
-        $stagedPath,
-        gemarc_excel_path(),
-        gemarc_json_path(),
-        gemarc_upload_metadata_path(),
-        gemarc_upload_uploader_identity()
-    );
+   $originalFilename = $_FILES['certificate_file']['name'];
+
+$result = gemarc_convert_certificate_upload(
+    $stagedPath,
+    gemarc_excel_path($originalFilename),
+    gemarc_json_path(),
+    gemarc_upload_metadata_path(),
+    gemarc_upload_uploader_identity()
+);
 
     $message = sprintf(
         '%s uploaded successfully. %d certificate record(s) are now available in the public verification portal.',
