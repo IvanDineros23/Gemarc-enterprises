@@ -382,23 +382,66 @@ function gemarc_load_certificates_from_excel(string $excelPath): array
 
     $spreadsheet = IOFactory::load($excelPath);
     $sheet = $spreadsheet->getActiveSheet();
+
     $highestRow = (int) $sheet->getHighestDataRow();
     $highestColumn = (string) $sheet->getHighestDataColumn();
-    $headerRange = 'A1:' . $highestColumn . '1';
-    $headerRow = $sheet->rangeToArray($headerRange, null, true, false)[0] ?? [];
+
+    /*
+    |--------------------------------------------------------------------------
+    | Automatically detect the header row
+    |--------------------------------------------------------------------------
+    */
+    $headerRowNumber = null;
+    $headerRow = [];
+
+    $certificateAliases = gemarc_required_header_aliases()['certificate_number'];
+
+    for ($row = 1; $row <= min($highestRow, 30); $row++) {
+
+        $currentRow = $sheet->rangeToArray(
+            'A' . $row . ':' . $highestColumn . $row,
+            null,
+            true,
+            false
+        )[0] ?? [];
+
+        foreach ($currentRow as $cell) {
+
+            $normalized = gemarc_normalize_header((string) $cell);
+
+            if (in_array($normalized, $certificateAliases, true)) {
+                $headerRowNumber = $row;
+                $headerRow = $currentRow;
+                break 2;
+            }
+        }
+    }
+
+    if ($headerRowNumber === null) {
+        throw new InvalidArgumentException(
+            'Unable to locate the certificate table header. Please make sure the workbook contains a "Certificate Number" column.'
+        );
+    }
 
     $headerMap = [];
+
     foreach ($headerRow as $index => $rawHeader) {
+
         $normalized = gemarc_normalize_header((string) $rawHeader);
+
         if ($normalized !== '') {
             $headerMap[$normalized] = $index + 1;
         }
     }
 
     $missingHeaders = [];
+
     foreach (gemarc_required_header_aliases() as $field => $aliases) {
+
         $found = false;
+
         foreach ($aliases as $alias) {
+
             if (isset($headerMap[$alias])) {
                 $found = true;
                 break;
@@ -411,6 +454,7 @@ function gemarc_load_certificates_from_excel(string $excelPath): array
     }
 
     if ($missingHeaders !== []) {
+
         throw new InvalidArgumentException(
             'Missing required column(s): ' . implode(', ', $missingHeaders)
         );
@@ -418,17 +462,23 @@ function gemarc_load_certificates_from_excel(string $excelPath): array
 
     $records = [];
     $seenCertificateNumbers = [];
-    for ($rowNumber = 2; $rowNumber <= $highestRow; $rowNumber++) {
+
+    for ($rowNumber = $headerRowNumber + 1; $rowNumber <= $highestRow; $rowNumber++) {
+
         $record = [];
 
         for ($columnIndex = 1; $columnIndex <= count($headerRow); $columnIndex++) {
+
             $rawHeader = (string) ($headerRow[$columnIndex - 1] ?? '');
+
             if (trim($rawHeader) === '') {
                 continue;
             }
 
             $cell = $sheet->getCellByColumnAndRow($columnIndex, $rowNumber);
+
             $value = gemarc_cell_to_string($cell);
+
             if ($value === '') {
                 continue;
             }
@@ -441,13 +491,17 @@ function gemarc_load_certificates_from_excel(string $excelPath): array
         }
 
         $record['certificate_number'] = strtoupper(trim((string) $record['certificate_number']));
+
         if (isset($record['status'])) {
             $record['status'] = strtoupper(trim((string) $record['status']));
         }
 
         $certificateNumber = gemarc_certificate_number_key($record);
+
         if (isset($seenCertificateNumbers[$certificateNumber])) {
-            throw new InvalidArgumentException('Duplicate Certificate Number found: ' . $certificateNumber);
+            throw new InvalidArgumentException(
+                'Duplicate Certificate Number found: ' . $certificateNumber
+            );
         }
 
         $seenCertificateNumbers[$certificateNumber] = true;
@@ -456,7 +510,9 @@ function gemarc_load_certificates_from_excel(string $excelPath): array
     }
 
     if ($records === []) {
-        throw new InvalidArgumentException('The workbook does not contain any certificate rows.');
+        throw new InvalidArgumentException(
+            'The workbook does not contain any certificate rows.'
+        );
     }
 
     return $records;
