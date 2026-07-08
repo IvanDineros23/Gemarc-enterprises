@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const defaultColumns = [
         { key: 'certificate_number', label: 'Certificate Number' },
-        { key: 'issued_to', label: 'Customer' },
+        { key: 'customer', label: 'Customer' },
         { key: 'equipment', label: 'Equipment' },
         { key: 'serial_number', label: 'Serial Number' },
         { key: 'calibration_date', label: 'Calibration Date' },

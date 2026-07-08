@@ -115,6 +115,9 @@ $result = gemarc_convert_certificate_upload(
         gemarc_send_json_response([
             'success' => false,
             'message' => $exception->getMessage(),
+            'file'    => $exception->getFile(),
+            'line'    => $exception->getLine(),
+            'trace'   => $exception->getTraceAsString(),
         ], 500);
     }
 

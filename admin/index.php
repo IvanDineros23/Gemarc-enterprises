@@ -250,7 +250,7 @@ if ($bootstrapJson === false) {
             <div class="certificate-panel certificate-table-panel">
                 <div class="certificate-panel-header">
                     <div>
-                        <h2 class="certificate-section-heading">Searchable Certificate Table</h2>
+                        <h2 class="certificate-section-heading"> Certificate Table</h2>
                         <p class="certificate-section-copy">Search, sort, paginate, and open any certificate for full details.</p>
                     </div>
                     <div class="certificate-table-toolbar">
@@ -318,7 +318,14 @@ if ($bootstrapJson === false) {
                 </div>
             </div>
 
-            <div class="certificate-sidebar">
+            </div>
+        </div>
+
+
+        </div>
+    
+<section class="container certificate-secondary-panels">
+<div class="certificate-sidebar">
                 <div class="certificate-panel">
                     <h2 class="certificate-section-heading">Upload History</h2>
                     <p class="certificate-section-copy">Latest upload metadata is stored in data/upload_metadata.json for quick review.</p>
@@ -377,8 +384,8 @@ if ($bootstrapJson === false) {
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+</section>
+</section>
 </main>
 
 <div class="certificate-modal" id="certificateModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="certificateModalTitle">

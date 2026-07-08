@@ -850,14 +850,6 @@ body.modal-open {
     overflow: hidden;
 }
 
-.certificate-dashboard-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
-    gap: 24px;
-    align-items: start;
-    padding-bottom: 48px;
-}
-
 .certificate-table-panel {
     display: grid;
     gap: 18px;
@@ -1029,6 +1021,27 @@ body.modal-open {
 .certificate-history-list {
     display: grid;
     gap: 12px;
+
+    max-height: 620px;      /* pwede mong taasan o babaan */
+    overflow-y: auto;
+
+    padding-right: 6px;
+}
+.certificate-history-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.certificate-history-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.certificate-history-list::-webkit-scrollbar-thumb {
+    background: rgba(46, 125, 50, 0.25);
+    border-radius: 999px;
+}
+
+.certificate-history-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(46, 125, 50, 0.45);
 }
 
 .certificate-history-item {
@@ -1093,6 +1106,29 @@ body.modal-open {
     display: grid;
     gap: 8px;
     color: #243429;
+
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding-right: 8px;
+}
+
+.certificate-diff-card ul::-webkit-scrollbar {
+    width: 8px;
+}
+
+.certificate-diff-card ul::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.certificate-diff-card ul::-webkit-scrollbar-thumb {
+    background: rgba(46,125,50,.25);
+    border-radius: 999px;
+}
+
+.certificate-diff-card ul::-webkit-scrollbar-thumb:hover {
+    background: rgba(46,125,50,.45);
 }
 
 .certificate-upload-flow {
@@ -1262,4 +1298,14 @@ body.modal-open {
     .certificate-modal-body {
         grid-template-columns: 1fr;
     }
+}
+.upload-history-card{
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-history-card .certificate-history-list{
+    flex: 1;
+    max-height: 620px;
+    overflow-y: auto;
 }

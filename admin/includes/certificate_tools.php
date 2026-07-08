@@ -88,71 +88,83 @@ function gemarc_boot_phpspreadsheet(): void
 function gemarc_normalize_header(string $header): string
 {
     $header = strtolower(trim($header));
-    $header = preg_replace('/[^a-z0-9]+/', '_', $header);
 
-    return trim((string) $header, '_');
+    $normalized = preg_replace('/[^a-z0-9]+/', '_', $header);
+
+    if ($normalized === null) {
+        return '';
+    }
+
+    return trim($normalized, '_');
 }
 
 function gemarc_expected_headers(): array
 {
-    return [
-        'Certificate Number',
-        'Customer',
-        'Equipment',
-        'Serial Number',
-        'Calibration Date',
-        'Expiry Date',
-        'Status',
+   return [
+    'CERTIFICATE CONTROL NO.',
+    'CUSTOMER NAME',
+    'MACHINE TYPE',
+    'SERIAL NO.',
+    'DATE OF CALIBRATION',
+    'VALIDITY',
+    'CALIBRATED BY',
     ];
 }
 
 function gemarc_required_header_aliases(): array
 {
-    return [
-        'certificate_number' => ['certificate_number', 'certificate_no', 'cert_number', 'cert_no', 'certificate'],
-        'issued_to' => ['issued_to', 'customer', 'customer_name', 'client', 'client_name'],
-        'equipment' => ['equipment', 'equipment_name', 'asset', 'asset_name', 'machine'],
-        'serial_number' => ['serial_number', 'serial_no', 'serial', 'serial_no_', 'sn'],
-        'calibration_date' => ['calibration_date', 'calibration', 'date_of_calibration', 'issued_date'],
-        'expiry_date' => ['expiry_date', 'expiry', 'expiration_date', 'valid_until', 'valid_till'],
-        'status' => ['status', 'certificate_status', 'state'],
-    ];
+   return [
+
+            'certificate_number' => [
+                'certificate_control_no',
+                'certificate control no',
+                'certificate_control_number'
+            ],
+            
+            'customer' => [
+            'customer_name',
+            'customer name'
+              ],
+            
+            'equipment' => [
+                'machine_type',
+                'machine type'
+            ],
+            
+            'serial_number' => [
+                'serial_no',
+                'serial no'
+            ],
+            
+            'calibration_date' => [
+                'date_of_calibration',
+                'date of calibration'
+            ],
+            
+            'expiry_date' => [
+                'validity'
+            ],
+            'issued_by' => [
+                'calibrated_by',
+                'calibrated by'
+            ],
+
+        ];
 }
 
 function gemarc_header_to_json_key(string $header): string
 {
-    static $map = [
-        'certificate_number' => 'certificate_number',
-        'certificate_no' => 'certificate_number',
-        'certificate_no_' => 'certificate_number',
-        'cert_number' => 'certificate_number',
-        'cert_no' => 'certificate_number',
-        'issued_to' => 'issued_to',
-        'customer' => 'issued_to',
-        'customer_name' => 'issued_to',
-        'client' => 'issued_to',
-        'client_name' => 'issued_to',
-        'equipment' => 'equipment',
-        'equipment_name' => 'equipment',
-        'asset' => 'equipment',
-        'machine' => 'equipment',
-        'serial_number' => 'serial_number',
-        'serial_no' => 'serial_number',
-        'serial' => 'serial_number',
-        'calibration_date' => 'calibration_date',
-        'date_of_calibration' => 'calibration_date',
-        'calibration' => 'calibration_date',
-        'expiry_date' => 'expiry_date',
-        'expiry' => 'expiry_date',
-        'expiration_date' => 'expiry_date',
-        'valid_until' => 'expiry_date',
-        'issued_by' => 'issued_by',
-        'calibrated_by' => 'issued_by',
-        'status' => 'status',
-        'certificate_status' => 'status',
-    ];
-
     $normalized = gemarc_normalize_header($header);
+
+    $map = [
+        'certificate_control_no' => 'certificate_number',
+        'customer_name'          => 'customer',
+        'machine_type'           => 'equipment',
+        'serial_no'              => 'serial_number',
+        'date_of_calibration'    => 'calibration_date',
+        'validity'               => 'expiry_date',
+        'calibrated_by'          => 'issued_by',
+    ];
 
     return $map[$normalized] ?? $normalized;
 }
@@ -425,7 +437,7 @@ function gemarc_load_certificates_from_excel(string $excelPath): array
 
     if ($headerRowNumber === null) {
         throw new InvalidArgumentException(
-            'Unable to locate the certificate table header. Please make sure the workbook contains a "Certificate Number" column.'
+                'Unable to locate the certificate table header. Please make sure the workbook contains a "CERTIFICATE CONTROL NO." column.'
         );
     }
 
@@ -491,15 +503,25 @@ function gemarc_load_certificates_from_excel(string $excelPath): array
 
             $record[gemarc_header_to_json_key($rawHeader)] = $value;
         }
-
+        
         if (trim($record['certificate_number'] ?? '') === '') {
             continue;
         }
 
         $record['certificate_number'] = strtoupper(trim((string) $record['certificate_number']));
 
-        if (isset($record['status'])) {
-            $record['status'] = strtoupper(trim((string) $record['status']));
+        if (empty($record['expiry_date'])) {
+            $record['status'] = 'VALID';
+        } else {
+            $expiry = strtotime($record['expiry_date']);
+
+            if ($expiry === false) {
+                $record['status'] = 'VALID';
+            } else {
+                $record['status'] = $expiry >= time()
+                    ? 'VALID'
+                    : 'EXPIRED';
+            }
         }
 
         $certificateNumber = gemarc_certificate_number_key($record);
@@ -528,7 +550,7 @@ function gemarc_header_label_from_key(string $key): string
 {
     return match ($key) {
         'certificate_number' => 'Certificate Number',
-        'issued_to' => 'Customer',
+        'customer' => 'Customer',
         'equipment' => 'Equipment',
         'serial_number' => 'Serial Number',
         'calibration_date' => 'Calibration Date',
