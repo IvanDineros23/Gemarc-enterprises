@@ -89,7 +89,7 @@ function renderFoundState(record) {
 
     <div class="verify-field-row">
         <span>Customer</span>
-        <strong>${getFieldValue(record,'issued_to')}</strong>
+        <strong>${getFieldValue(record,'customer')}</strong>
     </div>
 
     <div class="verify-field-row">
