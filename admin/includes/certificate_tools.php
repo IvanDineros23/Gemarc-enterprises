@@ -115,10 +115,13 @@ function gemarc_required_header_aliases(): array
 {
    return [
 
-            'certificate_number' => [
-                'certificate_control_no',
-                'certificate control no',
-                'certificate_control_number'
+           'certificate_number' => [
+            'certificate_control_no',
+            'certificate control no',
+            'certificate_control_number',
+        
+            'certificate_no',
+            'certificate no'
             ],
             
             'customer' => [
@@ -133,7 +136,10 @@ function gemarc_required_header_aliases(): array
             
             'serial_number' => [
                 'serial_no',
-                'serial no'
+                'serial no',
+            
+                'serial_number',
+                'serial number'
             ],
             
             'calibration_date' => [
@@ -156,8 +162,10 @@ function gemarc_header_to_json_key(string $header): string
 {
     $normalized = gemarc_normalize_header($header);
 
-    $map = [
+        $map = [
         'certificate_control_no' => 'certificate_number',
+        'certificate_no'         => 'certificate_number',
+
         'customer_name'          => 'customer',
         'machine_type'           => 'equipment',
         'serial_no'              => 'serial_number',
