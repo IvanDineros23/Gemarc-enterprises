@@ -158,20 +158,52 @@ function gemarc_required_header_aliases(): array
         ];
 }
 
+function gemarc_training_header_aliases(): array
+{
+   return [
+        'certificate_number' => [
+            'certificate_number',
+            'certificate number',
+            'cert no'
+        ],
+        'participant_name' => [
+            'participant_name',
+            'participant name',
+            'name'
+        ],
+        'customer' => [
+            'customer_name',
+            'customer name',
+            'customer'
+        ],
+        'training_date' => [
+            'training_date',
+            'training date'
+        ],
+        'status' => [
+            'status'
+        ]
+    ];
+}
+
 function gemarc_header_to_json_key(string $header): string
 {
     $normalized = gemarc_normalize_header($header);
 
-        $map = [
+    $map = [
         'certificate_control_no' => 'certificate_number',
         'certificate_no'         => 'certificate_number',
-
         'customer_name'          => 'customer',
         'machine_type'           => 'equipment',
         'serial_no'              => 'serial_number',
         'date_of_calibration'    => 'calibration_date',
         'validity'               => 'expiry_date',
         'calibrated_by'          => 'issued_by',
+        
+        // --- para sa training certificates---
+        'participant_name'       => 'participant_name',
+        'name'                   => 'participant_name',
+        'training_date'          => 'training_date'
     ];
 
     return $map[$normalized] ?? $normalized;
@@ -407,147 +439,163 @@ function gemarc_load_certificates_from_excel(string $excelPath): array
     }
 
     $spreadsheet = IOFactory::load($excelPath);
-    $sheet = $spreadsheet->getActiveSheet();
+    
+    // Arrays para sa lahat ng data mula sa lahat ng tabs
+    $records = [];
+    $seenCertificateNumbers = [];
+    $sheetsProcessed = 0;
 
-    $highestRow = (int) $sheet->getHighestDataRow();
-    $highestColumn = (string) $sheet->getHighestDataColumn();
+    // Iikot natin sa LAHAT ng tabs na nasa loob ng Excel file
+    foreach ($spreadsheet->getAllSheets() as $sheet) {
+        $highestRow = (int) $sheet->getHighestDataRow();
+        $highestColumn = (string) $sheet->getHighestDataColumn();
 
-    /*
-    |--------------------------------------------------------------------------
-    | Automatically detect the header row
-    |--------------------------------------------------------------------------
-    */
-    $headerRowNumber = null;
-    $headerRow = [];
+        /*
+        |--------------------------------------------------------------------------
+        | Automatically detect the header row and determine Certificate Type
+        |--------------------------------------------------------------------------
+        */
+        $headerRowNumber = null;
+        $headerRow = [];
+        $sheetType = 'calibration'; // Default type
 
-    $certificateAliases = gemarc_required_header_aliases()['certificate_number'];
+        $calibAliases = gemarc_required_header_aliases()['certificate_number'];
+        $trainingAliases = gemarc_training_header_aliases()['certificate_number'];
+        $allCertAliases = array_unique(array_merge($calibAliases, $trainingAliases));
+        $participantAliases = gemarc_training_header_aliases()['participant_name'];
 
-    for ($row = 1; $row <= min($highestRow, 30); $row++) {
+        for ($row = 1; $row <= min($highestRow, 30); $row++) {
+            $currentRow = $sheet->rangeToArray(
+                'A' . $row . ':' . $highestColumn . $row,
+                null,
+                true,
+                false
+            )[0] ?? [];
 
-        $currentRow = $sheet->rangeToArray(
-            'A' . $row . ':' . $highestColumn . $row,
-            null,
-            true,
-            false
-        )[0] ?? [];
+            $hasCertColumn = false;
+            $hasParticipantColumn = false;
 
-        foreach ($currentRow as $cell) {
+            foreach ($currentRow as $cell) {
+                $normalized = gemarc_normalize_header((string) $cell);
 
-            $normalized = gemarc_normalize_header((string) $cell);
+                if (in_array($normalized, $allCertAliases, true)) {
+                    $hasCertColumn = true;
+                }
+                if (in_array($normalized, $participantAliases, true)) {
+                    $hasParticipantColumn = true;
+                }
+            }
 
-            if (in_array($normalized, $certificateAliases, true)) {
+            if ($hasCertColumn) {
                 $headerRowNumber = $row;
                 $headerRow = $currentRow;
-                break 2;
-            }
-        }
-    }
-
-    if ($headerRowNumber === null) {
-        throw new InvalidArgumentException(
-                'Unable to locate the certificate table header. Please make sure the workbook contains a "CERTIFICATE CONTROL NO." column.'
-        );
-    }
-
-    $headerMap = [];
-
-    foreach ($headerRow as $index => $rawHeader) {
-
-        $normalized = gemarc_normalize_header((string) $rawHeader);
-
-        if ($normalized !== '') {
-            $headerMap[$normalized] = $index + 1;
-        }
-    }
-
-    $missingHeaders = [];
-
-    foreach (gemarc_required_header_aliases() as $field => $aliases) {
-
-        $found = false;
-
-        foreach ($aliases as $alias) {
-
-            if (isset($headerMap[$alias])) {
-                $found = true;
+                // Kapag may Participant column, Training Data ito
+                if ($hasParticipantColumn) {
+                    $sheetType = 'training';
+                }
                 break;
             }
         }
 
-        if (!$found) {
-            $missingHeaders[] = gemarc_header_label_from_key($field);
-        }
-    }
-
-    if ($missingHeaders !== []) {
-
-        throw new InvalidArgumentException(
-            'Missing required column(s): ' . implode(', ', $missingHeaders)
-        );
-    }
-
-    $records = [];
-    $seenCertificateNumbers = [];
-
-    for ($rowNumber = $headerRowNumber + 1; $rowNumber <= $highestRow; $rowNumber++) {
-
-        $record = [];
-
-        for ($columnIndex = 1; $columnIndex <= count($headerRow); $columnIndex++) {
-
-            $rawHeader = (string) ($headerRow[$columnIndex - 1] ?? '');
-
-            if (trim($rawHeader) === '') {
-                continue;
-            }
-
-            $cell = $sheet->getCellByColumnAndRow($columnIndex, $rowNumber);
-
-            $value = gemarc_cell_to_string($cell);
-
-            if ($value === '') {
-                continue;
-            }
-
-            $record[gemarc_header_to_json_key($rawHeader)] = $value;
-        }
-        
-        if (trim($record['certificate_number'] ?? '') === '') {
+        // Kung walang nahanap na header sa tab na ito, i-skip at pumunta sa next tab
+        if ($headerRowNumber === null) {
             continue;
         }
 
-        $record['certificate_number'] = strtoupper(trim((string) $record['certificate_number']));
+        $sheetsProcessed++;
+        $headerMap = [];
 
-        if (empty($record['expiry_date'])) {
-            $record['status'] = 'VALID';
-        } else {
-            $expiry = strtotime($record['expiry_date']);
-
-            if ($expiry === false) {
-                $record['status'] = 'VALID';
-            } else {
-                $record['status'] = $expiry >= time()
-                    ? 'VALID'
-                    : 'EXPIRED';
+        foreach ($headerRow as $index => $rawHeader) {
+            $normalized = gemarc_normalize_header((string) $rawHeader);
+            if ($normalized !== '') {
+                $headerMap[$normalized] = $index + 1;
             }
         }
 
-        $certificateNumber = gemarc_certificate_number_key($record);
+        // Gamitin ang tamang required columns depende sa type ng sheet
+        $requiredAliases = $sheetType === 'training' 
+            ? gemarc_training_header_aliases() 
+            : gemarc_required_header_aliases();
 
-        if (isset($seenCertificateNumbers[$certificateNumber])) {
+        $missingHeaders = [];
+
+        foreach ($requiredAliases as $field => $aliases) {
+            $found = false;
+            foreach ($aliases as $alias) {
+                if (isset($headerMap[$alias])) {
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                $missingHeaders[] = gemarc_header_label_from_key($field);
+            }
+        }
+
+        if ($missingHeaders !== []) {
             throw new InvalidArgumentException(
-                'Duplicate Certificate Number found: ' . $certificateNumber
+                'Missing required column(s) in sheet "' . $sheet->getTitle() . '": ' . implode(', ', $missingHeaders)
             );
         }
 
-        $seenCertificateNumbers[$certificateNumber] = true;
+        for ($rowNumber = $headerRowNumber + 1; $rowNumber <= $highestRow; $rowNumber++) {
+            $record = [];
 
-        $records[] = $record;
+            for ($columnIndex = 1; $columnIndex <= count($headerRow); $columnIndex++) {
+                $rawHeader = (string) ($headerRow[$columnIndex - 1] ?? '');
+
+                if (trim($rawHeader) === '') {
+                    continue;
+                }
+
+                $cell = $sheet->getCellByColumnAndRow($columnIndex, $rowNumber);
+                $value = gemarc_cell_to_string($cell);
+
+                if ($value === '') {
+                    continue;
+                }
+
+                $record[gemarc_header_to_json_key($rawHeader)] = $value;
+            }
+            
+            if (trim($record['certificate_number'] ?? '') === '') {
+                continue;
+            }
+
+            $record['certificate_number'] = strtoupper(trim((string) $record['certificate_number']));
+
+            // Status Logic
+            if (empty($record['expiry_date'])) {
+                if (!isset($record['status']) || trim($record['status']) === '') {
+                    $record['status'] = 'VALID';
+                }
+            } else {
+                $expiry = strtotime($record['expiry_date']);
+                if ($expiry === false) {
+                    $record['status'] = 'VALID';
+                } else {
+                    $record['status'] = $expiry >= time()
+                        ? 'VALID'
+                        : 'EXPIRED';
+                }
+            }
+
+            $certificateNumber = gemarc_certificate_number_key($record);
+
+            if (isset($seenCertificateNumbers[$certificateNumber])) {
+                throw new InvalidArgumentException(
+                    'Duplicate Certificate Number found: ' . $certificateNumber . ' in sheet "' . $sheet->getTitle() . '"'
+                );
+            }
+
+            $seenCertificateNumbers[$certificateNumber] = true;
+            $records[] = $record;
+        }
     }
 
-    if ($records === []) {
+    if ($sheetsProcessed === 0 || $records === []) {
         throw new InvalidArgumentException(
-            'The workbook does not contain any certificate rows.'
+            'The workbook does not contain any valid certificate rows in any of its tabs. Please check your columns.'
         );
     }
 
@@ -564,6 +612,11 @@ function gemarc_header_label_from_key(string $key): string
         'calibration_date' => 'Calibration Date',
         'expiry_date' => 'Expiry Date',
         'status' => 'Status',
+        
+        // --- para sa training certificates ---
+        'participant_name' => 'Participant Name',
+        'training_date' => 'Training Date',
+        
         default => ucfirst(str_replace('_', ' ', $key)),
     };
 }

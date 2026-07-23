@@ -49,8 +49,7 @@ function renderFoundState(record) {
 
     const status = String(record.status || 'UNKNOWN').trim();
     const normalizedStatus = status.toUpperCase();
-
-    const isActive = normalizedStatus === 'ACTIVE';
+    const isActive = normalizedStatus === 'ACTIVE' || normalizedStatus === 'VALID';
 
     const badgeClass = isActive
         ? 'certificate-badge certificate-badge-success'
@@ -62,84 +61,109 @@ function renderFoundState(record) {
 
     const statusColor = isActive ? '#1e7e34' : '#8a6d3b';
 
+    // I-CHECK KUNG TRAINING O CALIBRATION BASE SA LAMAN NG DATA
+    const isTraining = record.participant_name !== undefined && record.participant_name !== '';
+    const certificateTypeLabel = isTraining ? 'Training Certificate' : 'Calibration Certificate';
+
     result.className = 'verify-result-found';
 
+    // DYNAMIC FIELDS LOGIC
+    let fieldsHtml = '';
+
+    if (isTraining) {
+        // LAYOUT PARA SA TRAINING CERTIFICATES
+        fieldsHtml = `
+            <div class="verify-field-row">
+                <span>Certificate Type</span>
+                <strong>${certificateTypeLabel}</strong>
+            </div>
+            <div class="verify-field-row">
+                <span>Certificate Number</span>
+                <strong>${getFieldValue(record,'certificate_number')}</strong>
+            </div>
+            <div class="verify-field-row">
+                <span>Participant Name</span>
+                <strong>${getFieldValue(record,'participant_name')}</strong>
+            </div>
+            <div class="verify-field-row">
+                <span>Customer/Company</span>
+                <strong>${getFieldValue(record,'customer')}</strong>
+            </div>
+            <div class="verify-field-row">
+                <span>Training Date</span>
+                <strong>${getFieldValue(record,'training_date')}</strong>
+            </div>
+        `;
+    } else {
+        // LAYOUT PARA SA CALIBRATION CERTIFICATES (Yung Original Mo)
+        fieldsHtml = `
+            <div class="verify-field-row">
+                <span>Certificate Type</span>
+                <strong>${certificateTypeLabel}</strong>
+            </div>
+            <div class="verify-field-row">
+                <span>Certificate Number</span>
+                <strong>${getFieldValue(record,'certificate_number')}</strong>
+            </div>
+            <div class="verify-field-row">
+                <span>Customer</span>
+                <strong>${getFieldValue(record,'customer')}</strong>
+            </div>
+            <div class="verify-field-row">
+                <span>Equipment</span>
+                <strong>${getFieldValue(record,'equipment')}</strong>
+            </div>
+            <div class="verify-field-row">
+                <span>Serial Number</span>
+                <strong>${getFieldValue(record,'serial_number')}</strong>
+            </div>
+            <div class="verify-field-row">
+                <span>Calibration Date</span>
+                <strong>${getFieldValue(record,'calibration_date')}</strong>
+            </div>
+            <div class="verify-field-row">
+                <span>Valid Until</span>
+                <strong>${getFieldValue(record,'expiry_date')}</strong>
+            </div>
+        `;
+    }
+
+    // RENDER THE HTML
     result.innerHTML = `
-<div class="verify-result-status">
+        <div class="verify-result-status">
+            <span class="${badgeClass}">
+                <i class="fas ${badgeIcon}"></i>
+                Certificate Successfully Verified
+            </span>
+            <p>
+                This certificate has been successfully validated against the
+                official records maintained by
+                <strong>Gemarc Enterprises Inc.</strong>
+            </p>
+        </div>
 
-    <span class="${badgeClass}">
-        <i class="fas ${badgeIcon}"></i>
-        Certificate Successfully Verified
-    </span>
+        <div class="verify-field-list">
+            ${fieldsHtml}
+            <div class="verify-field-row">
+                <span>Status</span>
+                <strong style="color:${statusColor}">
+                    ${getFieldValue(record,'status')}
+                </strong>
+            </div>
+        </div>
 
-    <p>
-        This certificate has been successfully validated against the
-        official calibration records maintained by
-        <strong>Gemarc Enterprises Inc.</strong>
-    </p>
-
-</div>
-
-<div class="verify-field-list">
-
-    <div class="verify-field-row">
-        <span>Certificate Number</span>
-        <strong>${getFieldValue(record,'certificate_number')}</strong>
-    </div>
-
-    <div class="verify-field-row">
-        <span>Customer</span>
-        <strong>${getFieldValue(record,'customer')}</strong>
-    </div>
-
-    <div class="verify-field-row">
-        <span>Equipment</span>
-        <strong>${getFieldValue(record,'equipment')}</strong>
-    </div>
-
-    <div class="verify-field-row">
-        <span>Serial Number</span>
-        <strong>${getFieldValue(record,'serial_number')}</strong>
-    </div>
-
-    <div class="verify-field-row">
-        <span>Calibration Date</span>
-        <strong>${getFieldValue(record,'calibration_date')}</strong>
-    </div>
-
-    <div class="verify-field-row">
-        <span>Valid Until</span>
-        <strong>${getFieldValue(record,'expiry_date')}</strong>
-    </div>
-
-    <div class="verify-field-row">
-        <span>Status</span>
-        <strong style="color:${statusColor}">
-            ${getFieldValue(record,'status')}
-        </strong>
-    </div>
-
-</div>
-
-<div class="verify-result-footnote">
-
-    <i class="fas fa-shield-check"></i>
-
-    <span>
-
-        This verification confirms that the certificate information
-        displayed above matches the official records maintained by
-        <strong>Gemarc Enterprises Inc.</strong>
-
-        <br><br>
-
-        For questions regarding this certificate, please contact
-        Gemarc Enterprises Inc.
-
-    </span>
-
-</div>
-`;
+        <div class="verify-result-footnote">
+            <i class="fas fa-shield-check"></i>
+            <span>
+                This verification confirms that the certificate information
+                displayed above matches the official records maintained by
+                <strong>Gemarc Enterprises Inc.</strong>
+                <br><br>
+                For questions regarding this certificate, please contact
+                Gemarc Enterprises Inc.
+            </span>
+        </div>
+    `;
 }
 
 function renderNotFoundState() {
