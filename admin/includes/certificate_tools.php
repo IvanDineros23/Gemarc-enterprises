@@ -580,12 +580,11 @@ function gemarc_load_certificates_from_excel(string $excelPath): array
                 }
             }
 
-            $certificateNumber = gemarc_certificate_number_key($record);
+           $certificateNumber = gemarc_certificate_number_key($record);
 
+            // Kung nabasa na dati ang certificate number, iskip na lang imbes na mag-error
             if (isset($seenCertificateNumbers[$certificateNumber])) {
-                throw new InvalidArgumentException(
-                    'Duplicate Certificate Number found: ' . $certificateNumber . ' in sheet "' . $sheet->getTitle() . '"'
-                );
+                continue;
             }
 
             $seenCertificateNumbers[$certificateNumber] = true;
